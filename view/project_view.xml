@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<!-- views -->
+		<record id="project_viewchildren_project_form" model="ir.ui.view">
+			<field name="name">project.viewchildren.project.form</field>
+			<field name="model">project.project</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="project.edit_project" />
+			<field name="arch" type="xml">
+                    <notebook colspan="4" position="inside">
+                    <page string="Child projects">
+                    	<field name="child_ids" nolabel="1"/>
+                    </page>
+                    </notebook>
+			</field>
+		</record>
+	</data>
+</openerp>
