@@ -10,7 +10,7 @@
 			<field name="arch" type="xml">
                     <notebook colspan="4" position="inside">
                     <page string="Child projects">
-                    	<field name="child_ids" nolabel="1"/>
+                    	<field name="child_ids" nolabel="1" readonly="1" />
                     </page>
                     </notebook>
 			</field>
