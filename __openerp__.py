@@ -3,7 +3,7 @@
     "version": "1.0",
     "depends": ["purchase"],
     "author": "Marco Dieckhoff, BREMSKERL",
-    "category": "Generic Modules/Projects & Services",
+    "category": "Sales & Purchases",
     "description": """
     Adds currency to Purchase Order List view
     """,
