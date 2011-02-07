@@ -3,7 +3,7 @@
     "version": "1.01",
     "depends": [ "purchase" ],
     "author": "Marco Dieckhoff, BREMSKERL",
-    "category": "Custom",
+    "category": "Sales & Purchases",
     "description": """Show Purchase Order Lines menu entry
     """,
     "init_xml": [],
