@@ -3,7 +3,7 @@
     "version": "1.0",
     "depends": ["project"],
     "author": "Marco Dieckhoff, BREMSKERL",
-    "category": "Custom",
+    "category": "Base",
     "description": """View address type in tree view on general partner tab
     """,
     "init_xml": [],
