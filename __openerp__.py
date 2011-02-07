@@ -3,7 +3,7 @@
     "version": "1.0",
     "depends": ["mrp"],
     "author": "Marco Dieckhoff, BREMSKERL",
-    "category": "Custom",
+    "category": "Production",
     "description": """Add production lot in manufactoring order views
         Tab 'Consumed products' / 'Products to consume',
         Tab 'Finished products' / 'Products to finish'
