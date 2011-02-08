@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+
+		<!-- views -->
+
+		<record id="product_qa_documentation_type_product_form" model="ir.ui.view">
+			<field name="name">product.qa.documentation.type.product.form</field>
+			<field name="model">product.product</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="product_qa.product_qa_product_form" />
+			<field name="arch" type="xml">
+				<xpath
+					expr="//group[@colspan=2][@col=2]/separator[@string='Quality Assurance'][@colspan=2]/.."
+					position="inside">
+					<field name="qa_doctype" />
+				</xpath>
+			</field>
+		</record>
+
+	</data>
+</openerp>
