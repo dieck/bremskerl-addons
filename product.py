@@ -6,8 +6,7 @@ class product_code_mandatory_product(osv.osv):
     _inherit = "product.product"
         
     _columns = {
-        'code': fields.function(lambda self, *args, **kwargs: self._product_code(*args, **kwargs),
-                                method=True, type='char', string='Reference blah', required=True),
+        'default_code':  fields.char('Reference', size=64, required=True),
     }
             
 product_code_mandatory_product()

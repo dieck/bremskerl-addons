@@ -4,7 +4,7 @@
     "depends": ["product"],
     "author": "Marco Dieckhoff, BREMSKERL",
     "category": "Inventory Control",
-    "description": """Makes product code a mandatory field 
+    "description": """Makes product code (default_code) a mandatory field 
     """,
     "init_xml": [],
     'update_xml': [],
