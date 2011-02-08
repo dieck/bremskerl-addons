@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<!-- views -->
+		<record id="view_partner_externalaccounting_form" model="ir.ui.view">
+			<field name="name">res.partner.externalaccounting.form</field>
+			<field name="model">res.partner</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="base.view_partner_form" />
+			<field name="arch" type="xml">
+				<page string="Sales &amp; Purchases" position="inside">
+					<separator string="External Accounting" colspan="4" />
+					<field name="creditor" attrs="{'required':[('customer','=',True)]}" />
+					<field name="debtor" attrs="{'required':[('supplier','=',True)]}" />
+					<newline/>
+				</page>
+			</field>
+		</record>
+	</data>
+</openerp>
