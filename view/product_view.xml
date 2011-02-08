@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+
+		<!-- views -->
+        <record id="product_packaging_description_tree_view" model="ir.ui.view">
+            <field name="name">product.packaging.description.tree.view</field>
+            <field name="model">product.packaging</field>
+            <field name="type">tree</field>
+            <field name="inherit_id" ref="product.product_packaging_tree_view" />
+            <field name="arch" type="xml">
+                <tree string="Packaging" position="inside">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+	</data>
+</openerp>
