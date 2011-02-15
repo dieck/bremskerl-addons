@@ -1,3 +1,12 @@
+# -*- coding: utf-8 -*-
+##############################################################################
+#
+#    OpenERP Module
+#    
+#    Copyright (C) 2010-2011 BREMSKERL-REIBBELAGWERKE EMMERLING GmbH & Co. KG
+#    Author Marco Dieckhoff
+#
+##############################################################################
 {
     "name": "Add production lot in manufactoring order views",
     "version": "1.0",
