@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.0.1\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2011-02-08 11:29+0000\n"
-"PO-Revision-Date: 2011-02-08 11:29+0000\n"
+"POT-Creation-Date: 2011-02-15 09:34+0000\n"
+"PO-Revision-Date: 2011-02-15 09:34+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -15,8 +15,14 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
+#: code:addons\product_code_unique\product.py:19
+#. module: product_code_unique
+#, python-format
+msgid " (copy)"
+msgstr " (Kopie)"
 
 #: sql_constraint:product.product:0
 #. module: product_code_unique
 msgid "Reference has to be unique."
 msgstr "Referenz muss eindeutig sein."
+
