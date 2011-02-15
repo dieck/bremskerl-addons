@@ -1,3 +1,12 @@
+# -*- coding: utf-8 -*-
+##############################################################################
+#
+#    OpenERP Module
+#    
+#    Copyright (C) 2010-2011 BREMSKERL-REIBBELAGWERKE EMMERLING GmbH & Co. KG
+#    Author Marco Dieckhoff
+#
+##############################################################################
 {
     "name": "Make product code mandatory",
     "version": "1.01",
