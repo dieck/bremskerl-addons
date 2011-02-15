@@ -1,3 +1,12 @@
+# -*- coding: utf-8 -*-
+##############################################################################
+#
+#    OpenERP Module
+#    
+#    Copyright (C) 2010-2011 BREMSKERL-REIBBELAGWERKE EMMERLING GmbH & Co. KG
+#    Author Marco Dieckhoff
+#
+##############################################################################
 {
     "name": "Add QA documentation type",
     "version": "1.01",
