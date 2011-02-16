@@ -10,8 +10,8 @@
 			<field name="arch" type="xml">
 				<page string="Sales &amp; Purchases" position="inside">
 					<separator string="External Accounting" colspan="4" />
-					<field name="creditor" attrs="{'required':[('customer','=',True)]}" />
-					<field name="debtor" attrs="{'required':[('supplier','=',True)]}" />
+					<field name="creditor" attrs="{'required':[('supplier','=',True)]}" />
+					<field name="debtor" attrs="{'required':[('customer','=',True)]}" />
 					<newline/>
 				</page>
 			</field>
