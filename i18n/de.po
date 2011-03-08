@@ -1,13 +1,13 @@
 # Translation of OpenERP Server.
 # This file contains the translation of the following modules:
-#	* project_viewchildren
+#	* project_related
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 6.0.0\n"
+"Project-Id-Version: OpenERP Server 6.0.1\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2011-02-01 18:15+0000\n"
-"PO-Revision-Date: 2011-02-01 18:15+0000\n"
+"POT-Creation-Date: 2011-03-08 09:35+0000\n"
+"PO-Revision-Date: 2011-03-08 09:35+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -15,23 +15,23 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#. module: project_viewchildren
-#: model:ir.model,name:project_viewchildren.model_project_project
+#: model:ir.model,name:project_related.model_project_project
+#. module: project_related
 msgid "Project"
 msgstr "Projekt"
 
-#. module: project_viewchildren
-#: field:project.project,child_ids:0
-msgid "Child projects"
-msgstr "Unterprojekte"
+#: field:project.project,parent_project_id:0
+#. module: project_related
+msgid "Parent Project"
+msgstr "Hauptprojekt"
 
-#. module: project_viewchildren
-#: constraint:project.project:0
-msgid "Error! project start-date must be lower then project end-date."
-msgstr "Fehler! Der Projektstart mus vor dem Projektende liegen"
-
-#. module: project_viewchildren
 #: view:project.project:0
-msgid "Child projects"
+#. module: project_related
+msgid "Subprojects"
 msgstr "Unterprojekte"
+
+#: view:project.project:0
+#. module: project_related
+msgid "Related"
+msgstr "Zusammenhänge"
 

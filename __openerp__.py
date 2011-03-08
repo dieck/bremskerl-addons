@@ -3,7 +3,7 @@
 #
 #    OpenERP Module
 #    
-#    Copyright (C) 2010-2011 BREMSKERL-REIBBELAGWERKE EMMERLING GmbH & Co. KG
+#    Copyright (C) 2011 BREMSKERL-REIBBELAGWERKE EMMERLING GmbH & Co. KG
 #    Author Marco Dieckhoff
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -21,12 +21,12 @@
 #
 ##############################################################################
 {
-    "name": "View project children as notebook tab",
+    "name": "View subprojects and parent project",
     "version": "1.0",
     "depends": ["project"],
     "author": "Marco Dieckhoff, BREMSKERL",
     "category": "Projects & Services",
-    "description": """View project children as notebook tab
+    "description": """View sub and parent projects as tab
     """,
     "init_xml": [],
     'update_xml': ["view/project_view.xml",

@@ -9,8 +9,10 @@
 			<field name="inherit_id" ref="project.edit_project" />
 			<field name="arch" type="xml">
                     <notebook colspan="4" position="inside">
-                    <page string="Child projects">
-                    	<field name="child_ids" nolabel="1" readonly="1" />
+                    <page string="Related">
+                    	<field name="parent_project_id" readonly="1" colspan="4" />
+                    	<separator string="Subprojects" colspan="4" />
+                    	<field name="subproject_ids" nolabel="1" readonly="1" colspan="4" />
                     </page>
                     </notebook>
 			</field>
