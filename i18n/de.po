@@ -23,6 +23,6 @@ msgstr " (Kopie)"
 
 #: sql_constraint:product.product:0
 #. module: product_code_unique
-msgid "Reference has to be unique."
-msgstr "Referenz muss eindeutig sein."
+msgid "Reference/Variant has to be unique."
+msgstr "Referenz/Variante muss eindeutig sein."
 

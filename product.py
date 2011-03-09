@@ -7,7 +7,7 @@ class product_code_unique_product(osv.osv):
     _name = "product.product"
     _inherit = "product.product"
   
-    _sql_constraints = [ ('default_code_uniq', 'unique (default_code)', """Reference has to be unique."""), ]
+    _sql_constraints = [ ('default_code_uniq', 'unique (default_code, variants)', """Reference/Variant has to be unique."""), ]
 
     def copy(self, cr, uid, id, default=None, context=None):
         if context is None:
