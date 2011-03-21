@@ -22,11 +22,9 @@
 			<field name="type">search</field>
 			<field name="inherit_id" ref="product.product_search_form_view" />
 			<field name="arch" type="xml">
-				<group expand="0" string="Extended Filters..." groups="base.group_extended"
-					position="inside">
-					<newline />
+				<xpath expr="//search[@string='Product']/newline" position="before">
 					<field name="wva" />
-				</group>
+				</xpath>
 			</field>
 		</record>
 
