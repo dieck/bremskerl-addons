@@ -26,7 +26,7 @@
     "depends": ["stock"],
     "author": "Marco Dieckhoff, BREMSKERL",
     "category": "Inventory Control",
-    "description": """Adds product cost price to stock move at the time of creation resp. product change.
+    "description": """Adds product cost price and currency to stock move at the time of setting it to done.
     """,
     "init_xml": [],
     'update_xml': ["view/stock_view.xml"],
