@@ -12,7 +12,7 @@
 				<xpath expr="//group/separator[@string='Traceability']/.."
 					position="after">
 					<group colspan="2" col="4" groups="base.group_extended">
-						<separator string="Prices at Creation" colspan="4"
+						<separator string="Cost Price (at creation)" colspan="4"
 							groups="base.group_extended" />
 						<field name="history_price_unit" nolabel="1" readonly="1" />
 						<field name="history_price_unit_currency_id" nolabel="1"
