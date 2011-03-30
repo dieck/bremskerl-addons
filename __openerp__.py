@@ -22,7 +22,7 @@
 ##############################################################################
 {
     "name": "Add product cost price to stock move",
-    "version": "1.00",
+    "version": "1.05",
     "depends": ["stock"],
     "author": "Marco Dieckhoff, BREMSKERL",
     "category": "Inventory Control",
