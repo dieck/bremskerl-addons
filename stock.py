@@ -1,49 +1,58 @@
 # -*- coding: utf-8 -*-
 from osv import fields, osv
+import decimal_precision as dp
+import time
 
 class stock_move_price_history(osv.osv):
     _name = "stock.move"
     _inherit = "stock.move"
     
-    def _get_product_standard_price_currency(self, cr, uid, ids, field_name, arg, context):
-        print "CURRENCY1"
-        res = {}
+    # do updates. works as an update determination function
+    def _smph_do_updates(self, cr, uid, ids, context={}):
+        res = []
         for session in self.browse(cr, uid, ids):
-            #TODO remove debug message
-            print "GOT NEW CURRENCY FOR", session.id
-            res[session.id] = session.product_id.product_tmpl_id.company_id.currency_id.id
-        print "CURRENCY2"
+            # if state is set to done
+            if (session.state == 'done'):
+                # and there is not yet stored a price
+                if (not (session.history_price_unit)):
+                    # store price and unit (id)
+                    self.write(cr, uid, [session.id], {
+                        'history_price_unit': session.product_id.product_tmpl_id.standard_price,
+                        'history_price_unit_currency_id_store': session.product_id.product_tmpl_id.company_id.currency_id.id})
+                    
+                # return list of ids to be updated with _smph_get_current_date
+                res.append(session.id)
         return res
 
-    def _get_product_standard_price(self, cr, uid, ids, field_name, arg, context):
+
+    # returns current date for all ids
+    def _smph_get_current_date(self, cr, uid, ids, field_name, arg, context):
         res = {}
-        print "PRICE1"
-        for session in self.browse(cr, uid, ids):
-            #TODO remove debug message
-            print "GOT NEW PRICE FOR", session.id
-            res[session.id] = session.product_id.product_tmpl_id.standard_price
-        print "PRICE2"
+        for id in ids:
+            res[id] = time.strftime('%Y-%m-%d %H:%M:%S'),
         return res
-    
-    def _is_to_be_updated(self, cr, uid, ids, context={}):
-        ## can be replaced by
-        # return self.search(cursor, user_id, [('id','in',ids),('state', '=', 'done')])
-        res = []
-        print "IS1"
+
+    # "converts" a integer field to many2one via fields.function
+    def _smph_get_currency_from_id(self, cr, uid, ids, field_name, arg, context):
+        res = {}
         for session in self.browse(cr, uid, ids):
-            if (session.state == 'done'):
-                #TODO remove debug message
-                print "STOCK MOVE TO BE UPDATED", session.id
-                res.append(session.id)
-        print "IS2"
+            # use the stored id as real many2one id
+            res[session.id] = session.history_price_unit_currency_id_store
         return res
     
     _columns = {
-        'history_price_unit': fields.function(_get_product_standard_price, string="Historic Unit Price", type="float", method=True,
-                                              store={'stock.move':(_is_to_be_updated,['state'],20)}), 
-        'history_price_unit_currency_id': fields.function(_get_product_standard_price_currency, string="Historic Unit Price Currency",
-                                                          type="many2one", relation="res.currency", method=True,
-                                                          store={'stock.move':(_is_to_be_updated,['state'],10)}), 
+         # store price
+         'history_price_unit' : fields.float('Internal storage for Historic Unit Price', digits_compute=dp.get_precision('Account')),
+
+         # store only id, not relation
+         'history_price_unit_currency_id_store': fields.integer('Internal storage for Historic Unit Price Currency'),
+         
+         # get relation from id
+         'history_price_unit_currency_id': fields.function(_smph_get_currency_from_id, string="Historic Unit Price Currency", type="many2one", relation="res.currency", method=True),
+         
+         # use this as a dummy trigger function to set the values, from _smph_do_updates
+         'history_price_dummytrigger': fields.function(_smph_get_current_date, string="Dummy Trigger: Last Update", type="datetime", method=True,
+                                              store={'stock.move':(_smph_do_updates,['state'],20)}), 
     }
     
 stock_move_price_history()
