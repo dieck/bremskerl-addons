@@ -24,7 +24,6 @@ class wiz_stock_picking_merge(osv.osv_memory):
     _columns = {
         "target_picking_id": fields.many2one("stock.picking","Target Picking"),
         "picking_ids": fields.many2many("stock.picking","wizard_stock_move_picking_merge_chosen","merge_id","picking_id"),
-        "state": fields.selection([('init','Initialize'),('target','Target picked')],"State"),
 
         "target_picking_id_type": fields.related("target_picking_id", "type", type="char", string="Target Picking Type"),
         "target_picking_id_state": fields.related("target_picking_id", "state", type="char", string="Target Picking State"),
@@ -32,15 +31,27 @@ class wiz_stock_picking_merge(osv.osv_memory):
         
         "commit_merge": fields.boolean("Commit merge"),
     }        
+  
+  
+    def return_view(self, cr, uid, name, res_id):
+        data_pool = self.pool.get('ir.model.data')
+        result = data_pool.get_object_reference(cr, uid, 'merge_picking_v6', name)
+        view_id = result and result[1] or False
+        r = {
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'stock.move.picking.merge',
+            'views': [(view_id, 'form')],
+            'view_id': False,
+            'type': 'ir.actions.act_window',
+            'target': 'new',
+            'res_id': res_id,
+        }
+        return r
     
-    _defaults = {
-        "state": lambda *a: "init",
-    }
-   
     def do_target(self, cr, uid, ids, context=None):
         # look if we got compatible views
         picking_pool = self.pool.get('stock.picking')
-        data_pool = self.pool.get('ir.model.data')
        
         found = False
         for session in self.browse(cr, uid, ids):
@@ -62,79 +73,21 @@ class wiz_stock_picking_merge(osv.osv_memory):
         
         if not found: 
             raise osv.except_osv(_('Note'),_('There are no compatible pickings to be merged.'))
-            result = data_pool.get_object_reference(cr, uid, 'merge_picking_v6', 'merge_picking_form_init')
-            view_id = result and result[1] or False
-            r = {
-                    'view_type': 'form',
-                    'view_mode': 'form',
-                    'res_model': 'stock.move.picking.merge',
-                    'views': [(view_id, 'form')],
-                    'view_id': False,
-                    'type': 'ir.actions.act_window',
-                    'target': 'new',
-                    'res_id': ids[0],
-            }
-            return r
-        
-        result = data_pool.get_object_reference(cr, uid, 'merge_picking_v6', 'merge_picking_form_target')
-        view_id = result and result[1] or False
-        r = {
-                'view_type': 'form',
-                'view_mode': 'form',
-                'res_model': 'stock.move.picking.merge',
-                'views': [(view_id, 'form')],
-                'view_id': False,
-                'type': 'ir.actions.act_window',
-                'target': 'new',
-                'res_id': ids[0],
-        }
-        return r
-
-
-    def check_compatible(self, cr, uid, target_id, merge_ids, context=None):
-        return True
-        
+            return self.return_view(cr, uid, 'merge_picking_form_init', ids[0])
+        # else:
+        return self.return_view(cr, uid, 'merge_picking_form_target', ids[0])
+    
     def do_check(self, cr, uid, ids, context=None):
-        #TODO check if pickings are compatible with the target one
-        # by type, state, address_id
-        self.write(cr, uid, ids, {'state': 'target'})
-        data_pool = self.pool.get('ir.model.data')
-        
-        result = data_pool.get_object_reference(cr, uid, 'merge_picking_v6', 'merge_picking_form_checked')
-        view_id = result and result[1] or False
-        r = {
-                'view_type': 'form',
-                'view_mode': 'form',
-                'res_model': 'stock.move.picking.merge',
-                'views': [(view_id, 'form')],
-                'view_id': False,
-                'type': 'ir.actions.act_window',
-                'target': 'new',
-                'res_id': ids[0],
-        }
-        return r
-
+        # maybe check if pickings are compatible with the target one, by type, state, address_id
+        # but this should not happen, as the domain constraints won't allow incompatible pickings chosen to merge
+        return self.return_view(cr, uid, 'merge_picking_form_checked', ids[0])        
+    
     def do_merge(self, cr, uid, ids, context=None):
-        data_pool = self.pool.get('ir.model.data')
-
         # bail out if checkbox not set
         for session in self.browse(cr, uid, ids):
             if not session.commit_merge: 
                 raise osv.except_osv(_('Unchecked'),_('You did not check the Commit Merge checkbox.'))
-                result = data_pool.get_object_reference(cr, uid, 'merge_picking_v6', 'merge_picking_form_checked')
-                view_id = result and result[1] or False
-                r = {
-                        'view_type': 'form',
-                        'view_mode': 'form',
-                        'res_model': 'stock.move.picking.merge',
-                        'views': [(view_id, 'form')],
-                        'view_id': False,
-                        'type': 'ir.actions.act_window',
-                        'target': 'new',
-                        'res_id': ids[0],
-                }
-                return r
-        
+                return self.return_view(cr, uid, 'merge_picking_form_checked', ids[0])
         # merge 
         #TODO merge
         
@@ -194,23 +147,6 @@ class wiz_stock_picking_merge(osv.osv_memory):
     
         return {}
 
-    def TODO_REMOVE_DUMMY(self, cr, uid, move, journal_id, period_id):
-        name = _("Journal Items")
-        data_pool = self.pool.get('ir.model.data')
-        result = data_pool.get_object_reference(cr, uid, 'account', 'view_account_move_line_filter')
-        res_id = result and result[1] or False
-        return {
-            'name': name,
-            'view_type': 'form',
-            'view_mode': 'tree,graph,form',
-            'res_model': 'account.move.line',
-            'view_id': False,
-            'context': "{'search_default_posted': %d, 'visible_id':%s, 'search_default_journal_id':%d, 'search_default_period_id':%d}" % (move, journal_id, journal_id, period_id),
-            'type': 'ir.actions.act_window',
-            'search_view_id': res_id
-        }
-
 
 wiz_stock_picking_merge()
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
