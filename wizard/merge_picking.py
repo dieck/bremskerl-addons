@@ -25,13 +25,19 @@ class wiz_stock_picking_merge(osv.osv_memory):
         "target_picking_id": fields.many2one("stock.picking","Target Picking"),
         "picking_ids": fields.many2many("stock.picking","wizard_stock_move_picking_merge_chosen","merge_id","picking_id"),
 
-        "target_picking_id_type": fields.related("target_picking_id", "type", type="char", string="Target Picking Type"),
         "target_picking_id_state": fields.related("target_picking_id", "state", type="char", string="Target Picking State"),
+        "target_picking_id_type": fields.related("target_picking_id", "type", type="char", string="Target Picking Type"),
+        "target_picking_id_invoice_state": fields.related("target_picking_id", "invoice_state", type="char", string="Target Picking Invoice State"),
+
+        "target_picking_id_backorder_id": fields.related("target_picking_id", "backorder_id", type="many2one", relation='stock.picking', string="Target Picking Backorder"),
+        "target_picking_id_stock_journal_id": fields.related("target_picking_id", "stock_journal_id", type="many2one", relation='stock.journal', string="Target Picking Journal ID"),
+        "target_picking_id_location_id": fields.related("target_picking_id", "location_id", type="many2one", relation='stock.location', string="Target Picking Location"),
+        "target_picking_id_location_dest_id": fields.related("target_picking_id", "location_dest_id", type="many2one", relation='stock.location', string="Target Picking Destination Location"),
         "target_picking_id_address_id": fields.related("target_picking_id", "address_id", type="many2one", relation='res.partner.address', string="Target Picking Adress"),
+        "target_picking_id_company_id": fields.related("target_picking_id", "company_id", type="many2one", relation='res.company', string="Target Picking Company"),
         
         "commit_merge": fields.boolean("Commit merge"),
     }        
-  
   
     def return_view(self, cr, uid, name, res_id):
         data_pool = self.pool.get('ir.model.data')
@@ -57,18 +63,41 @@ class wiz_stock_picking_merge(osv.osv_memory):
         for session in self.browse(cr, uid, ids):
             similiar_ids = picking_pool.search(cr, uid, [('id','<>',session.target_picking_id.id),
                                                 ('state','=',session.target_picking_id.state),
-# does not work. gives an error: "can't adapt type browse_record" when finding no compatible data.
-# Works with two datasets with address_id=null, though, so traversing seems not to be the problem...
+                                                ('type','=',session.target_picking_id.type),
+                                                ('invoice_state','=',session.target_picking_id.invoice_state),
+                                                
+# related fields do not work. give an error: "can't adapt type browse_record" when finding no compatible data.
+# Works with two datasets with like address_id=null, though, so traversing seems not to be the problem...
 #                                                ('address_id','=',session.target_picking_id.address_id) ])
 #            if (similiar_ids):
 #                found = True
                                                 
-# so I'll do it manually.
+# so I'll do it manually for related fields
                                                ])
-               
+
+            # check for compability on related fields address, backorder, stock journal, location, location dest & company               
             for similiar in picking_pool.browse(cr, uid, similiar_ids):
-                # ok if addresses are similiar
-                if (similiar.address_id.id == session.target_picking_id.address_id.id):
+                similiarOK = True
+                
+                if (similiar.address_id.id <> session.target_picking_id.address_id.id):
+                    similiarOK = False
+
+                if (similiar.backorder_id.id <> session.target_picking_id.backorder_id.id):
+                    similiarOK = False
+                    
+                if (similiar.stock_journal_id.id <> session.target_picking_id.stock_journal_id.id):
+                    similiarOK = False
+                    
+                if (similiar.location_id.id <> session.target_picking_id.location_id.id):
+                    similiarOK = False
+                    
+                if (similiar.location_dest_id.id <> session.target_picking_id.location_dest_id.id):
+                    similiarOK = False
+                    
+                if (similiar.company_id.id <> session.target_picking_id.company_id.id):
+                    similiarOK = False
+                    
+                if (similiarOK):
                     found = True
         
         if not found: 
@@ -77,10 +106,12 @@ class wiz_stock_picking_merge(osv.osv_memory):
         # else:
         return self.return_view(cr, uid, 'merge_picking_form_target', ids[0])
     
+    
     def do_check(self, cr, uid, ids, context=None):
-        # maybe check if pickings are compatible with the target one, by type, state, address_id
+        # maybe check if pickings are compatible again with the attributes from do_target
         # but this should not happen, as the domain constraints won't allow incompatible pickings chosen to merge
         return self.return_view(cr, uid, 'merge_picking_form_checked', ids[0])        
+    
     
     def do_merge(self, cr, uid, ids, context=None):
         # bail out if checkbox not set
@@ -88,7 +119,15 @@ class wiz_stock_picking_merge(osv.osv_memory):
             if not session.commit_merge: 
                 raise osv.except_osv(_('Unchecked'),_('You did not check the Commit Merge checkbox.'))
                 return self.return_view(cr, uid, 'merge_picking_form_checked', ids[0])
-        # merge 
+        # merge
+        
+        picking_pool = self.pool.get("stock.picking")
+
+        for session in self.browse(cr, uid, ids):
+            for target in session.picking_ids:
+                
+                print "merging",target,"into",session.target_picking_id
+            
         #TODO merge
         
         return True
