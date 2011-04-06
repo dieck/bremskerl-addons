@@ -15,7 +15,6 @@
 
 from osv import osv, fields
 from tools.translate import _
-import netsvc
 
 class wiz_stock_picking_merge(osv.osv_memory):
     _name = "stock.move.picking.merge"
@@ -38,6 +37,14 @@ class wiz_stock_picking_merge(osv.osv_memory):
         
         "commit_merge": fields.boolean("Commit merge"),
     }        
+  
+    def module_installed(self, cr, uid, name):
+        mod_pool = self.pool.get("ir.module.module")
+        search_mod = mod_pool.search(cr, uid, [("name","=",name)])
+        for mod in mod_pool.browse(cr, uid, search_mod):
+            if (mod.state == 'installed'):
+                return True
+        return False
   
     def return_view(self, cr, uid, name, res_id):
         data_pool = self.pool.get('ir.model.data')
@@ -108,8 +115,29 @@ class wiz_stock_picking_merge(osv.osv_memory):
     
     
     def do_check(self, cr, uid, ids, context=None):
-        # maybe check if pickings are compatible again with the attributes from do_target
-        # but this should not happen, as the domain constraints won't allow incompatible pickings chosen to merge
+        # check if pickings are compatible again with the attributes
+        # depending on additional modules!
+        # I could not bring those to the domain, as there are no optional module dependencies in OpenERP for XML
+        for session in self.browse(cr, uid, ids):
+            target = session.target_picking_id
+            for merge in session.picking_ids:
+                # look for incompatible moves
+                for move in merge.move_lines:
+                    if (move.state == 'done'):
+                        raise osv.except_osv(_('Warning'),
+                              _('The following picking can not be merged due to moves in state done:') + " " + str(merge.name))
+                        return self.return_view(cr, uid, 'merge_picking_form_target', ids[0])
+                    
+                if (self.module_installed(cr, uid, "purchase")) and (target.purchase_id.id != merge.purchase_id.id):
+                    raise osv.except_osv(_('Warning'),
+                          _('The following picking can not be merged due to different purchase order references:') + " " + str(merge.name))
+                    return self.return_view(cr, uid, 'merge_picking_form_target', ids[0])
+
+                if (self.module_installed(cr, uid, "sale")) and (target.sale_id.id != merge.sale_id.id):
+                    raise osv.except_osv(_('Warning'),
+                          _('The following picking can not be merged due to different sale order references:') + " " + str(merge.name))
+                    return self.return_view(cr, uid, 'merge_picking_form_target', ids[0])
+         
         return self.return_view(cr, uid, 'merge_picking_form_checked', ids[0])        
     
     
@@ -119,73 +147,57 @@ class wiz_stock_picking_merge(osv.osv_memory):
             if not session.commit_merge: 
                 raise osv.except_osv(_('Unchecked'),_('You did not check the Commit Merge checkbox.'))
                 return self.return_view(cr, uid, 'merge_picking_form_checked', ids[0])
+
         # merge
-        
         picking_pool = self.pool.get("stock.picking")
-
+        move_pool = self.pool.get("stock.move")
+    
         for session in self.browse(cr, uid, ids):
-            for target in session.picking_ids:
-                
-                print "merging",target,"into",session.target_picking_id
+            target = session.target_picking_id
             
-        #TODO merge
-        
+            target_changes = {"date_done": target.date_done }
+
+            # prepare notes, esp. if not existing           
+            target_changes['note'] = str(target.note)
+            if (target.note):
+                target_changes['note'] += ";\n"
+            target_changes['note'] += "This is a merge target."
+            
+            for merge in session.picking_ids:
+
+                # fetch notes
+                linenote = "Merged " + str(merge.name)
+                if (merge.origin != target.origin):
+                    linenote += ", had Origin " + str(merge.origin)
+                
+                if (merge.date != target.date):
+                    linenote += ", from " + str(merge.date)
+                
+                # handle changeable values
+                
+                # if any one merge has partial delivery, deliver the whole picking as partial (direct)
+                if (merge.move_type == 'direct'):
+                    target_changes['move_type'] = 'direct'
+                
+                # date_done = MAX(date_done)
+                if (target_changes['date_done'] < merge.date_done):
+                    target_changes['date_done'] = merge.date_done
+                
+                # if any one merge is NOT auto_picking, then the target is not.
+                # should never occur, as auto_picking would set it to done instantly, which can't be merged
+                if (not (merge.auto_picking)):
+                    target_changes['auto_picking'] = False
+                
+                # combine moves
+                for move in merge.move_lines:
+                    move_pool.write(cr, uid, [move.id], {"picking_id": target.id})
+                
+                target_changes['note'] += linenote 
+            # for merge
+            
+            picking_pool.write(cr, uid, [target.id], target_changes)
+                
         return True
-
-               
-    def find_max_invid(self,cr,uid,ids,address_id,state,type):
-        stk_move_obj = self.pool.get('stock.picking')
-        stk_move = self.pool.get('stock.move')
-
-        cr.execute("select max(id) from stock_picking where type='%s' and state='%s' and address_id=%d" % (type,state,address_id))
-        max_picking_id=cr.fetchall()[0][0]
-    
-        cr.execute('select * from stock_picking where id=%d' %(max_picking_id))
-        rec_dict=cr.dictfetchall()
-    
-        rec_dict[0].__delitem__('perm_id')
-        rec_dict[0].__delitem__('create_uid')
-        rec_dict[0].__delitem__('create_date')
-        rec_dict[0].__delitem__('write_date')
-        rec_dict[0].__delitem__('write_uid')
-        rec_dict[0].__delitem__('id')
-    
-        rec_dict[0]['name']="OUT:"+str(max_picking_id+1)
-        rec_dict[0]['state']="draft"
-    
-        cr.execute("select * from stock_picking pc where type='%s' and state='%s' and address_id=%d" % (type,state,address_id))
-        picking_info=cr.dictfetchall()
-    
-        if len(picking_info) > 1:
-            cr_id=stk_move_obj.create(cr,uid,rec_dict[0],context=None)
-    
-            for picking in picking_info:
-                pick_ids=stk_move.search(cr,uid,[('picking_id','=',picking['id'])])
-    
-                for pick_id in pick_ids:
-                    stk_move.write(cr,uid,pick_id,{'picking_id':cr_id})
-    
-                wf_service = netsvc.LocalService("workflow")
-                wf_service.trg_validate(uid, 'stock.picking', picking['id'], 'button_cancel', cr)
-    
-            wf_service = netsvc.LocalService("workflow")
-            wf_service.trg_validate(uid, 'stock.picking', cr_id, 'button_confirm', cr)
-    
-            stk_move_obj.action_assign(cr,uid,[cr_id])
-        return True
-
-    def find_partner(self,cr,uid,ids,context=None):
-        state = 'assigned'
-        type = 'out'
-    
-        cr.execute("select address_id from stock_picking where type='%s' and state='%s' and address_id is not null group by address_id,state,type" % (type,state))
-        partner_ids=cr.dictfetchall()
-    
-        for partner in partner_ids:
-            self.find_max_invid(self,cr,uid,ids,partner['address_id'],state,type)
-    
-        return {}
-
 
 wiz_stock_picking_merge()
 

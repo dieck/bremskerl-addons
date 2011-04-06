@@ -9,7 +9,8 @@
 			<field name="arch" type="xml">
 				<form string="Merge Picking">
 					<separator colspan="4" string="Picking target to merge into" />
-					<field name="target_picking_id" required="1" />
+					<field name="target_picking_id" required="1"
+					   domain="[('state','&lt;&gt;','done'),('state','&lt;&gt;','cancel')]" />
 					<group col="2" colspan="4">
 						<button icon="gtk-cancel" special="cancel" string="Do not merge" />
 						<button name="do_target" string="Choose Target" type="object"
