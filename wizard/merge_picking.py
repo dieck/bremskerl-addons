@@ -38,11 +38,6 @@ class stock_picking_merge_wizard(osv.osv_memory):
         "commit_merge": fields.boolean("Commit merge"),
     }        
   
-    def debug(self, *args):
-        debug = False
-        if (debug): 
-            print args
-  
     def module_installed(self, cr, uid, name):
         mod_pool = self.pool.get("ir.module.module")
         search_mod = mod_pool.search(cr, uid, [("name","=",name)])
@@ -162,8 +157,6 @@ class stock_picking_merge_wizard(osv.osv_memory):
         for session in self.browse(cr, uid, ids):
             target = session.target_picking_id
             
-            self.debug("target", target.id, target.name)
-            
             target_changes = {"date_done": target.date_done }
 
             # prepare notes, esp. if not existing           
@@ -173,13 +166,8 @@ class stock_picking_merge_wizard(osv.osv_memory):
                 target_changes['note'] = ""
             target_changes['note'] += "This is a merge target."
 
-            self.debug("target changes", target_changes)
-            
             for merge in session.picking_ids:
-                self.debug("merge", merge.id, merge.name)
-                
                 # fetch notes
-                self.debug("fetch notes")
 
                 linenote = " Merged " + str(merge.name)
                 if (merge.origin != target.origin):
@@ -189,7 +177,6 @@ class stock_picking_merge_wizard(osv.osv_memory):
                     linenote += ", from " + str(merge.date)
                 
                 # handle changeable values
-                self.debug("handle changeable values")
 
                 # if any one merge has partial delivery, deliver the whole picking as partial (direct)
                 if (merge.move_type == 'direct'):
@@ -205,19 +192,14 @@ class stock_picking_merge_wizard(osv.osv_memory):
                     target_changes['auto_picking'] = False
                 
                 # combine moves
-                self.debug("combine moves")
                 for move in merge.move_lines:
-                    self.debug("combining move", move.id, move.name, " to picking" , target.id)
                     move_pool.write(cr, uid, [move.id], {"picking_id": target.id})
                 
-                self.debug("edit note", linenote)
                 target_changes['note'] += linenote 
 
-                self.debug("submerge done, deleting merged picking")
                 picking_pool.unlink(cr, uid, [merge.id])
             # /for merge
             
-            self.debug("target changes", target_changes)
             picking_pool.write(cr, uid, [target.id], target_changes)
                 
         return {'type': 'ir.actions.act_window_close'}
