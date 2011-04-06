@@ -38,14 +38,6 @@ class stock_picking_merge_wizard(osv.osv_memory):
         "commit_merge": fields.boolean("Commit merge"),
     }        
   
-    def module_installed(self, cr, uid, name):
-        mod_pool = self.pool.get("ir.module.module")
-        search_mod = mod_pool.search(cr, uid, [("name","=",name)])
-        for mod in mod_pool.browse(cr, uid, search_mod):
-            if (mod.state == 'installed'):
-                return True
-        return False
-  
     def return_view(self, cr, uid, name, res_id):
         data_pool = self.pool.get('ir.model.data')
         result = data_pool.get_object_reference(cr, uid, 'stock_merge_picking', name)
@@ -118,6 +110,9 @@ class stock_picking_merge_wizard(osv.osv_memory):
         # check if pickings are compatible again with the attributes
         # depending on additional modules!
         # I could not bring those to the domain, as there are no optional module dependencies in OpenERP for XML
+        
+        fields_pool = self.pool.get("ir.model.fields")
+
         for session in self.browse(cr, uid, ids):
             target = session.target_picking_id
             for merge in session.picking_ids:
@@ -128,15 +123,16 @@ class stock_picking_merge_wizard(osv.osv_memory):
                               _('The following picking can not be merged due to moves in state done:') + " " + str(merge.name))
                         return self.return_view(cr, uid, 'merge_picking_form_target', ids[0])
                     
-                if (self.module_installed(cr, uid, "purchase")) and (target.purchase_id.id != merge.purchase_id.id):
-                    raise osv.except_osv(_('Warning'),
-                          _('The following picking can not be merged due to different purchase order references:') + " " + str(merge.name))
-                    return self.return_view(cr, uid, 'merge_picking_form_target', ids[0])
-
-                if (self.module_installed(cr, uid, "sale")) and (target.sale_id.id != merge.sale_id.id):
-                    raise osv.except_osv(_('Warning'),
-                          _('The following picking can not be merged due to different sale order references:') + " " + str(merge.name))
-                    return self.return_view(cr, uid, 'merge_picking_form_target', ids[0])
+                # test all many2one fields for compability,as we can't link to different targets from one merged object!
+                # search for all related fields
+                fields_search = fields_pool.search(cr, uid, [('ttype','=','many2one'),('model','=','stock.picking'),('relation','<>',self._name)])
+                for field in fields_pool.browse(cr, uid, fields_search):
+                    related_target_id = getattr(target, field.name)
+                    related_merge_id = getattr(merge, field.name)
+                    if (related_target_id.id != related_merge_id.id):
+                        raise osv.except_osv(_('Warning'),
+                                _('The picking %s can not be merged due to different %s (%s) references.') % (str(merge.name), field.field_description, field.name) )
+                        return self.return_view(cr, uid, 'merge_picking_form_target', ids[0])
          
         return self.return_view(cr, uid, 'merge_picking_form_checked', ids[0])        
     
@@ -153,6 +149,7 @@ class stock_picking_merge_wizard(osv.osv_memory):
         # merge
         picking_pool = self.pool.get("stock.picking")
         move_pool = self.pool.get("stock.move")
+        fields_pool = self.pool.get("ir.model.fields")
     
         for session in self.browse(cr, uid, ids):
             target = session.target_picking_id
@@ -175,7 +172,13 @@ class stock_picking_merge_wizard(osv.osv_memory):
                 
                 if (merge.date != target.date):
                     linenote += ", from " + str(merge.date)
-                
+
+                if (merge.note):
+                    linenote += ", Notes: " + str(merge.note)
+
+                target_changes['note'] += linenote + ";\n"
+
+
                 # handle changeable values
 
                 # if any one merge has partial delivery, deliver the whole picking as partial (direct)
@@ -192,14 +195,45 @@ class stock_picking_merge_wizard(osv.osv_memory):
                     target_changes['auto_picking'] = False
                 
                 # combine moves
-                for move in merge.move_lines:
-                    move_pool.write(cr, uid, [move.id], {"picking_id": target.id})
-                
-                target_changes['note'] += linenote 
+                # not explicitly neccessary anymore, as it will be done by the many2one updates on all fields below
+                #for move in merge.move_lines:
+                #    move_pool.write(cr, uid, [move.id], {"picking_id": target.id})
 
+                    
+                ## update all relations to the old picking to look for the new one
+                
+                # search for all related fields.
+                # we don't need to handle one2many: backlinked references had to be equal in order to be compatible.
+                fields_search = fields_pool.search(cr, uid, [('relation','=','stock.picking'),('model','<>',self._name),
+                                                             '|',('ttype','=','many2one'),('ttype','=','many2many')])
+                
+                # go through these fields
+                for field in fields_pool.browse(cr, uid, fields_search):
+                    # find the model they're in
+                    model_pool = self.pool.get(field.model)
+                    
+                    # this can happen if you deinstalled modules by deleting their code, so they left something behind in the definition.
+                    if (not model_pool):
+                        continue
+                    
+                    # handle many2one: simply replace the id 
+                    if (field.ttype == 'many2one'):
+                        # find all entries that are old
+                        model_search = model_pool.search(cr, uid, [(field.name,'=',merge.id)])
+                        # and update them in one go
+                        model_pool.write(cr, uid, model_search, {field.name: target.id})
+
+                    # handle many2many:  
+                    if (field.ttype == 'many2many'):
+                        # find all entries that are old (don't know how yet, so I'll have to take 'em all
+                        model_search = model_pool.search(cr, uid, []) # (field.name,'=',merge.id)
+                        # and update them in one go
+                        model_pool.write(cr, uid, model_search, {field.name: [(3,merge.id),(4,target.id)]})
+                    
+                # updated everything, so now I can get rid of the object
                 picking_pool.unlink(cr, uid, [merge.id])
+
             # /for merge
-            
             picking_pool.write(cr, uid, [target.id], target_changes)
                 
         return {'type': 'ir.actions.act_window_close'}
