@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.0.1\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2011-04-06 10:01+0000\n"
-"PO-Revision-Date: 2011-04-06 10:01+0000\n"
+"POT-Creation-Date: 2011-04-06 14:50+0000\n"
+"PO-Revision-Date: 2011-04-06 14:50+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,13 @@ msgstr ""
 msgid "Merge Pickings (manual)"
 msgstr "Lieferaufträge zusammenfassen (manuell)"
 
-#: code:addons\stock_merge_picking\wizard\merge_picking.py:111
+#: code:addons\stock_merge_picking\wizard\merge_picking.py:134
+#. module: stock_merge_picking
+#, python-format
+msgid "The picking %s can not be merged due to different %s (%s) references."
+msgstr "Der Lieferauftrag %s kann nicht zusammengefasst werden, die Referenz %s (%s) weicht ab."
+
+#: code:addons\stock_merge_picking\wizard\merge_picking.py:103
 #. module: stock_merge_picking
 #, python-format
 msgid "Note"
@@ -42,7 +48,7 @@ msgstr "Zielauftrag Auftragsrückstand"
 msgid "Choose Target"
 msgstr "Zielauftrag wählen"
 
-#: code:addons\stock_merge_picking\wizard\merge_picking.py:150
+#: code:addons\stock_merge_picking\wizard\merge_picking.py:146
 #. module: stock_merge_picking
 #, python-format
 msgid "Unchecked"
@@ -58,7 +64,7 @@ msgstr "Aufträge, die im Ziel zusammengefasst werden sollen"
 msgid "unknown"
 msgstr "unbekannt"
 
-#: code:addons\stock_merge_picking\wizard\merge_picking.py:128
+#: code:addons\stock_merge_picking\wizard\merge_picking.py:123
 #. module: stock_merge_picking
 #, python-format
 msgid "The following picking can not be merged due to moves in state done:"
@@ -99,10 +105,11 @@ msgstr "Zielauftrag Lager Journal"
 msgid "Target Picking Company"
 msgstr "Zielauftrag Unternehmen"
 
+#: model:ir.module.module,shortdesc:stock_merge_picking.module_meta_information
 #: view:stock.picking.merge.wizard:0
 #. module: stock_merge_picking
 msgid "Merge Picking"
-msgstr "Lieferauftrag zusammenfassen"
+msgstr "Lieferaufträge zusammenfassen"
 
 #: field:stock.picking.merge.wizard,target_picking_id_state:0
 #. module: stock_merge_picking
@@ -124,19 +131,7 @@ msgstr "Zusammenfassen abbrechen"
 msgid "Target Picking"
 msgstr "Zielauftrag"
 
-#: code:addons\stock_merge_picking\wizard\merge_picking.py:138
-#. module: stock_merge_picking
-#, python-format
-msgid "The following picking can not be merged due to different sale order references:"
-msgstr "Dieser Lieferauftrag kann aufgrund von unterschiedlichen Verkaufsaufträgen nicht zusammengefasst werden:"
-
-#: code:addons\stock_merge_picking\wizard\merge_picking.py:133
-#. module: stock_merge_picking
-#, python-format
-msgid "The following picking can not be merged due to different purchase order references:"
-msgstr "Dieser Lieferauftrag kann aufgrund von unterschiedlichen Bestellungen nicht zusammengefasst werden:"
-
-#: code:addons\stock_merge_picking\wizard\merge_picking.py:150
+#: code:addons\stock_merge_picking\wizard\merge_picking.py:146
 #. module: stock_merge_picking
 #, python-format
 msgid "You did not check the Commit Merge checkbox."
@@ -152,15 +147,17 @@ msgstr "Zielauftrag Adresse"
 msgid "Target Picking Location"
 msgstr "Zielauftrag Lagerort"
 
-#: code:addons\stock_merge_picking\wizard\merge_picking.py:111
+#: model:ir.module.module,description:stock_merge_picking.module_meta_information
 #. module: stock_merge_picking
-#, python-format
-msgid "There are no compatible pickings to be merged."
-msgstr "Es gibt keine kompatiblen Lieferaufträge zum Zusammenfassen."
+msgid "\n"
+"This module allows you to manually merge stock pickings (Incoming Shipments, Delivery Orders, Internal Moves).\n"
+"    "
+msgstr "\n"
+"Mit diesem Modul können Lieferaufträge (Wareneingang, Interne Lieferungen, Warenauslieferungen) manuell zusammengefasst werden.\n"
+"    "
 
-#: code:addons\stock_merge_picking\wizard\merge_picking.py:127
-#: code:addons\stock_merge_picking\wizard\merge_picking.py:132
-#: code:addons\stock_merge_picking\wizard\merge_picking.py:137
+#: code:addons\stock_merge_picking\wizard\merge_picking.py:122
+#: code:addons\stock_merge_picking\wizard\merge_picking.py:133
 #. module: stock_merge_picking
 #, python-format
 msgid "Warning"
@@ -170,6 +167,12 @@ msgstr "Warnung"
 #. module: stock_merge_picking
 msgid "Target Picking Invoice State"
 msgstr "Zielauftrag Rechnungskontrolle"
+
+#: code:addons\stock_merge_picking\wizard\merge_picking.py:103
+#. module: stock_merge_picking
+#, python-format
+msgid "There are no compatible pickings to be merged."
+msgstr "Es gibt keine kompatiblen Lieferaufträge zum Zusammenfassen."
 
 #: view:stock.picking.merge.wizard:0
 #. module: stock_merge_picking

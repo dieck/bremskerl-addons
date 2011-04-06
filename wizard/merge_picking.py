@@ -28,6 +28,8 @@ class stock_picking_merge_wizard(osv.osv_memory):
         "target_picking_id_type": fields.related("target_picking_id", "type", type="char", string="Target Picking Type"),
         "target_picking_id_invoice_state": fields.related("target_picking_id", "invoice_state", type="char", string="Target Picking Invoice State"),
 
+        # basic stock.picking relations are related here, they are used for the many2many field domain
+        # all non-basic relations are checked after being choosen, in do_check
         "target_picking_id_backorder_id": fields.related("target_picking_id", "backorder_id", type="many2one", relation='stock.picking', string="Target Picking Backorder"),
         "target_picking_id_stock_journal_id": fields.related("target_picking_id", "stock_journal_id", type="many2one", relation='stock.journal', string="Target Picking Journal ID"),
         "target_picking_id_location_id": fields.related("target_picking_id", "location_id", type="many2one", relation='stock.location', string="Target Picking Location"),
@@ -126,12 +128,16 @@ class stock_picking_merge_wizard(osv.osv_memory):
                 # test all many2one fields for compability,as we can't link to different targets from one merged object!
                 # search for all related fields
                 fields_search = fields_pool.search(cr, uid, [('ttype','=','many2one'),('model','=','stock.picking'),('relation','<>',self._name)])
-                for field in fields_pool.browse(cr, uid, fields_search):
+                for field in fields_pool.browse(cr, uid, fields_search, context):
+                    print "context", context
+                    print "field desc", field.field_description
                     related_target_id = getattr(target, field.name)
                     related_merge_id = getattr(merge, field.name)
                     if (related_target_id.id != related_merge_id.id):
+                        desc = field.field_description
+                        desc = self.pool.get(field.model)._columns[field.name].string
                         raise osv.except_osv(_('Warning'),
-                                _('The picking %s can not be merged due to different %s (%s) references.') % (str(merge.name), field.field_description, field.name) )
+                                _('The picking %s can not be merged due to different %s (%s) references.') % (str(merge.name), desc, field.name) )
                         return self.return_view(cr, uid, 'merge_picking_form_target', ids[0])
          
         return self.return_view(cr, uid, 'merge_picking_form_checked', ids[0])        
