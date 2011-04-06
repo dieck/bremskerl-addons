@@ -4,7 +4,7 @@
 
 		<record id="merge_picking_form_init" model="ir.ui.view">
 			<field name="name">Merge Picking</field>
-			<field name="model">stock.move.picking.merge</field>
+			<field name="model">stock.picking.merge.wizard</field>
 			<field name="type">form</field>
 			<field name="arch" type="xml">
 				<form string="Merge Picking">
@@ -21,17 +21,17 @@
 		</record>
 
 
-		<act_window id="action_merge_picking" name="Merge Picking"
-			res_model="stock.move.picking.merge" src_model="stock.move"
+		<act_window id="action_merge_picking" name="Merge Pickings (manual)"
+			res_model="stock.picking.merge.wizard" src_model="stock.move"
 			view_mode="form" target="new" view_type="form" view_id="merge_picking_form_init" />
 
 		<menuitem action="action_merge_picking" id="menu_stock_moves_merge_picking"
-			parent="stock.menu_traceability" sequence="100" />
+			parent="stock.menu_stock_warehouse_mgmt" sequence="100" />
 
 
 		<record id="merge_picking_form_target" model="ir.ui.view">
 			<field name="name">Merge Picking</field>
-			<field name="model">stock.move.picking.merge</field>
+			<field name="model">stock.picking.merge.wizard</field>
 			<field name="type">form</field>
 			<field name="arch" type="xml">
 				<form string="Merge Picking">
@@ -71,7 +71,7 @@
 
 		<record id="merge_picking_form_checked" model="ir.ui.view">
 			<field name="name">Merge Picking</field>
-			<field name="model">stock.move.picking.merge</field>
+			<field name="model">stock.picking.merge.wizard</field>
 			<field name="type">form</field>
 			<field name="arch" type="xml">
 				<form string="Merge Picking">

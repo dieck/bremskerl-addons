@@ -13,15 +13,18 @@
 #
 ##############################################################################
 {
-    "name" : "Merge Picking v6",
-    "version" : "6.0",
-    "author" : "Marco Dieckhoff (Bremskerl)",
-    "website" : "www.bremskerl.com",
-    "depends" : ["base","stock"],
-    "category" : "Generic Modules",
-    "init_xml" : [],
-    "demo_xml" : [],
-    "update_xml" : ["wizard/merge_picking_view.xml"],
-    "active": False,
-    "installable": True
+    'name' : 'Merge Picking',
+    'version' : '6.0',
+    'author' : 'Marco Dieckhoff (Bremskerl)',
+    'website' : 'www.bremskerl.com',
+    'depends' : ['stock'],
+    'category' : 'Generic Modules',
+    'description': """
+This module allows you to manually merge stock pickings (Incoming Shipments, Delivery Orders, Internal Moves).
+    """,
+    'init_xml' : [],
+    'demo_xml' : [],
+    'update_xml' : ['wizard/merge_picking_view.xml'],
+    'active': False,
+    'installable': True
 }
