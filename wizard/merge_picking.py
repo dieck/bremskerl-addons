@@ -56,53 +56,50 @@ class stock_picking_merge_wizard(osv.osv_memory):
         }
         return r
     
+    def is_compatible_many2one(self, cr, uid, target, merge, context=None):
+        fields_pool = self.pool.get("ir.model.fields")
+        fields_search = fields_pool.search(cr, uid, [('ttype','=','many2one'),('model','=','stock.picking'),('relation','<>',self._name)])
+        for field in fields_pool.browse(cr, uid, fields_search, context):
+            related_target_id = getattr(target, field.name)
+            related_merge_id = getattr(merge, field.name)
+            if (related_target_id.id != related_merge_id.id):
+                return {'result': False, 'field': field }
+        return {'result': True }
+    
     def do_target(self, cr, uid, ids, context=None):
         # look if we got compatible views
         picking_pool = self.pool.get('stock.picking')
        
         found = False
+        found_incompatible = False
+        incompatible_notes = _('Near misses:')
+
         for session in self.browse(cr, uid, ids):
+            # search if there are any compatible merges at all
             similiar_ids = picking_pool.search(cr, uid, [('id','<>',session.target_picking_id.id),
                                                 ('state','=',session.target_picking_id.state),
                                                 ('type','=',session.target_picking_id.type),
                                                 ('invoice_state','=',session.target_picking_id.invoice_state),
-                                                
-# related fields do not work. give an error: "can't adapt type browse_record" when finding no compatible data.
-# Works with two datasets with like address_id=null, though, so traversing seems not to be the problem...
-#                                                ('address_id','=',session.target_picking_id.address_id) ])
-#            if (similiar_ids):
-#                found = True
-                                                
-# so I'll do it manually for related fields
                                                ])
-
-            # check for compability on related fields address, backorder, stock journal, location, location dest & company               
-            for similiar in picking_pool.browse(cr, uid, similiar_ids):
-                similiarOK = True
-                
-                if (similiar.address_id.id <> session.target_picking_id.address_id.id):
-                    similiarOK = False
-
-                if (similiar.backorder_id.id <> session.target_picking_id.backorder_id.id):
-                    similiarOK = False
-                    
-                if (similiar.stock_journal_id.id <> session.target_picking_id.stock_journal_id.id):
-                    similiarOK = False
-                    
-                if (similiar.location_id.id <> session.target_picking_id.location_id.id):
-                    similiarOK = False
-                    
-                if (similiar.location_dest_id.id <> session.target_picking_id.location_dest_id.id):
-                    similiarOK = False
-                    
-                if (similiar.company_id.id <> session.target_picking_id.company_id.id):
-                    similiarOK = False
-                    
-                if (similiarOK):
+            
+            # ensure that many2one relations are compatible 
+            for merge in picking_pool.browse(cr, uid, similiar_ids):
+                is_compatible = self.is_compatible_many2one(cr, uid, session.target_picking_id, merge, context)
+                if (is_compatible['result']):
                     found = True
+                else:
+                    found_incompatible = True
+                    desc = self.get_fieldname_translation(cr, uid, is_compatible['field'], context)
+                    incompatible_notes += "\n" + _('%s: %s (%s) differs.') \
+                        % (str(merge.name), desc, is_compatible['field'].name) 
+                    
         
         if not found: 
-            raise osv.except_osv(_('Note'),_('There are no compatible pickings to be merged.'))
+            if (found_incompatible):
+                raise osv.except_osv(_('Note'),_('There are no compatible pickings to be merged.') + "\n" + incompatible_notes)
+            else:
+                raise osv.except_osv(_('Note'),_('There are no compatible pickings to be merged.'))
+            
             return self.return_view(cr, uid, 'merge_picking_form_init', ids[0])
         # else:
         return self.return_view(cr, uid, 'merge_picking_form_target', ids[0])
@@ -123,8 +120,6 @@ class stock_picking_merge_wizard(osv.osv_memory):
         # check if pickings are compatible again with the attributes
         # depending on additional modules!
         # I could not bring those to the domain, as there are no optional module dependencies in OpenERP for XML
-        
-        fields_pool = self.pool.get("ir.model.fields")
 
         for session in self.browse(cr, uid, ids):
             target = session.target_picking_id
@@ -137,16 +132,12 @@ class stock_picking_merge_wizard(osv.osv_memory):
                         return self.return_view(cr, uid, 'merge_picking_form_target', ids[0])
                     
                 # test all many2one fields for compability,as we can't link to different targets from one merged object!
-                # search for all related fields
-                fields_search = fields_pool.search(cr, uid, [('ttype','=','many2one'),('model','=','stock.picking'),('relation','<>',self._name)])
-                for field in fields_pool.browse(cr, uid, fields_search, context):
-                    related_target_id = getattr(target, field.name)
-                    related_merge_id = getattr(merge, field.name)
-                    if (related_target_id.id != related_merge_id.id):
-                        desc = self.get_fieldname_translation(cr, uid, field, context)
-                        raise osv.except_osv(_('Warning'),
-                                _('The picking %s can not be merged due to different %s (%s) references.') % (str(merge.name), desc, field.name) )
-                        return self.return_view(cr, uid, 'merge_picking_form_target', ids[0])
+                is_compatible = self.is_compatible_many2one(cr, uid, target, merge, context)
+                if (not is_compatible['result']):
+                    desc = self.get_fieldname_translation(cr, uid, is_compatible['field'], context)
+                    raise osv.except_osv(_('Warning'),
+                            _('The picking %s can not be merged due to different %s (%s) references.') % (str(merge.name), desc, is_compatible['field'].name) )
+                    return self.return_view(cr, uid, 'merge_picking_form_target', ids[0])
          
         return self.return_view(cr, uid, 'merge_picking_form_checked', ids[0])        
 

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.0.1\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2011-04-06 14:50+0000\n"
-"PO-Revision-Date: 2011-04-06 14:50+0000\n"
+"POT-Creation-Date: 2011-04-07 08:13+0000\n"
+"PO-Revision-Date: 2011-04-07 08:13+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,13 +21,14 @@ msgstr ""
 msgid "Merge Pickings (manual)"
 msgstr "Lieferaufträge zusammenfassen (manuell)"
 
-#: code:addons\stock_merge_picking\wizard\merge_picking.py:134
+#: code:addons\stock_merge_picking\wizard\merge_picking.py:139
 #. module: stock_merge_picking
 #, python-format
 msgid "The picking %s can not be merged due to different %s (%s) references."
 msgstr "Der Lieferauftrag %s kann nicht zusammengefasst werden, die Referenz %s (%s) weicht ab."
 
-#: code:addons\stock_merge_picking\wizard\merge_picking.py:103
+#: code:addons\stock_merge_picking\wizard\merge_picking.py:99
+#: code:addons\stock_merge_picking\wizard\merge_picking.py:101
 #. module: stock_merge_picking
 #, python-format
 msgid "Note"
@@ -48,7 +49,7 @@ msgstr "Zielauftrag Auftragsrückstand"
 msgid "Choose Target"
 msgstr "Zielauftrag wählen"
 
-#: code:addons\stock_merge_picking\wizard\merge_picking.py:146
+#: code:addons\stock_merge_picking\wizard\merge_picking.py:149
 #. module: stock_merge_picking
 #, python-format
 msgid "Unchecked"
@@ -64,7 +65,7 @@ msgstr "Aufträge, die im Ziel zusammengefasst werden sollen"
 msgid "unknown"
 msgstr "unbekannt"
 
-#: code:addons\stock_merge_picking\wizard\merge_picking.py:123
+#: code:addons\stock_merge_picking\wizard\merge_picking.py:131
 #. module: stock_merge_picking
 #, python-format
 msgid "The following picking can not be merged due to moves in state done:"
@@ -100,6 +101,12 @@ msgstr "Zielauftrag Typ"
 msgid "Target Picking Journal ID"
 msgstr "Zielauftrag Lager Journal"
 
+#: code:addons\stock_merge_picking\wizard\merge_picking.py:75
+#. module: stock_merge_picking
+#, python-format
+msgid "Near misses:"
+msgstr "Knapp dran vorbei:"
+
 #: field:stock.picking.merge.wizard,target_picking_id_company_id:0
 #. module: stock_merge_picking
 msgid "Target Picking Company"
@@ -131,7 +138,13 @@ msgstr "Zusammenfassen abbrechen"
 msgid "Target Picking"
 msgstr "Zielauftrag"
 
-#: code:addons\stock_merge_picking\wizard\merge_picking.py:146
+#: code:addons\stock_merge_picking\wizard\merge_picking.py:93
+#. module: stock_merge_picking
+#, python-format
+msgid "%s: %s (%s) differs."
+msgstr "%s: %s (%s) weicht ab."
+
+#: code:addons\stock_merge_picking\wizard\merge_picking.py:149
 #. module: stock_merge_picking
 #, python-format
 msgid "You did not check the Commit Merge checkbox."
@@ -156,8 +169,8 @@ msgstr "\n"
 "Mit diesem Modul können Lieferaufträge (Wareneingang, Interne Lieferungen, Warenauslieferungen) manuell zusammengefasst werden.\n"
 "    "
 
-#: code:addons\stock_merge_picking\wizard\merge_picking.py:122
-#: code:addons\stock_merge_picking\wizard\merge_picking.py:133
+#: code:addons\stock_merge_picking\wizard\merge_picking.py:130
+#: code:addons\stock_merge_picking\wizard\merge_picking.py:138
 #. module: stock_merge_picking
 #, python-format
 msgid "Warning"
@@ -168,7 +181,8 @@ msgstr "Warnung"
 msgid "Target Picking Invoice State"
 msgstr "Zielauftrag Rechnungskontrolle"
 
-#: code:addons\stock_merge_picking\wizard\merge_picking.py:103
+#: code:addons\stock_merge_picking\wizard\merge_picking.py:99
+#: code:addons\stock_merge_picking\wizard\merge_picking.py:101
 #. module: stock_merge_picking
 #, python-format
 msgid "There are no compatible pickings to be merged."
