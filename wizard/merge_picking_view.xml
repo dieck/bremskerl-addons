@@ -10,7 +10,7 @@
 				<form string="Merge Picking">
 					<separator colspan="4" string="Picking target to merge into" />
 					<field name="target_picking_id" required="1"
-					   domain="[('state','&lt;&gt;','done'),('state','&lt;&gt;','cancel')]" />
+						domain="[('state','&lt;&gt;','done'),('state','&lt;&gt;','cancel')]" />
 					<group col="2" colspan="4">
 						<button icon="gtk-cancel" special="cancel" string="Do not merge" />
 						<button name="do_target" string="Choose Target" type="object"
@@ -21,9 +21,17 @@
 		</record>
 
 
-		<act_window id="action_merge_picking" name="Merge Pickings (manual)"
-			res_model="stock.picking.merge.wizard" src_model="stock.move"
-			view_mode="form" target="new" view_type="form" view_id="merge_picking_form_init" />
+		<record id="action_merge_picking" model="ir.actions.act_window">
+			<field name="name">Merge Pickings (manual)</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">stock.picking.merge.wizard</field>
+			<field name="src_model">stock.picking</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+			<field name="view_id" ref="merge_picking_form_init" />
+			<field name="domain">[('target_picking_id', '=', active_id)]</field>
+		</record>
 
 		<menuitem action="action_merge_picking" id="menu_stock_moves_merge_picking"
 			parent="stock.menu_stock_warehouse_mgmt" sequence="100" />

@@ -132,6 +132,7 @@ class stock_picking_merge_wizard(osv.osv_memory):
                         return self.return_view(cr, uid, 'merge_picking_form_target', ids[0])
                     
                 # test all many2one fields for compability,as we can't link to different targets from one merged object!
+                # yes, we still need this, if we come from a link on stock.picking views, we don't have the first check!
                 is_compatible = self.is_compatible_many2one(cr, uid, target, merge, context)
                 if (not is_compatible['result']):
                     desc = self.get_fieldname_translation(cr, uid, is_compatible['field'], context)
