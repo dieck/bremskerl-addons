@@ -108,6 +108,17 @@ class stock_picking_merge_wizard(osv.osv_memory):
         return self.return_view(cr, uid, 'merge_picking_form_target', ids[0])
     
     
+    # todo remove if http://www.openerp.com/forum/topic24128.html is solved
+    def get_fieldname_translation(self, cr, uid, field, context=None):
+        if ((context) and (context['lang'])):
+            name = str(field.model) + "," + str(field.name)
+            trans_pool = self.pool.get('ir.translation')
+            trans_search = trans_pool.search(cr, uid, [('lang','=',context['lang']),('name','=',name),('type','=','field')])
+            for trans in trans_pool.browse(cr, uid, trans_search):
+                return trans.value 
+        # nothing found? return untranslated
+        return field.field_description
+    
     def do_check(self, cr, uid, ids, context=None):
         # check if pickings are compatible again with the attributes
         # depending on additional modules!
@@ -129,20 +140,15 @@ class stock_picking_merge_wizard(osv.osv_memory):
                 # search for all related fields
                 fields_search = fields_pool.search(cr, uid, [('ttype','=','many2one'),('model','=','stock.picking'),('relation','<>',self._name)])
                 for field in fields_pool.browse(cr, uid, fields_search, context):
-                    print "context", context
-                    print "field desc", field.field_description
                     related_target_id = getattr(target, field.name)
                     related_merge_id = getattr(merge, field.name)
                     if (related_target_id.id != related_merge_id.id):
-                        desc = field.field_description
-                        desc = self.pool.get(field.model)._columns[field.name].string
+                        desc = self.get_fieldname_translation(cr, uid, field, context)
                         raise osv.except_osv(_('Warning'),
                                 _('The picking %s can not be merged due to different %s (%s) references.') % (str(merge.name), desc, field.name) )
                         return self.return_view(cr, uid, 'merge_picking_form_target', ids[0])
          
         return self.return_view(cr, uid, 'merge_picking_form_checked', ids[0])        
-    
-
 
     
     def do_merge(self, cr, uid, ids, context=None):
@@ -154,7 +160,6 @@ class stock_picking_merge_wizard(osv.osv_memory):
 
         # merge
         picking_pool = self.pool.get("stock.picking")
-        move_pool = self.pool.get("stock.move")
         fields_pool = self.pool.get("ir.model.fields")
     
         for session in self.browse(cr, uid, ids):
@@ -200,13 +205,9 @@ class stock_picking_merge_wizard(osv.osv_memory):
                 if (not (merge.auto_picking)):
                     target_changes['auto_picking'] = False
                 
-                # combine moves
-                # not explicitly neccessary anymore, as it will be done by the many2one updates on all fields below
-                #for move in merge.move_lines:
-                #    move_pool.write(cr, uid, [move.id], {"picking_id": target.id})
-
                     
                 ## update all relations to the old picking to look for the new one
+                ## includes stock.move lines merge
                 
                 # search for all related fields.
                 # we don't need to handle one2many: backlinked references had to be equal in order to be compatible.
