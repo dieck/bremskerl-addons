@@ -20,18 +20,17 @@
 			</field>
 		</record>
 
-
-		<record id="action_merge_picking" model="ir.actions.act_window">
-			<field name="name">Merge Pickings (manual)</field>
-			<field name="type">ir.actions.act_window</field>
-			<field name="res_model">stock.picking.merge.wizard</field>
-			<field name="src_model">stock.picking</field>
-			<field name="view_type">form</field>
-			<field name="view_mode">form</field>
-			<field name="target">new</field>
-			<field name="view_id" ref="merge_picking_form_init" />
-			<field name="domain">[('target_picking_id', '=', active_id)]</field>
-		</record>
+		<act_window
+			id="action_merge_picking"
+			name="Merge Pickings (manual)"
+			res_model="stock.picking.merge.wizard"
+			src_model="stock.picking"
+			view_type="form"
+			view_mode="form"
+			target="new"
+			view_id="merge_picking_form_init" 
+			domain="[('target_picking_id', '=', active_id)]"
+		/>
 
 		<menuitem action="action_merge_picking" id="menu_stock_moves_merge_picking"
 			parent="stock.menu_stock_warehouse_mgmt" sequence="100" />
