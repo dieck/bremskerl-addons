@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<record id="dp_bom" model="decimal.precision">
+			<field name="name">Bill of Material Quantities</field>
+			<field name="digits">3</field>
+		</record>
+	</data>
+</openerp>
+		
