@@ -12,6 +12,6 @@ class mrp_bom(osv.osv):
         'product_qty': fields.float('Product Qty', required=True, digits_compute=dp.get_precision('Bill of Material Quantities')),
         'product_rounding': fields.float('Product Rounding', help="Rounding applied on the product quantity.", digits_compute=dp.get_precision('Bill of Material Quantities')),
     }
-    
+        
 mrp_bom()
     
