@@ -14,8 +14,17 @@ class sale_order(osv.osv):
         res = bom_pool.read(cr, uid, ids, ['raw_materials_location_id'])
         print "get_mrp_bom_raw_materials_location_id ids",res
         if len(res):
-            if (res[0]['raw_materials_location_id'][0]):
-                return res[0]['raw_materials_location_id'][0]
+            if (len(res)>0):
+                res0 = res[0]
+                print "get_mrp_bom_raw_materials_location_id res0",res0
+                if (res0):
+                    res0rml = res0['raw_materials_location_id']
+                    print "get_mrp_bom_raw_materials_location_id res0rml",res0rml
+                    if (res0rml):
+                        res0rml0 = res0rml[0]
+                        print "get_mrp_bom_raw_materials_location_id res0rml0",res0rml0
+                        if (res0rml0):
+                            return res0rml0
         return 0
         
 
@@ -42,12 +51,15 @@ class sale_order(osv.osv):
                     continue
                 if line.product_id and line.product_id.product_tmpl_id.type in ('product', 'consu'):
                     bom_rml_id = self.get_mrp_bom_raw_materials_location_id(cr, uid, line.product_id.id)
-                    print "got get_mrp_bom_raw_materials_location_id",bom_rml_id
-                    self.debug_warehouse(cr, uid, order.shop_id.warehouse_id.id)
-                    storage[line.id] = {"warehouse_id": order.shop_id.warehouse_id.id, 
-                                        "original_id": order.shop_id.warehouse_id.lot_stock_id.id,
-                                        "bom_rml_id": bom_rml_id,
-                                        }
+                    if (bom_rml_id > 0):
+                        print "got get_mrp_bom_raw_materials_location_id",bom_rml_id
+                        self.debug_warehouse(cr, uid, order.shop_id.warehouse_id.id)
+                        storage[line.id] = {"warehouse_id": order.shop_id.warehouse_id.id, 
+                                            "original_id": order.shop_id.warehouse_id.lot_stock_id.id,
+                                            "bom_rml_id": bom_rml_id,
+                                            }
+                    else:
+                        print "got NO get_mrp_bom_raw_materials_location_id"
 
         print "have storage",storage
 
