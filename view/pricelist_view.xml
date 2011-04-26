@@ -11,13 +11,14 @@
 					<field name="pricelist_name" />
 					<field name="pricelist_type" />
 					<field name="pricelist_cur" />
+					<field name="product_id" />
+					<field name="fixed_price" />
 					<field name="price_version_name" />
 					<field name="price_version_date_start" />
 					<field name="price_version_date_end" />
 					<field name="sequence" />
 					<field name="name" />
 					<field name="product_tmpl_id" />
-					<field name="product_id" />
 					<field name="categ_id" />
 					<field name="min_quantity" />
 					<field name="base" />
@@ -26,7 +27,6 @@
 					<field name="price_round" />
 					<field name="price_min_margin" />
 					<field name="price_max_margin" />
-					<field name="fixed_price" />
 				</tree>
 			</field>
 		</record>
