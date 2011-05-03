@@ -27,7 +27,7 @@
 #    ins Internet ein. Bitte beachten Sie bei der Verwendung der Bankleitzahlendatei
 #    die Hinweise im Disclaimer http://www.bundesbank.de/info/info_impressum.php
 #
-#    Stand der Liste / List last updated 02. Feb 2011 
+#    Stand der Liste / List last updated 19.01.2011; gültig ab 07.03.2011 bis 05.06.2011
 #
 ##############################################################################
 {
