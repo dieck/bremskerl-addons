@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<record id="purchase_form_all_action" model="ir.actions.act_window">
+			<field name="name">Purchase Orders (All Responsible)</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">purchase.order</field>
+			<field name="view_mode">tree,form,graph,calendar</field>
+			<field name="context">{'search_default_approved':1}</field>
+			<field name="search_view_id" ref="purchase.view_purchase_order_filter" />
+			<field name="help">Use this menu to search within your purchase orders
+				by references, supplier, products, etc. For each purchase order, you
+				can track the products received, and control the supplier invoices.
+			</field>
+		</record>
+		<menuitem action="purchase_form_all_action" id="menu_purchase_form_all_action"
+			parent="purchase.menu_procurement_management" sequence=30 />
+
+	</data>
+</openerp>
