@@ -21,13 +21,12 @@
 #
 ##############################################################################
 {
-    "name": "Show Purchase Order Lines menu entry",
+    "name": "Show Partner Reference in Purchase Order list views",
     "version": "1.01",
     "depends": [ "purchase" ],
     "author": "Marco Dieckhoff, BREMSKERL",
     "category": "Sales & Purchases",
-    "description": """Show Purchase Order Lines menu entry
-    """,
+    "description": "Show Partner Reference in Purchase Order list views",
     "init_xml": [],
     'update_xml': ["view/purchase_view.xml"],
     'demo_xml': [],
