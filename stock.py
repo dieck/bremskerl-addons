@@ -7,8 +7,8 @@ class stock_move_notes(osv.osv):
         
     _columns = {
          # store price
-         'notes' : fields.char("Notes", size=128),
-         'prtnotes': fields.char("Printed Notes", size=128),
+         'notes' : fields.char("Notes", size=128, translate=True),
+         'prtnotes': fields.char("Printed Notes", size=128, translate=True),
     }
     
 stock_move_notes()
