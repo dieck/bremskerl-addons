@@ -1,0 +1,28 @@
+# -*- coding: utf-8 -*-
+##############################################################################
+#
+#    OpenERP Module
+#    
+#    Copyright (C) 2010-2011 BREMSKERL-REIBBELAGWERKE EMMERLING GmbH & Co. KG
+#    Author Marco Dieckhoff
+#
+##############################################################################
+{
+    "name": "Boilerplates",
+    "version": "1.0",
+    "depends": ["base", "product" ],
+    "author": "Marco Dieckhoff, BREMSKERL",
+    "category": "Custom",
+    "description": """
+This module
+    """,
+    "init_xml": [],
+    'update_xml': ["data/boilerplates_data.xml", 
+                   "view/boilerplates_view.xml",
+                   "security/boilerplates_security.xml",
+                   "security/ir.model.access.csv", ],
+    'demo_xml': ["data/boilerplates_demo.xml"],
+    'installable': True,
+    'active': False,
+#    'certificate': '${certificate}',
+}

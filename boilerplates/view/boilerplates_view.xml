@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+
+		<!-- views -->
+		<record id="category_search" model="ir.ui.view">
+			<field name="name">boilerplates.category.search</field>
+			<field name="model">boilerplates.category</field>
+			<field name="type">search</field>
+			<field name="arch" type="xml">
+				<search string="Boilerplate Category">
+					<field name="name" />
+					<field name="description" />
+				</search>
+			</field>
+		</record>
+
+		<record id="category_tree" model="ir.ui.view">
+			<field name="name">boilerplates.category.tree</field>
+			<field name="model">boilerplates.category</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Boilerplate Categories">
+					<field name="name" />
+					<field name="description" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="category_form" model="ir.ui.view">
+			<field name="name">boilerplates.category.form</field>
+			<field name="model">boilerplates.category</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Boilerplate Category">
+					<field name="name" colspan="4" />
+					<field name="description" colspan="4" />
+				</form>
+			</field>
+		</record>
+
+
+		<record id="text_search" model="ir.ui.view">
+			<field name="name">boilerplates.text.search</field>
+			<field name="model">boilerplates.text</field>
+			<field name="type">search</field>
+			<field name="arch" type="xml">
+				<search string="Boilerplate Texts">
+					<filter name="filter_active" string='Active' icon="terp-go-year"
+						domain="[('active','=',True)]" />
+
+					<field name="name" />
+					<field name="category_id" />
+
+					<newline />
+					<group expand='0' string="Content..." groups="base.group_extended">
+						<field name="text" />
+						<field name="note" />
+					</group>
+
+					<newline />
+					<group expand='0' string="Constraints..." groups="base.group_extended">
+						<field name="valid_from" />
+						<field name="valid_to" />
+						<field name="product_id" />
+						<field name="partner_id" />
+					</group>
+
+					<newline />
+					<group expand='0' string='Group by...' groups="base.group_extended">
+						<filter string='Category' icon="terp-stock_symbol-selection"
+							domain="[]" context="{'group_by' : 'category_id'}" />
+						<separator orientation="vertical" />
+						<filter string='Product' icon="terp-product" domain="[]"
+							context="{'group_by' : 'product_id'}" />
+						<separator orientation="vertical" />
+						<filter string='Partner' icon="terp-partner" domain="[]"
+							context="{'group_by' : 'partner_id'}" />
+					</group>
+				</search>
+			</field>
+		</record>
+
+
+		<record id="text_tree" model="ir.ui.view">
+			<field name="name">boilerplates.text.tree</field>
+			<field name="model">boilerplates.text</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Boilerplate Texts">
+					<field name="name" />
+					<field name="category_id" />
+					<field name="valid_from" />
+					<field name="valid_to" />
+					<field name="product_id" />
+					<field name="partner_id" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="text_form" model="ir.ui.view">
+			<field name="name">boilerplates.text.form</field>
+			<field name="model">boilerplates.text</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Boilerplate Text">
+					<field name="name" />
+					<field name="category_id" />
+					<field name="valid_from" />
+					<field name="valid_to" />
+
+					<group col="2" colspan="2">
+						<separator string="Constraints" colspan="2" />
+						<field name="product_id" />
+						<field name="partner_id" />
+					</group>
+					<group col="2" colspan="2">
+						<separator string="Internal Notes" colspan="2" />
+						<field name="note" nolabel="1" colspan="2" />
+					</group>
+
+					<separator string="Boilerplate Text" colspan="4" />
+					<field name="text" nolabel="1" colspan="4" />
+
+				</form>
+			</field>
+		</record>
+
+		<!-- actions -->
+		<record id="open_boilerplate_category_tree" model="ir.actions.act_window">
+			<field name="name">Categories</field>
+			<field name="res_model">boilerplates.category</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_id" ref="category_tree" />
+			<field name="search_view_id" ref="category_search" />
+		</record>
+
+		<record id="open_boilerplate_text_tree" model="ir.actions.act_window">
+			<field name="name">Boilerplates</field>
+			<field name="res_model">boilerplates.text</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_id" ref="text_tree" />
+			<field name="search_view_id" ref="text_search" />
+		</record>
+
+		<!-- menus -->
+
+
+		<!-- TODO find good parent for this -->
+		<menuitem id="menu_boilerplates" sequence="49" name="Boilerplates" />
+
+		<menuitem action="open_boilerplate_text_tree" id="menu_boilerplates_text"
+			parent="menu_boilerplates" sequence="10" />
+
+		<menuitem action="open_boilerplate_category_tree" id="menu_boilerplates_category"
+			parent="menu_boilerplates" sequence="20" />
+
+
+	</data>
+</openerp>
