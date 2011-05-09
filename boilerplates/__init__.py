@@ -1,1 +1,2 @@
 import boilerplates
+import wizard
