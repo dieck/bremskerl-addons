@@ -16,19 +16,34 @@
 from osv import osv, fields
 from tools.translate import _
 
-class boilerplate_wizard_sale(osv.osv_memory):
-    _name = "boilerplate.wizard.sale"
+class boilerplate_wizard(osv.osv_memory):
+    _name = "boilerplate.wizard.stock.move.notes"
     _inherit = "boilerplate.wizard"
 
-    remote_name = _("Sales Order")
-    remote_model = "sale.order"
-    remote_note = "note"
-    remote_product_id = False
-    remote_partner_id = "partner_id"
+    remote_name = _("Stock Move")
+    remote_model = "stock.move"
+    remote_note = "notes"
+    remote_product_id = "product_id"
+    remote_partner_id = False
 
     _columns = {
         "remote_id": fields.many2one(remote_model, "Remote model"),
     }    
 
-boilerplate_wizard_sale()
+boilerplate_wizard()
 
+class boilerplate_wizard_prt(osv.osv_memory):
+    _name = "boilerplate.wizard.stock.move.prtnotes"
+    _inherit = "boilerplate.wizard"
+
+    remote_name = _("Stock Move")
+    remote_model = "stock.move"
+    remote_note = "prtnotes"
+    remote_product_id = "product_id"
+    remote_partner_id = False
+
+    _columns = {
+        "remote_id": fields.many2one(remote_model, "Remote model"),
+    }    
+
+boilerplate_wizard_prt()

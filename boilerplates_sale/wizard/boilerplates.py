@@ -12,17 +12,23 @@
 #    This is a complete rewrite.
 #
 ##############################################################################
-{
-    'name' : 'Boilerplates for Sales',
-    'version' : '6.0',
-    'author' : 'Marco Dieckhoff (Bremskerl)',
-    'website' : 'www.bremskerl.com',
-    'depends' : ['boilerplates','sale'],
-    'category' : 'Boilerplates',
-    'description': "Adds Boilerplate actions",
-    'init_xml' : [],
-    'demo_xml' : [],
-    'update_xml' : ['wizard/boilerplates_view.xml'],
-    'active': False,
-    'installable': True
-}
+
+from osv import osv, fields
+from tools.translate import _
+
+class boilerplate_wizard(osv.osv_memory):
+    _name = "boilerplate.wizard.sale"
+    _inherit = "boilerplate.wizard"
+
+    remote_name = _("Sales Order")
+    remote_model = "sale.order"
+    remote_note = "note"
+    remote_product_id = False
+    remote_partner_id = "partner_id"
+
+    _columns = {
+        "remote_id": fields.many2one(remote_model, "Remote model"),
+    }    
+
+boilerplate_wizard()
+

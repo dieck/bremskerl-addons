@@ -13,11 +13,11 @@
 #
 ##############################################################################
 {
-    'name' : 'Boilerplates for Sales',
+    'name' : 'Boilerplates for Stock Moves',
     'version' : '6.0',
     'author' : 'Marco Dieckhoff (Bremskerl)',
     'website' : 'www.bremskerl.com',
-    'depends' : ['boilerplates','sale'],
+    'depends' : ['boilerplates','stock_move_notes'],
     'category' : 'Boilerplates',
     'description': "Adds Boilerplate actions",
     'init_xml' : [],

@@ -13,11 +13,11 @@
 #
 ##############################################################################
 {
-    'name' : 'Boilerplates for Sales',
+    'name' : 'Boilerplates for MRP',
     'version' : '6.0',
     'author' : 'Marco Dieckhoff (Bremskerl)',
     'website' : 'www.bremskerl.com',
-    'depends' : ['boilerplates','sale'],
+    'depends' : ['boilerplates','mrp'],
     'category' : 'Boilerplates',
     'description': "Adds Boilerplate actions",
     'init_xml' : [],
