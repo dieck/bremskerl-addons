@@ -40,15 +40,15 @@
 
 		<record id="view_picking_form" model="ir.ui.view">
 			<field name="name">stock.move.notes.picking.internal.form</field>
-			<field name="model">stock.move</field>
+			<field name="model">stock.picking</field>
 			<field name="type">form</field>
 			<field name="inherit_id" ref="stock.view_picking_form" />
 			<field name="arch" type="xml">
-				<!-- <xpath expr="//field[@name='move_lines']/form/group/separator[@string='Traceability']/.." position="after"> -->
-					<xpath expr="//group/separator[@string='Traceability']/.."
+				<xpath
+					expr="//field[@name='move_lines']/form/group/separator[@string='Traceability']/.."
 					position="after">
-					<group colspan="2" col="4">
-						<separator string="Notes" colspan="4" />
+					<group colspan="2" col="2">
+						<separator string="Notes" colspan="2" />
 						<field name="notes" />
 						<field name="prtnotes" />
 					</group>
@@ -58,15 +58,15 @@
 
 		<record id="view_picking_out_form" model="ir.ui.view">
 			<field name="name">stock.move.notes.picking.out.form</field>
-			<field name="model">stock.move</field>
+			<field name="model">stock.picking</field>
 			<field name="type">form</field>
 			<field name="inherit_id" ref="stock.view_picking_out_form" />
 			<field name="arch" type="xml">
 				<xpath
 					expr="//field[@name='move_lines']/form/group/separator[@string='Traceability']/.."
 					position="after">
-					<group colspan="2" col="4">
-						<separator string="Notes" colspan="4" />
+					<group colspan="2" col="2">
+						<separator string="Notes" colspan="2" />
 						<field name="notes" />
 						<field name="prtnotes" />
 					</group>
@@ -76,15 +76,15 @@
 
 		<record id="view_picking_in_form" model="ir.ui.view">
 			<field name="name">stock.move.notes.picking.in.form</field>
-			<field name="model">stock.move</field>
+			<field name="model">stock.picking</field>
 			<field name="type">form</field>
 			<field name="inherit_id" ref="stock.view_picking_in_form" />
 			<field name="arch" type="xml">
 				<xpath
 					expr="//field[@name='move_lines']/form/group/separator[@string='Traceability']/.."
 					position="after">
-					<group colspan="2" col="4">
-						<separator string="Notes" colspan="4" />
+					<group colspan="2" col="2">
+						<separator string="Notes" colspan="2" />
 						<field name="notes" />
 						<field name="prtnotes" />
 					</group>
