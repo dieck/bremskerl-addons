@@ -59,12 +59,13 @@ class stock_picking_merge_wizard(osv.osv_memory):
     def is_compatible_many2one(self, cr, uid, target, merge, context=None):
         fields_pool = self.pool.get("ir.model.fields")
         fields_search = fields_pool.search(cr, uid, [('ttype','=','many2one'),('model','=','stock.picking'),('relation','<>',self._name)])
+        failedfields = []
         for field in fields_pool.browse(cr, uid, fields_search, context):
             related_target_id = getattr(target, field.name)
             related_merge_id = getattr(merge, field.name)
             if (related_target_id.id != related_merge_id.id):
-                return {'result': False, 'field': field }
-        return {'result': True }
+                failedfields.append(field)
+        return {'result': (len(failedfields)==0), 'fields': failedfields}
     
     def do_target(self, cr, uid, ids, context=None):
         # look if we got compatible views
@@ -89,10 +90,9 @@ class stock_picking_merge_wizard(osv.osv_memory):
                     found = True
                 else:
                     found_incompatible = True
-                    desc = self.get_fieldname_translation(cr, uid, is_compatible['field'], context)
-                    incompatible_notes += "\n" + _('%s: %s (%s) differs.') \
-                        % (str(merge.name), desc, is_compatible['field'].name) 
-                    
+                    for f in is_compatible['fields']:
+                        desc = self.get_fieldname_translation(cr, uid, f, context)
+                        incompatible_notes += "\n" + _('%s: %s (%s) differs.') % (str(merge.name), desc, f.name) 
         
         if not found: 
             if (found_incompatible):
@@ -135,9 +135,11 @@ class stock_picking_merge_wizard(osv.osv_memory):
                 # yes, we still need this, if we come from a link on stock.picking views, we don't have the first check!
                 is_compatible = self.is_compatible_many2one(cr, uid, target, merge, context)
                 if (not is_compatible['result']):
-                    desc = self.get_fieldname_translation(cr, uid, is_compatible['field'], context)
-                    raise osv.except_osv(_('Warning'),
-                            _('The picking %s can not be merged due to different %s (%s) references.') % (str(merge.name), desc, is_compatible['field'].name) )
+                    ex = _('The picking %s can not be merged due to different references:') % (str(merge.name))
+                    for f in is_compatible['fields']:
+                        desc = self.get_fieldname_translation(cr, uid, f, context)
+                        ex += "\n" + desc + " (" + f.name + ")" 
+                    raise osv.except_osv(_('Warning'), ex)
                     return self.return_view(cr, uid, 'merge_picking_form_target', ids[0])
          
         return self.return_view(cr, uid, 'merge_picking_form_checked', ids[0])        

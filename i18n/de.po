@@ -24,8 +24,8 @@ msgstr "Lieferaufträge zusammenfassen (manuell)"
 #: code:addons\stock_merge_picking\wizard\merge_picking.py:139
 #. module: stock_merge_picking
 #, python-format
-msgid "The picking %s can not be merged due to different %s (%s) references."
-msgstr "Der Lieferauftrag %s kann nicht zusammengefasst werden, die Referenz %s (%s) weicht ab."
+msgid "The picking %s can not be merged due to different references:"
+msgstr "Der Lieferauftrag %s kann nicht zusammengefasst werden, abweichende Referenzen:"
 
 #: code:addons\stock_merge_picking\wizard\merge_picking.py:99
 #: code:addons\stock_merge_picking\wizard\merge_picking.py:101
