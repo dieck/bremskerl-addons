@@ -40,6 +40,14 @@ class stock_picking_merge_wizard(osv.osv_memory):
         "commit_merge": fields.boolean("Commit merge"),
     }        
   
+  
+    # fieldname: function handling that fieldname
+    # will not be raised as incompatibility error
+    # def specialhandler(cr, uid, fieldname, merge, target, target_changes, context=None)
+    # specialhandlers = { 'relation_fieldname': specialhandler, }
+    specialhandlers = {}
+  
+  
     def return_view(self, cr, uid, name, res_id):
         data_pool = self.pool.get('ir.model.data')
         result = data_pool.get_object_reference(cr, uid, 'stock_merge_picking', name)
@@ -61,6 +69,12 @@ class stock_picking_merge_wizard(osv.osv_memory):
         fields_search = fields_pool.search(cr, uid, [('ttype','=','many2one'),('model','=','stock.picking'),('relation','<>',self._name)])
         failedfields = []
         for field in fields_pool.browse(cr, uid, fields_search, context):
+
+            # don't handle specialhandlers fields as incompatible            
+            if field.name in self.specialhandlers.keys():
+                continue
+            
+            # compare fields
             related_target_id = getattr(target, field.name)
             related_merge_id = getattr(merge, field.name)
             if (related_target_id.id != related_merge_id.id):
@@ -210,27 +224,35 @@ class stock_picking_merge_wizard(osv.osv_memory):
                 
                 # go through these fields
                 for field in fields_pool.browse(cr, uid, fields_search):
-                    # find the model they're in
-                    model_pool = self.pool.get(field.model)
                     
-                    # this can happen if you deinstalled modules by deleting their code, so they left something behind in the definition.
-                    if (not model_pool):
-                        continue
-                    
-                    # handle many2one: simply replace the id 
-                    if (field.ttype == 'many2one'):
-                        # find all entries that are old
-                        model_search = model_pool.search(cr, uid, [(field.name,'=',merge.id)])
-                        # and update them in one go
-                        model_pool.write(cr, uid, model_search, {field.name: target.id})
-
-                    # handle many2many:  
-                    if (field.ttype == 'many2many'):
-                        # find all entries that are old (don't know how yet, so I'll have to take 'em all
-                        model_search = model_pool.search(cr, uid, []) # (field.name,'=',merge.id)
-                        # and update them in one go
-                        model_pool.write(cr, uid, model_search, {field.name: [(3,merge.id),(4,target.id)]})
-                    
+                    if field.name in self.specialhandlers.keys():
+                        # use special handler
+                        specialhandler = self.specialhandlers.get(field.name)
+                        target_changes = specialhandler(cr, uid, field.name, merge, target, target_changes)
+                        
+                        
+                    else:
+                        # find the model they're in
+                        model_pool = self.pool.get(field.model)
+                        
+                        # this can happen if you deinstalled modules by deleting their code, so they left something behind in the definition.
+                        if (not model_pool):
+                            continue
+                        
+                        # handle many2one: simply replace the id 
+                        if (field.ttype == 'many2one'):
+                            # find all entries that are old
+                            model_search = model_pool.search(cr, uid, [(field.name,'=',merge.id)])
+                            # and update them in one go
+                            model_pool.write(cr, uid, model_search, {field.name: target.id})
+    
+                        # handle many2many:  
+                        if (field.ttype == 'many2many'):
+                            # find all entries that are old (don't know how yet, so I'll have to take 'em all
+                            model_search = model_pool.search(cr, uid, []) # (field.name,'=',merge.id)
+                            # and update them in one go
+                            model_pool.write(cr, uid, model_search, {field.name: [(3,merge.id),(4,target.id)]})
+                        
                 # updated everything, so now I can get rid of the object
                 picking_pool.unlink(cr, uid, [merge.id])
 
