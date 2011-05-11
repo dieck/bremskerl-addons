@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP Module
-#    
-#    Copyright (C) 2011 BREMSKERL-REIBBELAGWERKE EMMERLING GmbH & Co. KG
-#    Author Marco Dieckhoff
+#    OpenERP, Open Source Management Solution
+#    Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,17 +18,18 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-{
-    "name": "Add notes to stock move",
-    "version": "1.05",
-    "depends": ["stock","delivery"],
-    "author": "Marco Dieckhoff, BREMSKERL",
-    "category": "Inventory Control",
-    "description": "Add notes to stock move, as internal and printed notes",
-    "init_xml": [],
-    'update_xml': ["view/stock_view.xml", "report/stock_report.xml"],
-    'demo_xml': [],
-    'installable': True,
-    'active': False,
-#    'certificate': '${certificate}',
-}
+
+import time
+
+from report import report_sxw
+
+class shipping(report_sxw.rml_parse):
+    def __init__(self, cr, uid, name, context):
+        super(shipping, self).__init__(cr, uid, name, context=context)
+        self.localcontext.update({
+            'time': time,
+        })
+
+report_sxw.report_sxw('report.sale.shipping.notes','stock.picking','addons/stock_move_notes/report/shipping.rml',parser=shipping)
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
