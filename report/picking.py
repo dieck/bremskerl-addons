@@ -38,5 +38,5 @@ class picking(report_sxw.rml_parse):
             total+=move.product_qty
         return {'quantity':total,'uom':uom}
 
-report_sxw.report_sxw('report.stock.picking.list','stock.picking','addons/stock_move_notes/report/picking.rml',parser=picking)
+report_sxw.report_sxw('report.stock.picking.list.notes','stock.picking','addons/stock_move_notes/report/picking.rml',parser=picking)
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
