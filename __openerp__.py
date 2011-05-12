@@ -28,7 +28,7 @@
     "category": "Inventory Control",
     "description": "Add notes to stock move, as internal and printed notes",
     "init_xml": [],
-    'update_xml': ["view/stock_view.xml", "report/stock_report.xml"],
+    'update_xml': ["report/stock_report.xml", "view/stock_view.xml"],
     'demo_xml': [],
     'installable': True,
     'active': False,
