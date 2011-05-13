@@ -25,23 +25,8 @@ class stock_picking_merge_wizard_sale(osv.osv_memory):
     # specialhandlers = { 'relation_fieldname': specialhandler, }
     
     def specialhandler_saleid(self, cr, uid, fieldname, merge, target, target_changes, context=None):
-        debug = True
-        
-        if debug:
-            print "starting specialhandler saleid for fn,mr,tg", fieldname, merge, target
-            print "mlines", merge.move_lines
-        
-            # copy sale_id into stock moves
-            for ml in merge.move_lines:
-                print "ml",ml
-                print "mlid",ml.id
-        
         line_ids = [line.id for line in merge.move_lines]
         self.pool.get('stock.move').write(cr, uid, line_ids, {'premerge_sale_id': merge.sale_id.id}, context=context)
-        
-        if debug:
-            print "  updated line_ids",line_ids,"with premerge_sale_id",merge.sale_id.id
-        
 
         line_ids = [line.id for line in target.move_lines]
         self.pool.get('stock.move').write(cr, uid, line_ids, {'premerge_sale_id': target.sale_id.id}, context=context)
