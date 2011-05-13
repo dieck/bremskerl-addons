@@ -20,17 +20,10 @@
 			</field>
 		</record>
 
-		<act_window
-			id="action_merge_picking"
-			name="Merge Pickings (manual)"
-			res_model="stock.picking.merge.wizard"
-			src_model="stock.picking"
-			view_type="form"
-			view_mode="form"
-			target="new"
-			view_id="merge_picking_form_init" 
-			domain="[('target_picking_id', '=', active_id)]"
-		/>
+		<act_window id="action_merge_picking" name="Merge Pickings (manual)"
+			res_model="stock.picking.merge.wizard" src_model="stock.picking"
+			view_type="form" view_mode="form" target="new" view_id="merge_picking_form_init"
+			domain="[('target_picking_id', '=', active_id)]" />
 
 		<menuitem action="action_merge_picking" id="menu_stock_moves_merge_picking"
 			parent="stock.menu_stock_warehouse_mgmt" sequence="100" />
@@ -92,6 +85,18 @@
 						<button name="do_merge" string="Merge" type="object"
 							icon="terp-accessories-archiver+" />
 					</group>
+				</form>
+			</field>
+		</record>
+
+		<record id="merge_picking_form_done" model="ir.ui.view">
+			<field name="name">Merge Picking</field>
+			<field name="model">stock.picking.merge.wizard</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Merge Picking">
+					<separator colspan="4" string="Merge completed." />
+					<button icon="gtk-cancel" special="cancel" string="Close" />
 				</form>
 			</field>
 		</record>

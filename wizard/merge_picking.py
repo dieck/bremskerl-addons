@@ -156,7 +156,6 @@ class stock_picking_merge_wizard(osv.osv_memory):
                     return self.return_view(cr, uid, 'merge_picking_form_target', ids[0])
          
         return self.return_view(cr, uid, 'merge_picking_form_checked', ids[0])        
-
     
     def do_merge(self, cr, uid, ids, context=None):
         # bail out if checkbox not set
@@ -281,7 +280,7 @@ class stock_picking_merge_wizard(osv.osv_memory):
             # /for merge
             picking_pool.write(cr, uid, [target.id], target_changes)
                 
-        return {'type': 'ir.actions.act_window_close'}
+        return self.return_view(cr, uid, 'merge_picking_form_done', ids[0])        
 
 stock_picking_merge_wizard()
 
