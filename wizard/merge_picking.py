@@ -40,7 +40,6 @@ class stock_picking_merge_wizard(osv.osv_memory):
         "commit_merge": fields.boolean("Commit merge"),
     }        
   
-  
     # fieldname: function handling that fieldname
     # will not be raised as incompatibility error
     # def specialhandler(cr, uid, fieldname, merge, target, target_changes, context=None)
@@ -84,7 +83,7 @@ class stock_picking_merge_wizard(osv.osv_memory):
     def do_target(self, cr, uid, ids, context=None):
         # look if we got compatible views
         picking_pool = self.pool.get('stock.picking')
-       
+               
         found = False
         found_incompatible = False
         incompatible_notes = _('Near misses:')
@@ -213,12 +212,24 @@ class stock_picking_merge_wizard(osv.osv_memory):
                 if (not (merge.auto_picking)):
                     target_changes['auto_picking'] = False
                 
+                # search for all outgoing related fields.
+                # we handle only ougoing many2one (incoming one2many may not exist for that) here
+                # this IS neccessary, but only to catch specialhandler-handled fields.
+                # must be done before the next search, because refs might have been destroyed later
+                fields_search = fields_pool.search(cr, uid, [('model','=','stock.picking'),('ttype','=','many2one')])
+                                
+                # go through these fields
+                for field in fields_pool.browse(cr, uid, fields_search):
                     
-                ## update all relations to the old picking to look for the new one
-                ## includes stock.move lines merge
+                    if field.name in self.specialhandlers.keys():
+                        # use special handler
+                        specialhandler_name = self.specialhandlers.get(field.name)
+                        specialhandler = getattr(self, specialhandler_name)
+                        target_changes = specialhandler(cr, uid, field.name, merge, target, target_changes)
+
                 
-                # search for all related fields.
-                # we don't need to handle one2many: backlinked references had to be equal in order to be compatible.
+                # search for all incoming related fields.
+                # we don't need to handle one2many here: would be backlinked versions of many2one anyway.
                 fields_search = fields_pool.search(cr, uid, [('relation','=','stock.picking'),('model','<>',self._name),
                                                              '|',('ttype','=','many2one'),('ttype','=','many2many')])
                 
@@ -227,11 +238,19 @@ class stock_picking_merge_wizard(osv.osv_memory):
                     
                     if field.name in self.specialhandlers.keys():
                         # use special handler
-                        specialhandler = self.specialhandlers.get(field.name)
+                        specialhandler_name = self.specialhandlers.get(field.name)
+                        specialhandler = getattr(self, specialhandler_name)
                         target_changes = specialhandler(cr, uid, field.name, merge, target, target_changes)
+
                         
-                        
-                    else:
+                ## update all relations to the old picking to look for the new one
+                ## includes stock.move lines merge
+
+
+                # go through these fields and change things, using field_search from before (many2one | many2many)
+                for field in fields_pool.browse(cr, uid, fields_search):
+                    
+                    if not (field.name in self.specialhandlers.keys()):
                         # find the model they're in
                         model_pool = self.pool.get(field.model)
                         
@@ -252,6 +271,9 @@ class stock_picking_merge_wizard(osv.osv_memory):
                             model_search = model_pool.search(cr, uid, []) # (field.name,'=',merge.id)
                             # and update them in one go
                             model_pool.write(cr, uid, model_search, {field.name: [(3,merge.id),(4,target.id)]})
+                        
+                        
+                
                         
                 # updated everything, so now I can get rid of the object
                 picking_pool.unlink(cr, uid, [merge.id])
