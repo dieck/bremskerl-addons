@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<!-- views -->
+		<record id="mrp_olt_production_form_view1" model="ir.ui.view">
+			<field name="name">mrp.olt.production.form.view1</field>
+			<field name="model">mrp.production</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="mrp.mrp_production_form_view" />
+			<field name="arch" type="xml">
+				<button name="%(stock.move_consume)d" string="Consume Products"
+					type="action" icon="gtk-go-forward" context="{'consume': True}"
+					states="draft,waiting,confirmed,assigned" position="before">
+					<field name="prodlot_id" context="{'product_id': product_id}" />
+				</button>
+			</field>
+		</record>
+		<record id="mrp_olt_production_form_view2" model="ir.ui.view">
+			<field name="name">mrp.olt.production.form.view2</field>
+			<field name="model">mrp.production</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="mrp.mrp_production_form_view" />
+			<field name="arch" type="xml">
+				<button name="%(stock.action_partial_move_server)d" string="Partial"
+					type="action" states="confirmed,assigned" icon="gtk-justify-fill"
+					position="before">
+					<field name="prodlot_id" context="{'product_id': product_id}" />
+				</button>
+			</field>
+		</record>
+	</data>
+</openerp>
