@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<!-- views -->
+		<record id="partner_form1" model="ir.ui.view">
+			<field name="name">base.partner.notes.form1</field>
+			<field name="model">res.partner</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="base.view_partner_form" />
+			<field name="arch" type="xml">
+				<xpath expr="//page[@string='Notes']/field[@name='comment']"
+					position="before">
+					<separator string="General Notes" colspan="4" />
+				</xpath>
+			</field>
+		</record>
+
+		<record id="partner_form2" model="ir.ui.view">
+			<field name="name">base.partner.notes.form2</field>
+			<field name="model">res.partner</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="base.view_partner_form" />
+			<field name="arch" type="xml">
+				<xpath expr="//page[@string='Notes']/field[@name='comment']"
+					position="after">
+
+					<group colspan="2" col="1">
+						<separator string="Note for Sale Orders" />
+						<field name="note_sale" nolabel="1" />
+					</group>
+
+					<group colspan="2" col="1">
+						<separator string="Note for Purchase Orders" />
+						<field name="note_purchase" nolabel="1" />
+					</group>
+
+					<group colspan="2" col="1">
+						<separator string="Note for Invoices" />
+						<field name="note_invoice" nolabel="1" />
+					</group>
+
+					<group colspan="2" col="1">
+						<separator string="Note for Delivery Orders" />
+						<field name="note_delivery" nolabel="1" />
+					</group>
+
+				</xpath>
+			</field>
+		</record>
+	</data>
+</openerp>
