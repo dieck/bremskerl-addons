@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+
+		<!-- views -->
+		<record id="product_stock_noupdate_form" model="ir.ui.view">
+			<field name="name">product.stock.noupdate.form</field>
+			<field name="model">product.product</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="stock.view_normal_stock_property_form" />
+			<field name="arch" type="xml">
+				<xpath expr="//group/separator[@string='Stocks']/../button[@string='Update'][@groups='stock.group_stock_manager,stock.group_stock_user']" position="attributes">
+					<attribute name="attrs">{'invisible':['|','|','|',('type', '=', 'service'),
+								('track_production','=',True),
+								('track_incoming','=',True),
+								('track_outgoing','=',True)]}</attribute>
+				</xpath>
+			</field>
+		</record>
+
+	</data>
+</openerp>
