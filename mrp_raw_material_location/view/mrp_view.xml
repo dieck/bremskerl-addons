@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<!-- views -->
+		<record id="bom_form" model="ir.ui.view">
+			<field name="name">mrp.raw.material.location.bom.form</field>
+			<field name="model">mrp.bom</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="mrp.mrp_bom_form_view" />
+			<field name="arch" type="xml">
+                <field name="type" groups="base.group_extended" position="after">
+					<field name="raw_materials_location_id" groups="base.group_extended" />
+				</field>
+			</field>
+		</record>
+	</data>
+</openerp>
