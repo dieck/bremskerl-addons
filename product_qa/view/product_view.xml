@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+
+		<!-- views -->
+
+		<record id="product_qa_product_form" model="ir.ui.view">
+			<field name="name">product.qa.product.form</field>
+			<field name="model">product.product</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="product.product_normal_form_view" />
+			<field name="arch" type="xml">
+				<page string="Information" position="inside">
+					<group colspan="2" col="2">
+						<separator string="Quality Assurance" colspan="2" />
+					</group>
+				</page>
+			</field>
+		</record>
+
+	</data>
+</openerp>
