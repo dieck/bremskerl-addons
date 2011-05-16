@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<openerp>
+	<data>
+
+		<!-- Survey Question Wizard -->
+
+		<record id="survey_user_changer" model="ir.ui.view">
+			<field name="name">Survey User Changer</field>
+			<field name="model">survey.uid.changer.wizard</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Survey User Changer">
+					<field name="user_id" colspan="2" />
+					<field name="survey_ids" nolabel="1"
+						colspan="4" domain="[('user_id','=',uid)]">
+						<tree>
+							<field name="survey_id" />
+							<field name="date_create" />
+							<field name="state" />
+						</tree>
+					</field>
+					<button icon="gtk-cancel" special="cancel" string="Cancel" />
+					<button name="do_changeuid" string="Change User" type="object"
+						icon="gtk-go-forward" />
+				</form>
+			</field>
+		</record>
+
+		<act_window id="action_survey_user_changer" name="Change Survey Response User"
+			res_model="survey.uid.changer.wizard" view_type="form" view_mode="form"
+			target="new" view_id="survey_user_changer" />
+
+		<menuitem action="action_survey_user_changer" id="menu_survey_user_changer"
+			parent="survey.menu_answer_surveys" sequence="100" />
+
+	</data>
+</openerp>
