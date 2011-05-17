@@ -1,0 +1,10 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_survey_survey_manager","survey.survey.manager","model_survey","survey.group_survey_manager",1,1,1,1
+"access_survey_page_survey_manager","survey.page.survey.manager","model_survey_page","survey.group_survey_manager",1,1,1,1
+"access_survey_question_survey_manager","survey.question.survey.manager","model_survey_question","survey.group_survey_manager",1,1,1,1
+"access_survey_answer_survey_manager","survey.answer.survey.manager","model_survey_answer","survey.group_survey_manager",1,1,1,1
+"access_survey_response_survey_manager","survey.response.survey.manager","model_survey_response","survey.group_survey_manager",1,1,1,1
+"access_survey_response_answer_survey_manager","survey.response.answer.survey.manager","model_survey_response_answer","survey.group_survey_manager",1,1,1,1
+"access_survey_history_survey_manager","survey.history.survey.manager","model_survey_history","survey.group_survey_manager",1,1,1,1
+"access_survey_response_line_survey_manager","survey.response.line.survey.manager","model_survey_response_line","survey.group_survey_manager",1,1,1,1
+"access_survey_question_column_heading_survey_manager","survey.question.column.heading.survey.manager","model_survey_question_column_heading","survey.group_survey_manager",1,1,1,1

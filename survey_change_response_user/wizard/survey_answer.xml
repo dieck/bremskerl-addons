@@ -31,7 +31,7 @@
 			target="new" view_id="survey_user_changer" />
 
 		<menuitem action="action_survey_user_changer" id="menu_survey_user_changer"
-			parent="survey.menu_answer_surveys" sequence="100" />
+			parent="survey.menu_answer_surveys" groups="base.group_tool_manager,survey.group_survey_manager" sequence="100" />
 
 	</data>
 </openerp>

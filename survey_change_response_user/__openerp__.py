@@ -17,7 +17,10 @@
     'description': "Allows changing the user for the last entered survey answer, thus allowing to input legacy answers (like fax) of your partners more convenient.",
     'init_xml' : [],
     'demo_xml' : [],
-    'update_xml' : ["wizard/survey_answer.xml"],
+    'update_xml' : ["security/survey_security.xml",
+                    "security/ir.model.access.csv",
+                    "wizard/survey_answer.xml",
+                    ],
     'active': False,
     'installable': True
 }
