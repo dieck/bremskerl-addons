@@ -22,10 +22,11 @@
 ##############################################################################
 {
     "name": "Show Partner Reference in Purchase Order list views",
-    "version": "1.01",
+    "version": "1.0",
     "depends": [ "purchase" ],
-    "author": "Marco Dieckhoff, BREMSKERL",
-    "category": "Sales & Purchases",
+    'author' : 'Marco Dieckhoff (Bremskerl)',
+    'website' : 'www.bremskerl.com',
+    "category": "Purchases",
     "description": "Show Partner Reference in Purchase Order list views",
     "init_xml": [],
     'update_xml': ["view/purchase_view.xml"],

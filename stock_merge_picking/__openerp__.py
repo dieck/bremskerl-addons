@@ -18,7 +18,7 @@
     'author' : 'Marco Dieckhoff (Bremskerl)',
     'website' : 'www.bremskerl.com',
     'depends' : ['stock'],
-    'category' : 'Generic Modules',
+    'category' : 'Warehouse',
     'description': """
 This module allows you to manually merge stock pickings (Incoming Shipments, Delivery Orders, Internal Moves).
     """,
