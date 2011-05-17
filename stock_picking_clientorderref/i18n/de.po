@@ -18,10 +18,10 @@ msgstr ""
 #: view:stock.picking:0
 #. module: stock_picking_clientorderref
 msgid "SO Cust. Ref."
-msgstr "Kd. Ref. (Verk.Auf.)"
+msgstr "Ref. Kd. (Auftrag)"
 
 #: field:stock.picking,sale_client_order_ref:0
 #. module: stock_picking_clientorderref
 msgid "Sales Order Customer Reference"
-msgstr "Kundenreferenz Verkaufsauftrag"
+msgstr "Referenz des Kunden (Verkaufsauftrag)"
 
