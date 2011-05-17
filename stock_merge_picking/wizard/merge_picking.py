@@ -175,10 +175,16 @@ class stock_picking_merge_wizard(osv.osv_memory):
 
             # prepare notes, esp. if not existing           
             if (target.note):
-                target_changes['note'] = target.note + ";\n"
+                target_changes['note'] = target.note + "\n"
             else:
                 target_changes['note'] = ""
-            target_changes['note'] += "This is a merge target."
+
+            if (target.merge_notes):
+                target_changes['merge_notes'] = target.merge_notes + ";\n"
+            else:
+                target_changes['merge_notes'] = ""
+            target_changes['merge_notes'] += "This is a merge target."
+
 
             for merge in session.picking_ids:
                 # fetch notes
@@ -193,8 +199,10 @@ class stock_picking_merge_wizard(osv.osv_memory):
                 if (merge.note):
                     linenote += ", Notes: " + str(merge.note)
 
-                target_changes['note'] += linenote + ";\n"
+                target_changes['merge_notes'] += linenote + ";\n"
 
+                if (merge.note):
+                    target_changes['note'] += str(merge.note) + "\n"
 
                 # handle changeable values
 

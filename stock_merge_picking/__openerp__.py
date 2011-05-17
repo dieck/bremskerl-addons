@@ -24,7 +24,7 @@ This module allows you to manually merge stock pickings (Incoming Shipments, Del
     """,
     'init_xml' : [],
     'demo_xml' : [],
-    'update_xml' : ['wizard/merge_picking_view.xml'],
+    'update_xml' : ['view/stock_view.xml', 'wizard/merge_picking_view.xml'],
     'active': False,
     'installable': True
 }
