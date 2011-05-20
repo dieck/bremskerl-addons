@@ -7,11 +7,6 @@
 #    Author Marco Dieckhoff
 #
 ##############################################################################
-#
-#    Merge Picking up to v5 of OpenERP was written by Axelor, www.axelor.com
-#    This is a complete rewrite.
-#
-##############################################################################
 
 from osv import osv, fields
 from tools.translate import _
@@ -31,9 +26,28 @@ class boilerplate_wizard(osv.osv_memory):
         "remote_id": fields.many2one(remote_model, "Remote model"),
     }        
   
-    def do_boilerplate(self, cr, uid, ids, context=None):
+    #TODO does not work!
+    # see http://www.openerp.com/forum/topic24970.html
+    # and https://bugs.launchpad.net/openobject-server/+bug/780584
+    def is_translateable(self, cr, uid, model, field):
+        ir_model_fields = self.pool.get("ir.model.fields")
+        model_id = ir_model_fields.search(cr, uid, [('model','=',model),('name','=',field)])
+        for m in ir_model_fields.browse(cr, uid, model_id):
+            if (m.translate):
+                return True
+        return False
 
-        for session in self.browse(cr, uid, ids):
+    def browselanguages(self, cr, uid):
+        res_lang = self.pool.get("res.lang")
+        all_res_lang = res_lang.search(cr, uid, [])
+        return res_lang.browse(cr, uid, all_res_lang)
+
+  
+    def do_boilerplate(self, cr, uid, ids, context=None):
+        if context is None:
+            context = {}
+
+        for session in self.browse(cr, uid, ids, context=context):
             
             # look for wrongly chosen boilerplate
             bp_pid = session.boilerplate_id.product_id
@@ -56,14 +70,28 @@ class boilerplate_wizard(osv.osv_memory):
                     raise osv.except_osv(_('Partner mismatch'),_('Partner set on the Boilerplate does not match this ') + self.remote_name)
                     return { 'type': 'ir.actions.act_window_close' }
             
-            # ok, add notes
-            oldnotes = getattr(session.remote_id, self.remote_note)
-            if (not oldnotes):
-                oldnotes = ""
-            newnotes = oldnotes + "\n" + session.boilerplate_id.text
-    
+            # ok, add notes, maybe per language
             remote_pool = self.pool.get(self.remote_model)
-            remote_pool.write(cr, uid, [session.remote_id.id], {self.remote_note: newnotes})
+            
+            
+            # add accordingly in all translations
+            
+            #TODO use is_translateable if https://bugs.launchpad.net/openobject-server/+bug/780584 is fixed
+            res_lang = self.pool.get('res.lang')
+            lang_ids = res_lang.search(cr, uid, [])
+            for lang in res_lang.browse(cr,uid,lang_ids):
+                ctx = context
+                ctx['lang'] = lang.code
+                
+                for transession in self.browse(cr, uid, [session.id], context=ctx):
+                    oldnotes = getattr(transession.remote_id, self.remote_note)
+                    if (not oldnotes):
+                        oldnotes = ""
+                        
+                    notes_to_add = str(transession.boilerplate_id.text)
+                    if (not oldnotes.endswith(notes_to_add)):
+                        newnotes = oldnotes + "\n" + transession.boilerplate_id.text
+                        remote_pool.write(cr, uid, [transession.remote_id.id], {self.remote_note: newnotes}, context=ctx)
                 
         return {'type': 'ir.actions.act_window_close'}
 
