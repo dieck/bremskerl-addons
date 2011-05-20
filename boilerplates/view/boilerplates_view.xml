@@ -67,6 +67,12 @@
 					</group>
 
 					<newline />
+					<group expand='0' string="Usability..." groups="base.group_extended">
+						<!-- <filter name="filter_usability_xyz" string='XYZ' icon="terp-go-week" 
+							domain="[('usability_xyz','=',True)]" /> -->
+					</group>
+
+					<newline />
 					<group expand='0' string='Group by...' groups="base.group_extended">
 						<filter string='Category' icon="terp-stock_symbol-selection"
 							domain="[]" context="{'group_by' : 'category_id'}" />
@@ -121,6 +127,8 @@
 					<notebook colspan="4">
 						<page string="Boilerplate Text">
 							<field name="text" nolabel="1" colspan="4" />
+						</page>
+						<page string="Usability">
 						</page>
 					</notebook>
 

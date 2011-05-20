@@ -17,7 +17,7 @@
     'version' : '6.0',
     'author' : 'Marco Dieckhoff (Bremskerl)',
     'website' : 'www.bremskerl.com',
-    'depends' : ['boilerplates_modularity','account'],
+    'depends' : ['boilerplates','account'],
     'category' : 'Boilerplates',
     'description': "Adds Boilerplate actions to Accounting forms: Invoices",
     'init_xml' : [],

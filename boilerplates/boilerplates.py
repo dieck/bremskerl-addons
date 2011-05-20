@@ -38,8 +38,8 @@ class boilerplates_text(osv.osv):
         "valid_from": fields.date("Valid From", required=True),
         "valid_to": fields.date("Valid To"),
 
-        "product_id": fields.many2one("product.product", "Product", help="This note relates to this single specific product."),
-        "partner_id": fields.many2one("res.partner", "Partner", help="This note relates to this single specific partner."),
+        "product_id": fields.many2one("product.product", "Product", help="This boilerplate relates to this single specific product."),
+        "partner_id": fields.many2one("res.partner", "Partner", help="This boilerplate relates to this single specific partner."),
 
         "text": fields.text("Text", translate=True),
         "note": fields.text("Internal notes about this boilerplate", translate=True),
