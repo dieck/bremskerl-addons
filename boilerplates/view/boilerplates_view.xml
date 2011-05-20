@@ -148,8 +148,9 @@
 		<!-- menus -->
 
 
-		<!-- TODO find good parent for this -->
-		<menuitem id="menu_boilerplates" sequence="49" name="Boilerplates" />
+		<menuitem id="menu_boilerplates" sequence="49" name="Boilerplates"
+			parent="base.menu_tools"
+			groups="group_boilerplates_manager" />
 
 		<menuitem action="open_boilerplate_text_tree" id="menu_boilerplates_text"
 			parent="menu_boilerplates" sequence="10" />

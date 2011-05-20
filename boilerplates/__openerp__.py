@@ -10,7 +10,7 @@
 {
     "name": "Boilerplates",
     "version": "1.0",
-    "depends": ["base", "product" ],
+    "depends": ["base", "base_tools", "product" ],
     "author": "Marco Dieckhoff, BREMSKERL",
     "category": "Custom",
     "description": """
