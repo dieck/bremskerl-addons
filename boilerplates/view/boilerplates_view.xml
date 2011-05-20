@@ -81,7 +81,6 @@
 			</field>
 		</record>
 
-
 		<record id="text_tree" model="ir.ui.view">
 			<field name="name">boilerplates.text.tree</field>
 			<field name="model">boilerplates.text</field>
@@ -119,8 +118,11 @@
 						<field name="note" nolabel="1" colspan="2" />
 					</group>
 
-					<separator string="Boilerplate Text" colspan="4" />
-					<field name="text" nolabel="1" colspan="4" />
+					<notebook colspan="4">
+						<page string="Boilerplate Text">
+							<field name="text" nolabel="1" colspan="4" />
+						</page>
+					</notebook>
 
 				</form>
 			</field>
@@ -149,8 +151,7 @@
 
 
 		<menuitem id="menu_boilerplates" sequence="49" name="Boilerplates"
-			parent="base.menu_tools"
-			groups="group_boilerplates_manager" />
+			parent="base.menu_tools" groups="group_boilerplates_manager" />
 
 		<menuitem action="open_boilerplate_text_tree" id="menu_boilerplates_text"
 			parent="menu_boilerplates" sequence="10" />

@@ -17,10 +17,10 @@
 This module
     """,
     "init_xml": [],
-    'update_xml': ["data/boilerplates_data.xml", 
-                   "view/boilerplates_view.xml",
-                   "security/boilerplates_security.xml",
+    'update_xml': ["security/boilerplates_security.xml",
                    "security/ir.model.access.csv",
+                   "data/boilerplates_data.xml", 
+                   "view/boilerplates_view.xml",
                    "wizard/boilerplates_wiz_view.xml"],
     'demo_xml': ["data/boilerplates_demo.xml"],
     'installable': True,

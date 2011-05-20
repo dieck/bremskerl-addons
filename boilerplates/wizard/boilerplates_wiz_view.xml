@@ -8,7 +8,7 @@
 			<field name="type">form</field>
 			<field name="arch" type="xml">
 				<form string="Add Boilerplate">
-					<field name="boilerplate_id" colspan="4" required="1"/>
+					<field name="boilerplate_id" colspan="4" required="1" context="context" />
 					<field name="remote_id" invisible="1" />
 					<group col="2" colspan="4">
 						<button icon="gtk-cancel" special="cancel" string="Cancel" />
