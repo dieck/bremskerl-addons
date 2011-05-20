@@ -18,6 +18,7 @@
     'author' : 'Marco Dieckhoff (Bremskerl)',
     'website' : 'www.bremskerl.com',
     'depends' : ['boilerplates','stock_move_notes'],
+    # Hint: stock_move_notes is a custom addon from me, too :)
     'category' : 'Boilerplates',
     'description': "Adds Boilerplate actions",
     'init_xml' : [],
