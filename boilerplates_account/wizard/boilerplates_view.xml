@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<record id="text_search" model="ir.ui.view">
+			<field name="name">boilerplates.account.text.search</field>
+			<field name="model">boilerplates.text</field>
+			<field name="type">search</field>
+			<field name="inherit_id" ref="boilerplates_modularity.text_search" />
+			<field name="arch" type="xml">
+				<xpath expr="//group[@string='Usability...']" position="inside">
+					<filter name="filter_usability_account" string='Accounting' icon="terp-go-week"
+						domain="[('usability_account','=',True)]" />
+				</xpath>
+			</field>
+		</record>
+
+		<record id="text_form" model="ir.ui.view">
+			<field name="name">boilerplates.modularity.text.form</field>
+			<field name="model">boilerplates.text</field>
+			<field name="inherit_id" ref="boilerplates_modularity.text_form" />
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<page string="Usability" position="inside">
+					<field name="usability_account" />
+				</page>
+			</field>
+		</record>
+
+		<record id="boilerplates_wiz" model="ir.ui.view">
+			<field name="name">Boilerplates</field>
+			<field name="model">boilerplate.wizard.account.invoice</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="boilerplates.boilerplates_wiz" />
+			<field name="arch" type="xml">
+				<field name="remote_id" invisible="1" position="replace">
+					<field name="remote_id" invisible="1" />
+				</field>
+			</field>
+		</record>
+
+		<act_window id="action_boilerplate_account_invoice" name="Add Boilerplate"
+			res_model="boilerplate.wizard.account.invoice" src_model="account.invoice"
+			view_type="form" view_mode="form" target="new" view_id="boilerplates_wiz"
+			domain="[('remote_id', '=', active_id)]" context="{'search_default_filter_usability_account':1}" />
+
+	</data>
+</openerp>
