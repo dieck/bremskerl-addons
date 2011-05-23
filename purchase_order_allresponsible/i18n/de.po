@@ -1,6 +1,6 @@
 # Translation of OpenERP Server.
 # This file contains the translation of the following modules:
-#	* purchase_order_allreponsible
+#	* purchase_order_allresponsible
 #
 msgid ""
 msgstr ""
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#: model:ir.actions.act_window,help:purchase_order_allreponsible.purchase_form_all_action
-#. module: purchase_order_allreponsible
+#: model:ir.actions.act_window,help:purchase_order_allresponsible.purchase_form_all_action
+#. module: purchase_order_allresponsible
 msgid "Use this menu to search within your purchase orders\n"
 "				by references, supplier, products, etc. For each purchase order, you\n"
 "				can track the products received, and control the supplier invoices.\n"
@@ -27,9 +27,9 @@ msgstr "Verwenden Sie dieses Menü zur Suche in Beschaffungsaufträgen nach "
 "tatsächlich bekommen haben und dadurch auch einen Abgleich mit der"
 "Eingangsrechnung vornehmen."
 
-#: model:ir.actions.act_window,name:purchase_order_allreponsible.purchase_form_all_action
-#: model:ir.ui.menu,name:purchase_order_allreponsible.menu_purchase_form_all_action
-#. module: purchase_order_allreponsible
+#: model:ir.actions.act_window,name:purchase_order_allresponsible.purchase_form_all_action
+#: model:ir.ui.menu,name:purchase_order_allresponsible.menu_purchase_form_all_action
+#. module: purchase_order_allresponsible
 msgid "Purchase Orders (All Responsible)"
 msgstr "Beschaffungsaufträge (Alle Verantwortlichen)"
 

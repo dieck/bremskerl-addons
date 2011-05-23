@@ -1,13 +1,13 @@
 # Translation of OpenERP Server.
 # This file contains the translation of the following modules:
-#	* sale_order_all
+#	* sale_order_allsalesmen
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.0.2\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2011-05-05 14:00+0000\n"
-"PO-Revision-Date: 2011-05-05 14:00+0000\n"
+"POT-Creation-Date: 2011-05-23 08:51+0000\n"
+"PO-Revision-Date: 2011-05-23 08:51+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#: model:ir.actions.act_window,help:sale_order_all.action_order_all_form
-#. module: sale_order_all
+#. module: sale_order_allsalesmen
+#: model:ir.actions.act_window,help:sale_order_allsalesmen.action_order_all_form
 msgid "Sales Orders help you manage quotations and orders\n"
 "				from your customers. OpenERP suggests that you start by creating a\n"
 "				quotation. Once it is confirmed, the quotation will be converted\n"
@@ -25,7 +25,8 @@ msgid "Sales Orders help you manage quotations and orders\n"
 "				orders, purchases and so on. Based on the configuration of the sales\n"
 "				order, a draft invoice will be generated so that you just have to\n"
 "				confirm it when you want to bill your customer."
-msgstr "Verkaufsaufträge helfen Ihnen bei der Erstellung und Verwaltung von "
+msgstr ""
+"Verkaufsaufträge helfen Ihnen bei der Erstellung und Verwaltung von "
 "Angeboten an Ihre Kunden und bei der Auftragserfassung. OpenERP schlägt "
 "zunächst die Erstellung eines Angebots an Kunden vor. Durch die "
 "Kundenbestellung und Bestätigung des Auftrags wird das Angebot dann "
@@ -38,9 +39,15 @@ msgstr "Verkaufsaufträge helfen Ihnen bei der Erstellung und Verwaltung von "
 "Entwurf vorgeschlagen werden, die dann für die Fakturierung nur noch "
 "aufzurufen und zu bestätigen ist."
 
-#: model:ir.actions.act_window,name:sale_order_all.action_order_all_form
-#: model:ir.ui.menu,name:sale_order_all.menu_sale_order_all
-#. module: sale_order_all
+#. module: sale_order_allsalesmen
+#: model:ir.module.module,description:sale_order_allsalesmen.module_meta_information
+#: model:ir.module.module,shortdesc:sale_order_allsalesmen.module_meta_information
+msgid "Add a menu item to Sales Orders without setting salesman in search"
+msgstr "Fügt ein Menü-Eintrag im Verkauf hinzu um ohne Verkäufer-Vorbelegung die Liste zu öffnen."
+
+#. module: sale_order_allsalesmen
+#: model:ir.actions.act_window,name:sale_order_allsalesmen.action_order_all_form
+#: model:ir.ui.menu,name:sale_order_allsalesmen.menu_sale_order_all
 msgid "Sales Orders (All Salesmen)"
 msgstr "Verkaufsaufträge (Alle Verkäufer)"
 
