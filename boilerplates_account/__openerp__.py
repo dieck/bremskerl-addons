@@ -7,11 +7,6 @@
 #    Author Marco Dieckhoff
 #
 ##############################################################################
-#
-#    Merge Picking up to v5 of OpenERP was written by Axelor, www.axelor.com
-#    This is a complete rewrite.
-#
-##############################################################################
 {
     'name' : 'Boilerplates for Accounting',
     'version' : '6.0',
