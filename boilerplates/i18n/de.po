@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.0.2\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2011-05-20 11:51+0000\n"
-"PO-Revision-Date: 2011-05-20 11:51+0000\n"
+"POT-Creation-Date: 2011-05-24 14:49+0000\n"
+"PO-Revision-Date: 2011-05-24 14:49+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -31,22 +31,22 @@ msgstr "Raten 12 @ 2%"
 msgid "This boilerplate relates to this single specific product."
 msgstr "Dieser Textbaustein bezieht sich auf dieses spezielle Produkt."
 
-#: code:addons\boilerplates\wizard\boilerplates_wizard.py:58
-#: code:addons\boilerplates\wizard\boilerplates_wizard.py:60
+#: code:addons\boilerplates\wizard\boilerplates_wizard.py:67
+#: code:addons\boilerplates\wizard\boilerplates_wizard.py:69
 #. module: boilerplates
 #, python-format
 msgid "Product set on the Boilerplate does not match this "
 msgstr "Entspricht nicht der Produktfestlegung des Textbausteins"
 
-#: code:addons\boilerplates\wizard\boilerplates_wizard.py:67
-#: code:addons\boilerplates\wizard\boilerplates_wizard.py:70
+#: code:addons\boilerplates\wizard\boilerplates_wizard.py:76
+#: code:addons\boilerplates\wizard\boilerplates_wizard.py:79
 #. module: boilerplates
 #, python-format
 msgid "Partner mismatch"
 msgstr "Abweichung beim Partner"
 
-#: code:addons\boilerplates\wizard\boilerplates_wizard.py:67
-#: code:addons\boilerplates\wizard\boilerplates_wizard.py:70
+#: code:addons\boilerplates\wizard\boilerplates_wizard.py:76
+#: code:addons\boilerplates\wizard\boilerplates_wizard.py:79
 #. module: boilerplates
 #, python-format
 msgid "Partner set on the Boilerplate does not match this "
@@ -72,7 +72,7 @@ msgstr "boilerplates.text"
 #: view:boilerplates.text:0
 #. module: boilerplates
 msgid "Boilerplate Text"
-msgstr "Boilerplate Text"
+msgstr "Textbaustein"
 
 #: model:boilerplates.text,name:boilerplates.bp_txt_acct2
 #. module: boilerplates
@@ -227,8 +227,8 @@ msgstr "Bereitstellung..."
 msgid "Constraints"
 msgstr "Einschränkungen"
 
-#: code:addons\boilerplates\wizard\boilerplates_wizard.py:58
-#: code:addons\boilerplates\wizard\boilerplates_wizard.py:60
+#: code:addons\boilerplates\wizard\boilerplates_wizard.py:67
+#: code:addons\boilerplates\wizard\boilerplates_wizard.py:69
 #. module: boilerplates
 #, python-format
 msgid "Product mismatch"

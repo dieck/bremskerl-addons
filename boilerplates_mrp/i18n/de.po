@@ -1,13 +1,13 @@
 # Translation of OpenERP Server.
 # This file contains the translation of the following modules:
-#	* boilerplates_account
+#	* boilerplates_mrp
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.0.2\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2011-05-20 11:23+0000\n"
-"PO-Revision-Date: 2011-05-20 11:23+0000\n"
+"POT-Creation-Date: 2011-05-24 14:47+0000\n"
+"PO-Revision-Date: 2011-05-24 14:47+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -15,60 +15,60 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#: model:ir.module.module,description:boilerplates_account.module_meta_information
-#. module: boilerplates_account
-msgid "Adds Boilerplate actions to Accounting forms: Invoices"
-msgstr "Fügt Textbaustein-Option zu Finanzen hinzu, für Rechnungen"
+#: field:boilerplates.text,usability_mrp:0
+#. module: boilerplates_mrp
+msgid "Usable for Manufacturing"
+msgstr "Vorgesehen für Fertigung"
 
-#: model:ir.model,name:boilerplates_account.model_boilerplates_text
-#. module: boilerplates_account
-msgid "boilerplates.text"
-msgstr "boilerplates.text"
-
-#: field:boilerplate.wizard.account.invoice,boilerplate_id:0
-#. module: boilerplates_account
+#: field:boilerplate.wizard.mrp.bom,boilerplate_id:0
+#: field:boilerplate.wizard.mrp.order,boilerplate_id:0
+#. module: boilerplates_mrp
 msgid "Boilerplate"
 msgstr "Textbaustein"
 
-#: model:ir.actions.act_window,name:boilerplates_account.action_boilerplate_account_invoice
-#: model:ir.model,name:boilerplates_account.model_boilerplate_wizard_account_invoice
-#. module: boilerplates_account
+#: code:addons\boilerplates_mrp\wizard\boilerplates.py:39
+#. module: boilerplates_mrp
+#, python-format
+msgid "MRP BoM"
+msgstr "Stückliste"
+
+#: model:ir.actions.act_window,name:boilerplates_mrp.action_boilerplate_mrp_bom
+#: model:ir.actions.act_window,name:boilerplates_mrp.action_boilerplate_mrp_order
+#: model:ir.model,name:boilerplates_mrp.model_boilerplate_wizard_mrp_bom
+#: model:ir.model,name:boilerplates_mrp.model_boilerplate_wizard_mrp_order
+#. module: boilerplates_mrp
 msgid "Add Boilerplate"
 msgstr "Textbaustein hinzufügen"
 
-#: model:ir.module.module,shortdesc:boilerplates_account.module_meta_information
-#. module: boilerplates_account
-msgid "Boilerplates for Accounting"
-msgstr "Textbausteine für Finanzen"
+#: model:ir.model,name:boilerplates_mrp.model_boilerplates_text
+#. module: boilerplates_mrp
+msgid "boilerplates.text"
+msgstr "boilerplates.text"
 
-#: field:boilerplates.text,usability_account:0
-#. module: boilerplates_account
-msgid "Usable for Accounting"
-msgstr "Vorgesehen für Finanzen"
-
-#: code:addons\boilerplates_account\wizard\boilerplates.py:23
-#. module: boilerplates_account
-#, python-format
-msgid "Invoice"
-msgstr "Rechnung"
-
-#: field:boilerplate.wizard.account.invoice,remote_id:0
-#. module: boilerplates_account
+#: field:boilerplate.wizard.mrp.bom,remote_id:0
+#: field:boilerplate.wizard.mrp.order,remote_id:0
+#. module: boilerplates_mrp
 msgid "Remote model"
 msgstr "Bezug zum Datenbankmodel"
 
+#: code:addons\boilerplates_mrp\wizard\boilerplates.py:23
+#. module: boilerplates_mrp
+#, python-format
+msgid "MRP Order"
+msgstr "Fertigungsauftrag"
+
 #: view:boilerplates.text:0
-#. module: boilerplates_account
-msgid "Accounting"
-msgstr "Finanzen"
+#. module: boilerplates_mrp
+msgid "Manufacturing"
+msgstr "Fertigung"
 
 #: sql_constraint:boilerplates.text:0
-#. module: boilerplates_account
+#. module: boilerplates_mrp
 msgid "The boilerplate names must be unique!"
 msgstr "Der Name des Textbausteins muss eindeutig sein!"
 
 #: view:boilerplates.text:0
-#. module: boilerplates_account
+#. module: boilerplates_mrp
 msgid "Usability"
 msgstr "Bereitstellung"
 
