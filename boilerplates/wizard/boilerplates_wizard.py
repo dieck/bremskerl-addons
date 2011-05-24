@@ -89,7 +89,6 @@ class boilerplate_wizard(osv.osv_memory):
 
                 # if field was previously empty, first insert will put it to ALL databases.
                 oldnotes = getattr(transession.remote_id, self.remote_note)
-                print "oldnotes1", oldnotes
                 if (not oldnotes):
                     remote_pool.write(cr, uid, [transession.remote_id.id], {self.remote_note: default_notes_to_add}, context={})
             
@@ -100,8 +99,6 @@ class boilerplate_wizard(osv.osv_memory):
                 ctx = context
                 ctx['lang'] = lang.code
                 
-                print "working on", ctx['lang']
-                
                 for transession in self.browse(cr, uid, [session.id], context=ctx):
                     oldnotes = getattr(transession.remote_id, self.remote_note)
                
@@ -110,15 +107,9 @@ class boilerplate_wizard(osv.osv_memory):
                     
                     notes_to_add = unicode(transession.boilerplate_id.text)
                  
-                    print "  oldnotes", oldnotes
-                    print "  notes_to_add", notes_to_add
-                    print "  default_notes_to_add", default_notes_to_add
-            
                     # default_notes_to_add match old/last: bail out, already added default translation before
                     if (oldnotes.endswith(default_notes_to_add)):
-                        print "oldnotes match default_notes_to_add", oldnotes, " // ", default_notes_to_add
                         oldnotes = oldnotes[:oldnotes.rfind(default_notes_to_add)]
-                        print "oldnotes match default_notes_to_add", oldnotes, " // ", default_notes_to_add
                         
                     if (not oldnotes.endswith(notes_to_add)):
                         newnotes = oldnotes + "\n" + transession.boilerplate_id.text
