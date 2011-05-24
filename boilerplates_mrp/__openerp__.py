@@ -17,12 +17,13 @@
     'version' : '6.0',
     'author' : 'Marco Dieckhoff (Bremskerl)',
     'website' : 'www.bremskerl.com',
-    'depends' : ['boilerplates','mrp'],
+    'depends' : ['boilerplates','mrp_notes'],
+    # Hint: mrp_notes is a custom addon from me, too :)
     'category' : 'Boilerplates',
-    'description': "Adds Boilerplate actions",
+    'description': "Adds Boilerplate actions to Manufacturing forms",
     'init_xml' : [],
     'demo_xml' : [],
-    'update_xml' : ['wizard/boilerplates_view.xml'],
+    'update_xml' : ['view/boilerplates_view.xml','wizard/boilerplates_view.xml'],
     'active': False,
     'installable': True
 }

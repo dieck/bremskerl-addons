@@ -17,14 +17,14 @@ from osv import osv, fields
 from tools.translate import _
 
 class boilerplate_wizard(osv.osv_memory):
-    _name = "boilerplate.wizard.mrp"
+    _name = "boilerplate.wizard.mrp.order"
     _inherit = "boilerplate.wizard"
 
     remote_name = _("MRP Order")
-    remote_model = "mrp.order"
-    remote_note = "notes"
-    remote_product_id = False
-    remote_partner_id = "partner_id"
+    remote_model = "mrp.production"
+    remote_note = "note"
+    remote_product_id = "product_id"
+    remote_partner_id = False
 
     _columns = {
         "remote_id": fields.many2one(remote_model, "Remote model"),
@@ -32,3 +32,18 @@ class boilerplate_wizard(osv.osv_memory):
 
 boilerplate_wizard()
 
+class boilerplate_wizard_bom(osv.osv_memory):
+    _name = "boilerplate.wizard.mrp.bom"
+    _inherit = "boilerplate.wizard"
+
+    remote_name = _("MRP BoM")
+    remote_model = "mrp.bom"
+    remote_note = "note"
+    remote_product_id = "product_id"
+    remote_partner_id = False
+
+    _columns = {
+        "remote_id": fields.many2one(remote_model, "Remote model"),
+    }    
+
+boilerplate_wizard_bom()
