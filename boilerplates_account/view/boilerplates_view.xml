@@ -17,7 +17,7 @@
 		</record>
 
 		<record id="text_form" model="ir.ui.view">
-			<field name="name">boilerplates.modularity.text.form</field>
+			<field name="name">boilerplates.account.text.form</field>
 			<field name="model">boilerplates.text</field>
 			<field name="inherit_id" ref="boilerplates.text_form" />
 			<field name="type">form</field>
