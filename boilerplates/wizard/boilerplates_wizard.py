@@ -25,17 +25,26 @@ class boilerplate_wizard(osv.osv_memory):
         "boilerplate_id": fields.many2one("boilerplates.text","Boilerplate"),
         "remote_id": fields.many2one(remote_model, "Remote model"),
     }        
+
   
-    #TODO does not work!
-    # see http://www.openerp.com/forum/topic24970.html
-    # and https://bugs.launchpad.net/openobject-server/+bug/780584
-    def is_translateable(self, cr, uid, model, field):
-        ir_model_fields = self.pool.get("ir.model.fields")
-        model_id = ir_model_fields.search(cr, uid, [('model','=',model),('name','=',field)])
-        for m in ir_model_fields.browse(cr, uid, model_id):
-            if (m.translate):
-                return True
+    def is_translateable(self, browse):
+        # following a hint of Vo Minh Thu in https://bugs.launchpad.net/openobject-server/+bug/780584
+        # it is still possible for a non-custom field to see if it is translatable by inspecting the _columns attribute of the model.
+        if (browse):
+            cols = getattr(browse, "_columns") or False
+            remotefield = cols[self.remote_note] or False
+            return (remotefield.translate) 
         return False
+
+        #TODO does not work!
+        # see http://www.openerp.com/forum/topic24970.html
+        # and https://bugs.launchpad.net/openobject-server/+bug/780584
+#        ir_model_fields = self.pool.get("ir.model.fields")
+#        model_id = ir_model_fields.search(cr, uid, [('model','=',model),('name','=',field)])
+#        for m in ir_model_fields.browse(cr, uid, model_id):
+#            if (m.translate):
+#                return True
+#        return False
 
     def browselanguages(self, cr, uid):
         res_lang = self.pool.get("res.lang")
@@ -74,46 +83,63 @@ class boilerplate_wizard(osv.osv_memory):
             remote_pool = self.pool.get(self.remote_model)
             
             
-            # add accordingly in all translations
- 
-
-            # if no sublanguage defined, self.browse with context will return default language
-            # means: If unset before, secondary language translations have double content:
-            #   default language + translated entry.
-            # Therefore, I test here if the default store matches
-            default_notes_to_add = u""
             
-            # get default language text
-            for transession in self.browse(cr, uid, [session.id], context={}):
-                default_notes_to_add = unicode(transession.boilerplate_id.text)
-
-                # if field was previously empty, first insert will put it to ALL databases.
-                oldnotes = getattr(transession.remote_id, self.remote_note)
-                if (not oldnotes):
-                    remote_pool.write(cr, uid, [transession.remote_id.id], {self.remote_note: default_notes_to_add}, context={})
-            
-            #TODO use is_translateable if https://bugs.launchpad.net/openobject-server/+bug/780584 is fixed
-            res_lang = self.pool.get('res.lang')
-            lang_ids = res_lang.search(cr, uid, [])
-            for lang in res_lang.browse(cr,uid,lang_ids):
-                ctx = context
-                ctx['lang'] = lang.code
+            if (self.is_translateable(session.remote_id)):
+                # do the whole show, add accordingly in all translations
                 
-                for transession in self.browse(cr, uid, [session.id], context=ctx):
+                # if no sublanguage defined, self.browse with context will return default language
+                # means: If unset before, secondary language translations have double content:
+                #   default language + translated entry.
+                # Therefore, I test here if the default store matches
+                default_notes_to_add = u""
+
+                # get default language text
+                for transession in self.browse(cr, uid, [session.id], context={}):
+                    default_notes_to_add = unicode(transession.boilerplate_id.text)
+    
+                    # if field was previously empty, first insert will put it to ALL databases.
                     oldnotes = getattr(transession.remote_id, self.remote_note)
-               
                     if (not oldnotes):
-                        oldnotes = str("").encode('utf-8')
+                        remote_pool.write(cr, uid, [transession.remote_id.id], {self.remote_note: default_notes_to_add}, context={})
+    
+                res_lang = self.pool.get('res.lang')
+                lang_ids = res_lang.search(cr, uid, [])
+                for lang in res_lang.browse(cr,uid,lang_ids):
+                    ctx = context
+                    ctx['lang'] = lang.code
                     
-                    notes_to_add = unicode(transession.boilerplate_id.text)
-                 
-                    # default_notes_to_add match old/last: bail out, already added default translation before
-                    if (oldnotes.endswith(default_notes_to_add)):
-                        oldnotes = oldnotes[:oldnotes.rfind(default_notes_to_add)]
+                    for transession in self.browse(cr, uid, [session.id], context=ctx):
+                        oldnotes = getattr(transession.remote_id, self.remote_note)
+                   
+                        if (oldnotes):
+                            oldnotes = oldnotes + "\n"
+                        else:
+                            oldnotes = str("").encode('utf-8')
                         
-                    if (not oldnotes.endswith(notes_to_add)):
-                        newnotes = oldnotes + "\n" + transession.boilerplate_id.text
-                        remote_pool.write(cr, uid, [transession.remote_id.id], {self.remote_note: newnotes}, context=ctx)
+                        notes_to_add = unicode(transession.boilerplate_id.text)
+                     
+                        # default_notes_to_add match old/last: bail out, already added default translation before
+                        if (oldnotes.strip().endswith(default_notes_to_add)):
+                            oldnotes = oldnotes[:oldnotes.rfind(default_notes_to_add)]
+                            
+                        if (not oldnotes.strip().endswith(notes_to_add)):
+                            newnotes = oldnotes + transession.boilerplate_id.text
+                            remote_pool.write(cr, uid, [transession.remote_id.id], {self.remote_note: newnotes}, context=ctx)
+
+            else:
+                # NOT self.is_translateable(session.remote_id) => use language as defined by current user
+                
+                oldnotes = getattr(session.remote_id, self.remote_note)
+                if (oldnotes):
+                    oldnotes = oldnotes + "\n"
+                else:
+                    oldnotes = str("").encode('utf-8')
+                            
+                notes_to_add = unicode(session.boilerplate_id.text)
+                    
+                if (not oldnotes.strip().endswith(notes_to_add)):
+                    newnotes = oldnotes + session.boilerplate_id.text
+                    remote_pool.write(cr, uid, [session.remote_id.id], {self.remote_note: newnotes}, context=context)
                 
         return {'type': 'ir.actions.act_window_close'}
 
