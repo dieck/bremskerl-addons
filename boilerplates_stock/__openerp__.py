@@ -7,22 +7,17 @@
 #    Author Marco Dieckhoff
 #
 ##############################################################################
-#
-#    Merge Picking up to v5 of OpenERP was written by Axelor, www.axelor.com
-#    This is a complete rewrite.
-#
-##############################################################################
 {
-    'name' : 'Boilerplates for Stock (e.g. Delivery Notes)',
+    'name' : 'Boilerplates for Stock',
     'version' : '6.0',
     'author' : 'Marco Dieckhoff (Bremskerl)',
     'website' : 'www.bremskerl.com',
     'depends' : ['boilerplates','stock'],
     'category' : 'Boilerplates',
-    'description': "Adds Boilerplate actions",
+    'description': "Adds Boilerplate actions to Stock forms: Delivery Notes",
     'init_xml' : [],
     'demo_xml' : [],
-    'update_xml' : ['wizard/boilerplates_view.xml'],
+    'update_xml' : ['view/boilerplates_view.xml', 'wizard/boilerplates_view.xml'],
     'active': False,
     'installable': True
 }
