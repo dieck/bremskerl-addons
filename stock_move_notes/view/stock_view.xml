@@ -31,8 +31,9 @@
 					position="after">
 					<group colspan="2" col="4">
 						<separator string="Notes" colspan="4" />
-						<field name="notes" />
-						<field name="prtnotes" />
+						<field name="notes" colspan="2" />
+						<newline/>
+						<field name="prtnotes" colspan="2" />
 					</group>
 				</xpath>
 			</field>
@@ -47,10 +48,11 @@
 				<xpath
 					expr="//field[@name='move_lines']/form/group/separator[@string='Traceability']/.."
 					position="after">
-					<group colspan="2" col="2">
-						<separator string="Notes" colspan="2" />
-						<field name="notes" />
-						<field name="prtnotes" />
+					<group colspan="2" col="4">
+						<separator string="Notes" colspan="4" />
+						<field name="notes" colspan="2" />
+						<newline/>
+						<field name="prtnotes" colspan="2" />
 					</group>
 				</xpath>
 			</field>
@@ -65,10 +67,11 @@
 				<xpath
 					expr="//field[@name='move_lines']/form/group/separator[@string='Traceability']/.."
 					position="after">
-					<group colspan="2" col="2">
-						<separator string="Notes" colspan="2" />
-						<field name="notes" />
-						<field name="prtnotes" />
+					<group colspan="2" col="4">
+						<separator string="Notes" colspan="4" />
+						<field name="notes" colspan="2" />
+						<newline/>
+						<field name="prtnotes" colspan="2" />
 					</group>
 				</xpath>
 			</field>
@@ -83,10 +86,11 @@
 				<xpath
 					expr="//field[@name='move_lines']/form/group/separator[@string='Traceability']/.."
 					position="after">
-					<group colspan="2" col="2">
-						<separator string="Notes" colspan="2" />
-						<field name="notes" />
-						<field name="prtnotes" />
+					<group colspan="2" col="4">
+						<separator string="Notes" colspan="4" />
+						<field name="notes" colspan="2" />
+						<newline/>
+						<field name="prtnotes" colspan="2" />
 					</group>
 				</xpath>
 			</field>
