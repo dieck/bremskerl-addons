@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<!-- views -->
+		<record id="mrp_production_form_view" model="ir.ui.view">
+			<field name="name">mrp.notes.production.form</field>
+			<field name="model">mrp.production</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="mrp.mrp_production_form_view" />
+			<field name="arch" type="xml">
+				<page string="Extra Information" position="inside">
+					<separator colspan="4" string="Notes" />
+					<field name="note" nolabel="1" colspan="4" />
+				</page>
+			</field>
+		</record>
+
+		<record id="mrp_bom_form_view" model="ir.ui.view">
+			<field name="name">mrp.notes.bom.form</field>
+			<field name="model">mrp.bom</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="mrp.mrp_bom_form_view" />
+			<field name="arch" type="xml">
+				<notebook position="inside">
+					<page string="Notes">
+						<field name="note" nolabel="1" colspan="4" />
+					</page>
+				</notebook>
+			</field>
+		</record>
+	</data>
+</openerp>
