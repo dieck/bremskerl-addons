@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data noupdate="1">
+		<record id="bp_txt_tracking1" model="boilerplates.text">
+			<field name="name">Urgent - Delay Information</field>
+			<field name="category_id" ref="bp_cat_tracking" />
+			<field name="valid_from" eval="time.strftime('%Y-01-01')" />
+			<field name="text">Urgent Freight. Please keep sender informed about unplanned delays.</field>
+		</record>
+		<record id="bp_txt_acct1" model="boilerplates.text">
+			<field name="name">Rates 12 @ 2%</field>
+			<field name="category_id" ref="bp_cat_accounting" />
+			<field name="valid_from" eval="time.strftime('%Y-01-01')" />
+			<field name="text">You may pay in 12 rates at only 2% interest. Contact our Accounting department.</field>
+		</record>
+		<record id="bp_txt_acct2" model="boilerplates.text">
+			<field name="name">No cheques</field>
+			<field name="category_id" ref="bp_cat_accounting" />
+			<field name="valid_from" eval="time.strftime('%Y-01-01')" />
+			<field name="text">Please note: Due to recent events, we can not accept cheques from outside the EU.</field>
+		</record>
+		
+	</data>
+</openerp>
