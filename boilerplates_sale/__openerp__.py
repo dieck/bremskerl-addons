@@ -7,11 +7,6 @@
 #    Author Marco Dieckhoff
 #
 ##############################################################################
-#
-#    Merge Picking up to v5 of OpenERP was written by Axelor, www.axelor.com
-#    This is a complete rewrite.
-#
-##############################################################################
 {
     'name' : 'Boilerplates for Sales',
     'version' : '6.0',
@@ -19,10 +14,10 @@
     'website' : 'www.bremskerl.com',
     'depends' : ['boilerplates','sale'],
     'category' : 'Boilerplates',
-    'description': "Adds Boilerplate actions",
+    'description': "Adds Boilerplate actions to Sales forms: Order Lines",
     'init_xml' : [],
     'demo_xml' : [],
-    'update_xml' : ['wizard/boilerplates_view.xml'],
+    'update_xml' : ['view/boilerplates_view.xml', 'wizard/boilerplates_view.xml'],
     'active': False,
     'installable': True
 }

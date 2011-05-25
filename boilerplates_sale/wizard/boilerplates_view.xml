@@ -2,9 +2,9 @@
 <openerp>
 	<data>
 
-		<record id="boilerplates_wiz" model="ir.ui.view">
+		<record id="boilerplates_wiz_line" model="ir.ui.view">
 			<field name="name">Boilerplates</field>
-			<field name="model">boilerplate.wizard.sale</field>
+			<field name="model">boilerplate.wizard.sale.order.line</field>
 			<field name="type">form</field>
 			<field name="inherit_id" ref="boilerplates.boilerplates_wiz" />
 			<field name="arch" type="xml">
@@ -14,10 +14,27 @@
 			</field>
 		</record>
 
-		<act_window id="action_boilerplate_sale" name="Add Boilerplate"
-			res_model="boilerplate.wizard.sale" src_model="sale.order" view_type="form"
-			view_mode="form" target="new" view_id="boilerplates_wiz"
-			domain="[('remote_id', '=', active_id)]" />
+		<act_window id="action_boilerplate_sale_order_line" name="Add Boilerplate"
+			res_model="boilerplate.wizard.sale.order.line" src_model="sale.order.line"
+			view_type="form" view_mode="form" target="new" view_id="boilerplates_wiz_line"
+			domain="[('remote_id', '=', active_id)]" context="{'search_default_filter_usability_sale':1}" />
+
+
+		<record id="view_order_form" model="ir.ui.view">
+			<field name="name">boilerplates.sale.order.line.form</field>
+			<field name="model">sale.order</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="sale.view_order_form" />
+			<field name="arch" type="xml">
+				<xpath
+					expr="//field[@name='order_line']/form/notebook/page[@string='Notes']/field[@name='notes']"
+					position="after">
+					<button icon="terp-stock_align_left_24" string="Add Boilerplate"
+						name="%(action_boilerplate_sale_order_line)d" type="action" />
+				</xpath>
+			</field>
+		</record>
+
 
 	</data>
 </openerp>

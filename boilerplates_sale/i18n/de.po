@@ -1,0 +1,75 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* boilerplates_sale
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.2\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2011-05-25 12:26+0000\n"
+"PO-Revision-Date: 2011-05-25 12:26+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#: model:ir.module.module,description:boilerplates_sale.module_meta_information
+#. module: boilerplates_sale
+msgid "Adds Boilerplate actions"
+msgstr "Fügt Textbaustein-Optionen hinzu"
+
+#: model:ir.model,name:boilerplates_sale.model_boilerplates_text
+#. module: boilerplates_sale
+msgid "boilerplates.text"
+msgstr "boilerplates.text"
+
+#: field:boilerplate.wizard.sale.order.line,boilerplate_id:0
+#. module: boilerplates_sale
+msgid "Boilerplate"
+msgstr "Textbaustein"
+
+#: field:boilerplates.text,usability_sale:0
+#. module: boilerplates_sale
+msgid "Usable for Sales"
+msgstr "Vorgesehen für Verkauf"
+
+#: view:boilerplates.text:0
+#. module: boilerplates_sale
+msgid "Sales"
+msgstr "Verkauf"
+
+#: model:ir.actions.act_window,name:boilerplates_sale.action_boilerplate_sale_order_line
+#: model:ir.model,name:boilerplates_sale.model_boilerplate_wizard_sale_order_line
+#: view:sale.order:0
+#. module: boilerplates_sale
+msgid "Add Boilerplate"
+msgstr "Textbaustein hinzufügen"
+
+#: code:addons\boilerplates_sale\wizard\boilerplates.py:10
+#. module: boilerplates_sale
+#, python-format
+msgid "Invoice"
+msgstr "Rechnung"
+
+#: field:boilerplate.wizard.sale.order.line,remote_id:0
+#. module: boilerplates_sale
+msgid "Remote model"
+msgstr "Bezug zum Datenbankmodel"
+
+#: view:boilerplates.text:0
+#. module: boilerplates_sale
+msgid "Usability"
+msgstr "Bereitstellung"
+
+#: sql_constraint:boilerplates.text:0
+#. module: boilerplates_sale
+msgid "The boilerplate names must be unique!"
+msgstr "Der Name des Textbausteins muss eindeutig sein!"
+
+#: model:ir.module.module,shortdesc:boilerplates_sale.module_meta_information
+#. module: boilerplates_sale
+msgid "Boilerplates for Sales"
+msgstr "Textbausteine für Verkauf"
+
