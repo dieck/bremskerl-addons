@@ -14,12 +14,69 @@
 			</field>
 		</record>
 
-		<act_window id="action_boilerplate_stock_move_prtnotes" name="Add Boilerplate"
-			res_model="boilerplate.wizard.stock.move.notes" src_model="stock.move" view_type="form"
-			view_mode="form" target="new" view_id="boilerplates_wiz"
+		<act_window id="action_boilerplate_stock_move_notes" name="Add Boilerplate"
+			res_model="boilerplate.wizard.stock.move.notes" src_model="stock.move"
+			view_type="form" view_mode="form" target="new" view_id="boilerplates_wiz"
 			domain="[('remote_id', '=', active_id)]" />
 
-	<record id="boilerplates_wiz_prt" model="ir.ui.view">
+
+		<record id="view_move_form_reception_picking" model="ir.ui.view">
+			<field name="name">boilerplates.wizard.stock.move.notes.reception
+			</field>
+			<field name="model">stock.move</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="stock_move_notes.view_move_form_reception_picking" />
+			<field name="arch" type="xml">
+				<field name="notes" colspan="2" position="after">
+					<button icon="terp-stock_align_left_24" name="%(action_boilerplate_stock_move_notes)d"
+						type="action" string="Boilerplate" />
+				</field>
+			</field>
+		</record>
+
+		<record id="view_picking_form" model="ir.ui.view">
+			<field name="name">boilerplates.wizard.stock.move.notes.internal
+			</field>
+			<field name="model">stock.picking</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="stock_move_notes.view_picking_form" />
+			<field name="arch" type="xml">
+				<field name="notes" colspan="2" position="after">
+					<button icon="terp-stock_align_left_24" name="%(action_boilerplate_stock_move_notes)d"
+						type="action" string="Boilerplate" />
+				</field>
+			</field>
+		</record>
+		<record id="view_picking_out_form" model="ir.ui.view">
+			<field name="name">boilerplates.wizard.stock.move.notes.out
+			</field>
+			<field name="model">stock.picking</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="stock_move_notes.view_picking_out_form" />
+			<field name="arch" type="xml">
+				<field name="notes" colspan="2" position="after">
+					<button icon="terp-stock_align_left_24" name="%(action_boilerplate_stock_move_notes)d"
+						type="action" string="Boilerplate" />
+				</field>
+			</field>
+		</record>
+		<record id="view_picking_in_form" model="ir.ui.view">
+			<field name="name">boilerplates.wizard.stock.move.notes.in
+			</field>
+			<field name="model">stock.picking</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="stock_move_notes.view_picking_in_form" />
+			<field name="arch" type="xml">
+				<field name="notes" colspan="2" position="after">
+					<button icon="terp-stock_align_left_24" name="%(action_boilerplate_stock_move_notes)d"
+						type="action" string="Boilerplate" />
+				</field>
+			</field>
+		</record>
+
+
+
+		<record id="boilerplates_wiz_prt" model="ir.ui.view">
 			<field name="name">Boilerplates</field>
 			<field name="model">boilerplate.wizard.stock.move.prtnotes</field>
 			<field name="type">form</field>
@@ -31,10 +88,65 @@
 			</field>
 		</record>
 
-		<act_window id="action_boilerplate_stock_move_notes" name="Add Boilerplate (Prt.)"
-			res_model="boilerplate.wizard.stock.move.prtnotes" src_model="stock.move" view_type="form"
-			view_mode="form" target="new" view_id="boilerplates_wiz_prt"
-			domain="[('remote_id', '=', active_id)]" />
+		<act_window id="action_boilerplate_stock_move_prtnotes"
+			name="Add Boilerplate (Prt.)" res_model="boilerplate.wizard.stock.move.prtnotes"
+			src_model="stock.move" view_type="form" view_mode="form" target="new"
+			view_id="boilerplates_wiz_prt" domain="[('remote_id', '=', active_id)]" />
+
+
+		<record id="view_move_form_reception_picking_prt" model="ir.ui.view">
+			<field name="name">boilerplates.wizard.stock.move.prtnotes.reception
+			</field>
+			<field name="model">stock.move</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="view_move_form_reception_picking" />
+			<field name="arch" type="xml">
+				<field name="prtnotes" colspan="2" position="after">
+					<button icon="terp-stock_align_left_24" name="%(action_boilerplate_stock_move_prtnotes)d"
+						type="action" string="Boilerplate" />
+				</field>
+			</field>
+		</record>
+		<record id="view_picking_form_prt" model="ir.ui.view">
+			<field name="name">boilerplates.wizard.stock.move.prtnotes.internal
+			</field>
+			<field name="model">stock.picking</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="view_picking_form" />
+			<field name="arch" type="xml">
+				<field name="prtnotes" colspan="2" position="after">
+					<button icon="terp-stock_align_left_24" name="%(action_boilerplate_stock_move_prtnotes)d"
+						type="action" string="Boilerplate" />
+				</field>
+			</field>
+		</record>
+		<record id="view_picking_out_form_prt" model="ir.ui.view">
+			<field name="name">boilerplates.wizard.stock.move.prtnotes.out
+			</field>
+			<field name="model">stock.picking</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="view_picking_out_form" />
+			<field name="arch" type="xml">
+				<field name="prtnotes" colspan="2" position="after">
+					<button icon="terp-stock_align_left_24" name="%(action_boilerplate_stock_move_prtnotes)d"
+						type="action" string="Boilerplate" />
+				</field>
+			</field>
+		</record>
+		<record id="view_picking_in_form_prt" model="ir.ui.view">
+			<field name="name">boilerplates.wizard.stock.move.prtnotes.in
+			</field>
+			<field name="model">stock.picking</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="view_picking_in_form" />
+			<field name="arch" type="xml">
+				<field name="prtnotes" colspan="2" position="after">
+					<button icon="terp-stock_align_left_24" name="%(action_boilerplate_stock_move_prtnotes)d"
+						type="action" string="Boilerplate" />
+				</field>
+			</field>
+		</record>
+
 
 	</data>
 </openerp>
