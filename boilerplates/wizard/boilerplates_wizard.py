@@ -21,12 +21,19 @@ class boilerplate_wizard(osv.osv_memory):
     remote_product_id = False
     remote_partner_id = False
     
+    def _lang_get(self, cr, uid, context={}):
+        obj = self.pool.get('res.lang')
+        ids = obj.search(cr, uid, [], context=context)
+        res = obj.read(cr, uid, ids, ['code', 'name'], context)
+        return [(r['code'], r['name']) for r in res] + [('','')]
+    
     _columns = {
         "boilerplate_id": fields.many2one("boilerplates.text","Boilerplate"),
         "remote_id": fields.many2one(remote_model, "Remote model"),
+        "lang": fields.selection(_lang_get, type='char', string="Language"),
     }        
 
-  
+    
     def is_translateable(self, browse):
         # following a hint of Vo Minh Thu in https://bugs.launchpad.net/openobject-server/+bug/780584
         # it is still possible for a non-custom field to see if it is translatable by inspecting the _columns attribute of the model.
@@ -35,16 +42,6 @@ class boilerplate_wizard(osv.osv_memory):
             remotefield = cols[self.remote_note] or False
             return (remotefield.translate) 
         return False
-
-        #TODO does not work!
-        # see http://www.openerp.com/forum/topic24970.html
-        # and https://bugs.launchpad.net/openobject-server/+bug/780584
-#        ir_model_fields = self.pool.get("ir.model.fields")
-#        model_id = ir_model_fields.search(cr, uid, [('model','=',model),('name','=',field)])
-#        for m in ir_model_fields.browse(cr, uid, model_id):
-#            if (m.translate):
-#                return True
-#        return False
 
     def browselanguages(self, cr, uid):
         res_lang = self.pool.get("res.lang")
@@ -108,38 +105,44 @@ class boilerplate_wizard(osv.osv_memory):
                     ctx = context
                     ctx['lang'] = lang.code
                     
-                    for transession in self.browse(cr, uid, [session.id], context=ctx):
-                        oldnotes = getattr(transession.remote_id, self.remote_note)
+                    for translated_session in self.browse(cr, uid, [session.id], context=ctx):
+                        oldnotes = getattr(translated_session.remote_id, self.remote_note)
                    
                         if (oldnotes):
                             oldnotes = oldnotes + "\n"
                         else:
                             oldnotes = str("").encode('utf-8')
                         
-                        notes_to_add = unicode(transession.boilerplate_id.text)
+                        notes_to_add = unicode(translated_session.boilerplate_id.text)
                      
                         # default_notes_to_add match old/last: bail out, already added default translation before
                         if (oldnotes.strip().endswith(default_notes_to_add)):
                             oldnotes = oldnotes[:oldnotes.rfind(default_notes_to_add)]
                             
                         if (not oldnotes.strip().endswith(notes_to_add)):
-                            newnotes = oldnotes + transession.boilerplate_id.text
-                            remote_pool.write(cr, uid, [transession.remote_id.id], {self.remote_note: newnotes}, context=ctx)
+                            newnotes = oldnotes + translated_session.boilerplate_id.text
+                            remote_pool.write(cr, uid, [translated_session.remote_id.id], {self.remote_note: newnotes}, context=ctx)
 
             else:
                 # NOT self.is_translateable(session.remote_id) => use language as defined by current user
                 
-                oldnotes = getattr(session.remote_id, self.remote_note)
-                if (oldnotes):
-                    oldnotes = oldnotes + "\n"
-                else:
-                    oldnotes = str("").encode('utf-8')
-                            
-                notes_to_add = unicode(session.boilerplate_id.text)
+                ctx = context # includes user default language
+                # if language was set on wizard, use it
+                if (session.lang):
+                    ctx['lang'] = session.lang
                     
-                if (not oldnotes.strip().endswith(notes_to_add)):
-                    newnotes = oldnotes + session.boilerplate_id.text
-                    remote_pool.write(cr, uid, [session.remote_id.id], {self.remote_note: newnotes}, context=context)
+                for translated_session in self.browse(cr, uid, [session.id], context=ctx):
+                    oldnotes = getattr(session.remote_id, self.remote_note)
+                    if (oldnotes):
+                        oldnotes = oldnotes + "\n"
+                    else:
+                        oldnotes = str("").encode('utf-8')
+                                
+                    notes_to_add = unicode(translated_session.boilerplate_id.text)
+                        
+                    if (not oldnotes.strip().endswith(notes_to_add)):
+                        newnotes = oldnotes + translated_session.boilerplate_id.text
+                        remote_pool.write(cr, uid, [session.remote_id.id], {self.remote_note: newnotes}, context=context)
                 
         return {'type': 'ir.actions.act_window_close'}
 
