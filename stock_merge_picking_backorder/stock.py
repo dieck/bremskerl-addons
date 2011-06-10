@@ -11,5 +11,3 @@ class stock_move(osv.osv):
     }
         
 stock_move()
-
-

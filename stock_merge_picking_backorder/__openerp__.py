@@ -19,7 +19,7 @@ This module allow the merging of picking lists with different backorder pickings
     """,
     'init_xml' : [],
     'demo_xml' : [],
-    'update_xml' : ["view/sale_view.xml", "view/stock_view.xml"],
+    'update_xml' : ["view/stock_view.xml"],
     'active': False,
     'installable': True
 }
