@@ -30,7 +30,6 @@ class stock_picking_merge_wizard(osv.osv_memory):
 
         # basic stock.picking relations are related here, they are used for the many2many field domain
         # all non-basic relations are checked after being choosen, in do_check
-        "target_picking_id_backorder_id": fields.related("target_picking_id", "backorder_id", type="many2one", relation='stock.picking', string="Target Picking Backorder"),
         "target_picking_id_stock_journal_id": fields.related("target_picking_id", "stock_journal_id", type="many2one", relation='stock.journal', string="Target Picking Journal ID"),
         "target_picking_id_location_id": fields.related("target_picking_id", "location_id", type="many2one", relation='stock.location', string="Target Picking Location"),
         "target_picking_id_location_dest_id": fields.related("target_picking_id", "location_dest_id", type="many2one", relation='stock.location', string="Target Picking Destination Location"),
