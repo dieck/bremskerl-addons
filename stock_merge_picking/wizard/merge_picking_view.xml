@@ -40,7 +40,6 @@
 					<field name="target_picking_id_type" invisible="1" />
 					<field name="target_picking_id_invoice_state" invisible="1" />
 
-					<field name="target_picking_id_backorder_id" invisible="1" />
 					<field name="target_picking_id_stock_journal_id" invisible="1" />
 					<field name="target_picking_id_location_id" invisible="1" />
 					<field name="target_picking_id_location_dest_id" invisible="1" />
@@ -53,7 +52,6 @@
 						        ('state','=',target_picking_id_state),
 						        ('type','=',target_picking_id_type),
 						        ('invoice_state','=',target_picking_id_invoice_state),
-						        ('backorder_id','=',target_picking_id_backorder_id),
 						        ('stock_journal_id','=',target_picking_id_stock_journal_id),
 						        ('location_id','=',target_picking_id_location_id),
 						        ('location_dest_id','=',target_picking_id_location_dest_id),
