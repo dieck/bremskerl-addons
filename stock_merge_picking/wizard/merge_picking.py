@@ -39,11 +39,12 @@ class stock_picking_merge_wizard(osv.osv_memory):
         "commit_merge": fields.boolean("Commit merge"),
     }        
   
-    # fieldname: function handling that fieldname
-    # will not be raised as incompatibility error
-    # def specialhandler(cr, uid, fieldname, merge, target, target_changes, context=None)
-    # specialhandlers = { 'relation_fieldname': specialhandler, }
-    specialhandlers = {}
+    # dictionary of 
+    #   fieldname: function handling that fieldname, will not be raised as incompatibility error
+    #   def specialhandler(cr, uid, fieldname, merge, target, target_changes, context=None)
+    # this function is to be superseeded by subsidiary modules
+    def get_specialhandlers(self):
+        return {}
   
   
     def return_view(self, cr, uid, name, res_id):
@@ -69,7 +70,7 @@ class stock_picking_merge_wizard(osv.osv_memory):
         for field in fields_pool.browse(cr, uid, fields_search, context):
 
             # don't handle specialhandlers fields as incompatible            
-            if field.name in self.specialhandlers.keys():
+            if field.name in self.get_specialhandlers().keys():
                 continue
             
             # compare fields
@@ -227,9 +228,9 @@ class stock_picking_merge_wizard(osv.osv_memory):
                 # go through these fields
                 for field in fields_pool.browse(cr, uid, fields_search):
                     
-                    if field.name in self.specialhandlers.keys():
+                    if field.name in self.get_specialhandlers().keys():
                         # use special handler
-                        specialhandler_name = self.specialhandlers.get(field.name)
+                        specialhandler_name = self.get_specialhandlers().get(field.name)
                         specialhandler = getattr(self, specialhandler_name)
                         target_changes = specialhandler(cr, uid, field.name, merge, target, target_changes)
 
@@ -242,9 +243,9 @@ class stock_picking_merge_wizard(osv.osv_memory):
                 # go through these fields
                 for field in fields_pool.browse(cr, uid, fields_search):
                     
-                    if field.name in self.specialhandlers.keys():
+                    if field.name in self.get_specialhandlers().keys():
                         # use special handler
-                        specialhandler_name = self.specialhandlers.get(field.name)
+                        specialhandler_name = self.get_specialhandlers().get(field.name)
                         specialhandler = getattr(self, specialhandler_name)
                         target_changes = specialhandler(cr, uid, field.name, merge, target, target_changes)
 
@@ -256,7 +257,7 @@ class stock_picking_merge_wizard(osv.osv_memory):
                 # go through these fields and change things, using field_search from before (many2one | many2many)
                 for field in fields_pool.browse(cr, uid, fields_search):
                     
-                    if not (field.name in self.specialhandlers.keys()):
+                    if not (field.name in self.get_specialhandlers().keys()):
                         # find the model they're in
                         model_pool = self.pool.get(field.model)
                         
