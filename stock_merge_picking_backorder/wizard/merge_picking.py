@@ -44,8 +44,9 @@ class stock_picking_merge_wizard_backorder(osv.osv_memory):
 
         return target_changes
     
-    specialhandlers = {
-        'backorder_id': "specialhandler_backorderid"
-    }
+    def get_specialhandlers(self):
+        r = super(stock_picking_merge_wizard_backorder, self).get_specialhandlers()
+        r['backorder_id'] = "specialhandler_backorderid"
+        return r
 
 stock_picking_merge_wizard_backorder()

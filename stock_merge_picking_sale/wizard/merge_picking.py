@@ -19,11 +19,6 @@ class stock_picking_merge_wizard_sale(osv.osv_memory):
     _name = "stock.picking.merge.wizard"
     _inherit = "stock.picking.merge.wizard" 
   
-    # fieldname: function handling that fieldname
-    # will not be raised as incompatibility error
-    # def specialhandler(cr, uid, fieldname, merge, target, target_changes, context=None)
-    # specialhandlers = { 'relation_fieldname': specialhandler, }
-    
     def specialhandler_saleid(self, cr, uid, fieldname, merge, target, target_changes, context=None):
         stock_move = self.pool.get('stock.move')
         
@@ -48,9 +43,11 @@ class stock_picking_merge_wizard_sale(osv.osv_memory):
         stock_move.write(cr, uid, line_ids, {'premerge_sale_id': target.sale_id.id}, context=context)
 
         return target_changes
+
     
-    specialhandlers = {
-        'sale_id': "specialhandler_saleid"
-    }
+    def get_specialhandlers(self):
+        r = super(stock_picking_merge_wizard_sale, self).get_specialhandlers()
+        r['sale_id'] = "specialhandler_saleid"
+        return r
 
 stock_picking_merge_wizard_sale()
