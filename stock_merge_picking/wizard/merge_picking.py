@@ -129,6 +129,28 @@ class stock_picking_merge_wizard(osv.osv_memory):
         # nothing found? return untranslated
         return field.field_description
     
+    def is_view(self, browse):
+        # _auto=False is used to overload __init__ with a "create or replace view" if you don't need a table
+        # so: return TRUE if _auto exists and is False, otherwise return False
+        if (browse):
+            if (hasattr(browse, "_auto")):
+                if (not getattr(browse, "_auto")):
+                    return True
+        return False
+            # ((getattr(browse, "_auto") or True)==False)
+           
+#table <osv.osv.ir.model.fields object at 0x0362E650>
+
+    
+    def is_translateable(self, browse):
+        # following a hint of Vo Minh Thu in https://bugs.launchpad.net/openobject-server/+bug/780584
+        # it is still possible for a non-custom field to see if it is translatable by inspecting the _columns attribute of the model.
+        if (browse):
+            cols = getattr(browse, "_columns") or False
+            remotefield = cols[self.remote_note] or False
+            return (remotefield.translate) 
+        return False
+    
     def do_check(self, cr, uid, ids, context=None):
         # check if pickings are compatible again with the attributes
         # depending on additional modules!
@@ -256,13 +278,18 @@ class stock_picking_merge_wizard(osv.osv_memory):
 
                 # go through these fields and change things, using field_search from before (many2one | many2many)
                 for field in fields_pool.browse(cr, uid, fields_search):
-                    
+
+
                     if not (field.name in self.get_specialhandlers().keys()):
                         # find the model they're in
                         model_pool = self.pool.get(field.model)
-                        
+
                         # this can happen if you deinstalled modules by deleting their code, so they left something behind in the definition.
                         if (not model_pool):
+                            continue
+
+                        # do not handle relations to views
+                        if self.is_view(model_pool):
                             continue
                         
                         # handle many2one: simply replace the id 
