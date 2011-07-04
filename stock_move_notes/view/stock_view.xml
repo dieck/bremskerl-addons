@@ -97,23 +97,5 @@
 		</record>
 
 
-
-		<record id="view_delivery_order_inherit_stock" model="ir.ui.view">
-			<field name="name">stock.move.notes.picking.out.form</field>
-			<field name="type">form</field>
-			<field name="model">stock.picking</field>
-			<field name="inherit_id" ref="delivery.view_delivery_order_inherit_stock" />
-			<field name="arch" type="xml">
-				<xpath
-					expr="//button[@string='Delivery Order'][@type='action'][@states='done,assigned'][@icon='gtk-print']"
-					position="replace">
-					<button name="%(report_shipping)d" string="Delivery Order"
-						states="done,assigned" type="action" icon="gtk-print" />
-
-				</xpath>
-			</field>
-		</record>
-
-
 	</data>
 </openerp>
