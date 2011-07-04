@@ -21,16 +21,16 @@
 #
 ##############################################################################
 {
-    "name": "Add notes to stock move",
-    "version": "1.06",
-    "depends": ["stock_move_notes"],
-    # "conflicts": ["delivery_remove_report"],
+    "name": "Remove Delivery Order report button" ,
+    "version": "1.00",
+    "depends": ["delivery"],
+    # "conflicts": ["stock_move_notes_report"],
     'author' : 'Marco Dieckhoff (Bremskerl)',
     'website' : 'www.bremskerl.com',
     "category": "Warehouse",
-    "description": "Add reports for notes to stock move",
+    "description": "Removes the Delivery Order report button",
     "init_xml": [],
-    'update_xml': ["report/stock_report.xml", "view/stock_view.xml"],
+    'update_xml': ["view/stock_view.xml"],
     'demo_xml': [],
     'installable': True,
     'active': False,
