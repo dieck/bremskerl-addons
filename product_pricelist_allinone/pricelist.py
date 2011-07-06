@@ -6,7 +6,6 @@ class product_pricelist_item(osv.osv):
     _inherit = "product.pricelist.item"
 
     _columns = {
-        "price_version_idid": fields.related("price_version_id", "id", readonly=True, type="integer", string="Version ID"),
         "price_version_name": fields.related("price_version_id", "name", readonly=True, type="char", string="Version Name"),
         "price_version_date_start": fields.related("price_version_id", "date_start", readonly=True, type="date", string="Version Start"),
         "price_version_date_end": fields.related("price_version_id", "date_end", readonly=True, type="date", string="Version End"),
