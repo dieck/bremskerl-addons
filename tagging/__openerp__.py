@@ -24,8 +24,7 @@ Tags can be looked up in Tools / Tagging.
 Modular extensions provide relations to the different objects. 
     """,
     "init_xml": [],
-    'update_xml': ["security/tagging_security.xml",
-                   "security/ir.model.access.csv",
+    'update_xml': ["security/ir.model.access.csv",
                    "view/tagging_view.xml",
                    ],
     'demo_xml': [],
