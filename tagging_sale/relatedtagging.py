@@ -7,7 +7,7 @@ class taggings_saleorder(osv.osv):
     _name = _inherit
 
     _columns = {
-        "sale_order_ids": fields.many2many("sale.order", "tagging_related_saleorder", "tag_id", "saleorder_id", string="Sale Orders"),
+        "sale_order_ids": fields.many2many("sale.order", "tagging_saleorder", "tag_id", "saleorder_id", string="Sale Orders"),
         
     }
 taggings_saleorder()
@@ -18,7 +18,7 @@ class saleorder_taggings(osv.osv):
     _name = _inherit
 
     _columns = {
-        "tagging_ids": fields.many2many("tagging.tags", "tagging_related_saleorder", "saleorder_id", "tag_id", string="Tags"),
+        "tagging_ids": fields.many2many("tagging.tags", "tagging_saleorder", "saleorder_id", "tag_id", string="Tags"),
         
     }
 saleorder_taggings()
