@@ -12,7 +12,7 @@
     "version": "1.0",
     "depends": ["base", "base_tools" ],
     "author": "Marco Dieckhoff, BREMSKERL",
-    "category": "Custom",
+    "category": "Tools",
     "description": """
 This addon, together with it's modular extensions, provides tagging for multiple modules.
 
