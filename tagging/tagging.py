@@ -9,13 +9,12 @@ class tags(osv.osv):
         "name": fields.char("Tag", size=64, required=True, translate=True),
         "description": fields.char("Short Description", size=256, translate=True),
         "notes": fields.text("Notes"),
-        "active": fields.boolean("Archived"),
+        "active": fields.boolean("Active"),
     }
     _defaults = {
-        "active": lambda *a: False,
+        "active": lambda *a: True,
     }
     _sql_constraints = [
         ('tagging_tags_name_unique', 'unique (name)', _('The tag names must be unique!')),
     ]
 tags()
-     
