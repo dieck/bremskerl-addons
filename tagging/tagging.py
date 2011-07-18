@@ -18,3 +18,13 @@ class tags(osv.osv):
         ('tagging_tags_name_unique', 'unique (name)', _('The tag names must be unique!')),
     ]
 tags()
+
+class tagging_related_tags(osv.osv):
+    _inherit = "tagging.tags"
+    _name = _inherit
+
+    _columns = {
+        "related_tags_ids": fields.many2many("tagging.tags", "tagging_related_tags", "tag_id", "related_tag_id", string="Related Taggings"),
+        
+    }
+tagging_related_tags()
