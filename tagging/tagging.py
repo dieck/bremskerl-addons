@@ -24,7 +24,7 @@ class tagging_related_tags(osv.osv):
     _name = _inherit
 
     _columns = {
-        "related_tags_ids": fields.many2many("tagging.tags", "tagging_related_tags", "tag_id", "related_tag_id", string="Related Taggings"),
+        "related_tags_ids": fields.many2many("tagging.tags", "tagging_related_tags", "tag_id", "related_tag_id", string="Related Tags"),
         
     }
 tagging_related_tags()
