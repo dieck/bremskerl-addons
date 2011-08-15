@@ -1,0 +1,201 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* stock_merge_picking
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Bremskerl-Addons\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/bremskerl-addons\n"
+"POT-Creation-Date: 2011-08-15 13:45+0000\n"
+"PO-Revision-Date: 2011-08-15 13:45+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#: model:ir.actions.act_window,name:stock_merge_picking.action_merge_picking
+#: model:ir.ui.menu,name:stock_merge_picking.menu_stock_moves_merge_picking
+#. module: stock_merge_picking
+msgid "Merge Pickings (manual)"
+msgstr "Merge Pickings (manual)"
+
+#: view:stock.picking.merge.wizard:0
+#. module: stock_merge_picking
+msgid "Choose Target"
+msgstr "Choose Target"
+
+#: code:addons/stock_merge_picking/wizard/merge_picking.py:112
+#: code:addons/stock_merge_picking/wizard/merge_picking.py:114
+#. module: stock_merge_picking
+#, python-format
+msgid "Note"
+msgstr "Note"
+
+#: view:stock.picking:0
+#: field:stock.picking,merge_notes:0
+#. module: stock_merge_picking
+msgid "Merge Notes"
+msgstr "Merge Notes"
+
+#: field:stock.picking.merge.wizard,commit_merge:0
+#. module: stock_merge_picking
+msgid "Commit merge"
+msgstr "Commit merge"
+
+#: model:ir.model,name:stock_merge_picking.model_stock_picking
+#. module: stock_merge_picking
+msgid "Picking List"
+msgstr "Picking List"
+
+#: code:addons/stock_merge_picking/wizard/merge_picking.py:186
+#. module: stock_merge_picking
+#, python-format
+msgid "Unchecked"
+msgstr "Unchecked"
+
+#: view:stock.picking.merge.wizard:0
+#. module: stock_merge_picking
+msgid "Pickings to merge into the target"
+msgstr "Pickings to merge into the target"
+
+#: field:stock.picking.merge.wizard,picking_ids:0
+#. module: stock_merge_picking
+msgid "unknown"
+msgstr "unknown"
+
+#: code:addons/stock_merge_picking/wizard/merge_picking.py:166
+#. module: stock_merge_picking
+#, python-format
+msgid "The following picking can not be merged due to moves in state done:"
+msgstr "The following picking can not be merged due to moves in state done:"
+
+#: code:addons/stock_merge_picking/wizard/merge_picking.py:165
+#: code:addons/stock_merge_picking/wizard/merge_picking.py:177
+#. module: stock_merge_picking
+#, python-format
+msgid "Warning"
+msgstr "Warning"
+
+#: field:stock.picking.merge.wizard,target_picking_id_invoice_state:0
+#. module: stock_merge_picking
+msgid "Target Picking Invoice State"
+msgstr "Target Picking Invoice State"
+
+#: view:stock.picking.merge.wizard:0
+#. module: stock_merge_picking
+msgid "Please verify and check to merge"
+msgstr "Please verify and check to merge"
+
+#: model:ir.model,name:stock_merge_picking.model_stock_picking_merge_wizard
+#. module: stock_merge_picking
+msgid "Merge Stock Pickings"
+msgstr "Merge Stock Pickings"
+
+#: view:stock.picking.merge.wizard:0
+#. module: stock_merge_picking
+msgid "Picking target to merge into"
+msgstr "Picking target to merge into"
+
+#: field:stock.picking.merge.wizard,target_picking_id_type:0
+#. module: stock_merge_picking
+msgid "Target Picking Type"
+msgstr "Target Picking Type"
+
+#: field:stock.picking.merge.wizard,target_picking_id_stock_journal_id:0
+#. module: stock_merge_picking
+msgid "Target Picking Journal ID"
+msgstr "Target Picking Journal ID"
+
+#: code:addons/stock_merge_picking/wizard/merge_picking.py:89
+#. module: stock_merge_picking
+#, python-format
+msgid "Near misses:"
+msgstr "Near misses:"
+
+#: field:stock.picking.merge.wizard,target_picking_id_company_id:0
+#. module: stock_merge_picking
+msgid "Target Picking Company"
+msgstr "Target Picking Company"
+
+#: view:stock.picking.merge.wizard:0
+#. module: stock_merge_picking
+msgid "Merge Picking"
+msgstr "Merge Picking"
+
+#: field:stock.picking.merge.wizard,target_picking_id_state:0
+#. module: stock_merge_picking
+msgid "Target Picking State"
+msgstr "Target Picking State"
+
+#: view:stock.picking.merge.wizard:0
+#. module: stock_merge_picking
+msgid "Merge"
+msgstr "Merge"
+
+#: view:stock.picking.merge.wizard:0
+#. module: stock_merge_picking
+msgid "Do not merge"
+msgstr "Do not merge"
+
+#: field:stock.picking.merge.wizard,target_picking_id:0
+#. module: stock_merge_picking
+msgid "Target Picking"
+msgstr "Target Picking"
+
+#: code:addons/stock_merge_picking/wizard/merge_picking.py:108
+#. module: stock_merge_picking
+#, python-format
+msgid "%s: %s (%s) differs."
+msgstr "%s: %s (%s) differs."
+
+#: code:addons/stock_merge_picking/wizard/merge_picking.py:186
+#. module: stock_merge_picking
+#, python-format
+msgid "You did not check the Commit Merge checkbox."
+msgstr "You did not check the Commit Merge checkbox."
+
+#: field:stock.picking.merge.wizard,target_picking_id_address_id:0
+#. module: stock_merge_picking
+msgid "Target Picking Adress"
+msgstr "Target Picking Adress"
+
+#: field:stock.picking.merge.wizard,target_picking_id_location_id:0
+#. module: stock_merge_picking
+msgid "Target Picking Location"
+msgstr "Target Picking Location"
+
+#: code:addons/stock_merge_picking/wizard/merge_picking.py:112
+#: code:addons/stock_merge_picking/wizard/merge_picking.py:114
+#. module: stock_merge_picking
+#, python-format
+msgid "There are no compatible pickings to be merged."
+msgstr "There are no compatible pickings to be merged."
+
+#: view:stock.picking.merge.wizard:0
+#. module: stock_merge_picking
+msgid "Merge completed."
+msgstr "Merge completed."
+
+#: field:stock.picking.merge.wizard,target_picking_id_location_dest_id:0
+#. module: stock_merge_picking
+msgid "Target Picking Destination Location"
+msgstr "Target Picking Destination Location"
+
+#: view:stock.picking.merge.wizard:0
+#. module: stock_merge_picking
+msgid "Close"
+msgstr "Close"
+
+#: view:stock.picking.merge.wizard:0
+#. module: stock_merge_picking
+msgid "Check"
+msgstr "Check"
+
+#: code:addons/stock_merge_picking/wizard/merge_picking.py:173
+#. module: stock_merge_picking
+#, python-format
+msgid "The picking %s can not be merged due to different references:"
+msgstr "The picking %s can not be merged due to different references:"
+
