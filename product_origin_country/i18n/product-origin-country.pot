@@ -1,0 +1,43 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* product_origin_country
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.1\n"
+"Report-Msgid-Bugs-To: https://bugs.launchpad.net/bremskerl-addons/\n"
+"POT-Creation-Date: 2011-03-31 09:15+0000\n"
+"PO-Revision-Date: 2011-03-31 09:15+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#: model:ir.model,name:product_origin_country.model_product_product
+#. module: product_origin_country
+msgid "Product"
+msgstr ""
+
+#: constraint:product.product:0
+#. module: product_origin_country
+msgid "Error: Invalid ean code"
+msgstr ""
+
+#: field:product.product,origin_country_id:0
+#. module: product_origin_country
+msgid "Country of Origin"
+msgstr ""
+
+#: help:product.product,origin_country_id:0
+#. module: product_origin_country
+msgid "Made in ..."
+msgstr ""
+
+#: constraint:product.product:0
+#: sql_constraint:product.product:0
+#. module: product_origin_country
+msgid "Reference/Variant has to be unique."
+msgstr ""
+
