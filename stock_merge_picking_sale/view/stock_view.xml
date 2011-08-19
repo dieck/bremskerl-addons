@@ -48,5 +48,24 @@
 			</field>
 		</record>
 
+		<record id="view_move_form" model="ir.ui.view">
+			<field name="name">stock.picking.stmrpcsl.stock.move.form.info</field>
+			<field name="model">stock.move</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="stock.view_move_form" />
+			<field name="arch" type="xml">
+				<xpath expr="//group/separator[@string='Traceability']/.."
+					position="after">
+					<group colspan="2" col="4">
+						<separator string="Sale Order References" colspan="4" />
+						<field name="sale_lookup_type" />
+						<field name="sale_lookup_order_id" />
+						<field name="sale_state" />
+						<field name="sale_client_order_ref" />
+					</group>
+				</xpath>
+			</field>
+		</record>
+
 	</data>
 </openerp>
