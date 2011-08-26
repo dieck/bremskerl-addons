@@ -8,6 +8,11 @@ class stock_move(osv.osv):
     _name = "stock.move"
     _inherit = _name
 
+    _columns = {
+        'picker_origin': fields.char('Original Picking Origin', size=64, help="Reference of the document that produced the picking this move was previously part of.", select=True),
+        'picker_backorder_id': fields.many2one('stock.picking', 'Original Picking Back Order of', help="If the original picking was split this field links to the picking that contains the other part that has been processed already.", select=True),
+    }
+
     def action_picking_picker(self, cr, uid, ids, context=None):
         # nothing to process
         if len(context['active_ids']) == 0:
@@ -49,7 +54,7 @@ class stock_move(osv.osv):
                 if (wlog_item.picking_id.state != item.picking_id.state):
                     raise osv.except_osv(_('Operation forbidden'),_('You cannot pick moves where the pickings have different states.'))
 
-                if (wlog_item.picking_id.state != item.picking_id.company_id):
+                if (wlog_item.picking_id.company_id.id != item.picking_id.company_id.id):
                     raise osv.except_osv(_('Operation forbidden'),_('You cannot pick moves where the pickings belong to different companies.'))
 
 
@@ -72,9 +77,23 @@ class stock_move(osv.osv):
                 if (wlog_item.picking_id.invoice_state != item.picking_id.invoice_state):
                     raise osv.except_osv(_('Operation forbidden'),_('You cannot pick moves where the pickings have different invoice states.'))
 
-        return {}
+        # everything is ok
 
-        
+        # present "yes/no" dialog
+        data_pool = self.pool.get('ir.model.data')
+        view_result = data_pool.get_object_reference(cr, uid, 'stock_picking_picker', 'picking_picker_form_yesno')
+        view_id = view_result and view_result[1] or False
+
+        return {
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'stock.picking.picker.wizard',
+            'views': [(view_id, 'form')],
+            'view_id': False,
+            'type': 'ir.actions.act_window',
+            'target': 'new',
+            'context': context,
+        }
         
 stock_move()
 

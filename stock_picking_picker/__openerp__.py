@@ -18,6 +18,7 @@
     'init_xml' : [],
     'demo_xml' : [],
     'update_xml' : [ 'view/stock_view.xml',
+                     'wizard/picking_picker_view.xml',
                     ],
     'active': False,
     'installable': True

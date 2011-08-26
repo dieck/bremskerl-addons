@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<record id="picking_picker_form_yesno" model="ir.ui.view">
+			<field name="name">Picking Picker</field>
+			<field name="model">stock.picking.picker.wizard</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Picking Picker">
+					<separator colspan="4" string="Please confirm creating the new picking" />
+					<group col="2" colspan="4">
+						<button icon="gtk-cancel" special="cancel" string="Cancel" />
+						<button name="do_create_picking" string="Create new Picking" type="object"
+							icon="gtk-go-forward" />
+					</group>
+				</form>
+			</field>
+		</record>
+
+	</data>
+</openerp>
