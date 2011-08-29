@@ -49,6 +49,7 @@ class stock_picking_picker_wizard(osv.osv_memory):
         backorder_ids = []
         note_moves = []
         move_changes = {}
+        old_pickings = []
             
         for move in move_pool.browse(cr, uid, context['active_ids'], context):
             # list of origins
@@ -62,7 +63,10 @@ class stock_picking_picker_wizard(osv.osv_memory):
             note_moves.append(move.name + " [" + str(move.id) + "]")
             # changes for updates/writes later
             move_changes[move.id] = {"picker_origin": move.origin or None,
-                                  "picker_backorder_id": move.backorder_id.id or None}                
+                                  "picker_backorder_id": move.backorder_id.id or None}
+            # remember old picking ids for later processing
+            old_pickings.append(move.picking_id.id or None)
+                            
 
         new_picking["note"] = "Incorporated moves: " + ', '.join(note_moves) + "\n"
             
@@ -79,14 +83,21 @@ class stock_picking_picker_wizard(osv.osv_memory):
             # single/same backorder found, use that
             new_picking["backorder_id"] = backorder_ids[0]
 
-
+        # create picking
         new_picking_id = picking_pool.create(cr, uid, new_picking)
         
+        # change move assigns (and write picker_ stored data)
         for i,c in move_changes.iteritems():
             c["picking_id"] = new_picking_id
             move_pool.write(cr, uid, [i], c)
 
         
+        # find now "empty" pickings and set them to done
+        for pck in picking_pool.browse(cr, uid, old_pickings):
+            if (len(pck.move_lines)==0):
+                pck.action_done()
+                
+        # return appropriate view        
         view_names = {'out': 'view_picking_out_form',
                       'in': 'view_picking_in_form', 
                       'internal': 'view_picking_form'
