@@ -86,13 +86,22 @@ class stock_picking_picker_wizard(osv.osv_memory):
             c["picking_id"] = new_picking_id
             move_pool.write(cr, uid, [i], c)
 
+        
+        view_names = {'out': 'view_picking_out_form',
+                      'in': 'view_picking_in_form', 
+                      'internal': 'view_picking_form'
+                      }
+        data_pool = self.pool.get('ir.model.data')
+        view_result = data_pool.get_object_reference(cr, uid, 'stock', view_names[new_picking['type']])
+        view_id = view_result and view_result[1] or False
         return {
             'view_type': 'form',
             'view_mode': 'form',
+            'views': [(view_id, 'form')],
             'res_model': 'stock.picking',
             'view_id': False,
             'type': 'ir.actions.act_window',
-            'target': 'new',
+            'target': 'current',
             'res_id': new_picking_id,
             'context': context,
         }
