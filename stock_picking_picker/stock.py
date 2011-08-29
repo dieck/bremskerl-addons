@@ -25,12 +25,22 @@ class stock_move(osv.osv):
             if ((item.picking_id.state == 'done') or (item.picking_id.state == 'cancel')):
                 raise osv.except_osv(_('Operation forbidden'),_('You cannot pick moves where the picking is done or cancelled.'))
         
+        same_picking = True
+        
         # more than one to process: check for compatibility
         if len(context['active_ids']) >= 2:
             wlog_id = context['active_ids'][0]
             wlog_item = self.browse(cr, uid, wlog_id, context)
             
             for item in self.browse(cr, uid, context['active_ids'], context):
+                
+                # test if it's already the same picking for all moves
+                if (wlog_item.picking_id.id != item.picking_id.id):
+                    same_picking = False
+                # there must not be a move in the "same_picking" pickings that's not selected for recombination 
+                for ml in item.picking_id.move_lines:
+                    if (ml.id not in context['active_ids']):
+                        same_picking = False
                 
                 # fields for move
                 if (wlog_item.company_id.id != item.company_id.id):
@@ -73,14 +83,15 @@ class stock_move(osv.osv):
                 if (wlog_item.picking_id.invoice_state != item.picking_id.invoice_state):
                     raise osv.except_osv(_('Operation forbidden'),_('You cannot pick moves where the pickings have different invoice states.'))
 
+        if (same_picking):
+            raise osv.except_osv(_('Operation unnecessary'),_('The selected moves (and no others) already belong to the same picking.'))
+
         # everything is ok
 
         # present "yes/no" dialog
         data_pool = self.pool.get('ir.model.data')
         view_result = data_pool.get_object_reference(cr, uid, 'stock_picking_picker', 'picking_picker_form_yesno')
         view_id = view_result and view_result[1] or False
-
-        print "------------------- GOING TO GIVE CONTEXT ", context
 
         return {
             'view_type': 'form',
