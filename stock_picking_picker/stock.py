@@ -27,11 +27,10 @@ class stock_move(osv.osv):
         
         # more than one to process: check for compatibility
         if len(context['active_ids']) >= 2:
-            active_ids = context['active_ids']
-            wlog_id = active_ids.pop()
+            wlog_id = context['active_ids'][0]
             wlog_item = self.browse(cr, uid, wlog_id, context)
             
-            for item in self.browse(cr, uid, active_ids, context):
+            for item in self.browse(cr, uid, context['active_ids'], context):
                 
                 # fields for move
                 if (wlog_item.company_id.id != item.company_id.id):
@@ -68,9 +67,6 @@ class stock_move(osv.osv):
                 if (wlog_item.picking_id.location_dest_id.id != item.picking_id.location_dest_id.id):
                     raise osv.except_osv(_('Operation forbidden'),_('You cannot pick moves where the pickings have different destination locations.'))
                 
-                if (wlog_item.picking_id.auto_picking != item.picking_id.auto_picking):
-                    raise osv.except_osv(_('Operation forbidden'),_('You cannot pick moves to different auto-picking settings.'))
-
                 if (wlog_item.picking_id.address_id.id != item.picking_id.address_id.id):
                     raise osv.except_osv(_('Operation forbidden'),_('You cannot pick moves to different delivery addresses.'))
 
@@ -83,6 +79,8 @@ class stock_move(osv.osv):
         data_pool = self.pool.get('ir.model.data')
         view_result = data_pool.get_object_reference(cr, uid, 'stock_picking_picker', 'picking_picker_form_yesno')
         view_id = view_result and view_result[1] or False
+
+        print "------------------- GOING TO GIVE CONTEXT ", context
 
         return {
             'view_type': 'form',
