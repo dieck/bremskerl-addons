@@ -62,8 +62,12 @@ class stock_picking_picker_wizard(osv.osv_memory):
             # notes
             note_moves.append(move.name + " [" + str(move.id) + "]")
             # changes for updates/writes later
-            move_changes[move.id] = {"picker_origin": move.origin or None,
-                                  "picker_backorder_id": move.backorder_id.id or None}
+            move_changes[move.id] = {"name": move.name or None,
+                                     "id": move.id or None,
+                                     "picking_id": move.picking_id.id or None,
+                                     "picking_id_note": move.picking_id.note or None,
+                                     "picker_origin": move.origin or None,
+                                     "picker_backorder_id": move.backorder_id.id or None}
             # remember old picking ids for later processing
             old_pickings.append(move.picking_id.id or None)
                             
@@ -85,11 +89,17 @@ class stock_picking_picker_wizard(osv.osv_memory):
 
         # create picking
         new_picking_id = picking_pool.create(cr, uid, new_picking)
+        new_picking = picking_pool.browse(cr, uid, new_picking_id)
         
         # change move assigns (and write picker_ stored data)
         for i,c in move_changes.iteritems():
-            c["picking_id"] = new_picking_id
-            move_pool.write(cr, uid, [i], c)
+            chg = {"picking_id": new_picking_id,
+                   "picker_origin": c["picker_origin"],
+                   "picker_backorder_id": c["picker_backorder_id"]}
+            move_pool.write(cr, uid, [i], chg)
+            chg = {"note": c["picking_id_note"].strip()
+                   + "\nMoved " + c["name"] + " ("+ str( c["id"]) +") to " + new_picking.name + "\n"}
+            picking_pool.write(cr, uid, [c["picking_id"]], chg)
 
         
         # find now "empty" pickings and set them to done
