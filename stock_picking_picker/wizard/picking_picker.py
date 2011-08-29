@@ -50,10 +50,7 @@ class stock_picking_picker_wizard(osv.osv_memory):
         note_moves = []
         move_changes = {}
             
-        print "context", context
-            
         for move in move_pool.browse(cr, uid, context['active_ids'], context):
-            print "FOUND MOVE", move.id, move.name
             # list of origins
             origins.append(move.picking_id.origin or None)
             # list of backorder_ids
@@ -67,7 +64,6 @@ class stock_picking_picker_wizard(osv.osv_memory):
             move_changes[move.id] = {"picker_origin": move.origin or None,
                                   "picker_backorder_id": move.backorder_id.id or None}                
 
-        print "move changes", move_changes
         new_picking["note"] = "Incorporated moves: " + ', '.join(note_moves) + "\n"
             
         origins = list(set(origins)) # unique
@@ -84,15 +80,22 @@ class stock_picking_picker_wizard(osv.osv_memory):
             new_picking["backorder_id"] = backorder_ids[0]
 
 
-        print "creating new picking", new_picking
         new_picking_id = picking_pool.create(cr, uid, new_picking)
         
         for i,c in move_changes.iteritems():
             c["picking_id"] = new_picking_id
-            print "Writing to move ", i, " changes ", c
             move_pool.write(cr, uid, [i], c)
 
-        return {}
+        return {
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'stock.picking',
+            'view_id': False,
+            'type': 'ir.actions.act_window',
+            'target': 'new',
+            'res_id': new_picking_id,
+            'context': context,
+        }
 
 stock_picking_picker_wizard()
 
