@@ -26,11 +26,20 @@ class stock_move(osv.osv):
                 raise osv.except_osv(_('Operation forbidden'),_('You cannot pick moves where the picking is done or cancelled.'))
         
         same_picking = True
+
+        wlog_id = context['active_ids'][0]
+        wlog_item = self.browse(cr, uid, wlog_id, context)
+
+        wlog_picking_id = wlog_item.picking_id.id or None
+        wlog_type = wlog_item.picking_id.type or None
+
+        # there must not be a move in the "same_picking" pickings that's not selected for recombination 
+        for ml in wlog_item.picking_id.move_lines:
+            if (ml.id not in context['active_ids']):
+                same_picking = False
         
         # more than one to process: check for compatibility
         if len(context['active_ids']) >= 2:
-            wlog_id = context['active_ids'][0]
-            wlog_item = self.browse(cr, uid, wlog_id, context)
             
             for item in self.browse(cr, uid, context['active_ids'], context):
                 
@@ -83,16 +92,33 @@ class stock_move(osv.osv):
                 if (wlog_item.picking_id.invoice_state != item.picking_id.invoice_state):
                     raise osv.except_osv(_('Operation forbidden'),_('You cannot pick moves where the pickings have different invoice states.'))
 
-        if (same_picking):
-            raise osv.except_osv(_('Operation unnecessary'),_('The selected moves (and no others) already belong to the same picking.'))
+        data_pool = self.pool.get('ir.model.data')
 
+        if (same_picking):
+            # return appropriate view        
+            view_names = {'out': 'view_picking_out_form',
+                          'in': 'view_picking_in_form', 
+                          'internal': 'view_picking_form'
+                          }
+            view_result = data_pool.get_object_reference(cr, uid, 'stock', view_names[wlog_type])
+            view_id = view_result and view_result[1] or False
+            return {
+                'view_type': 'form',
+                'view_mode': 'form',
+                'views': [(view_id, 'form')],
+                'res_model': 'stock.picking',
+                'view_id': False,
+                'type': 'ir.actions.act_window',
+                'target': 'current',
+                'res_id': wlog_picking_id,
+                'context': context,
+            }
+        
         # everything is ok
 
         # present "yes/no" dialog
-        data_pool = self.pool.get('ir.model.data')
         view_result = data_pool.get_object_reference(cr, uid, 'stock_picking_picker', 'picking_picker_form_yesno')
         view_id = view_result and view_result[1] or False
-
         return {
             'view_type': 'form',
             'view_mode': 'form',
