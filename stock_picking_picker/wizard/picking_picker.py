@@ -33,14 +33,14 @@ class stock_picking_picker_wizard(osv.osv_memory):
             "location_id": wlog_move.picking_id.location_id.id or None,
             "location_dest_id": wlog_move.picking_id.location_dest_id.id or None,
             "address_id": wlog_move.picking_id.address_id.id or None,
-            "invoice_state": wlog_move.picking_id.invoice_state or None,
+            "invoice_state": wlog_move.picking_id.invoice_state or 'none',
 
             # optional, may not be set            
             "auto_picking": True,
             "origin": None,
             "backorder_id": None,
             "note": "",
-            "date": time.strftime('%Y-%m-%d %H:%M:%S'),
+            "date": lambda *a: time.strftime('%Y-%m-%d %H:%M:%S'),
             "date_done": None, # only set on done pickings, which can't be processed anyway
             "move_lines": None,
         }
@@ -97,7 +97,8 @@ class stock_picking_picker_wizard(osv.osv_memory):
                    "picker_origin": c["picker_origin"],
                    "picker_backorder_id": c["picker_backorder_id"]}
             move_pool.write(cr, uid, [i], chg)
-            chg = {"note": c["picking_id_note"].strip()
+            picking_id_note = c["picking_id_note"] or ""
+            chg = {"note": picking_id_note.strip()
                    + "\nMoved " + c["name"] + " ("+ str( c["id"]) +") to " + new_picking.name + "\n"}
             picking_pool.write(cr, uid, [c["picking_id"]], chg)
 
