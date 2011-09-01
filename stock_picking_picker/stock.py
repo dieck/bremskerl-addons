@@ -94,6 +94,7 @@ class stock_move(osv.osv):
 
         data_pool = self.pool.get('ir.model.data')
 
+        # if the chosen moves already combine one picking,
         if (same_picking):
             # return appropriate view        
             view_names = {'out': 'view_picking_out_form',

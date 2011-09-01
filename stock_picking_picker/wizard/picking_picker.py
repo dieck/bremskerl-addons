@@ -27,13 +27,13 @@ class stock_picking_picker_wizard(osv.osv_memory):
             "move_type": wlog_move.picking_id.move_type,
             "state": wlog_move.picking_id.state,
             "company_id": wlog_move.picking_id.company_id.id,
+            "invoice_state": wlog_move.picking_id.invoice_state or 'none',
 
             # optional, but equal fields
             "stock_journal_id": wlog_move.picking_id.stock_journal_id.id or None,
             "location_id": wlog_move.picking_id.location_id.id or None,
             "location_dest_id": wlog_move.picking_id.location_dest_id.id or None,
             "address_id": wlog_move.picking_id.address_id.id or None,
-            "invoice_state": wlog_move.picking_id.invoice_state or 'none',
 
             # optional, may not be set            
             "auto_picking": True,
@@ -101,7 +101,6 @@ class stock_picking_picker_wizard(osv.osv_memory):
             chg = {"note": picking_id_note.strip()
                    + "\nMoved " + c["name"] + " ("+ str( c["id"]) +") to " + new_picking.name + "\n"}
             picking_pool.write(cr, uid, [c["picking_id"]], chg)
-
         
         # find now "empty" pickings and set them to done
         for pck in picking_pool.browse(cr, uid, old_pickings):
