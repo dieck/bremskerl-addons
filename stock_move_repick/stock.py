@@ -9,11 +9,12 @@ class stock_move(osv.osv):
     _inherit = _name
 
     _columns = {
-        'picker_origin': fields.char('Original Picking Origin', size=64, help="Reference of the document that produced the picking this move was previously part of.", select=True),
-        'picker_backorder_id': fields.many2one('stock.picking', 'Original Picking Back Order of', help="If the original picking was split this field links to the picking that contains the other part that has been processed already.", select=True),
+        'repick_origin': fields.char('Original Picking Origin', size=64, help="Reference of the document that produced the picking this move was previously part of, before re-picking.", select=True),
+        'repick_backorder_id': fields.many2one('stock.picking', 'Original Picking Back Order of', help="If the original picking before re-picking was split this field links to the picking that contains the other part that has been processed already.", select=True),
+        'repick_sale_id': fields.many2one('sale.order', 'Pre-RePick Sales Order Reference'),
     }
 
-    def action_picking_picker(self, cr, uid, ids, context=None):
+    def action_repick(self, cr, uid, ids, context=None):
         # nothing to process
         if len(context['active_ids']) == 0:
             return {}
@@ -118,12 +119,12 @@ class stock_move(osv.osv):
         # everything is ok
 
         # present "yes/no" dialog
-        view_result = data_pool.get_object_reference(cr, uid, 'stock_picking_picker', 'picking_picker_form_yesno')
+        view_result = data_pool.get_object_reference(cr, uid, 'stock_move_repick', 'move_repick_form_yesno')
         view_id = view_result and view_result[1] or False
         return {
             'view_type': 'form',
             'view_mode': 'form',
-            'res_model': 'stock.picking.picker.wizard',
+            'res_model': 'stock.move.repick.wizard',
             'views': [(view_id, 'form')],
             'view_id': False,
             'type': 'ir.actions.act_window',
