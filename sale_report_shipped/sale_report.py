@@ -53,7 +53,7 @@ class sale_report(osv.osv):
     def init(self, cr):
         tools.drop_view_if_exists(cr, 'sale_report')
         cr.execute("""
-            create or replace view sale_report as (
+            create or replace view sale_report_shipped as (
                 select el.*,
                    -- (select count(1) from sale_order_line where order_id = s.id) as nbr,
                     (select 1) as nbr,
