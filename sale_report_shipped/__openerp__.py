@@ -24,7 +24,7 @@ This module adds reporting for Sales with summed shipped quantities.
     """,
     'init_xml' : [],
     'demo_xml' : [],
-    'update_xml' : ['sale_report_view.xml'],
+    'update_xml' : ['security/ir.model.access.csv', 'view/sale_report_view.xml'],
     'active': False,
     'installable': True
 }
