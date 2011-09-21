@@ -72,7 +72,14 @@ class sale_report(osv.osv):
                      s.shipped::integer as shipped_qty_1,
                      s.pricelist_id as pricelist_id,
                      s.project_id as analytic_account_id,
-                     sum(mv.shipped_uom_qty) as shipped_uom_qty
+                     (SELECT sum(sm.product_qty / smu.factor) as shipped_uom_qty
+ FROM stock_move sm, stock_picking sp, product_uom smu
+ WHERE smu.id=sm.product_uom AND sm.picking_id=sp.id
+ AND sp.type='out'
+ AND sm.picking_id IS NOT NULL
+ AND sm.state='done'
+ AND sm.sale_line_id=el.id
+ GROUP BY sm.sale_line_id) as shipped_uom_qty
                 from
                 sale_order s,
                     (
@@ -83,7 +90,7 @@ class sale_report(osv.osv):
                         else
                             u.name
                         end) as uom_name,
-                        sum(l.product_uom_qty * u.factor) as product_uom_qty,
+                        sum(l.product_uom_qty / u.factor) as product_uom_qty,
                         sum(l.product_uom_qty * l.price_unit) as price_total,
                         pt.categ_id, l.order_id
                     from
@@ -92,17 +99,6 @@ class sale_report(osv.osv):
                      and pt.id = p.product_tmpl_id
                      and p.id = l.product_id
                       group by l.id, l.order_id, l.product_id, u.name, pt.categ_id, u.uom_type, u.category_id) el
-
-LEFT OUTER JOIN
-      (SELECT sm.sale_line_id, sum(sm.product_qty * smu.factor) as shipped_uom_qty
- FROM stock_move sm, stock_picking sp, product_uom smu
- WHERE smu.id=sm.product_uom AND sm.picking_id=sp.id
- AND sp.type='out'
- AND sm.picking_id IS NOT NULL
- AND sm.state='done'
- GROUP BY sm.sale_line_id) as mv
- ON el.id=mv.sale_line_id
-                      
                 where s.id = el.order_id
                 group by el.id,
                     el.product_id,
@@ -121,8 +117,6 @@ LEFT OUTER JOIN
                     s.shipped,
                     s.pricelist_id,
                     s.project_id
-
-
             )
         """)
 sale_report()
