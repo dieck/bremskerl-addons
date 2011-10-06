@@ -94,14 +94,6 @@ class stock_move_repick_wizard(osv.osv_memory):
 
         # create picking
         new_picking_id = picking_pool.create(cr, uid, new_picking)
-        
-        # set workflow        
-        if (wlog_move.picking_id.state == 'confirmed') or (wlog_move.picking_id.state == 'assigned'):
-            wf_service.trg_validate(uid, 'stock.picking', new_picking_id, 'button_confirm', cr)
-            # workflow to state "assigned" has false trigger, so should be automatically done
-            # picking_pool.force_assign(cr, uid, [new_picking_id], context)
-
-#FIXME TODO  ok, now it's DONE at stock.picking, moves stay assigned...
 
         # get data        
         new_picking = picking_pool.browse(cr, uid, new_picking_id)
@@ -117,6 +109,11 @@ class stock_move_repick_wizard(osv.osv_memory):
             chg = {"note": picking_id_note.strip()
                    + "\nMoved " + c["name"] + " ("+ str( c["id"]) +") to " + new_picking.name + "\n"}
             picking_pool.write(cr, uid, [c["picking_id"]], chg)
+        
+        # set workflow        
+        if (wlog_move.picking_id.state == 'confirmed') or (wlog_move.picking_id.state == 'assigned'):
+            wf_service.trg_validate(uid, 'stock.picking', new_picking_id, 'button_confirm', cr)
+            # workflow to state "assigned" has false trigger, so is automatically done, if test applies
         
         # find now "empty" pickings and set them to done
         for pck in picking_pool.browse(cr, uid, old_pickings):
