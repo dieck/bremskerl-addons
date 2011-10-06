@@ -10,6 +10,7 @@
 
 from osv import osv, fields
 import time
+import netsvc
 
 class stock_move_repick_wizard(osv.osv_memory):
     _name = "stock.move.repick.wizard"
@@ -18,6 +19,7 @@ class stock_move_repick_wizard(osv.osv_memory):
     def do_create_picking(self, cr, uid, ids, context=None):
         picking_pool = self.pool.get("stock.picking")
         move_pool = self.pool.get("stock.move")
+        wf_service = netsvc.LocalService("workflow")
         
         wlog_move = move_pool.browse(cr, uid, context['active_ids'][0], context)
         
@@ -25,7 +27,8 @@ class stock_move_repick_wizard(osv.osv_memory):
             # required fields
             "type": wlog_move.picking_id.type,
             "move_type": wlog_move.picking_id.move_type,
-            "state": wlog_move.picking_id.state,
+            "state": "draft", # need to start at draft and work my way "up" with workflows
+            
             "company_id": wlog_move.picking_id.company_id.id,
             "invoice_state": wlog_move.picking_id.invoice_state or 'none',
 
@@ -36,7 +39,7 @@ class stock_move_repick_wizard(osv.osv_memory):
             "address_id": wlog_move.picking_id.address_id.id or None,
 
             # optional, may not be set            
-            "auto_picking": True,
+            "auto_picking": False, # need to continue manually
             "origin": None,
             "backorder_id": None,
             "note": "",
@@ -91,6 +94,16 @@ class stock_move_repick_wizard(osv.osv_memory):
 
         # create picking
         new_picking_id = picking_pool.create(cr, uid, new_picking)
+        
+        # set workflow        
+        if (wlog_move.picking_id.state == 'confirmed') or (wlog_move.picking_id.state == 'assigned'):
+            wf_service.trg_validate(uid, 'stock.picking', new_picking_id, 'button_confirm', cr)
+            # workflow to state "assigned" has false trigger, so should be automatically done
+            # picking_pool.force_assign(cr, uid, [new_picking_id], context)
+
+#FIXME TODO  ok, now it's DONE at stock.picking, moves stay assigned...
+
+        # get data        
         new_picking = picking_pool.browse(cr, uid, new_picking_id)
         
         # change move assigns (and write repick stored data)

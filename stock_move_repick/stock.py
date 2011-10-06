@@ -23,7 +23,8 @@ class stock_move(osv.osv):
         for item in self.browse(cr, uid, context['active_ids'], context):            
             if ((item.state == 'done') or (item.state == 'cancel')):
                 raise osv.except_osv(_('Operation forbidden'),_('You cannot pick done or cancelled moves.'))
-            if ((item.picking_id.state == 'done') or (item.picking_id.state == 'cancel')):
+            item_picking_state = item.picking_id and item.picking_id.state or False
+            if ((item_picking_state == 'done') or (item_picking_state == 'cancel') or (item_picking_state == 'auto')):
                 raise osv.except_osv(_('Operation forbidden'),_('You cannot pick moves where the picking is done or cancelled.'))
         
         same_picking = True
