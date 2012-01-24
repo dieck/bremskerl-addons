@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data noupdate="1">
+		<record id="temunit00" model="tem.res.units">
+			<field name="name">%</field>
+			<field name="description">Percent</field>
+		</record>
+		<record id="temunit01" model="tem.res.units">
+			<field name="name">g/l</field>
+			<field name="description">Grams/Liter</field>
+		</record>
+		<record id="temunit02" model="tem.res.units">
+			<field name="name">°C</field>
+			<field name="description">Degree Celcius</field>
+		</record>
+		<record id="temunit03" model="tem.res.units">
+			<field name="name">μm</field>
+			<field name="description">Micrometers</field>
+		</record>
+		<record id="temunit04" model="tem.res.units">
+			<field name="name">A</field>
+			<field name="description">Ampere</field>
+		</record>
+		<record id="temunit05" model="tem.res.units">
+			<field name="name">#</field>
+			<field name="description">Count</field>
+		</record>
+		<record id="temunit06" model="tem.res.units">
+			<field name="name">cm</field>
+			<field name="description">Centimeters</field>
+		</record>
+		<record id="temunit07" model="tem.res.units">
+			<field name="name">cm²</field>
+			<field name="description">Square Centimeters</field>
+		</record>
+		<record id="temunit08" model="tem.res.units">
+			<field name="name">g</field>
+			<field name="description">Grams</field>
+		</record>
+		<record id="temunit09" model="tem.res.units">
+			<field name="name">HB</field>
+			<field name="description">Hardness Brinell</field>
+		</record>
+		<record id="temunit10" model="tem.res.units">
+			<field name="name">kg</field>
+			<field name="description">Kilograms</field>
+		</record>
+		<record id="temunit11" model="tem.res.units">
+			<field name="name">kΩ</field>
+			<field name="description">Kiloohm</field>
+		</record>
+		<record id="temunit12" model="tem.res.units">
+			<field name="name">KV</field>
+			<field name="description">Kilovolt</field>
+		</record>
+		<record id="temunit13" model="tem.res.units">
+			<field name="name">l</field>
+			<field name="description">Liter</field>
+		</record>
+		<record id="temunit14" model="tem.res.units">
+			<field name="name">m²</field>
+			<field name="description">Square Meters</field>
+		</record>
+		<record id="temunit15" model="tem.res.units">
+			<field name="name">mm</field>
+			<field name="description">Millimeters</field>
+		</record>
+		<record id="temunit16" model="tem.res.units">
+			<field name="name">mm²</field>
+			<field name="description">Square Millimeters</field>
+		</record>
+		<record id="temunit17" model="tem.res.units">
+			<field name="name">N/mm²</field>
+			<field name="description">Newton / Square Millimeter</field>
+		</record>
+		<record id="temunit18" model="tem.res.units">
+			<field name="name">N</field>
+			<field name="description">Newton</field>
+		</record>
+		<record id="temunit19" model="tem.res.units">
+			<field name="name">Ω</field>
+			<field name="description">Ohm</field>
+		</record>
+		<record id="temunit20" model="tem.res.units">
+			<field name="name">ppm</field>
+			<field name="description">Parts per Million</field>
+		</record>
+		<record id="temunit21" model="tem.res.units">
+			<field name="name">V</field>
+			<field name="description">Volt</field>
+		</record>
+		<record id="temunit22" model="tem.res.units">
+			<field name="name">μ</field>
+			<field name="description">Specific Coefficient of Friction μ</field>
+		</record>
+		<record id="temunit23" model="tem.res.units">
+			<field name="name">mg</field>
+			<field name="description">Milligrams</field>
+		</record>
+		<record id="temunit24" model="tem.res.units">
+			<field name="name">Shore D</field>
+			<field name="description">Hardness Shore D</field>
+		</record>
+
+
+		<record id="dp_price" model="decimal.precision">
+			<field name="name">TEM Prices</field>
+			<field name="digits">2</field>
+		</record>
+
+		<record id="at_tem_location" model="audittrail.rule">
+			<field name="name">TEM Location</field>
+			<field name="object_id" search="[('model','=','tem.location')]" />
+			<field name="log_write">1</field>
+			<field name="log_create">1</field>
+			<field name="log_unlink">1</field>
+			<field name="state">subscribed</field>
+		</record>
+		<record id="at_tem_equipment_group" model="audittrail.rule">
+			<field name="name">TEM Equipment Groups</field>
+			<field name="object_id" search="[('model','=','tem.equipment.group')]" />
+			<field name="log_write">1</field>
+			<field name="log_create">1</field>
+			<field name="log_unlink">1</field>
+			<field name="state">subscribed</field>
+		</record>
+
+		<record id="at_tem_inspection" model="audittrail.rule">
+			<field name="name">TEM Inspection</field>
+			<field name="object_id" search="[('model','=','tem.inspection')]" />
+			<field name="log_write">1</field>
+			<field name="log_create">1</field>
+			<field name="log_unlink">1</field>
+			<field name="state">subscribed</field>
+		</record>
+
+		<record id="at_tem_equipment" model="audittrail.rule">
+			<field name="name">TEM Equipment</field>
+			<field name="object_id" search="[('model','=','tem.equipment')]" />
+			<field name="log_write">1</field>
+			<field name="log_create">1</field>
+			<field name="log_unlink">1</field>
+			<field name="state">subscribed</field>
+		</record>
+		
+		<record id="at_tem_res_units" model="audittrail.rule">
+			<field name="name">TEM Units</field>
+			<field name="object_id" search="[('model','=','tem.res.units')]" />
+			<field name="log_write">1</field>
+			<field name="log_create">1</field>
+			<field name="log_unlink">1</field>
+			<field name="state">subscribed</field>
+		</record>
+
+	</data>
+</openerp>

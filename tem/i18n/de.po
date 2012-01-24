@@ -1,0 +1,889 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* tem
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.1\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2011-02-24 12:47+0000\n"
+"PO-Revision-Date: 2011-02-24 12:47+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#: model:ir.model,name:tem.model_tem_equipment
+#. module: tem
+msgid "tem.equipment"
+msgstr "tem.equipment"
+
+#: model:tem.res.units,description:tem.temunit15
+#. module: tem
+msgid "Millimeters"
+msgstr "Millimeter"
+
+#: model:tem.res.units,description:tem.temunit20
+#. module: tem
+msgid "Parts per Million"
+msgstr "Teile pro Million"
+
+#: model:ir.model,name:tem.model_tem_equipment_group
+#. module: tem
+msgid "tem.equipment.group"
+msgstr "tem.equipment.group"
+
+#: field:tem.inspection,scrap:0
+#. module: tem
+msgid "To be scrapped"
+msgstr "Wird verschrottet"
+
+#: model:ir.actions.act_window,name:tem.open_tem_location_tree
+#. module: tem
+msgid "TEM Locations"
+msgstr "PMM Orte"
+
+#: view:tem.equipment:0
+#: field:tem.equipment,supplier_id:0
+#: selection:tem.location,category:0
+#. module: tem
+msgid "Supplier"
+msgstr "Lieferant"
+
+#: selection:tem.equipment,situation:0
+#. module: tem
+msgid "Monitored"
+msgstr "Überwacht"
+
+#: selection:tem.equipment.group,interval_repeat:0
+#. module: tem
+msgid "Weeks"
+msgstr "Wochen"
+
+#: selection:tem.equipment,situation:0
+#. module: tem
+msgid "In reparation"
+msgstr "In Reparatur"
+
+#: selection:tem.equipment,situation:0
+#. module: tem
+msgid "Scheduled"
+msgstr "Geplant"
+
+#: field:tem.equipment,usage_site:0
+#. module: tem
+msgid "Usage site"
+msgstr "Einsatzort"
+
+#: model:tem.res.units,description:tem.temunit13
+#. module: tem
+msgid "Liter"
+msgstr "Liter"
+
+#: model:ir.actions.act_window,name:tem.open_tem_equipment_tree
+#. module: tem
+msgid "TEM Equipment"
+msgstr "PMM Prüfmittel"
+
+#: model:tem.res.units,description:tem.temunit10
+#. module: tem
+msgid "Kilograms"
+msgstr "Kilogramm"
+
+#: view:tem.equipment.group:0
+#. module: tem
+msgid "TEM - Equipment Groups"
+msgstr "PMM - Prüfmittelgruppen"
+
+#: view:tem.equipment.group:0
+#. module: tem
+msgid "Standard"
+msgstr "Standard"
+
+#: view:tem.equipment:0
+#. module: tem
+msgid "TEM - Equipment"
+msgstr "PMM - Prüfmittel"
+
+#: selection:tem.location,category:0
+#. module: tem
+msgid "Internal Acocunt"
+msgstr "Interne Kostenstelle"
+
+#: selection:tem.equipment,situation:0
+#. module: tem
+msgid "Cannot be found"
+msgstr "Kann nicht gefunden werden"
+
+#: help:tem.location,incoming_due:0
+#. module: tem
+msgid "Equipment is due to inspection when incoming to this location"
+msgstr "Prüfmittel sind fällig zur Überprüfung sobald sie auf diesen Lagerort gebucht werden"
+
+#: field:tem.equipment,service_contract:0
+#. module: tem
+msgid "Service Contract"
+msgstr "Wartungsvertrag"
+
+#: model:ir.module.module,shortdesc:tem.module_meta_information
+#. module: tem
+msgid "Test Equiment Management"
+msgstr "Prüfmittel-Management"
+
+#: model:ir.module.module,description:tem.module_meta_information
+#. module: tem
+msgid "Test Equipment Management Suite - Basics\n"
+"    "
+msgstr "Prüfmittel-Management - Grundlagen\n"
+"    "
+
+#: view:tem.equipment:0
+#: field:tem.equipment,notes:0
+#: view:tem.equipment.group:0
+#: field:tem.equipment.group,notes:0
+#: field:tem.inspection,notes:0
+#. module: tem
+msgid "Notes"
+msgstr "Bemerkungen"
+
+#: field:tem.equipment.group,interval_repeat:0
+#. module: tem
+msgid "Interval type"
+msgstr "Prüfintervall"
+
+#: selection:tem.equipment.group,interval_repeat:0
+#. module: tem
+msgid "Days"
+msgstr "Tage"
+
+#: view:tem.equipment:0
+#: field:tem.location,type_usage:0
+#. module: tem
+msgid "Usage Site"
+msgstr "Einsatzort"
+
+#: view:tem.equipment:0
+#: view:tem.inspection:0
+#. module: tem
+msgid "Remarks"
+msgstr "Bemerkungen"
+
+#: model:tem.res.units,description:tem.temunit14
+#. module: tem
+msgid "Square Meters"
+msgstr "Quadratmeter"
+
+#: field:tem.equipment.group,inspection_means_type:0
+#. module: tem
+msgid "Inspection Means Type"
+msgstr "Prüfmittel-Wahl"
+
+#: model:tem.res.units,description:tem.temunit04
+#. module: tem
+msgid "Ampere"
+msgstr "Ampere"
+
+#: selection:tem.equipment.group,interval_repeat:0
+#. module: tem
+msgid "Quarter"
+msgstr "Quartal"
+
+#: selection:tem.equipment.group,interval_repeat:0
+#. module: tem
+msgid "Minutes"
+msgstr "Minuten"
+
+#: model:tem.res.units,description:tem.temunit19
+#. module: tem
+msgid "Ohm"
+msgstr "Ohm"
+
+#: sql_constraint:tem.equipment:0
+#. module: tem
+msgid "Ident/Inventory no. has to be unique."
+msgstr "Ident-Nr. muss eindeutig sein"
+
+#: model:ir.actions.act_window,name:tem.open_tem_res_units_tree
+#. module: tem
+msgid "TEM Units"
+msgstr "PMM Einheiten"
+
+#: model:tem.res.units,description:tem.temunit18
+#. module: tem
+msgid "Newton"
+msgstr "Newton"
+
+#: model:tem.res.units,description:tem.temunit22
+#. module: tem
+msgid "Specific Coefficient of Friction μ"
+msgstr "Spezifischer Reibwert μ"
+
+#: model:ir.actions.act_window,name:tem.open_tem_inspection_tree
+#. module: tem
+msgid "TEM Inspections"
+msgstr "PMM Prüfungen"
+
+#: model:tem.res.units,description:tem.temunit11
+#. module: tem
+msgid "Kiloohm"
+msgstr "Kiloohm"
+
+#: view:tem.inspection:0
+#. module: tem
+msgid "Inspector"
+msgstr "Prüfer"
+
+#: model:tem.res.units,description:tem.temunit24
+#. module: tem
+msgid "Hardness Shore D"
+msgstr "Härte Shore D"
+
+#: selection:tem.equipment,situation:0
+#. module: tem
+msgid "Confirmed"
+msgstr "Bestätigt"
+
+#: field:tem.inspection,interval_text:0
+#. module: tem
+msgid "Scheduled Interval"
+msgstr "Vorgesehenes Intervall"
+
+#: view:tem.location:0
+#. module: tem
+msgid "Rigging"
+msgstr "Montageort"
+
+#: model:tem.res.units,description:tem.temunit07
+#. module: tem
+msgid "Square Centimeters"
+msgstr "Quadratzentimeter"
+
+#: selection:tem.equipment.group,interval_repeat:0
+#. module: tem
+msgid "Inspection Orders"
+msgstr "Prüfauftrag"
+
+#: field:tem.equipment,cal_invoice_id:0
+#. module: tem
+msgid "Calibration Invoice"
+msgstr "Rechnung Kalibrierung"
+
+#: model:ir.ui.menu,name:tem.menu_equipment_list
+#: field:tem.equipment,description:0
+#: view:tem.inspection:0
+#: field:tem.inspection,equipment_id:0
+#. module: tem
+msgid "Equipment"
+msgstr "Prüfmittel"
+
+#: view:tem.location:0
+#. module: tem
+msgid "Location"
+msgstr "Ort"
+
+#: view:tem.inspection:0
+#: selection:tem.inspection,result:0
+#. module: tem
+msgid "Passed"
+msgstr "Bestanden"
+
+#: selection:tem.equipment.group,interval_repeat:0
+#. module: tem
+msgid "Production Cycle"
+msgstr "Fertigungstakte"
+
+#: model:ir.ui.menu,name:tem.menu_definitions_res_units
+#. module: tem
+msgid "Units"
+msgstr "Einheiten"
+
+#: selection:tem.equipment,situation:0
+#. module: tem
+msgid "New"
+msgstr "Neu"
+
+#: model:tem.res.units,description:tem.temunit06
+#. module: tem
+msgid "Centimeters"
+msgstr "Zentimeter"
+
+#: model:ir.ui.menu,name:tem.main_menu
+#: model:ir.ui.menu,name:tem.menu_equipment
+#. module: tem
+msgid "Test Equipment"
+msgstr "Prüfmittel"
+
+#: view:tem.equipment:0
+#: field:tem.equipment,group_id:0
+#. module: tem
+msgid "Type"
+msgstr "Typ"
+
+#: model:tem.res.units,description:tem.temunit12
+#. module: tem
+msgid "Kilovolt"
+msgstr "Kilovolt"
+
+#: model:ir.model,name:tem.model_tem_inspection
+#. module: tem
+msgid "tem.inspection"
+msgstr "tem.inspection"
+
+#: view:tem.location:0
+#. module: tem
+msgid "Usage"
+msgstr "Benutzung"
+
+#: field:tem.location,type_rigging:0
+#. module: tem
+msgid "Rigging Site"
+msgstr "Montageort"
+
+#: model:tem.res.units,description:tem.temunit02
+#. module: tem
+msgid "Degree Celcius"
+msgstr "Grad Celsius"
+
+#: help:tem.location,never_due:0
+#. module: tem
+msgid "Equipment is never due in this location"
+msgstr "Prüfmittel in diesem Ort sind nie fällig zur Überprüfung"
+
+#: selection:tem.equipment.group,interval_repeat:0
+#. module: tem
+msgid "Hours"
+msgstr "Stunden"
+
+#: model:ir.ui.menu,name:tem.menu_definitions
+#. module: tem
+msgid "Configuration"
+msgstr "Konfiguration"
+
+#: field:tem.location,never_due:0
+#. module: tem
+msgid "Never Due"
+msgstr "Nie fällig"
+
+#: field:tem.inspection,by_id:0
+#. module: tem
+msgid "Inspected by"
+msgstr "Geprüft von"
+
+#: model:tem.res.units,description:tem.temunit08
+#. module: tem
+msgid "Grams"
+msgstr "Gramm"
+
+#: field:tem.equipment,next_inspection:0
+#. module: tem
+msgid "Next Inspection"
+msgstr "Nächste Prüfung"
+
+#: model:tem.res.units,description:tem.temunit23
+#. module: tem
+msgid "Milligrams"
+msgstr "Milligramm"
+
+#: field:tem.equipment,cal_location_id:0
+#: field:tem.location,type_calibration:0
+#. module: tem
+msgid "Calibration Site"
+msgstr "Kalibrierungsort"
+
+#: view:tem.inspection:0
+#: selection:tem.inspection,result:0
+#. module: tem
+msgid "Deferred"
+msgstr "Zurückgestellt"
+
+#: field:tem.equipment,measuring_range:0
+#: field:tem.equipment.group,measuring_range:0
+#. module: tem
+msgid "Range"
+msgstr "Messbereich"
+
+#: field:tem.inspection,next:0
+#. module: tem
+msgid "Next Inspection Due"
+msgstr "Nächste Prüfung fällig"
+
+#: view:tem.equipment:0
+#: view:tem.inspection:0
+#: field:tem.inspection,name:0
+#. module: tem
+msgid "Inspection"
+msgstr "Prüfung"
+
+#: model:ir.ui.menu,name:tem.menu_inspection
+#: view:tem.equipment:0
+#: field:tem.equipment,inspection_ids:0
+#. module: tem
+msgid "Inspections"
+msgstr "Prüfungen"
+
+#: field:tem.equipment,order_no:0
+#. module: tem
+msgid "Order no."
+msgstr "Bestellnummer"
+
+#: field:tem.equipment,name:0
+#. module: tem
+msgid "Equipment name"
+msgstr "Prüfmittel Name"
+
+#: view:tem.location:0
+#. module: tem
+msgid "TEM - Locations"
+msgstr "PMM - Orte"
+
+#: field:tem.location,incoming_due:0
+#. module: tem
+msgid "Incoming Due"
+msgstr "Direkt fällig"
+
+#: field:tem.equipment,serial_no:0
+#. module: tem
+msgid "Serial no."
+msgstr "Seriennummer"
+
+#: view:tem.equipment:0
+#: view:tem.equipment.group:0
+#: view:tem.inspection:0
+#: view:tem.location:0
+#: view:tem.res.units:0
+#. module: tem
+msgid "Group by..."
+msgstr "Gruppieren nach..."
+
+#: field:tem.equipment.group,inspection_means_id:0
+#: selection:tem.equipment.group,inspection_means_type:0
+#. module: tem
+msgid "Specified Inspection Means"
+msgstr "Angegebenes Prüfmittel"
+
+#: view:tem.inspection:0
+#. module: tem
+msgid "Result"
+msgstr "Ergebnis"
+
+#: selection:tem.equipment.group,inspection_means_type:0
+#. module: tem
+msgid "Any Inspection Means"
+msgstr "Beliebiges Prüfmittel"
+
+#: view:tem.location:0
+#: field:tem.location,category:0
+#: view:tem.res.units:0
+#. module: tem
+msgid "Category"
+msgstr "Kategorie"
+
+#: field:tem.equipment.group,name:0
+#. module: tem
+msgid "Group"
+msgstr "Gruppe"
+
+#: field:tem.equipment,repair_costs:0
+#. module: tem
+msgid "Repair Costs"
+msgstr "Reparaturkosten"
+
+#: model:tem.res.units,description:tem.temunit03
+#. module: tem
+msgid "Micrometers"
+msgstr "Mikrometer"
+
+#: field:tem.location,name:0
+#. module: tem
+msgid "Location Name"
+msgstr "Ortsbezeichnung"
+
+#: view:tem.equipment:0
+#: view:tem.inspection:0
+#. module: tem
+msgid "Maintenance"
+msgstr "Wartung"
+
+#: view:tem.equipment:0
+#: view:tem.equipment.group:0
+#. module: tem
+msgid "Basic"
+msgstr "Grundlagen"
+
+#: field:tem.equipment,leasing_price:0
+#. module: tem
+msgid "Leasing Price"
+msgstr "Leasing-Preis"
+
+#: view:tem.equipment.group:0
+#. module: tem
+msgid "Extended search..."
+msgstr "Erweiterte Suche..."
+
+#: model:ir.ui.menu,name:tem.menu_inspections_due
+#. module: tem
+msgid "Due Inspections"
+msgstr "Fällige Prüfungen"
+
+#: view:tem.equipment:0
+#. module: tem
+msgid "Storage Location"
+msgstr "Lagerort"
+
+#: selection:tem.equipment,situation:0
+#. module: tem
+msgid "Sold"
+msgstr "Verkauft"
+
+#: field:tem.equipment,measuring_precision:0
+#. module: tem
+msgid "Precision"
+msgstr "Messgenauigkeit"
+
+#: model:ir.model,name:tem.model_tem_location
+#. module: tem
+msgid "tem.location"
+msgstr "tem.location"
+
+#: model:ir.ui.menu,name:tem.menu_definitions_groups
+#. module: tem
+msgid "Groups"
+msgstr "Gruppen"
+
+#: view:tem.equipment.group:0
+#: field:tem.equipment.group,active:0
+#: view:tem.location:0
+#: field:tem.location,active:0
+#: view:tem.res.units:0
+#: field:tem.res.units,active:0
+#. module: tem
+msgid "Active"
+msgstr "Aktiv"
+
+#: field:tem.equipment,manufacturer_id:0
+#. module: tem
+msgid "Manufacturer"
+msgstr "Hersteller"
+
+#: model:tem.res.units,description:tem.temunit05
+#. module: tem
+msgid "Count"
+msgstr "Anzahl"
+
+#: model:tem.res.units,description:tem.temunit00
+#. module: tem
+msgid "Percent"
+msgstr "Prozent"
+
+#: selection:tem.equipment.group,interval_repeat:0
+#. module: tem
+msgid "Months"
+msgstr "Monate"
+
+#: selection:tem.equipment,situation:0
+#. module: tem
+msgid "No current calibration"
+msgstr "Keine aktuelle Kalibrierung"
+
+#: field:tem.inspection,maint:0
+#. module: tem
+msgid "Needs Maintenance/Repair"
+msgstr "Benötigt Wartung/Reparatur"
+
+#: view:tem.equipment:0
+#: field:tem.equipment,situation:0
+#. module: tem
+msgid "Situation"
+msgstr "Status"
+
+#: field:tem.equipment,measuring_resolution:0
+#: field:tem.equipment.group,measuring_resolution:0
+#. module: tem
+msgid "Resolution"
+msgstr "Auflösung"
+
+#: view:tem.equipment:0
+#: selection:tem.equipment,situation:0
+#: view:tem.inspection:0
+#. module: tem
+msgid "Scrapped"
+msgstr "Verschrottet"
+
+#: field:tem.equipment,repair_invoice_id:0
+#. module: tem
+msgid "Repair Invoice"
+msgstr "Reparatur-Rechnung"
+
+#: field:tem.equipment.group,standard:0
+#. module: tem
+msgid "Test standard"
+msgstr "Prüfnorm"
+
+#: view:tem.inspection:0
+#: selection:tem.inspection,result:0
+#. module: tem
+msgid "Failed"
+msgstr "Durchgefallen"
+
+#: selection:tem.equipment,situation:0
+#. module: tem
+msgid "Exhausted"
+msgstr "Verschlissen"
+
+#: model:tem.res.units,description:tem.temunit17
+#. module: tem
+msgid "Newton / Square Millimeter"
+msgstr "Newton pro Quadratmillimeter"
+
+#: field:tem.equipment,interval_text:0
+#: field:tem.equipment.group,interval:0
+#: field:tem.equipment.group,interval_text:0
+#. module: tem
+msgid "Interval"
+msgstr "Intervall"
+
+#: view:tem.equipment:0
+#: view:tem.inspection:0
+#. module: tem
+msgid "TEM - Inspections"
+msgstr "PMM - Prüfungen"
+
+#: selection:tem.equipment,situation:0
+#: selection:tem.equipment.group,interval_repeat:0
+#. module: tem
+msgid "Moved"
+msgstr "Verschoben"
+
+#: model:ir.ui.menu,name:tem.menu_definitions_locations
+#: view:tem.equipment:0
+#. module: tem
+msgid "Locations"
+msgstr "Orte"
+
+#: model:tem.res.units,description:tem.temunit21
+#. module: tem
+msgid "Volt"
+msgstr "Volt"
+
+#: field:tem.equipment,purchase_date:0
+#. module: tem
+msgid "Purchased"
+msgstr "Gekauft"
+
+#: view:tem.location:0
+#. module: tem
+msgid "On Move"
+msgstr "Bei Bewegung"
+
+#: field:tem.equipment,last_inspection:0
+#. module: tem
+msgid "Last Inspection"
+msgstr "Letzte Prüfung"
+
+#: field:tem.equipment,storage_location:0
+#. module: tem
+msgid "Storage location"
+msgstr "Lagerort"
+
+#: view:tem.res.units:0
+#. module: tem
+msgid "TEM - Units"
+msgstr "PMM - Einheiten"
+
+#: view:tem.equipment:0
+#: view:tem.location:0
+#. module: tem
+msgid "Calibration"
+msgstr "Kalibrierung"
+
+#: model:tem.res.units,description:tem.temunit01
+#. module: tem
+msgid "Grams/Liter"
+msgstr "Gramm pro Liter"
+
+#: field:tem.equipment,cal_responsible_id:0
+#. module: tem
+msgid "Responsible"
+msgstr "Verantwortlich"
+
+#: model:ir.ui.menu,name:tem.menu_inspections_plan
+#. module: tem
+msgid "Inspection Plans"
+msgstr "Prüfpläne"
+
+#: view:tem.equipment:0
+#: view:tem.inspection:0
+#. module: tem
+msgid "Results"
+msgstr "Ergebnisse"
+
+#: view:tem.equipment:0
+#. module: tem
+msgid "Details"
+msgstr "Details"
+
+#: selection:tem.equipment.group,inspection_means_type:0
+#. module: tem
+msgid "No Inspection Means"
+msgstr "Keine Prüfmittel"
+
+#: selection:tem.equipment.group,interval_repeat:0
+#. module: tem
+msgid "Years"
+msgstr "Jahre"
+
+#: field:tem.equipment,inventory:0
+#. module: tem
+msgid "Company Inventory id"
+msgstr "Inventarisierungs-Nummer"
+
+#: field:tem.equipment,cal_costs:0
+#. module: tem
+msgid "Calibration Costs"
+msgstr "Kalibrierungskosten"
+
+#: field:tem.location,description:0
+#: field:tem.res.units,description:0
+#. module: tem
+msgid "Description"
+msgstr "Beschreibung"
+
+#: field:tem.inspection,date:0
+#. module: tem
+msgid "Inspection date"
+msgstr "Prüfdatum"
+
+#: model:ir.actions.act_window,name:tem.open_tem_equipment_group_tree
+#. module: tem
+msgid "TEM Equipment Groups"
+msgstr "PMM Prüfmittelgruppen"
+
+#: selection:tem.equipment,situation:0
+#. module: tem
+msgid "In revision"
+msgstr "In Revision"
+
+#: model:tem.res.units,description:tem.temunit16
+#. module: tem
+msgid "Square Millimeters"
+msgstr "Quadratmillimeter"
+
+#: field:tem.equipment.group,destructive:0
+#. module: tem
+msgid "Destructive Inspection"
+msgstr "Zerstörende Prüfung"
+
+#: selection:tem.equipment,situation:0
+#. module: tem
+msgid "Finished"
+msgstr "Abgeschlossen"
+
+#: field:tem.inspection,result:0
+#. module: tem
+msgid "Inspection Result"
+msgstr "Prüfergebnis"
+
+#: view:tem.equipment.group:0
+#: field:tem.equipment.group,inspection_means_ids:0
+#. module: tem
+msgid "Inspection Means"
+msgstr "Prüfmittel"
+
+#: model:ir.model,name:tem.model_tem_res_units
+#. module: tem
+msgid "tem.res.units"
+msgstr "tem.res.units"
+
+#: field:tem.equipment,purchase_invoice_id:0
+#. module: tem
+msgid "Purchase Invoice"
+msgstr "Rechnung (Kauf)"
+
+#: selection:tem.equipment.group,interval_repeat:0
+#. module: tem
+msgid "Working Hours"
+msgstr "Betriebsstunden"
+
+#: selection:tem.equipment.group,interval_repeat:0
+#. module: tem
+msgid "Delivery Batch"
+msgstr "Liefereinheiten"
+
+#: field:tem.equipment.group,measuring_resolution_unit_id:0
+#. module: tem
+msgid "Resolution unit"
+msgstr "Einheit Auflösung"
+
+#: selection:tem.location,category:0
+#. module: tem
+msgid "Customer"
+msgstr "Kunde"
+
+#: view:tem.location:0
+#. module: tem
+msgid "Basics"
+msgstr "Grundlagen"
+
+#: field:tem.inspection,description:0
+#. module: tem
+msgid "Short Description"
+msgstr "Kurzbeschreibung"
+
+#: selection:tem.equipment.group,interval_repeat:0
+#. module: tem
+msgid "as needed"
+msgstr "nach Bedarf"
+
+#: view:tem.equipment:0
+#. module: tem
+msgid "Item"
+msgstr "Gegenstand"
+
+#: field:tem.equipment,cal_company_id:0
+#. module: tem
+msgid "External Company"
+msgstr "Externe Firma"
+
+#: model:tem.res.units,description:tem.temunit09
+#. module: tem
+msgid "Hardness Brinell"
+msgstr "Härte Brinell"
+
+#: field:tem.res.units,name:0
+#. module: tem
+msgid "Unit"
+msgstr "Einheit"
+
+#: selection:tem.equipment.group,interval_repeat:0
+#. module: tem
+msgid "Production Orders"
+msgstr "Aufträge"
+
+#: selection:tem.equipment,situation:0
+#. module: tem
+msgid "Lending"
+msgstr "Verliehen"
+
+#: field:tem.equipment,id_number:0
+#. module: tem
+msgid "TEM Ident/Inventory no."
+msgstr "PMM Ident-Nr."
+
+#: field:tem.equipment,purchase_price:0
+#. module: tem
+msgid "Purchase Price"
+msgstr "Kaufpreis"
+
+#: selection:tem.equipment,situation:0
+#. module: tem
+msgid "Nonused stock"
+msgstr "Unbenutzt"
+
+#: view:tem.location:0
+#: field:tem.location,type_storage:0
+#. module: tem
+msgid "Storage"
+msgstr "Lager"
+
