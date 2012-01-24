@@ -75,12 +75,7 @@
 							<group col="2" colspan="2">
 								<separator colspan="2" string="Calibration" />
 								<field name="cal_responsible_id" />
-								<field name="cal_location_id" />
 								<field name="cal_company_id" />
-								<field name="cal_costs" />
-								<field name="cal_invoice_id" />
-								<field name="repair_costs" />
-								<field name="repair_invoice_id" />
 								<field name="last_inspection" />
 								<field name="next_inspection" />
 							</group>

@@ -219,14 +219,7 @@ class tem_equipment(osv.osv):
         "purchase_invoice_id": fields.many2one("account.invoice","Purchase Invoice", domain=[('type','=','in_invoice')]),
         
         "cal_responsible_id": fields.many2one("tem.res.responsibles","Responsible"),
-        "cal_location_id": fields.many2one("tem.location", "Calibration Site", domain=[('type_calibration','=',True)]),
-        "cal_company_id": fields.many2one("res.partner","External Company", domain=[('supplier','=',True)]),
-        
-        "cal_costs": fields.float('Calibration Costs', digits_compute=dp.get_precision('TEM Prices')),
-        "cal_invoice_id": fields.many2one("account.invoice","Calibration Invoice", domain=[('type','=','in_invoice')]),
-       
-        "repair_costs": fields.float('Repair Costs', digits_compute=dp.get_precision('TEM Prices')),
-        "repair_invoice_id": fields.many2one("account.invoice","Repair Invoice", domain=[('type','=','in_invoice')]),
+        "cal_company_id": fields.many2one("res.partner","Involved Company", domain=[('supplier','=',True)]),
 
         "notes": fields.text("Notes"),
         
