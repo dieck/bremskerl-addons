@@ -54,30 +54,28 @@
 								<field name="storage_location" />
 								<field name="usage_site" />
 							</group>
-						</page>
-						<page string="Supplier">
-							<group col="4" colspan="2">
-								<separator colspan="2" string="Supplier" />
-								<field name="supplier_id" />
-								<field name="order_no" />
-
-								<field name="serial_no" />
-								<field name="service_contract" />
-
-								<field name="purchase_date" />
-								<field name="purchase_invoice_id" />
-
-								<field name="purchase_price" />
-								<field name="purchase_currency_id" />
-							</group>
-						</page>
-						<page string="Calibration &amp; Repairs">
 							<group col="2" colspan="2">
 								<separator colspan="2" string="Calibration" />
 								<field name="cal_responsible_id" />
 								<field name="cal_company_id" />
 								<field name="last_inspection" />
 								<field name="next_inspection" />
+							</group>
+						</page>
+						<page string="Supplier">
+							<group col="6" colspan="2">
+								<separator colspan="6" string="Supplier" />
+								<field name="supplier_id" colspan="3" />
+								<field name="order_no" colspan="3" />
+
+								<field name="serial_no" colspan="3" />
+								<field name="service_contract" colspan="3" />
+
+								<field name="purchase_date" colspan="3" />
+								<field name="purchase_invoice_id" colspan="3" />
+
+								<field name="purchase_price" colspan="2" />
+								<field name="purchase_currency_id" colspan="1" nolabel="1" />
 							</group>
 						</page>
 						<page string="Inspections">
@@ -196,9 +194,9 @@
 								attrs="{'required':[('interval','!=',False)]}" />
 
 							<newline />
-							<separator string="General Inspection Plan" colspan="4"/>
+							<separator string="General Inspection Plan" colspan="4" />
 							<field name="inspection_plan" colspan="4" nolabel="1" />
-							
+
 						</page>
 						<page string="Notes">
 							<field name="notes" colspan="4" nolabel="1" />
@@ -458,12 +456,14 @@
 					<field name="name" />
 					<field name="active" />
 
-					<newline/>
+					<newline />
 					<field name="type" />
-					<newline/>
-					<field name="user_id" attrs="{'required': [('type','=','employee')], 'invisible': [('type','!=','employee')]}"/>
-					<newline/>
-					<field name="partner_id" attrs="{'required': ['|',('type','=','manufacturer'),('type','=','contractor')], 'invisible': ['&amp;',('type','!=','manufacturer'),('type','!=','contractor')]}" />
+					<newline />
+					<field name="user_id"
+						attrs="{'required': [('type','=','employee')], 'invisible': [('type','!=','employee')]}" />
+					<newline />
+					<field name="partner_id"
+						attrs="{'required': ['|',('type','=','manufacturer'),('type','=','contractor')], 'invisible': ['&amp;',('type','!=','manufacturer'),('type','!=','contractor')]}" />
 
 					<newline />
 					<field name="description" colspan="4" />
