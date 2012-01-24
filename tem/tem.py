@@ -132,23 +132,8 @@ class tem_equipment_group(osv.osv):
         "measuring_range": fields.char("Range", size=64),
         "measuring_resolution": fields.char("Resolution", size=64),
         "measuring_resolution_unit_id": fields.many2one("tem.res.units", "Resolution unit"),
-
-        "destructive": fields.boolean("Destructive Inspection"),
-        
+       
         "inspection_plan": fields.text("General Inspection Plan"),
-        "inspection_means_type": fields.selection([
-                                   ('none','No Inspection Means'),
-                                   ('any','Any Inspection Means'),
-                                   ('spc','Specified Inspection Means')],
-                                   "Inspection Means Type"),
-        ## defined in tem_equipment_group_update1 after tem.equipment 
-        # "inspection_means_id": fields.one2many("tem.equipment", "Specified Inspection Means"),
-        # "inspection_means_ids": fields.many2many("tem.equipment", # Foreign model
-        #                                 "tem_equipment_group_inspectionmeans_rel", # Relational table
-        #                                 "group_id", # Current model id will be stored here
-        #                                 "equipment_id", # Linked model id will be stored here
-        #                                 "Inspection Means"
-        #                                 ),
         "notes": fields.text("Notes"),
 
 
@@ -403,23 +388,6 @@ class tem_equipment_update1(osv.osv):
                                            store={'tem.inspection':(_get_equipment_from_inspection,['next'],10)}),
     }
 tem_equipment_update1()
-
-
-class tem_equipment_group_update1(osv.osv):
-    _name = "tem.equipment.group"
-    _inherit = "tem.equipment.group"
-    
-    _columns = {
-            "inspection_means_id": fields.many2one("tem.equipment", "Specified Inspection Means"),
-            "inspection_means_ids": fields.many2many("tem.equipment", # Foreign model
-                                         "tem_equipment_group_inspectionmeans_rel", # Relational table
-                                         "group_id", # Current model id will be stored here
-                                         "equipment_id", # Linked model id will be stored here
-                                         "Inspection Means"
-                                         ),
-
-    }
-tem_equipment_group_update1()
 
 
 

@@ -200,18 +200,11 @@
 							<field name="interval" attrs="{'required':[('interval_repeat','!=',False)]}" />
 							<field name="interval_repeat" nolabel="1"
 								attrs="{'required':[('interval','!=',False)]}" />
-							<newline />
-						</page>
-						<page string="Inspection">
-							<group colspan="4" col="2">
-								<field name="inspection_plan" colspan="2" />
 
-								<field name="inspection_means_type" />
-								<field name="inspection_means_id"
-									attrs="{'required':[('inspection_means_type','=','spc')]}" />
-								<field name="inspection_means_ids"
-									attrs="{'required':[('inspection_means_type','=','any')]}" />
-							</group>
+							<newline />
+							<separator string="General Inspection Plan" colspan="4"/>
+							<field name="inspection_plan" colspan="4" nolabel="1" />
+							
 						</page>
 						<page string="Notes">
 							<field name="notes" colspan="4" nolabel="1" />
@@ -237,7 +230,6 @@
 						<field name="measuring_range" />
 						<field name="measuring_resolution" />
 						<field name="measuring_resolution_unit_id" />
-						<field name="destructive" />
 					</group>
 					<newline />
 					<group expand='1' string='Group by...' groups="base.group_extended">
