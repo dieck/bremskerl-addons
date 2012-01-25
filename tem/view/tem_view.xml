@@ -38,16 +38,20 @@
 							</group>
 							<group col="4" colspan="2">
 								<separator colspan="4" string="Details" />
-								<field name="manufacturer_id" />
-								<newline />
-								<field name="measuring_range" />
-								<field name="measuring_range_unit_id" nolabel="1" colspan="2" />
-								<field name="measuring_resolution" />
-								<field name="measuring_resolution_unit_id" nolabel="1"
-									colspan="2" />
+								<field name="manufacturer_id" colspan="4" />
+
+								<field name="measuring_range" colspan="4" />
+
+								<field name="measuring_resolution" colspan="4" />
+
+								<field name="measuring_rangeresolution_unit_id" colspan="4"
+									attrs="{'required':['|',('measuring_range','!=',False),('measuring_resolution','!=',False)]}" />
+
 								<field name="measuring_precision" />
+
 								<field name="measuring_precision_unit_id" nolabel="1"
-									colspan="2" />
+									colspan="2" attrs="{'required':[('measuring_precision','!=',False)]}" />
+
 							</group>
 							<group col="2" colspan="2">
 								<separator colspan="2" string="Locations" />

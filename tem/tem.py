@@ -178,6 +178,14 @@ class tem_equipment(osv.osv):
         return pooler.get_pool(cr.dbname).get('res.currency').search(cr, uid, [('rate','=', 1.0)])[0]
     
     
+    def _get_percent(self, cr, uid, context=None):
+        units = pooler.get_pool(cr.dbname).get('tem.res.units')
+        percent = units.search(cr, uid, [('name','=','%')], context=context)
+        for u in units.browse(cr, uid, percent, context=context):
+            return u.id
+        return False
+
+        
     _columns = {
         "id_number": fields.char("TEM Ident no.", size=32, required=True),
         "description": fields.char("Equipment", size=64, required=True),
@@ -199,11 +207,11 @@ class tem_equipment(osv.osv):
                                    "State"),# required=True),
         "manufacturer_id": fields.many2one("res.partner","Manufacturer"),
         "measuring_range": fields.char("Range", size=64),
-        "measuring_range_unit_id": fields.many2one("tem.res.units", "Range unit"),
-        "measuring_resolution": fields.char("Resolution", size=64),
-        "measuring_resolution_unit_id": fields.many2one("tem.res.units", "Resolution unit"),
+        "measuring_resolution": fields.char("Resolution", size=64, help="Maximal fraction of measurements readings. E.g. a scale might be read in a resolution of 0.1."),
+        "measuring_rangeresolution_unit_id": fields.many2one("tem.res.units", "Range & Resolution unit"),
         "measuring_precision": fields.char("Precision", size=64),
-        "measuring_precision_unit_id": fields.many2one("tem.res.units", "Precision unit"),
+        "measuring_precision_unit_id": fields.many2one("tem.res.units", "Precision unit", help="Inherent maximal deviation of measurements. E.g. if a scale reads in a resolution of 0.1, but with 0.2 deviation, the reading 0.5 might be in between 0.3 and 0.7."),
+        
         
         "storage_location": fields.many2one("tem.location", "Storage location", domain=[('type_storage','=',True)]),
         "usage_site": fields.many2one("tem.location", "Usage site", domain=[('type_usage','=',True)]),
@@ -227,9 +235,28 @@ class tem_equipment(osv.osv):
     
     _defaults = {
         "situation": lambda *a: 'new',
+        "measuring_precision_unit_id": _get_percent,
     }
+    
+    def _check_measuring_rangeresolution_unit_id(self, cr, uid, ids, context=None):
+        for session in self.browse(cr, uid, ids, context=context):
+            if ( ((session.measuring_range) or (session.measuring_resolution)) and not (session.measuring_rangeresolution_unit_id and session.measuring_rangeresolution_unit_id.id) ) :
+                return False
+        return True
 
+    def _check_measuring_precision_unit_id(self, cr, uid, ids, context=None):
+        for session in self.browse(cr, uid, ids, context=context):
+            if ( (session.measuring_precision) and not (session.measuring_precision_unit_id and session.measuring_precision_unit_id.id) ) :
+                return False
+        return True
+     
+    _constraints = [
+        (_check_measuring_rangeresolution_unit_id, 'If you set a Range or Resolution, you have to set the unit.', ['measuring_range','measuring_resolution','measuring_rangeresolution_unit_id']),
+        (_check_measuring_precision_unit_id, 'If you set a Precision, you have to set the unit.', ['measuring_precision','measuring_precision_unit_id']),
+    ]
+    
     _sql_constraints = [ ('default_idnumber_uniq', 'unique (id_number)', """Ident no. has to be unique."""), ]
+
 tem_equipment()
 
 
