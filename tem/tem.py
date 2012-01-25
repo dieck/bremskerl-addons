@@ -110,7 +110,8 @@ class tem_equipment_group(osv.osv):
     
     _columns = {
         "name": fields.char("Group", size=64, required=True, translate=True),
-        "standard": fields.char("Test standard", size=64),
+        "standard": fields.char("Test standard", size=64, translate=True),
+        "standard_link": fields.char("Test standard specifications", size=260),
         "interval": fields.float("Interval", digits=(8,1) ),
         "interval_repeat": fields.selection([
                                    ('prdord','Production Orders'),
@@ -133,7 +134,7 @@ class tem_equipment_group(osv.osv):
         "measuring_resolution": fields.char("Resolution", size=64),
         "measuring_resolution_unit_id": fields.many2one("tem.res.units", "Resolution unit"),
        
-        "inspection_plan": fields.text("General Inspection Plan"),
+        "inspection_plan": fields.text("General Inspection Plan", translate=True),
         "notes": fields.text("Notes"),
 
 

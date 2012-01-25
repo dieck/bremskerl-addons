@@ -193,6 +193,8 @@
 						<page string="Group">
 							<field name="standard" />
 							<newline />
+							<field name="standard_link" colspan="4"/>
+							<newline />
 							<field name="interval" attrs="{'required':[('interval_repeat','!=',False)]}" />
 							<field name="interval_repeat" nolabel="1"
 								attrs="{'required':[('interval','!=',False)]}" />
