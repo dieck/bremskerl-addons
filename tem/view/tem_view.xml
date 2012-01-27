@@ -193,7 +193,7 @@
 						<page string="Group">
 							<field name="standard" />
 							<newline />
-							<field name="standard_link" colspan="4"/>
+							<field name="standard_link" colspan="4" />
 							<newline />
 							<field name="interval" attrs="{'required':[('interval_repeat','!=',False)]}" />
 							<field name="interval_repeat" nolabel="1"
@@ -330,7 +330,7 @@
 			</field>
 		</record>
 
-		<record id="tem_inspectionform" model="ir.ui.view">
+		<record id="tem_inspection_form" model="ir.ui.view">
 			<field name="name">tem.inspection.form</field>
 			<field name="model">tem.inspection</field>
 			<field name="type">form</field>
@@ -561,6 +561,10 @@
 			<field name="context">{'search_default_Active':1}</field>
 		</record>
 
+		<act_window name="New Inspection" res_model="tem.inspection"
+			src_model="tem.equipment" view_mode="form" view_type="form" target="current"
+			key2="client_action_multi" id="action_tem_inspection_from_equipment"
+			domain="[('equipment_id', '=', active_id)]" />
 
 		<!-- menu -->
 		<menuitem icon="terp-project" id="main_menu" name="Test Equipment Management"

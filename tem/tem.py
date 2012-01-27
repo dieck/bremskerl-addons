@@ -310,7 +310,15 @@ class tem_inspection(osv.osv):
         return res
 
     def _get_next_date(self, cr, uid, context):
-        equipment = self.pool.get('tem.equipment').browse(cr, uid, [context['equipment_id']], context=context)[0]
+        # datetime object for deriving the default next test date
+        dt = datetime.today()
+
+        eqid = context.get('equipment_id', context.get('active_id', None))
+        if (not eqid):
+            print "got no equipment_id", context
+            return dt.strftime('%Y-%m-%d %H:%M:%S')
+        
+        equipment = self.pool.get('tem.equipment').browse(cr, uid, [eqid], context=context)[0]
         
         # get interval count and type
         intvl =  equipment and equipment.group_id and equipment.group_id.interval or 0
@@ -320,8 +328,6 @@ class tem_inspection(osv.osv):
         if (intvl == 0 or intvl_type is None):
             return time.strftime('%Y-%m-%d %H:%M:%S') 
         
-        # datetime object for deriving the default next test date
-        dt = datetime.today()
        
          
         # year and month are directly converted
@@ -367,6 +373,7 @@ class tem_inspection(osv.osv):
     _defaults = {
         "date": lambda *a: time.strftime('%Y-%m-%d %H:%M:%S'),
         "next": _get_next_date,
+        "by_id": lambda self,cr,uid,context: uid,
     }
 tem_inspection()
 
