@@ -557,8 +557,6 @@ msgstr "Benutzer"
 msgid "Groups"
 msgstr "Gruppen"
 
-#: view:tem.equipment:0
-#: field:tem.equipment,active:0
 #: view:tem.equipment.group:0
 #: field:tem.equipment.group,active:0
 #: view:tem.location:0
@@ -570,6 +568,12 @@ msgstr "Gruppen"
 #. module: tem
 msgid "Active"
 msgstr "Aktiv"
+
+#. module: tem
+#: view:tem.equipment:0
+#: field:tem.equipment,active:0
+msgid "Inactive"
+msgstr "Inaktiv"
 
 #: field:tem.equipment,manufacturer_id:0
 #: selection:tem.res.responsibles,type:0

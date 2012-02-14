@@ -161,11 +161,17 @@ class tem_equipment(osv.osv):
             res[session.id] = r
         return res
     
+    
+    
     def _is_active(self, cr, uid, ids, field_name, arg, context):
         res = {}
         for session in self.browse(cr, uid, ids):
             res[session.id] = ((session.state == 'new') or (session.state == 'available') or (session.state == 'disabled'))
         return res
+
+    def _is_active_changed(self, cr, uid, ids):
+        return ids
+        
 
     # _get_currency        
     # @author: from account.invoice,     
@@ -190,7 +196,8 @@ class tem_equipment(osv.osv):
         "description": fields.char("Equipment", size=64, required=True),
         
         "name": fields.function(_get_name, string="Equipment name", type='char', size=75, method=True),
-        "active": fields.function(_is_active, string="Active", type='boolean', method=True),
+        "active": fields.function(_is_active, string="Active", type='boolean', method=True,
+                                  store={'tem.equipment': (_is_active_changed, 'state', 10)}),
 
         #char("test1", size=32), 
         #function(_get_name, string="Equipment name", type='char', size=75, method=True),

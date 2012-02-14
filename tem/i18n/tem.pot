@@ -558,8 +558,6 @@ msgid "Groups"
 msgstr ""
 
 #. module: tem
-#: view:tem.equipment:0
-#: field:tem.equipment,active:0
 #: view:tem.equipment.group:0
 #: field:tem.equipment.group,active:0
 #: view:tem.location:0
@@ -569,6 +567,12 @@ msgstr ""
 #: view:tem.res.units:0
 #: field:tem.res.units,active:0
 msgid "Active"
+msgstr ""
+
+#. module: tem
+#: view:tem.equipment:0
+#: field:tem.equipment,active:0
+msgid "Inactive"
 msgstr ""
 
 #. module: tem

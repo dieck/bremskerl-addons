@@ -14,6 +14,7 @@
 					<field name="description" />
 					<field name="state" />
 					<field name="next_inspection" />
+					<field name="active" invisible="1"/>
 					<field name="inspection_due" invisible="1" />
 					<field name="usage_site" />
 					<field name="storage_location" />
@@ -136,8 +137,8 @@
 			<field name="type">search</field>
 			<field name="arch" type="xml">
 				<search string="TEM - Equipment">
-					<filter icon="terp-check" string="Active" name="Active"
-						domain="[('active','=',True)]" />
+					<filter icon="terp-check" string="Inactive" name="Inactive"
+						domain="[('active','=',False)]" />
 					<separator orientation="vertical" />
 					<field name="description" />
 					<field name="id_number" />
