@@ -76,15 +76,13 @@ class tem_location(osv.osv):
         "description": fields.char("Description", size=128),
         
         "cost_unit": fields.integer("Cost Unit"),
+        "partner_id": fields.many2one("res.partner", "Partner"),
         
         "type_storage": fields.boolean("Storage"),
         "type_usage": fields.boolean("Usage Site"),
         "type_calibration": fields.boolean("Calibration Site"),
         "type_rigging": fields.boolean("Rigging Site"),
 
-        "incoming_due": fields.boolean("Incoming Due", help="Equipment is due to inspection when incoming to this location"),
-        "never_due": fields.boolean("Never Due", help="Equipment is never due in this location"),
-        
         "active": fields.boolean("Active"),    
     }
     _defaults = {
@@ -159,7 +157,7 @@ class tem_equipment(osv.osv):
             if (session.id_number):
                 r += str(session.id_number)
             if (session.description):
-                r += " ("+str(session.description)+")"
+                r += " ("+str(session.description.encode('utf-8'))+")"
             res[session.id] = r
         return res
     
@@ -227,7 +225,6 @@ class tem_equipment(osv.osv):
         "purchase_currency_id": fields.many2one('res.currency', 'Currency'),
         "purchase_invoice_id": fields.many2one("account.invoice","Purchase Invoice", domain=[('type','=','in_invoice')]),
         
-        "cal_responsible_id": fields.many2one("tem.res.responsibles","Responsible"),
         "cal_company_id": fields.many2one("res.partner","Involved Company", domain=[('supplier','=',True)]),
 
         "notes": fields.text("Notes"),
@@ -235,7 +232,7 @@ class tem_equipment(osv.osv):
     }
     
     _defaults = {
-        "situation": lambda *a: 'new',
+        "state": lambda *a: 'new',
         "measuring_precision_unit_id": _get_percent,
     }
     
@@ -302,10 +299,6 @@ class tem_inspection(osv.osv):
 
     def default_get(self, cr, uid, fields_list, context=None):
         res = super(tem_inspection, self).default_get(cr, uid, fields_list, context)
-#        print "res",res
-#        print "context", context
-#        print "fields_list", fields_list
-        
         #self.compute_date(cr, uid, context=context)
         return res
 
@@ -315,7 +308,6 @@ class tem_inspection(osv.osv):
 
         eqid = context.get('equipment_id', context.get('active_id', None))
         if (not eqid):
-            print "got no equipment_id", context
             return dt.strftime('%Y-%m-%d %H:%M:%S')
         
         equipment = self.pool.get('tem.equipment').browse(cr, uid, [eqid], context=context)[0]
@@ -419,4 +411,37 @@ tem_equipment_update1()
 
 
 
+class tem_equipment_group_o2m(osv.osv):
+    _name = "tem.equipment.group";
+    _inherit = _name
+    
+    _columns = {
+        "equipment_ids": fields.one2many("tem.equipment","group_id","Equipment"),
+    }                                
+    
+tem_equipment_group_o2m()
 
+class tem_location_o2m(osv.osv):
+    _name = "tem.location";
+    _inherit = _name
+    
+    def _get_related_equipments(self, cr, uid, ids, field_name, arg, context):
+        res = {}
+        equipment_obj = self.pool.get("tem.equipment")
+        for session in self.browse(cr, uid, ids):
+            li = []
+            
+            storage_ids = equipment_obj.search(cr, uid, [('storage_location.id','=',session.id)], context=context)
+            li.extend(storage_ids)
+            
+            usage_ids = equipment_obj.search(cr, uid, [('usage_site.id','=',session.id)], context=context)
+            li.extend(usage_ids)
+            
+            res[session.id] = li
+        return res
+    
+    _columns = {
+        "related_equipment_ids": fields.function(_get_related_equipments, type='one2many', obj='tem.equipment', method=True, string="Related Equipment",),
+    }                                
+        
+tem_location_o2m()

@@ -60,7 +60,6 @@
 							</group>
 							<group col="2" colspan="2">
 								<separator colspan="2" string="Calibration" />
-								<field name="cal_responsible_id" />
 								<field name="cal_company_id" />
 								<field name="last_inspection" />
 								<field name="next_inspection" />
@@ -200,12 +199,14 @@
 								attrs="{'required':[('interval','!=',False)]}" />
 
 							<newline />
+							<separator string="Notes" colspan="4" />
+							<field name="notes" colspan="4" nolabel="1" />
 							<separator string="General Inspection Plan" colspan="4" />
 							<field name="inspection_plan" colspan="4" nolabel="1" />
 
 						</page>
-						<page string="Notes">
-							<field name="notes" colspan="4" nolabel="1" />
+						<page string="Equipment">
+							<field name="equipment_ids" colspan="4" nolabel="1" />
 						</page>
 					</notebook>
 				</form>
@@ -258,26 +259,33 @@
 			<field name="type">form</field>
 			<field name="arch" type="xml">
 				<form string="TEM - Locations">
-					<group col="2" colspan="2">
-						<separator string="Basics" colspan="2" />
-						<field name="name" />
-						<field name="category" />
-						<field name="description" colspan="2" />
-						<field name="cost_unit" />
-						<field name="active" />
-					</group>
-					<group col="2" colspan="2">
-						<separator string="Location" colspan="2" />
-						<field name="type_storage" />
-						<field name="type_usage" />
-						<field name="type_calibration" />
-						<field name="type_rigging" />
-					</group>
-					<group col="2" colspan="2">
-						<separator string="On Move" colspan="2" />
-						<field name="incoming_due" />
-						<field name="never_due" />
-					</group>
+					<notebook>
+						<page string="Basics">
+							<group col="2" colspan="2">
+								<separator string="Basics" colspan="2" />
+								<field name="name" />
+								<field name="description" />
+								<field name="active" />
+							</group>
+							<group col="2" colspan="2">
+								<separator string="References" colspan="2" />
+								<field name="category" />
+								<field name="cost_unit" />
+								<field name="partner_id" />
+							</group>
+							<group col="2" colspan="2">
+								<separator string="Location" colspan="2" />
+								<field name="type_storage" />
+								<field name="type_usage" />
+								<field name="type_calibration" />
+								<field name="type_rigging" />
+							</group>
+						</page>
+						<page string="Related Equipment">
+							<field name="related_equipment_ids" colspan="4" nolabel="1" />
+						</page>
+					</notebook>
+
 				</form>
 			</field>
 		</record>
