@@ -19,6 +19,6 @@
     'update_xml': [],
     'demo_xml': [],
     'installable': True,
-    'active': True,
+    'active': False,
 #    'certificate': '${certificate}',
 }
