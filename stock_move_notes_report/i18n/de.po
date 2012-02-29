@@ -7,177 +7,178 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 6.0.2\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2011-05-12 09:38+0000\n"
-"PO-Revision-Date: 2011-05-12 09:38+0000\n"
-"Last-Translator: <>\n"
+"PO-Revision-Date: 2011-08-16 14:26+0000\n"
+"Last-Translator: Bremskerl <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2012-02-29 05:19+0000\n"
+"X-Generator: Launchpad (build 14874)\n"
 
-#: report:sale.shipping.notes:0
 #. module: stock_move_notes
+#: report:sale.shipping.notes:0
 msgid "Order Ref."
 msgstr "Referenz Auslieferung"
 
-#: report:stock.picking.list.notes:0
 #. module: stock_move_notes
+#: report:stock.picking.list.notes:0
 msgid "Shipping Address :"
 msgstr "Lieferadresse :"
 
-#: constraint:stock.move:0
 #. module: stock_move_notes
+#: constraint:stock.move:0
 msgid "You must assign a production lot for this product"
 msgstr "Sie müssen zwingend eine Losnummer für dieses Produkt angeben"
 
-#: view:stock.picking:0
 #. module: stock_move_notes
+#: view:stock.picking:0
 msgid "Delivery Order"
 msgstr "Lieferauftrag"
 
-#: report:stock.picking.list.notes:0
 #. module: stock_move_notes
+#: report:stock.picking.list.notes:0
 msgid "State"
 msgstr "Status"
 
-#: report:stock.picking.list.notes:0
 #. module: stock_move_notes
+#: report:stock.picking.list.notes:0
 msgid "Location"
 msgstr "Ort"
 
+#. module: stock_move_notes
 #: report:sale.shipping.notes:0
 #: report:stock.picking.list.notes:0
-#. module: stock_move_notes
 msgid "Lot"
 msgstr "Fertigungslos"
 
+#. module: stock_move_notes
 #: report:sale.shipping.notes:0
 #: report:stock.picking.list.notes:0
-#. module: stock_move_notes
 msgid "Description"
 msgstr "Beschreibung"
 
-#: report:stock.picking.list.notes:0
 #. module: stock_move_notes
+#: report:stock.picking.list.notes:0
 msgid "Picking List:"
 msgstr "Packauftrag:"
 
-#: report:stock.picking.list.notes:0
 #. module: stock_move_notes
+#: report:stock.picking.list.notes:0
 msgid "Contact Address :"
 msgstr "Kontakt Adresse"
 
+#. module: stock_move_notes
 #: constraint:stock.move:0
-#. module: stock_move_notes
 msgid "You try to assign a lot which is not from the same product"
-msgstr "Sie versuchen eine Losnummer ohne Bezug zu diesem Produkt zuzuweisen."
+msgstr ""
+"Sie versuchen eine Losnummer ohne Bezug zu diesem Produkt zuzuweisen."
 
-#: report:stock.picking.list.notes:0
 #. module: stock_move_notes
+#: report:stock.picking.list.notes:0
 msgid "Journal"
 msgstr "Journal"
 
-#: model:ir.actions.report.xml,name:stock_move_notes.report_shipping
 #. module: stock_move_notes
+#: model:ir.actions.report.xml,name:stock_move_notes.report_shipping
 msgid "Delivery order"
 msgstr "Lieferauftrag"
 
-#: report:stock.picking.list.notes:0
 #. module: stock_move_notes
+#: report:stock.picking.list.notes:0
 msgid "Expected Shipping Date"
 msgstr "Erwartete Auslieferung"
 
-#: report:stock.picking.list.notes:0
 #. module: stock_move_notes
+#: report:stock.picking.list.notes:0
 msgid "Delivery Order:"
 msgstr "Lieferauftrag:"
 
-#: report:sale.shipping.notes:0
 #. module: stock_move_notes
+#: report:sale.shipping.notes:0
 msgid "Shipping Date"
 msgstr "Lieferdatum"
 
-#: report:stock.picking.list.notes:0
 #. module: stock_move_notes
+#: report:stock.picking.list.notes:0
 msgid "Recipient"
 msgstr "Empfänger"
 
+#. module: stock_move_notes
 #: view:stock.move:0
 #: field:stock.move,notes:0
 #: view:stock.picking:0
-#. module: stock_move_notes
 msgid "Notes"
 msgstr "Anmerkungen"
 
-#: report:sale.shipping.notes:0
 #. module: stock_move_notes
+#: report:sale.shipping.notes:0
 msgid "Delivery Order :"
 msgstr "Lieferauftrag :"
 
-#: report:sale.shipping.notes:0
 #. module: stock_move_notes
+#: report:sale.shipping.notes:0
 msgid "Order Date"
 msgstr "Auftragsdatum"
 
-#: model:ir.actions.report.xml,name:stock_move_notes.report_picking_list
 #. module: stock_move_notes
+#: model:ir.actions.report.xml,name:stock_move_notes.report_picking_list
 msgid "Packing list"
 msgstr "Packliste"
 
-#: field:stock.move,prtnotes:0
 #. module: stock_move_notes
+#: field:stock.move,prtnotes:0
 msgid "Printed Notes"
 msgstr "Anmerkungen (Druck)"
 
-#: report:sale.shipping.notes:0
 #. module: stock_move_notes
+#: report:sale.shipping.notes:0
 msgid "Carrier"
 msgstr "Frachtführer"
 
-#: report:stock.picking.list.notes:0
 #. module: stock_move_notes
+#: report:stock.picking.list.notes:0
 msgid "["
 msgstr "["
 
-#: report:stock.picking.list.notes:0
 #. module: stock_move_notes
+#: report:stock.picking.list.notes:0
 msgid "]"
 msgstr "]"
 
+#. module: stock_move_notes
 #: report:sale.shipping.notes:0
 #: report:stock.picking.list.notes:0
-#. module: stock_move_notes
 msgid "Quantity"
 msgstr "Menge"
 
+#. module: stock_move_notes
 #: report:sale.shipping.notes:0
 #: report:stock.picking.list.notes:0
-#. module: stock_move_notes
 msgid "Weight"
 msgstr "Gewicht"
 
-#: model:ir.model,name:stock_move_notes.model_stock_move
 #. module: stock_move_notes
+#: model:ir.model,name:stock_move_notes.model_stock_move
 msgid "Stock Move"
 msgstr "Lieferung"
 
-#: report:stock.picking.list.notes:0
 #. module: stock_move_notes
+#: report:stock.picking.list.notes:0
 msgid "Reception:"
 msgstr "Zugang:"
 
-#: report:stock.picking.list.notes:0
 #. module: stock_move_notes
+#: report:stock.picking.list.notes:0
 msgid "Order(Origin)"
 msgstr "Auftragsgrundlage"
 
-#: report:stock.picking.list.notes:0
 #. module: stock_move_notes
+#: report:stock.picking.list.notes:0
 msgid "Total"
 msgstr "Summe"
 
-#: report:sale.shipping.notes:0
 #. module: stock_move_notes
+#: report:sale.shipping.notes:0
 msgid "Invoiced to"
 msgstr "Berechnet an"
-

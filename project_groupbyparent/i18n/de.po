@@ -7,22 +7,40 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 6.0.2\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2011-06-16 14:40+0000\n"
-"PO-Revision-Date: 2011-06-16 14:40+0000\n"
-"Last-Translator: <>\n"
+"PO-Revision-Date: 2011-08-16 15:56+0000\n"
+"Last-Translator: Bremskerl <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2012-02-29 05:19+0000\n"
+"X-Generator: Launchpad (build 14874)\n"
 
-#: model:ir.actions.act_window,help:project_groupbyparent.open_view_project_all
 #. module: project_groupbyparent
-msgid "A project contains a set of tasks or issues that will be performed by your resources assigned to it. A project can be hierarchically structured, as a child of a Parent Project. This allows you to design large project structures with different phases spread over the project duration cycle. Each user can set his default project in his own preferences to automatically filter the tasks or issues he usually works on. If you choose to invoice the time spent on a project task, you can find project tasks to be invoiced in the billing section."
-msgstr "Ein Projekt besteht aus einer Reihe von Einzelaufgaben oder projektbezogenen Problemstellungen, die durch Ihre Mitarbeiter zu bearbeiten sind. Ein Projekt kann in eine bestehende multidimensionale Projekthierachie, z.B. als Teilprojekt platziert werden. Jeder Anwender kann dabei sein eigenes Projekt in seinen Benutzer Eigenschaften hinterlegen, wodurch für die Anzeige der zu bearbeitenden Aufgaben ein automatischer Filter nur für dieses Projekt angewendet wird. Wenn Sie Ihre Anwendung für Projekte so konfiguriert haben, dass eine unmittelbare Weiterberechnung von erledigten Aufgaben möglich sein soll, können Sie einstellen, ob für ein Projekt die Abrechnungsfunktion angewendet werden soll oder nicht."
+#: model:ir.actions.act_window,help:project_groupbyparent.open_view_project_all
+msgid ""
+"A project contains a set of tasks or issues that will be performed by your "
+"resources assigned to it. A project can be hierarchically structured, as a "
+"child of a Parent Project. This allows you to design large project "
+"structures with different phases spread over the project duration cycle. "
+"Each user can set his default project in his own preferences to "
+"automatically filter the tasks or issues he usually works on. If you choose "
+"to invoice the time spent on a project task, you can find project tasks to "
+"be invoiced in the billing section."
+msgstr ""
+"Ein Projekt besteht aus einer Reihe von Einzelaufgaben oder projektbezogenen "
+"Problemstellungen, die durch Ihre Mitarbeiter zu bearbeiten sind. Ein "
+"Projekt kann in eine bestehende multidimensionale Projekthierachie, z.B. als "
+"Teilprojekt platziert werden. Jeder Anwender kann dabei sein eigenes Projekt "
+"in seinen Benutzer Eigenschaften hinterlegen, wodurch für die Anzeige der zu "
+"bearbeitenden Aufgaben ein automatischer Filter nur für dieses Projekt "
+"angewendet wird. Wenn Sie Ihre Anwendung für Projekte so konfiguriert haben, "
+"dass eine unmittelbare Weiterberechnung von erledigten Aufgaben möglich sein "
+"soll, können Sie einstellen, ob für ein Projekt die Abrechnungsfunktion "
+"angewendet werden soll oder nicht."
 
+#. module: project_groupbyparent
 #: model:ir.actions.act_window,name:project_groupbyparent.open_view_project_all
 #: model:ir.ui.menu,name:project_groupbyparent.menu_open_view_project_all
-#. module: project_groupbyparent
 msgid "Projects (Group by Parent)"
 msgstr "Projekte (Gruppiert nach Hauptprojekt)"
-

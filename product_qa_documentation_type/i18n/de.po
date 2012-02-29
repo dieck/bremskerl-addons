@@ -7,16 +7,16 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 6.0.1\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2011-02-08 13:17+0000\n"
-"PO-Revision-Date: 2011-02-08 13:17+0000\n"
-"Last-Translator: <>\n"
+"PO-Revision-Date: 2011-08-16 15:48+0000\n"
+"Last-Translator: Bremskerl <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2012-02-29 05:19+0000\n"
+"X-Generator: Launchpad (build 14874)\n"
 
-#: field:product.product,qa_doctype:0
 #. module: product_qa_documentation_type
+#: field:product.product,qa_doctype:0
 msgid "Type of documentation"
 msgstr "Dokumentationsart"
-

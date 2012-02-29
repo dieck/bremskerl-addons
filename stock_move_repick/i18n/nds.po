@@ -1,15 +1,16 @@
-# Translation of OpenERP Server.
-# This file contains the translation of the following modules:
-#	* stock_move_repick
+# Low German translation for bremskerl-addons
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
+# This file is distributed under the same license as the bremskerl-addons package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Bremskerl-Addons\n"
-"Report-Msgid-Bugs-To: https://bugs.launchpad.net/bremskerl-addons\n"
+"Project-Id-Version: bremskerl-addons\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-09-02 08:56+0000\n"
-"PO-Revision-Date: 2011-09-05 11:54+0000\n"
-"Last-Translator: Bremskerl <Unknown>\n"
-"Language-Team: \n"
+"PO-Revision-Date: 2011-10-11 13:35+0000\n"
+"Last-Translator: Marco Dieckhoff <Unknown>\n"
+"Language-Team: Low German <nds@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -22,13 +23,11 @@ msgid ""
 "Reference of the document that produced the picking this move was previously "
 "part of, before re-picking."
 msgstr ""
-"Referenz des Beleges, der den Lieferschein erzeugte, zu dem diese Bewegung "
-"vor der Neuzuordnung gehörte."
 
 #. module: stock_move_repick
 #: constraint:stock.move:0
 msgid "You must assign a production lot for this product"
-msgstr "Sie müssen zwingend eine Losnummer für dieses Produkt angeben"
+msgstr ""
 
 #. module: stock_move_repick
 #: code:addons\stock_move_repick\stock.py:88
@@ -37,40 +36,37 @@ msgid ""
 "You cannot pick moves where the pickings have different destination "
 "locations."
 msgstr ""
-"Sie können keine Lagerbewegungen zusammenführen, deren Lieferaufträge "
-"unterschiedliche Ziel-Lagerorte haben."
 
 #. module: stock_move_repick
 #: field:stock.move,repick_sale_id:0
 msgid "Pre-RePick Sales Order Reference"
-msgstr "Verkaufsauftrag vor der Neuzuordnung"
+msgstr ""
 
 #. module: stock_move_repick
 #: model:ir.model,name:stock_move_repick.model_stock_move_repick_wizard
 #: view:stock.move.repick.wizard:0
 msgid "Stock Move RePick"
-msgstr "Neuzuordnung Lagerbewegung"
+msgstr ""
 
 #. module: stock_move_repick
 #: model:ir.actions.server,name:stock_move_repick.action_move_repick_server
 msgid "RePick into Picking"
-msgstr "In neuen Lieferauftrag zusammenführen"
+msgstr ""
 
 #. module: stock_move_repick
 #: view:stock.move.repick.wizard:0
 msgid "Create new Picking"
-msgstr "Neuen Lieferauftrag erzeugen"
+msgstr "Neen Lieferupdrag anleegen"
 
 #. module: stock_move_repick
 #: constraint:stock.move:0
 msgid "You try to assign a lot which is not from the same product"
 msgstr ""
-"Sie versuchen eine Losnummer ohne Bezug zu diesem Produkt zuzuweisen."
 
 #. module: stock_move_repick
 #: field:stock.move,repick_origin:0
 msgid "Original Picking Origin"
-msgstr "Ursprüngliche Lieferauftrag-Herkunft"
+msgstr ""
 
 #. module: stock_move_repick
 #: code:addons\stock_move_repick\stock.py:94
@@ -78,53 +74,41 @@ msgstr "Ursprüngliche Lieferauftrag-Herkunft"
 msgid ""
 "You cannot pick moves where the pickings have different invoice states."
 msgstr ""
-"Sie können keine Lagerbewegungen zusammenführen, deren Lieferscheine "
-"unterschiedliche Stati der Rechnungskontrolle haben."
 
 #. module: stock_move_repick
 #: code:addons\stock_move_repick\stock.py:85
 #, python-format
 msgid "You cannot pick moves where the pickings have different locations."
 msgstr ""
-"Sie können keine Lagerbewegungen zusammenführen, deren Lieferscheine "
-"unterschiedliche Orte enthalten."
 
 #. module: stock_move_repick
 #: code:addons\stock_move_repick\stock.py:74
 #, python-format
 msgid "You cannot pick moves where the pickings have different states."
 msgstr ""
-"Sie können keine Lagerbewegungen zusammenführen, deren Lieferscheine nicht "
-"denselben Status haben."
 
 #. module: stock_move_repick
 #: code:addons\stock_move_repick\stock.py:25
 #, python-format
 msgid "You cannot pick done or cancelled moves."
 msgstr ""
-"Sie können keine abgeschlossenen oder abgebrochenen Lagerbewegungen "
-"zusammenführen."
 
 #. module: stock_move_repick
 #: view:stock.move.repick.wizard:0
 msgid "Cancel"
-msgstr "Abbrechen"
+msgstr ""
 
 #. module: stock_move_repick
 #: code:addons\stock_move_repick\stock.py:82
 #, python-format
 msgid "You cannot pick moves where the pickings have stock journals."
 msgstr ""
-"Sie können keine Lagerbewegungen zusammenführen, deren Lieferscheine auf "
-"unterschiedliche Lager-Journale gebucht werden."
 
 #. module: stock_move_repick
 #: code:addons\stock_move_repick\stock.py:91
 #, python-format
 msgid "You cannot pick moves to different delivery addresses."
 msgstr ""
-"Sie können keine Lagerbewegungen mit unterschiedlichen Lieferanschriften "
-"zusammenführen."
 
 #. module: stock_move_repick
 #: code:addons\stock_move_repick\stock.py:77
@@ -132,8 +116,6 @@ msgstr ""
 msgid ""
 "You cannot pick moves where the pickings belong to different companies."
 msgstr ""
-"Sie können keine Lagerbewegungen zusammenführen, deren Lieferaufträge zu "
-"unterschiedlichen Unternehmen gehören."
 
 #. module: stock_move_repick
 #: help:stock.move,repick_backorder_id:0
@@ -141,13 +123,11 @@ msgid ""
 "If the original picking before re-picking was split this field links to the "
 "picking that contains the other part that has been processed already."
 msgstr ""
-"Wenn der ursprüngliche Lieferauftrag aus einer Teilung entstand, dann zeigt "
-"dieses Feld auf den bereits bearbeiteten Lieferschein."
 
 #. module: stock_move_repick
 #: model:ir.model,name:stock_move_repick.model_stock_move
 msgid "Stock Move"
-msgstr "Lagerbewegung"
+msgstr ""
 
 #. module: stock_move_repick
 #: code:addons\stock_move_repick\stock.py:25
@@ -166,25 +146,23 @@ msgstr "Lagerbewegung"
 #: code:addons\stock_move_repick\stock.py:94
 #, python-format
 msgid "Operation forbidden"
-msgstr "Durchführung nicht möglich"
+msgstr ""
 
 #. module: stock_move_repick
 #: view:stock.move.repick.wizard:0
 msgid "Please confirm creating the new picking"
-msgstr "Bitte Erzeugung eines neuen Lieferauftrags bestätigen"
+msgstr ""
 
 #. module: stock_move_repick
 #: field:stock.move,repick_backorder_id:0
 msgid "Original Picking Back Order of"
-msgstr "Ursprünglicher Lieferrückstand von"
+msgstr ""
 
 #. module: stock_move_repick
 #: code:addons\stock_move_repick\stock.py:27
 #, python-format
 msgid "You cannot pick moves where the picking is done or cancelled."
 msgstr ""
-"Sie können keine Lagerbewegungen zusammenführen, deren Lieferaufträge "
-"abgeschlossenen oder abgebrochenen sind."
 
 #. module: stock_move_repick
 #: code:addons\stock_move_repick\stock.py:57
@@ -193,16 +171,12 @@ msgstr ""
 #, python-format
 msgid "You cannot pick moves from different companies."
 msgstr ""
-"Sie können keine Lagerbewegungen zusammenführen, die zu unterschiedlichen "
-"Unternehmen gehören."
 
 #. module: stock_move_repick
 #: code:addons\stock_move_repick\stock.py:68
 #, python-format
 msgid "You cannot pick moves from different picking types."
 msgstr ""
-"Sie können keine Lagerbewegungen zusammenführen, die unterschiedliche "
-"Einstellungen zum automatischen Lieferauftrag haben."
 
 #. module: stock_move_repick
 #: code:addons\stock_move_repick\stock.py:71
@@ -210,5 +184,3 @@ msgstr ""
 msgid ""
 "You cannot pick moves where the pickings have different delivery methods."
 msgstr ""
-"Sie können keine Lagerbewegungen zusammenführen, deren Lieferscheine "
-"unterschiedliche Auslieferungsmethoden haben."
