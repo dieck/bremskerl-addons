@@ -7,31 +7,33 @@ msgstr ""
 "Project-Id-Version: Bremskerl-Addons\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/bremskerl-addons\n"
 "POT-Creation-Date: 2011-09-02 09:25+0000\n"
-"PO-Revision-Date: 2011-09-02 09:25+0000\n"
-"Last-Translator: <>\n"
+"PO-Revision-Date: 2011-09-05 11:54+0000\n"
+"Last-Translator: Bremskerl <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2012-02-29 05:19+0000\n"
+"X-Generator: Launchpad (build 14874)\n"
 
-#: view:stock.move:0
 #. module: stock_sale_order_references
+#: view:stock.move:0
 msgid "Sale Order References"
 msgstr "Verkaufsauftrag Referenz"
 
-#: constraint:stock.move:0
 #. module: stock_sale_order_references
+#: constraint:stock.move:0
 msgid "You try to assign a lot which is not from the same product"
-msgstr "Sie versuchen eine Losnummer ohne Bezug zu diesem Produkt zuzuweisen."
+msgstr ""
+"Sie versuchen eine Losnummer ohne Bezug zu diesem Produkt zuzuweisen."
 
-#: constraint:stock.move:0
 #. module: stock_sale_order_references
+#: constraint:stock.move:0
 msgid "You must assign a production lot for this product"
 msgstr "Sie müssen zwingend eine Losnummer für dieses Produkt angeben"
 
-#: model:ir.model,name:stock_sale_order_references.model_stock_move
 #. module: stock_sale_order_references
+#: model:ir.model,name:stock_sale_order_references.model_stock_move
 msgid "Stock Move"
 msgstr "Lagerbewegung"
 
@@ -54,4 +56,3 @@ msgstr "Gefundene Verkaufsauftragsnr."
 #: field:stock.move,sale_lookup_type:0
 msgid "Sale Order Lookup Type"
 msgstr "Verkaufsauftrag gefunden"
-
