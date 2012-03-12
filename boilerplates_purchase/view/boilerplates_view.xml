@@ -11,7 +11,7 @@
 			<field name="arch" type="xml">
 				<xpath expr="//group[@string='Usability...']" position="inside">
 					<filter name="filter_usability_purchase" string='Purchase' icon="terp-go-week"
-						domain="[('usability_account','=',True)]" />
+						domain="[('usability_purchase','=',True)]" />
 				</xpath>
 			</field>
 		</record>
