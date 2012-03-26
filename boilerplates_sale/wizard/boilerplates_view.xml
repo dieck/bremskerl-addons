@@ -14,9 +14,26 @@
 			</field>
 		</record>
 
+		<record id="boilerplates_wiz_order" model="ir.ui.view">
+			<field name="name">Boilerplates</field>
+			<field name="model">boilerplate.wizard.sale.order</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="boilerplates.boilerplates_wiz_singlelang" />
+			<field name="arch" type="xml">
+				<field name="remote_id" invisible="1" position="replace">
+					<field name="remote_id" invisible="1" />
+				</field>
+			</field>
+		</record>
+
 		<act_window id="action_boilerplate_sale_order_line" name="Add Boilerplate"
 			res_model="boilerplate.wizard.sale.order.line" src_model="sale.order.line"
 			view_type="form" view_mode="form" target="new" view_id="boilerplates_wiz_line"
+			domain="[('remote_id', '=', active_id)]" context="{'search_default_filter_usability_sale':1}" />
+
+		<act_window id="action_boilerplate_sale_order" name="Add Boilerplate"
+			res_model="boilerplate.wizard.sale.order" src_model="sale.order"
+			view_type="form" view_mode="form" target="new" view_id="boilerplates_wiz_order"
 			domain="[('remote_id', '=', active_id)]" context="{'search_default_filter_usability_sale':1}" />
 
 
@@ -36,23 +53,6 @@
 		</record>
 
 
-
-		<record id="boilerplates_wiz_order" model="ir.ui.view">
-			<field name="name">Boilerplates</field>
-			<field name="model">boilerplate.wizard.sale.order</field>
-			<field name="type">form</field>
-			<field name="inherit_id" ref="boilerplates.boilerplates_wiz_singlelang" />
-			<field name="arch" type="xml">
-				<field name="remote_id" invisible="1" position="replace">
-					<field name="remote_id" invisible="1" />
-				</field>
-			</field>
-		</record>
-
-		<act_window id="action_boilerplate_sale_order" name="Add Boilerplate"
-			res_model="boilerplate.wizard.sale.order" src_model="sale.order"
-			view_type="form" view_mode="form" target="new" view_id="boilerplates_wiz_order"
-			domain="[('remote_id', '=', active_id)]" context="{'search_default_filter_usability_sale':1}" />
 
 	</data>
 </openerp>
