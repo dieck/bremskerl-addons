@@ -163,13 +163,13 @@ class tem_equipment(osv.osv):
     
     
     
-    def _is_active(self, cr, uid, ids, field_name, arg, context):
+    def _is_active(self, cr, uid, ids, field_name, arg, context={}):
         res = {}
         for session in self.browse(cr, uid, ids):
             res[session.id] = ((session.state == 'new') or (session.state == 'available') or (session.state == 'disabled'))
         return res
 
-    def _is_active_changed(self, cr, uid, ids):
+    def _is_active_changed(self, cr, uid, ids, context={}):
         return ids
         
 
@@ -301,6 +301,7 @@ class tem_inspection(osv.osv):
         "maint": fields.boolean("Needs Maintenance/Repair"),
         "scrap": fields.boolean("To be scrapped"),
         "notes": fields.text("Notes"),
+        "tool": fields.char("Tool", size=50, help="Tool (appliance/calibre) used to calibrate the test equipment.", required=True)
     }
 
 
@@ -345,17 +346,19 @@ class tem_inspection(osv.osv):
         else:
             # week, days, hours and minutes are handled via timedelta (got problems with days in months otherwise :))
             td = timedelta(days=0)
+            
+            rp = equipment and equipment.group_id and equipment.group_id.interval_repeat or None
                 
-            if (equipment and equipment.group_id and equipment.group_id.interval_repeat == 'wk'):
+            if (rp == 'wk'):
                 td = timedelta(weeks=intvl)
                 
-            elif (equipment and equipment.group_id and equipment.group_id.interval_repeat == 'dy'):
+            elif (rp == 'dy'):
                 td = timedelta(days=intvl)
                 
-            elif (equipment and equipment.group_id and equipment.group_id.interval_repeat == 'hr'):
+            elif (rp == 'hr'):
                 td = timedelta(hours=intvl)
             
-            elif (equipment and equipment.group_id and equipment.group_id.interval_repeat == 'min'):
+            elif (rp == 'min'):
                 td = timedelta(minutes=intvl)
 
             # calculate new date
@@ -376,6 +379,43 @@ class tem_inspection(osv.osv):
     }
 tem_inspection()
 
+
+class tem_inspection_measurements(osv.osv):
+    _name = "tem.inspection.measurements"
+    
+    _columns = {
+        "inspection_id": fields.many2one("tem.inspection", "Inspection", required=True),
+        "user_id": fields.many2one("res.users", "Inspected by", required=True),
+        "date": fields.datetime("Inspection date", required=True),
+        "measurement": fields.float("Measurement"),
+        "measurement_unit_id": fields.many2one("tem.res.units","Unit"),
+        "note": fields.char("Note",size=250),
+    }
+    
+    _defaults = {
+        "date": lambda *a: time.strftime('%Y-%m-%d %H:%M:%S'),
+        "user_id": lambda self,cr,uid,context: uid,
+    }
+    
+    
+    def _check_content(self, cr, uid, ids, context=None):
+        r = True
+        for session in self.browse(cr, uid, ids, context=context):
+            r = r and (session.note or session.measurement)
+        return r
+     
+    def _check_measuring_unit_id(self, cr, uid, ids, context=None):
+        for session in self.browse(cr, uid, ids, context=context):
+            if ( (session.measurement) and not (session.measurement_unit_id and session.measurement_unit_id.id) ) :
+                return False
+        return True
+     
+    _constraints = [
+        (_check_content, 'You have to set either measurement or note.', ['measurement','note']),
+        (_check_measuring_unit_id, 'If you set a measurement value, you have to set the unit.', ['measurement','measurement_unit_id']),
+    ]
+    
+tem_inspection_measurements()
 
 class tem_equipment_update1(osv.osv):
     _name = "tem.equipment"
@@ -452,3 +492,24 @@ class tem_location_o2m(osv.osv):
     }                                
         
 tem_location_o2m()
+
+class tem_inspection_o2m(osv.osv):
+    _name = "tem.inspection";
+    _inherit = _name
+    
+    _columns = {
+        "measurement_ids": fields.one2many("tem.inspection.measurements","inspection_id","Measurements"),
+    }       
+    
+    def _check_measurements(self, cr, uid, ids):
+        for session in self.browse(cr, uid, ids):
+            if ((session.result == "pass") or (session.result == "fail")):
+                if (len(session.measurement_ids)<1):
+                    return False
+        return True
+    
+    _constraints = [
+        (_check_measurements, 'You need to set at least one measurement.', ['measurement_ids']),
+    ]
+     
+tem_inspection_o2m()    

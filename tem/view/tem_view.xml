@@ -14,7 +14,7 @@
 					<field name="description" />
 					<field name="state" />
 					<field name="next_inspection" />
-					<field name="active" invisible="1"/>
+					<field name="active" invisible="1" />
 					<field name="inspection_due" invisible="1" />
 					<field name="usage_site" />
 					<field name="storage_location" />
@@ -104,7 +104,7 @@
 										<field name="next" />
 									</group>
 									<group colspan="2" col="2">
-										<separator string="Results" colspan="2" />
+										<separator string="Proof of Calibration" colspan="2" />
 										<field name="description" />
 										<field name="result" />
 										<field name="maint" />
@@ -352,12 +352,13 @@
 						<separator string="Inspection" colspan="2" />
 						<field name="equipment_id" on_change="on_change_equipment_id(equipment_id)" />
 						<field name="by_id" />
+						<field name="tool" />
 						<field name="date" />
 						<field name="next" />
 						<field name="interval_text" />
 					</group>
 					<group colspan="2" col="2">
-						<separator string="Results" colspan="2" />
+						<separator string="Proof of Calibration" colspan="2" />
 						<field name="description" />
 						<field name="result" />
 						<field name="maint" />
@@ -367,6 +368,29 @@
 						<separator string="Remarks" colspan="2" />
 						<field name="notes" nolabel="1" />
 					</group>
+
+					<group colspan="4" col="1">
+						<separator string="Measurements" />
+						<field nolabel="1" name="measurement_ids"
+							context="{'inspection_id':active_id or False}">
+							<tree string="TEM - Inspection Measurements">
+								<field name="user_id" />
+								<field name="date" />
+								<field name="measurement" />
+								<field name="measurement_unit_id" colspan="2" nolabel="1" />
+								<field name="note" colspan="4"/>
+							</tree>
+							<form string="TEM - Inspection Measurements">
+								<field name="user_id" />
+								<field name="date" />
+								<newline />
+								<field name="measurement" />
+								<field name="measurement_unit_id" colspan="2" nolabel="1" />
+								<field name="note" />
+							</form>
+						</field>
+					</group>
+
 				</form>
 			</field>
 		</record>
@@ -507,7 +531,60 @@
 			</field>
 		</record>
 
+		<!-- tem.inspection.measurements -->
+		<record id="tem_inspection_measurements_tree" model="ir.ui.view">
+			<field name="name">tem.inspection.measurements.tree</field>
+			<field name="model">tem.inspection.measurements</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="TEM - Inspection Measurements">
+					<field name="inspection_id" />
+					<field name="user_id" />
+					<field name="date" />
+					<field name="measurement" />
+					<field name="measurement_unit_id" colspan="2" nolabel="1" />
+					<field name="note" />
+				</tree>
+			</field>
+		</record>
 
+		<record id="tem_inspection_measurements_form" model="ir.ui.view">
+			<field name="name">tem.inspection.measurements.form</field>
+			<field name="model">tem.inspection.measurements</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="TEM - Inspection Measurements">
+					<field name="inspection_id" />
+					<newline />
+					<field name="user_id" />
+					<field name="date" />
+					<newline />
+					<field name="measurement" />
+					<field name="measurement_unit_id" colspan="2" nolabel="1" />
+					<field name="note" colspan="4" />
+				</form>
+			</field>
+		</record>
+
+		<record id="tem_inspection_measurements_search" model="ir.ui.view">
+			<field name="name">tem.inspection.measurements.search</field>
+			<field name="model">tem.inspection.measurements</field>
+			<field name="type">search</field>
+			<field name="arch" type="xml">
+				<search string="TEM - Inspection Measurements">
+					<field name="inspection_id" />
+					<field name="user_id" />
+					<field name="date" />
+					<newline />
+					<group expand='0' string='Group by...' groups="base.group_extended">
+						<filter string='Inspection' icon="terp-stock_align_left_24"
+							domain="[]" context="{'group_by' : 'inspection_id'}" />
+						<filter string='User' icon="terp-personal" domain="[]"
+							context="{'group_by' : 'user_id'}" />
+					</group>
+				</search>
+			</field>
+		</record>
 
 		<!-- actions -->
 		<record id="open_tem_equipment_tree" model="ir.actions.act_window">
@@ -529,6 +606,14 @@
 			<field name="search_view_id" ref="tem_inspection_search" />
 		</record>
 
+		<record id="open_tem_inspection_measurements_tree" model="ir.actions.act_window">
+			<field name="name">TEM Inspection Measurements</field>
+			<field name="res_model">tem.inspection.measurements</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_id" ref="tem_inspection_measurements_tree" />
+			<field name="search_view_id" ref="tem_inspection_measurements_search" />
+		</record>
 
 		<record id="open_tem_equipment_group_tree" model="ir.actions.act_window">
 			<field name="name">TEM Equipment Groups</field>
@@ -588,6 +673,11 @@
 
 		<menuitem id="menu_inspection" name="Inspections" parent="main_menu"
 			sequence="2" action="open_tem_inspection_tree" />
+
+		<menuitem id="menu_inspection_measurements" name="Inspection Measurements"
+			parent="main_menu" sequence="3" action="open_tem_inspection_measurements_tree"
+			groups="group_tem_manager,group_tem_inspector" />
+
 
 		<menuitem id="menu_definitions" name="Configuration" parent="main_menu"
 			sequence="60" />

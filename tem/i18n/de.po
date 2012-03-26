@@ -6,569 +6,601 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.0.3\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2012-02-10 11:36+0000\n"
-"PO-Revision-Date: 2012-02-14 15:27+0000\n"
-"Last-Translator: Bremskerl <Unknown>\n"
+"POT-Creation-Date: 2012-03-26 08:55+0000\n"
+"PO-Revision-Date: 2012-03-26 08:55+0000\n"
+"Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-09 05:26+0000\n"
-"X-Generator: Launchpad (build 14914)\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
 
-#. module: tem
 #: model:ir.model,name:tem.model_tem_equipment
+#. module: tem
 msgid "tem.equipment"
 msgstr "tem.equipment"
 
-#. module: tem
 #: model:tem.res.units,description:tem.temunit15
+#. module: tem
 msgid "Millimeters"
 msgstr "Millimeter"
 
-#. module: tem
 #: model:tem.res.units,description:tem.temunit20
+#. module: tem
 msgid "Parts per Million"
 msgstr "Teile pro Million"
 
+#: view:tem.inspection:0
+#: field:tem.inspection,measurement_ids:0
 #. module: tem
+msgid "Measurements"
+msgstr "Messungen"
+
 #: model:ir.model,name:tem.model_tem_equipment_group
+#. module: tem
 msgid "tem.equipment.group"
 msgstr "tem.equipment.group"
 
-#. module: tem
 #: field:tem.inspection,scrap:0
+#. module: tem
 msgid "To be scrapped"
 msgstr "Wird verschrottet"
 
-#. module: tem
 #: model:ir.actions.act_window,name:tem.open_tem_location_tree
+#. module: tem
 msgid "TEM Locations"
 msgstr "PMM Orte"
 
-#. module: tem
 #: selection:tem.res.responsibles,type:0
+#. module: tem
 msgid "Department"
 msgstr "Abteilung"
 
-#. module: tem
 #: selection:tem.equipment.group,interval_repeat:0
+#. module: tem
 msgid "Weeks"
 msgstr "Wochen"
 
+#: view:tem.equipment:0
+#: view:tem.inspection:0
 #. module: tem
+msgid "Proof of Calibration"
+msgstr "Kalibrierschein"
+
 #: model:tem.res.units,description:tem.temunit13
+#. module: tem
 msgid "Liter"
 msgstr "Liter"
 
-#. module: tem
 #: model:ir.actions.act_window,name:tem.open_tem_equipment_tree
+#. module: tem
 msgid "TEM Equipment"
 msgstr "PMM Prüfmittel"
 
-#. module: tem
 #: model:tem.res.units,description:tem.temunit10
+#. module: tem
 msgid "Kilograms"
 msgstr "Kilogramm"
 
-#. module: tem
 #: model:ir.ui.menu,name:tem.main_menu
+#. module: tem
 msgid "Test Equipment Management"
 msgstr "Prüfmittelverwaltung"
 
-#. module: tem
 #: view:tem.equipment.group:0
+#. module: tem
 msgid "TEM - Equipment Groups"
 msgstr "PMM - Prüfmittelgruppen"
 
-#. module: tem
 #: view:tem.equipment.group:0
+#. module: tem
 msgid "Standard"
 msgstr "Standard"
 
-#. module: tem
 #: field:tem.equipment,cal_company_id:0
+#. module: tem
 msgid "Involved Company"
 msgstr "Beteiligte Firma"
 
-#. module: tem
 #: selection:tem.location,category:0
+#. module: tem
 msgid "Internal Acocunt"
 msgstr "Interne Kostenstelle"
 
-#. module: tem
 #: selection:tem.equipment,state:0
+#. module: tem
 msgid "Cannot be found"
 msgstr "Unauffindbar"
 
-#. module: tem
 #: field:tem.equipment,service_contract:0
+#. module: tem
 msgid "Service Contract"
 msgstr "Wartungsvertrag"
 
-#. module: tem
 #: model:ir.actions.act_window,name:tem.action_tem_inspection_from_equipment
+#. module: tem
 msgid "New Inspection"
 msgstr "Neue Prüfung"
 
+#: model:ir.actions.act_window,name:tem.open_tem_inspection_measurements_tree
 #. module: tem
+msgid "TEM Inspection Measurements"
+msgstr "PMM Messwerte der Prüfungen"
+
 #: view:tem.equipment:0
 #: field:tem.equipment,notes:0
 #: view:tem.equipment.group:0
 #: field:tem.equipment.group,notes:0
 #: field:tem.inspection,notes:0
+#. module: tem
 msgid "Notes"
 msgstr "Bemerkungen"
 
-#. module: tem
 #: field:tem.equipment.group,interval_repeat:0
+#. module: tem
 msgid "Interval type"
 msgstr "Prüfintervall"
 
-#. module: tem
 #: selection:tem.equipment.group,interval_repeat:0
+#. module: tem
 msgid "Days"
 msgstr "Tage"
 
-#. module: tem
 #: view:tem.equipment:0
 #: field:tem.location,type_usage:0
+#. module: tem
 msgid "Usage Site"
 msgstr "Einsatzort"
 
-#. module: tem
 #: model:tem.res.units,description:tem.temunit14
+#. module: tem
 msgid "Square Meters"
 msgstr "Quadratmeter"
 
-#. module: tem
 #: model:tem.res.units,description:tem.temunit04
+#. module: tem
 msgid "Ampere"
 msgstr "Ampere"
 
-#. module: tem
 #: selection:tem.equipment.group,interval_repeat:0
+#. module: tem
 msgid "Quarter"
 msgstr "Quartal"
 
-#. module: tem
 #: selection:tem.equipment.group,interval_repeat:0
+#. module: tem
 msgid "Minutes"
 msgstr "Minuten"
 
-#. module: tem
 #: model:tem.res.units,description:tem.temunit19
+#. module: tem
 msgid "Ohm"
 msgstr "Ohm"
 
-#. module: tem
 #: constraint:tem.equipment:0
-msgid "If you set a Precision, you have to set the unit."
-msgstr ""
-"Wenn eine Messgenauigkeit angegeben ist muss auch eine Einheit ausgewählt "
-"werden."
-
 #. module: tem
-#: constraint:tem.equipment:0
 msgid "If you set a Range or Resolution, you have to set the unit."
-msgstr ""
-"Wenn ein Messbereich oder eine Auflösung angegeben ist muss auch eine "
-"Einheit ausgewählt werden."
+msgstr "Wenn ein Messbereich oder eine Auflösung angegeben ist muss auch eine Einheit ausgewählt werden."
 
-#. module: tem
 #: field:tem.equipment,measuring_rangeresolution_unit_id:0
+#. module: tem
 msgid "Range & Resolution unit"
 msgstr "Einheit für Messbereich und -auflösung"
 
-#. module: tem
 #: sql_constraint:tem.res.responsibles:0
+#. module: tem
 msgid "Responsibles Name has to be unique."
 msgstr "Name des Verantwortlichen muss eindeutig sein."
 
-#. module: tem
 #: model:tem.res.units,description:tem.temunit18
+#. module: tem
 msgid "Newton"
 msgstr "Newton"
 
-#. module: tem
 #: selection:tem.equipment,state:0
+#. module: tem
 msgid "Disabled"
 msgstr "Gesperrt"
 
-#. module: tem
 #: constraint:tem.res.responsibles:0
+#. module: tem
 msgid "For Employee type, you have to set a related user"
 msgstr "Bei Auswahl von Mitarbeiter muss ein Benutzer verknüpft werden."
 
-#. module: tem
 #: model:tem.res.units,description:tem.temunit11
+#. module: tem
 msgid "Kiloohm"
 msgstr "Kiloohm"
 
-#. module: tem
 #: help:tem.equipment,measuring_precision_unit_id:0
-msgid ""
-"Inherent maximal deviation of measurements. E.g. if a scale reads in a "
-"resolution of 0.1, but with 0.2 deviation, the reading 0.5 might be in "
-"between 0.3 and 0.7."
-msgstr ""
-"Mögliche Abweichung innerhalb des Gerätestandards.   Beispiel: Wenn eine "
-"Skala eine Auflösung von 0.1 hat, aber eine Messgenauigkeit von 0.2, kann "
-"die Ablesung 0.5 zwischen den echten Werten 0.3 und 0.7 schwanken."
-
 #. module: tem
+msgid "Inherent maximal deviation of measurements. E.g. if a scale reads in a resolution of 0.1, but with 0.2 deviation, the reading 0.5 might be in between 0.3 and 0.7."
+msgstr "Mögliche Abweichung innerhalb des Gerätestandards.   Beispiel: Wenn eine Skala eine Auflösung von 0.1 hat, aber eine Messgenauigkeit von 0.2, kann die Ablesung 0.5 zwischen den echten Werten 0.3 und 0.7 schwanken."
+
+#: field:tem.inspection.measurements,measurement:0
+#. module: tem
+msgid "Measurement"
+msgstr "Messwert"
+
 #: field:tem.location,partner_id:0
 #: field:tem.res.responsibles,partner_id:0
+#. module: tem
 msgid "Partner"
 msgstr "Partner"
 
-#. module: tem
 #: view:tem.inspection:0
+#. module: tem
 msgid "Inspector"
 msgstr "Prüfer"
 
-#. module: tem
 #: model:tem.res.units,description:tem.temunit24
+#. module: tem
 msgid "Hardness Shore D"
 msgstr "Härte Shore D"
 
-#. module: tem
 #: field:tem.equipment.group,standard_link:0
+#. module: tem
 msgid "Test standard specifications"
 msgstr "Spezifikationen der Prüfnorm"
 
-#. module: tem
 #: field:tem.inspection,interval_text:0
+#. module: tem
 msgid "Scheduled Interval"
 msgstr "Vorgesehenes Intervall"
 
-#. module: tem
 #: view:tem.location:0
+#. module: tem
 msgid "Rigging"
 msgstr "Montageort"
 
-#. module: tem
 #: model:tem.res.units,description:tem.temunit07
+#. module: tem
 msgid "Square Centimeters"
 msgstr "Quadratzentimeter"
 
-#. module: tem
 #: selection:tem.equipment.group,interval_repeat:0
+#. module: tem
 msgid "Inspection Orders"
 msgstr "Prüfauftrag"
 
-#. module: tem
 #: view:tem.location:0
 #: field:tem.location,type_storage:0
+#. module: tem
 msgid "Storage"
 msgstr "Lager"
 
-#. module: tem
 #: selection:tem.res.responsibles,type:0
+#. module: tem
 msgid "Contractor"
 msgstr "Lieferant"
 
-#. module: tem
 #: view:tem.inspection:0
 #: selection:tem.inspection,result:0
+#. module: tem
 msgid "Failed"
 msgstr "Durchgefallen"
 
-#. module: tem
 #: view:tem.equipment:0
 #: field:tem.equipment,state:0
+#. module: tem
 msgid "State"
 msgstr "Status"
 
-#. module: tem
 #: view:tem.location:0
+#. module: tem
 msgid "Location"
 msgstr "Ort"
 
-#. module: tem
 #: view:tem.inspection:0
 #: selection:tem.inspection,result:0
+#. module: tem
 msgid "Passed"
 msgstr "Bestanden"
 
-#. module: tem
 #: selection:tem.equipment.group,interval_repeat:0
+#. module: tem
 msgid "Production Cycle"
 msgstr "Fertigungstakte"
 
-#. module: tem
 #: selection:tem.res.responsibles,type:0
+#. module: tem
 msgid "Employee"
 msgstr "Mitarbeiter"
 
-#. module: tem
 #: selection:tem.equipment,state:0
+#. module: tem
 msgid "New"
 msgstr "Neu"
 
-#. module: tem
 #: model:tem.res.units,description:tem.temunit06
+#. module: tem
 msgid "Centimeters"
 msgstr "Zentimeter"
 
-#. module: tem
 #: view:tem.equipment:0
 #: field:tem.equipment,group_id:0
 #: view:tem.res.responsibles:0
 #: field:tem.res.responsibles,type:0
+#. module: tem
 msgid "Type"
 msgstr "Typ"
 
-#. module: tem
 #: selection:tem.equipment,state:0
+#. module: tem
 msgid "Available"
 msgstr "Frei"
 
-#. module: tem
 #: model:tem.res.units,description:tem.temunit12
+#. module: tem
 msgid "Kilovolt"
 msgstr "Kilovolt"
 
-#. module: tem
 #: field:tem.equipment,id_number:0
+#. module: tem
 msgid "TEM Ident no."
 msgstr "PMM Ident-Nr."
 
-#. module: tem
 #: view:tem.location:0
+#. module: tem
 msgid "Usage"
 msgstr "Benutzung"
 
-#. module: tem
 #: field:tem.location,type_rigging:0
+#. module: tem
 msgid "Rigging Site"
 msgstr "Montageort"
 
-#. module: tem
 #: model:tem.res.units,description:tem.temunit02
+#. module: tem
 msgid "Degree Celcius"
 msgstr "Grad Celsius"
 
-#. module: tem
 #: selection:tem.equipment.group,interval_repeat:0
+#. module: tem
 msgid "Hours"
 msgstr "Stunden"
 
-#. module: tem
 #: model:ir.ui.menu,name:tem.menu_definitions
+#. module: tem
 msgid "Configuration"
 msgstr "Konfiguration"
 
-#. module: tem
 #: model:tem.res.units,description:tem.temunit22
+#. module: tem
 msgid "Specific Coefficient of Friction μ"
 msgstr "Spezifischer Reibwert μ"
 
-#. module: tem
 #: field:tem.inspection,by_id:0
+#: field:tem.inspection.measurements,user_id:0
+#. module: tem
 msgid "Inspected by"
 msgstr "Geprüft von"
 
-#. module: tem
 #: model:tem.res.units,description:tem.temunit23
+#. module: tem
 msgid "Milligrams"
 msgstr "Milligramm"
 
-#. module: tem
 #: model:tem.res.units,description:tem.temunit08
+#. module: tem
 msgid "Grams"
 msgstr "Gramm"
 
-#. module: tem
 #: field:tem.equipment,next_inspection:0
+#. module: tem
 msgid "Next Inspection"
 msgstr "Nächste Prüfung"
 
-#. module: tem
 #: sql_constraint:tem.equipment:0
+#. module: tem
 msgid "Ident no. has to be unique."
 msgstr "Die Ident-Nr. muss eindeutig sein."
 
-#. module: tem
 #: field:tem.location,type_calibration:0
+#. module: tem
 msgid "Calibration Site"
 msgstr "Kalibrierungsort"
 
-#. module: tem
 #: view:tem.inspection:0
 #: selection:tem.inspection,result:0
+#. module: tem
 msgid "Deferred"
 msgstr "Zurückgestellt"
 
-#. module: tem
 #: field:tem.equipment,measuring_range:0
 #: field:tem.equipment.group,measuring_range:0
+#. module: tem
 msgid "Range"
 msgstr "Messbereich"
 
+#: constraint:tem.inspection:0
 #. module: tem
+msgid "You need to set at least one measurement."
+msgstr "Sie müssen mindestens ein Messergebnis eingeben."
+
 #: field:tem.inspection,next:0
+#. module: tem
 msgid "Next Inspection Due"
 msgstr "Nächste Prüfung fällig"
 
-#. module: tem
 #: view:tem.equipment:0
 #: view:tem.inspection:0
 #: field:tem.inspection,name:0
+#: view:tem.inspection.measurements:0
+#: field:tem.inspection.measurements,inspection_id:0
+#. module: tem
 msgid "Inspection"
 msgstr "Prüfung"
 
-#. module: tem
 #: model:ir.ui.menu,name:tem.menu_inspection
 #: view:tem.equipment:0
 #: field:tem.equipment,inspection_ids:0
+#. module: tem
 msgid "Inspections"
 msgstr "Prüfungen"
 
+#: model:ir.ui.menu,name:tem.menu_inspection_measurements
 #. module: tem
+msgid "Inspection Measurements"
+msgstr "Messwerte der Prüfung"
+
 #: field:tem.equipment,order_no:0
+#. module: tem
 msgid "Order no."
 msgstr "Bestellnummer"
 
-#. module: tem
 #: field:tem.equipment,name:0
+#. module: tem
 msgid "Equipment name"
 msgstr "Prüfmittel Name"
 
-#. module: tem
 #: view:tem.location:0
+#. module: tem
 msgid "TEM - Locations"
 msgstr "PMM - Orte"
 
-#. module: tem
 #: field:tem.equipment,serial_no:0
+#. module: tem
 msgid "Serial no."
 msgstr "Seriennummer"
 
-#. module: tem
 #: view:tem.equipment.group:0
 #: field:tem.equipment.group,inspection_plan:0
+#. module: tem
 msgid "General Inspection Plan"
 msgstr "Allgemeine Prüfanordnung"
 
-#. module: tem
 #: view:tem.equipment:0
 #: view:tem.equipment.group:0
 #: view:tem.inspection:0
+#: view:tem.inspection.measurements:0
 #: view:tem.location:0
 #: view:tem.res.responsibles:0
 #: view:tem.res.units:0
+#. module: tem
 msgid "Group by..."
 msgstr "Gruppieren nach..."
 
-#. module: tem
 #: model:ir.model,name:tem.model_tem_res_units
+#. module: tem
 msgid "tem.res.units"
 msgstr "tem.res.units"
 
-#. module: tem
 #: view:tem.inspection:0
+#. module: tem
 msgid "Result"
 msgstr "Ergebnis"
 
-#. module: tem
 #: model:ir.ui.menu,name:tem.menu_definitions_res_responsibles
+#. module: tem
 msgid "Responsibles"
 msgstr "Verantwortliche"
 
-#. module: tem
 #: view:tem.location:0
 #: field:tem.location,category:0
 #: view:tem.res.units:0
+#. module: tem
 msgid "Category"
 msgstr "Kategorie"
 
-#. module: tem
 #: view:tem.equipment.group:0
 #: field:tem.equipment.group,name:0
+#. module: tem
 msgid "Group"
 msgstr "Gruppe"
 
-#. module: tem
 #: model:tem.res.units,description:tem.temunit03
+#. module: tem
 msgid "Micrometers"
 msgstr "Mikrometer"
 
-#. module: tem
 #: field:tem.location,name:0
+#. module: tem
 msgid "Location Name"
 msgstr "Ortsbezeichnung"
 
+#: field:tem.inspection.measurements,note:0
 #. module: tem
+msgid "Note"
+msgstr "Hinweis"
+
 #: model:ir.model,name:tem.model_tem_res_responsibles
+#. module: tem
 msgid "tem.res.responsibles"
 msgstr "tem.res.responsibles"
 
-#. module: tem
 #: view:tem.equipment:0
 #: view:tem.inspection:0
+#. module: tem
 msgid "Maintenance"
 msgstr "Wartung"
 
-#. module: tem
 #: view:tem.equipment:0
+#. module: tem
 msgid "Basic"
 msgstr "Grundlagen"
 
-#. module: tem
 #: view:tem.equipment:0
 #: field:tem.equipment,supplier_id:0
 #: selection:tem.location,category:0
+#. module: tem
 msgid "Supplier"
 msgstr "Lieferant"
 
-#. module: tem
 #: model:ir.actions.act_window,name:tem.open_tem_res_responsibles_tree
 #: model:ir.actions.act_window,name:tem.open_tem_res_units_tree
+#. module: tem
 msgid "TEM Units"
 msgstr "PMM Einheiten"
 
-#. module: tem
 #: view:tem.equipment.group:0
+#. module: tem
 msgid "Extended search..."
 msgstr "Erweiterte Suche..."
 
-#. module: tem
 #: view:tem.equipment:0
+#. module: tem
 msgid "TEM - Equipment"
 msgstr "PMM - Prüfmittel"
 
+#: view:tem.location:0
+#: field:tem.location,related_equipment_ids:0
 #. module: tem
+msgid "Related Equipment"
+msgstr "Verknüpfte Prüfmittel"
+
 #: field:tem.location,cost_unit:0
+#. module: tem
 msgid "Cost Unit"
 msgstr "Kostenstelle"
 
-#. module: tem
 #: view:tem.equipment:0
+#. module: tem
 msgid "Storage Location"
 msgstr "Lagerort"
 
-#. module: tem
 #: field:tem.equipment,measuring_precision:0
+#. module: tem
 msgid "Precision"
 msgstr "Messgenauigkeit"
 
-#. module: tem
 #: model:ir.model,name:tem.model_tem_location
+#. module: tem
 msgid "tem.location"
 msgstr "tem.location"
 
-#. module: tem
+#: view:tem.inspection.measurements:0
 #: field:tem.res.responsibles,user_id:0
-msgid "User"
-msgstr "Benutzer"
-
 #. module: tem
+msgid "User"
+msgstr "User"
+
 #: model:ir.ui.menu,name:tem.menu_definitions_groups
+#. module: tem
 msgid "Groups"
 msgstr "Gruppen"
 
-#. module: tem
+#: field:tem.equipment,active:0
 #: view:tem.equipment.group:0
 #: field:tem.equipment.group,active:0
 #: view:tem.location:0
@@ -577,326 +609,337 @@ msgstr "Gruppen"
 #: field:tem.res.responsibles,active:0
 #: view:tem.res.units:0
 #: field:tem.res.units,active:0
+#. module: tem
 msgid "Active"
 msgstr "Aktiv"
 
-#. module: tem
-#: view:tem.equipment:0
-#: field:tem.equipment,active:0
-msgid "Inactive"
-msgstr "Inaktiv"
-
-#. module: tem
 #: field:tem.equipment,manufacturer_id:0
 #: selection:tem.res.responsibles,type:0
+#. module: tem
 msgid "Manufacturer"
 msgstr "Hersteller"
 
-#. module: tem
 #: model:tem.res.units,description:tem.temunit05
+#. module: tem
 msgid "Count"
 msgstr "Anzahl"
 
-#. module: tem
 #: model:tem.res.units,description:tem.temunit00
+#. module: tem
 msgid "Percent"
 msgstr "Prozent"
 
-#. module: tem
 #: selection:tem.equipment.group,interval_repeat:0
+#. module: tem
 msgid "Months"
 msgstr "Monate"
 
+#: model:ir.model,name:tem.model_tem_inspection_measurements
 #. module: tem
+msgid "tem.inspection.measurements"
+msgstr "tem.inspection.measurements"
+
 #: selection:tem.equipment.group,interval_repeat:0
+#. module: tem
 msgid "Production Orders"
 msgstr "Aufträge"
 
-#. module: tem
 #: field:tem.inspection,maint:0
+#. module: tem
 msgid "Needs Maintenance/Repair"
 msgstr "Benötigt Wartung/Reparatur"
 
-#. module: tem
 #: field:tem.equipment,measuring_resolution:0
 #: field:tem.equipment.group,measuring_resolution:0
+#. module: tem
 msgid "Resolution"
 msgstr "Auflösung"
 
-#. module: tem
 #: view:tem.equipment:0
 #: selection:tem.equipment,state:0
 #: view:tem.inspection:0
+#. module: tem
 msgid "Scrapped"
 msgstr "Verschrottet"
 
+#: constraint:tem.inspection.measurements:0
 #. module: tem
+msgid "If you set a measurement value, you have to set the unit."
+msgstr "Wenn ein Messwert eingegeben wird, muss auch eine Einheit angegeben werden."
+
 #: field:tem.equipment.group,standard:0
+#. module: tem
 msgid "Test standard"
 msgstr "Prüfnorm"
 
-#. module: tem
 #: model:ir.ui.menu,name:tem.menu_equipment_list
 #: field:tem.equipment,description:0
 #: view:tem.equipment.group:0
 #: field:tem.equipment.group,equipment_ids:0
 #: view:tem.inspection:0
 #: field:tem.inspection,equipment_id:0
+#. module: tem
 msgid "Equipment"
 msgstr "Prüfmittel"
 
-#. module: tem
 #: model:tem.res.units,description:tem.temunit17
+#. module: tem
 msgid "Newton / Square Millimeter"
 msgstr "Newton pro Quadratmillimeter"
 
-#. module: tem
 #: field:tem.equipment,interval_text:0
 #: field:tem.equipment.group,interval:0
 #: field:tem.equipment.group,interval_text:0
+#. module: tem
 msgid "Interval"
 msgstr "Intervall"
 
-#. module: tem
 #: selection:tem.equipment.group,interval_repeat:0
+#. module: tem
 msgid "Moved"
 msgstr "Verschoben"
 
-#. module: tem
 #: model:ir.ui.menu,name:tem.menu_definitions_locations
 #: view:tem.equipment:0
-msgid "Locations"
-msgstr "Orte"
-
 #. module: tem
+msgid "Locations"
+msgstr "Lagerorte"
+
 #: model:tem.res.units,description:tem.temunit21
+#. module: tem
 msgid "Volt"
 msgstr "Volt"
 
+#: view:tem.equipment:0
 #. module: tem
+msgid "Inactive"
+msgstr "Inaktiv"
+
 #: view:tem.location:0
+#. module: tem
 msgid "References"
 msgstr "Referenzen"
 
-#. module: tem
 #: field:tem.equipment,purchase_date:0
+#. module: tem
 msgid "Purchased"
 msgstr "Gekauft"
 
-#. module: tem
 #: model:ir.actions.act_window,name:tem.open_tem_inspection_tree
+#. module: tem
 msgid "TEM Inspections"
 msgstr "PMM Prüfungen"
 
-#. module: tem
 #: field:tem.equipment,last_inspection:0
+#. module: tem
 msgid "Last Inspection"
 msgstr "Letzte Prüfung"
 
-#. module: tem
 #: field:tem.equipment,storage_location:0
+#. module: tem
 msgid "Storage location"
 msgstr "Lagerort"
 
-#. module: tem
 #: view:tem.res.units:0
+#. module: tem
 msgid "TEM - Units"
 msgstr "PMM - Einheiten"
 
-#. module: tem
 #: field:tem.equipment,measuring_precision_unit_id:0
+#. module: tem
 msgid "Precision unit"
 msgstr "Einheit Messgenauigkeit"
 
-#. module: tem
 #: view:tem.equipment:0
 #: view:tem.location:0
+#. module: tem
 msgid "Calibration"
 msgstr "Kalibrierung"
 
-#. module: tem
 #: model:tem.res.units,description:tem.temunit01
+#. module: tem
 msgid "Grams/Liter"
 msgstr "Gramm pro Liter"
 
-#. module: tem
-#: field:tem.equipment,cal_responsible_id:0
-msgid "Responsible"
-msgstr "Verantwortlich"
-
-#. module: tem
 #: constraint:tem.res.responsibles:0
-msgid ""
-"For Manufacturer and Contractor type, you have to set a related partner"
-msgstr ""
-"Bei Auswahl von Hersteller oder Lieferant muss ein Partner verknüpft werden."
-
 #. module: tem
+msgid "For Manufacturer and Contractor type, you have to set a related partner"
+msgstr "Bei Auswahl von Hersteller oder Lieferant muss ein Partner verknüpft werden."
+
 #: view:tem.equipment:0
+#. module: tem
 msgid "Details"
 msgstr "Details"
 
-#. module: tem
 #: selection:tem.equipment.group,interval_repeat:0
+#. module: tem
 msgid "Years"
 msgstr "Jahre"
 
-#. module: tem
 #: field:tem.location,description:0
 #: field:tem.res.responsibles,description:0
 #: field:tem.res.units,description:0
+#. module: tem
 msgid "Description"
 msgstr "Beschreibung"
 
-#. module: tem
 #: field:tem.equipment,purchase_currency_id:0
+#. module: tem
 msgid "Currency"
 msgstr "Währung"
 
-#. module: tem
 #: field:tem.inspection,date:0
+#: field:tem.inspection.measurements,date:0
+#. module: tem
 msgid "Inspection date"
 msgstr "Prüfdatum"
 
-#. module: tem
 #: model:ir.actions.act_window,name:tem.open_tem_equipment_group_tree
+#. module: tem
 msgid "TEM Equipment Groups"
 msgstr "PMM Prüfmittelgruppen"
 
-#. module: tem
 #: model:tem.res.units,description:tem.temunit16
+#. module: tem
 msgid "Square Millimeters"
 msgstr "Quadratmillimeter"
 
-#. module: tem
 #: field:tem.equipment,usage_site:0
+#. module: tem
 msgid "Usage site"
 msgstr "Einsatzort"
 
+#: constraint:tem.inspection.measurements:0
 #. module: tem
+msgid "You have to set either measurement or note."
+msgstr "Sie müssen entweder Messwert oder Hinweis eingeben."
+
 #: field:tem.inspection,result:0
+#. module: tem
 msgid "Inspection Result"
 msgstr "Prüfergebnis"
 
-#. module: tem
 #: help:tem.equipment,measuring_resolution:0
-msgid ""
-"Maximal fraction of measurements readings. E.g. a scale might be read in a "
-"resolution of 0.1."
-msgstr ""
-"Maximale Fraktionierung des Messergebnisses. Beispiel: Eine Skala kann in "
-"Schritten von 0.1 ausgelesen werden."
-
 #. module: tem
+msgid "Maximal fraction of measurements readings. E.g. a scale might be read in a resolution of 0.1."
+msgstr "Maximale Fraktionierung des Messergebnisses. Beispiel: Eine Skala kann in Schritten von 0.1 ausgelesen werden."
+
 #: view:tem.equipment:0
 #: view:tem.inspection:0
-msgid "Remarks"
-msgstr "Bemerkungen"
-
 #. module: tem
+msgid "Remarks"
+msgstr "Anmerkungen"
+
 #: model:ir.ui.menu,name:tem.menu_definitions_res_units
+#. module: tem
 msgid "Units"
 msgstr "Einheiten"
 
+#: constraint:tem.equipment:0
 #. module: tem
-#: field:tem.equipment,cal_equipment:0
-msgid "Device/Equipment"
-msgstr "Gerät/Prüfmittel"
+msgid "If you set a Precision, you have to set the unit."
+msgstr "Wenn eine Messgenauigkeit angegeben ist muss auch eine Einheit ausgewählt werden."
 
-#. module: tem
 #: field:tem.equipment,purchase_invoice_id:0
+#. module: tem
 msgid "Purchase Invoice"
 msgstr "Rechnung (Kauf)"
 
-#. module: tem
 #: selection:tem.equipment.group,interval_repeat:0
+#. module: tem
 msgid "Working Hours"
 msgstr "Betriebsstunden"
 
-#. module: tem
 #: field:tem.equipment.group,measuring_resolution_unit_id:0
+#. module: tem
 msgid "Resolution unit"
 msgstr "Einheit Auflösung"
 
-#. module: tem
 #: selection:tem.location,category:0
+#. module: tem
 msgid "Customer"
 msgstr "Kunde"
 
-#. module: tem
 #: view:tem.location:0
+#. module: tem
 msgid "Basics"
 msgstr "Grundlagen"
 
-#. module: tem
 #: field:tem.res.responsibles,name:0
+#. module: tem
 msgid "Name"
 msgstr "Name"
 
-#. module: tem
 #: field:tem.inspection,description:0
+#. module: tem
 msgid "Short Description"
 msgstr "Kurzbeschreibung"
 
+#: view:tem.inspection:0
+#: view:tem.inspection.measurements:0
 #. module: tem
+msgid "TEM - Inspection Measurements"
+msgstr "PMM - Messwerte der Prüfungen"
+
 #: selection:tem.equipment.group,interval_repeat:0
+#. module: tem
 msgid "as needed"
 msgstr "nach Bedarf"
 
+#: help:tem.inspection,tool:0
 #. module: tem
+msgid "Tool (appliance/calibre) used to calibrate the test equipment."
+msgstr "Mittel (Werkzeug/Vorrichtung/Lehre) mit dem das Prüfmittel kalibiert wurde."
+
 #: view:tem.equipment:0
+#. module: tem
 msgid "Item"
 msgstr "Gegenstand"
 
-#. module: tem
 #: view:tem.res.responsibles:0
+#. module: tem
 msgid "TEM - Responsibles"
 msgstr "PMM - Verantwortliche"
 
-#. module: tem
 #: model:tem.res.units,description:tem.temunit09
+#. module: tem
 msgid "Hardness Brinell"
 msgstr "Härte Brinell"
 
-#. module: tem
 #: model:ir.model,name:tem.model_tem_inspection
+#. module: tem
 msgid "tem.inspection"
 msgstr "tem.inspection"
 
-#. module: tem
+#: field:tem.inspection.measurements,measurement_unit_id:0
 #: field:tem.res.units,name:0
-msgid "Unit"
-msgstr "Einheit"
-
 #. module: tem
+msgid "Unit"
+msgstr "Unit"
+
 #: view:tem.equipment:0
 #: view:tem.inspection:0
+#. module: tem
 msgid "TEM - Inspections"
 msgstr "PMM - Prüfungen"
 
-#. module: tem
 #: field:tem.equipment,purchase_price:0
+#. module: tem
 msgid "Purchase Price"
 msgstr "Kaufpreis"
 
-#. module: tem
-#: view:tem.equipment:0
-#: view:tem.inspection:0
-msgid "Results"
-msgstr "Ergebnisse"
-
-#. module: tem
 #: field:tem.equipment,inspection_due:0
+#. module: tem
 msgid "Next Inspection due"
 msgstr "Nächste Prüfung fällig"
 
-#. module: tem
 #: selection:tem.equipment.group,interval_repeat:0
+#. module: tem
 msgid "Delivery Batches"
 msgstr "Lieferchargen"
 
+#: field:tem.inspection,tool:0
 #. module: tem
-#: view:tem.location:0
-#: field:tem.location,related_equipment_ids:0
-msgid "Related Equipment"
-msgstr "Verknüpfte Prüfmittel"
+msgid "Tool"
+msgstr "Kalibriermittel"
+

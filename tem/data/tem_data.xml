@@ -152,5 +152,23 @@
 			<field name="state">subscribed</field>
 		</record>
 
+		<record id="at_tem_res_responsibles" model="audittrail.rule">
+			<field name="name">TEM Responsibles</field>
+			<field name="object_id" search="[('model','=','tem.res.responsibles')]" />
+			<field name="log_write">1</field>
+			<field name="log_create">1</field>
+			<field name="log_unlink">1</field>
+			<field name="state">subscribed</field>
+		</record>
+
+		<record id="at_tem_inspection_measurements" model="audittrail.rule">
+			<field name="name">TEM Inspection Measurements</field>
+			<field name="object_id" search="[('model','=','tem.inspection.measurements')]" />
+			<field name="log_write">1</field>
+			<field name="log_create">1</field>
+			<field name="log_unlink">1</field>
+			<field name="state">subscribed</field>
+		</record>
+
 	</data>
 </openerp>
