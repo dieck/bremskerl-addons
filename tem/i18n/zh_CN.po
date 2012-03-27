@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bremskerl-addons\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-02-10 11:36+0000\n"
+"POT-Creation-Date: 2012-03-26 08:55+0000\n"
 "PO-Revision-Date: 2012-03-02 08:41+0000\n"
 "Last-Translator: Marco Dieckhoff <Unknown>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-09 05:26+0000\n"
-"X-Generator: Launchpad (build 14914)\n"
+"X-Launchpad-Export-Date: 2012-03-27 05:34+0000\n"
+"X-Generator: Launchpad (build 15011)\n"
 
 #. module: tem
 #: model:ir.model,name:tem.model_tem_equipment
@@ -30,6 +30,12 @@ msgstr "毫米"
 #. module: tem
 #: model:tem.res.units,description:tem.temunit20
 msgid "Parts per Million"
+msgstr ""
+
+#. module: tem
+#: view:tem.inspection:0
+#: field:tem.inspection,measurement_ids:0
+msgid "Measurements"
 msgstr ""
 
 #. module: tem
@@ -56,6 +62,12 @@ msgstr "部门"
 #: selection:tem.equipment.group,interval_repeat:0
 msgid "Weeks"
 msgstr "周"
+
+#. module: tem
+#: view:tem.equipment:0
+#: view:tem.inspection:0
+msgid "Proof of Calibration"
+msgstr ""
 
 #. module: tem
 #: model:tem.res.units,description:tem.temunit13
@@ -113,6 +125,11 @@ msgid "New Inspection"
 msgstr ""
 
 #. module: tem
+#: model:ir.actions.act_window,name:tem.open_tem_inspection_measurements_tree
+msgid "TEM Inspection Measurements"
+msgstr ""
+
+#. module: tem
 #: view:tem.equipment:0
 #: field:tem.equipment,notes:0
 #: view:tem.equipment.group:0
@@ -164,11 +181,6 @@ msgstr ""
 
 #. module: tem
 #: constraint:tem.equipment:0
-msgid "If you set a Precision, you have to set the unit."
-msgstr ""
-
-#. module: tem
-#: constraint:tem.equipment:0
 msgid "If you set a Range or Resolution, you have to set the unit."
 msgstr ""
 
@@ -208,6 +220,11 @@ msgid ""
 "Inherent maximal deviation of measurements. E.g. if a scale reads in a "
 "resolution of 0.1, but with 0.2 deviation, the reading 0.5 might be in "
 "between 0.3 and 0.7."
+msgstr ""
+
+#. module: tem
+#: field:tem.inspection.measurements,measurement:0
+msgid "Measurement"
 msgstr ""
 
 #. module: tem
@@ -360,6 +377,7 @@ msgstr ""
 
 #. module: tem
 #: field:tem.inspection,by_id:0
+#: field:tem.inspection.measurements,user_id:0
 msgid "Inspected by"
 msgstr ""
 
@@ -401,6 +419,11 @@ msgid "Range"
 msgstr "比率"
 
 #. module: tem
+#: constraint:tem.inspection:0
+msgid "You need to set at least one measurement."
+msgstr ""
+
+#. module: tem
 #: field:tem.inspection,next:0
 msgid "Next Inspection Due"
 msgstr ""
@@ -409,6 +432,8 @@ msgstr ""
 #: view:tem.equipment:0
 #: view:tem.inspection:0
 #: field:tem.inspection,name:0
+#: view:tem.inspection.measurements:0
+#: field:tem.inspection.measurements,inspection_id:0
 msgid "Inspection"
 msgstr ""
 
@@ -417,6 +442,11 @@ msgstr ""
 #: view:tem.equipment:0
 #: field:tem.equipment,inspection_ids:0
 msgid "Inspections"
+msgstr ""
+
+#. module: tem
+#: model:ir.ui.menu,name:tem.menu_inspection_measurements
+msgid "Inspection Measurements"
 msgstr ""
 
 #. module: tem
@@ -449,6 +479,7 @@ msgstr ""
 #: view:tem.equipment:0
 #: view:tem.equipment.group:0
 #: view:tem.inspection:0
+#: view:tem.inspection.measurements:0
 #: view:tem.location:0
 #: view:tem.res.responsibles:0
 #: view:tem.res.units:0
@@ -494,6 +525,11 @@ msgid "Location Name"
 msgstr "货位名称"
 
 #. module: tem
+#: field:tem.inspection.measurements,note:0
+msgid "Note"
+msgstr ""
+
+#. module: tem
 #: model:ir.model,name:tem.model_tem_res_responsibles
 msgid "tem.res.responsibles"
 msgstr ""
@@ -533,6 +569,12 @@ msgid "TEM - Equipment"
 msgstr ""
 
 #. module: tem
+#: view:tem.location:0
+#: field:tem.location,related_equipment_ids:0
+msgid "Related Equipment"
+msgstr ""
+
+#. module: tem
 #: field:tem.location,cost_unit:0
 msgid "Cost Unit"
 msgstr ""
@@ -553,6 +595,7 @@ msgid "tem.location"
 msgstr ""
 
 #. module: tem
+#: view:tem.inspection.measurements:0
 #: field:tem.res.responsibles,user_id:0
 msgid "User"
 msgstr "用户"
@@ -563,6 +606,7 @@ msgid "Groups"
 msgstr ""
 
 #. module: tem
+#: field:tem.equipment,active:0
 #: view:tem.equipment.group:0
 #: field:tem.equipment.group,active:0
 #: view:tem.location:0
@@ -573,12 +617,6 @@ msgstr ""
 #: field:tem.res.units,active:0
 msgid "Active"
 msgstr "现用"
-
-#. module: tem
-#: view:tem.equipment:0
-#: field:tem.equipment,active:0
-msgid "Inactive"
-msgstr "不活跃的"
 
 #. module: tem
 #: field:tem.equipment,manufacturer_id:0
@@ -602,6 +640,11 @@ msgid "Months"
 msgstr "月"
 
 #. module: tem
+#: model:ir.model,name:tem.model_tem_inspection_measurements
+msgid "tem.inspection.measurements"
+msgstr ""
+
+#. module: tem
 #: selection:tem.equipment.group,interval_repeat:0
 msgid "Production Orders"
 msgstr "生产单"
@@ -622,6 +665,11 @@ msgstr "解决方案"
 #: selection:tem.equipment,state:0
 #: view:tem.inspection:0
 msgid "Scrapped"
+msgstr ""
+
+#. module: tem
+#: constraint:tem.inspection.measurements:0
+msgid "If you set a measurement value, you have to set the unit."
 msgstr ""
 
 #. module: tem
@@ -666,6 +714,11 @@ msgstr "货位列表"
 #: model:tem.res.units,description:tem.temunit21
 msgid "Volt"
 msgstr ""
+
+#. module: tem
+#: view:tem.equipment:0
+msgid "Inactive"
+msgstr "不活跃的"
 
 #. module: tem
 #: view:tem.location:0
@@ -714,11 +767,6 @@ msgid "Grams/Liter"
 msgstr ""
 
 #. module: tem
-#: field:tem.equipment,cal_responsible_id:0
-msgid "Responsible"
-msgstr "负责人"
-
-#. module: tem
 #: constraint:tem.res.responsibles:0
 msgid ""
 "For Manufacturer and Contractor type, you have to set a related partner"
@@ -748,6 +796,7 @@ msgstr "币种"
 
 #. module: tem
 #: field:tem.inspection,date:0
+#: field:tem.inspection.measurements,date:0
 msgid "Inspection date"
 msgstr ""
 
@@ -764,6 +813,11 @@ msgstr "平方毫米"
 #. module: tem
 #: field:tem.equipment,usage_site:0
 msgid "Usage site"
+msgstr ""
+
+#. module: tem
+#: constraint:tem.inspection.measurements:0
+msgid "You have to set either measurement or note."
 msgstr ""
 
 #. module: tem
@@ -790,8 +844,8 @@ msgid "Units"
 msgstr ""
 
 #. module: tem
-#: field:tem.equipment,cal_equipment:0
-msgid "Device/Equipment"
+#: constraint:tem.equipment:0
+msgid "If you set a Precision, you have to set the unit."
 msgstr ""
 
 #. module: tem
@@ -830,8 +884,19 @@ msgid "Short Description"
 msgstr "简短说明"
 
 #. module: tem
+#: view:tem.inspection:0
+#: view:tem.inspection.measurements:0
+msgid "TEM - Inspection Measurements"
+msgstr ""
+
+#. module: tem
 #: selection:tem.equipment.group,interval_repeat:0
 msgid "as needed"
+msgstr ""
+
+#. module: tem
+#: help:tem.inspection,tool:0
+msgid "Tool (appliance/calibre) used to calibrate the test equipment."
 msgstr ""
 
 #. module: tem
@@ -855,6 +920,7 @@ msgid "tem.inspection"
 msgstr ""
 
 #. module: tem
+#: field:tem.inspection.measurements,measurement_unit_id:0
 #: field:tem.res.units,name:0
 msgid "Unit"
 msgstr "个"
@@ -871,12 +937,6 @@ msgid "Purchase Price"
 msgstr "采购价格表"
 
 #. module: tem
-#: view:tem.equipment:0
-#: view:tem.inspection:0
-msgid "Results"
-msgstr ""
-
-#. module: tem
 #: field:tem.equipment,inspection_due:0
 msgid "Next Inspection due"
 msgstr ""
@@ -887,7 +947,6 @@ msgid "Delivery Batches"
 msgstr ""
 
 #. module: tem
-#: view:tem.location:0
-#: field:tem.location,related_equipment_ids:0
-msgid "Related Equipment"
+#: field:tem.inspection,tool:0
+msgid "Tool"
 msgstr ""
