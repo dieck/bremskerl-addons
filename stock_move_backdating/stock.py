@@ -8,9 +8,10 @@ class stock_move(osv.osv):
     _inherit = _name
         
     _columns = {
-         'date_backdating' : fields.datetime("Actual Movement Date", help="Date when the move action was committed. Will set the move date to this date instead of current date when processing to done."),
+         'date_backdating' : fields.datetime("Actual Movement Date", readonly=False, states={'done': [('readonly', True)],'cancel': [('readonly', True)]},
+                                            help="Date when the move action was committed. Will set the move date to this date instead of current date when processing to done."),
     }
-    
+
     def action_done(self, cr, uid, ids, context=None):
         # look at previous state and find date_backdating
         backdating_dates = {}     
@@ -34,6 +35,10 @@ class stock_move(osv.osv):
         """ Test if date is in the past
         @param date_backdating: date
         """
+        
+        # do nothing if empty
+        if (not date_backdating):
+            return {}
         
         dt = datetime.strptime(date_backdating, '%Y-%m-%d %H:%M:%S')
         NOW = datetime.now()
