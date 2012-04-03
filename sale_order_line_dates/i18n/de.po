@@ -7,46 +7,36 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 6.0.3\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2012-03-27 11:31+0000\n"
-"PO-Revision-Date: 2012-03-27 11:31+0000\n"
-"Last-Translator: <>\n"
+"PO-Revision-Date: 2012-03-27 14:39+0000\n"
+"Last-Translator: Bremskerl <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2012-03-28 05:37+0000\n"
+"X-Generator: Launchpad (build 15027)\n"
 
-#: field:sale.order.line,requested_date:0
 #. module: sale_order_line_dates
+#: field:sale.order.line,requested_date:0
 msgid "Requested Date"
 msgstr "Datum der Anfrage"
 
-#: field:sale.order.line,commitment_date:0
 #. module: sale_order_line_dates
-msgid "Commitment Date"
-msgstr "Datum Liefervereinbarung"
-
 #: model:ir.model,name:sale_order_line_dates.model_sale_order_line
-#. module: sale_order_line_dates
 msgid "Sales Order Line"
 msgstr "Verkaufsauftragsposition"
 
-#: help:sale.order.line,effective_date:0
 #. module: sale_order_line_dates
+#: help:sale.order.line,effective_date:0
 msgid "Date on which picking is created."
 msgstr "Datum der Erstellung des Lieferauftrags"
 
-#: help:sale.order.line,requested_date:0
 #. module: sale_order_line_dates
+#: help:sale.order.line,requested_date:0
 msgid "Date on which customer has requested for sales."
 msgstr "Datum der Anfrage an Vertrieb"
 
-#: help:sale.order.line,commitment_date:0
 #. module: sale_order_line_dates
-msgid "Estimated date from order date and delivery lead time."
-msgstr "Vorraussichtlicher Liefertermin basierend auf Bestellzeitpunkt und Tagen bis Auslieferung"
-
 #: field:sale.order.line,effective_date:0
-#. module: sale_order_line_dates
 msgid "Effective Date"
 msgstr "Effektives Datum"
-
