@@ -39,5 +39,21 @@
 			</field>
 		</record>
 
+		<record id="action_group_picking_server" model="ir.actions.server">
+            <field name="name">Group Pickings</field>
+            <field name="model_id" ref="model_stock_picking"/>
+            <field name="state">code</field>
+            <field name="code">action = obj.action_group(context=context)</field>
+        </record>
+        
+        <record id="ir_open_group_picking" model="ir.values">
+            <field eval="'client_action_multi'" name="key2"/>
+            <field eval="'stock.picking'" name="model"/>
+            <field name="name">Group Pickings</field>
+            <field eval="'ir.actions.server,%d'%action_group_picking_server" name="value"/>
+            <field eval="True" name="object"/>
+        </record>
+
+
 	</data>
 </openerp>
