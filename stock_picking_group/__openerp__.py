@@ -24,7 +24,8 @@ in order to print a single set of delivery papers for multiple transactions.
     """,
     'init_xml' : [],
     'demo_xml' : [],
-    'update_xml' : ['view/picking_group_view.xml'],
+    'update_xml' : ['view/picking_group_view.xml',
+                    'view/stock_view.xml'],
     'active': False,
     'installable': True
 }

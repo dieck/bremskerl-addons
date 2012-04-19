@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+
+		<!-- views -->
+		<record id="view_picking_form" model="ir.ui.view">
+			<field name="name">stock.picking.group.form</field>
+			<field name="model">stock.picking</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="stock.view_picking_form" />
+			<field name="arch" type="xml">
+				<xpath expr="//page[@string='Additional info']" position="inside">
+					<field name="picking_group_id" />
+				</xpath>
+			</field>
+		</record>
+
+		<record id="view_picking_out_form" model="ir.ui.view">
+			<field name="name">stock.picking.group.form.out</field>
+			<field name="model">stock.picking</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="stock.view_picking_out_form" />
+			<field name="arch" type="xml">
+				<xpath expr="//page[@string='Additional info']" position="inside">
+					<field name="picking_group_id" />
+				</xpath>
+			</field>
+		</record>
+
+		<record id="view_picking_in_form" model="ir.ui.view">
+			<field name="name">stock.picking.group.form.in</field>
+			<field name="model">stock.picking</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="stock.view_picking_in_form" />
+			<field name="arch" type="xml">
+				<xpath expr="//page[@string='Additional Info']" position="inside">
+					<field name="picking_group_id" />
+				</xpath>
+			</field>
+		</record>
+
+	</data>
+</openerp>
