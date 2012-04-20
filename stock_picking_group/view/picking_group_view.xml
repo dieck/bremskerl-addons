@@ -12,9 +12,11 @@
 					<field name="type" />
 					<field name="list" />
 					<field name="address_id" />
+					<field name="company_id" invisible="1" />
 					<notebook colspan="4">
 						<page string="Pickings">
 							<field name="picking_ids" nolabel="1" colspan="4" widget="many2many" />
+							<!-- won't work on freshly created EMPTY groups! domain="[('type','=',type),('address_id','=',address_id),('company_id','=',company_id)]" -->
 						</page>
 						<page string="Combined Moves">
 							<field name="move_ids" nolabel="1" colspan="4" widget="many2many" readonly="1" />

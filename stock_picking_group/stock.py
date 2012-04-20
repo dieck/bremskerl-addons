@@ -2,6 +2,7 @@
 
 from osv import fields, osv
 from tools.translate import _
+import time
 
 # Dummy to be used by stock picking, so many2one exists when one2many is established
 class stock_picking_group_blanco(osv.osv):
@@ -22,33 +23,53 @@ class stock_picking(osv.osv):
         if len(context['active_ids']) == 0:
             return {}
         
+        # checks
         for item in self.browse(cr, uid, context['active_ids'], context):            
             if (item.picking_group_id):
                 raise osv.except_osv(_('Grouping failed.'), _('You cannot re-group %s. Remove existing grouping first.') % (item.name))
         
         picking_ids = [x for x in context['active_ids']] #copy list
+        # without loss of generality, we choose the last (pop()) one to compare all others to
         wlog_id = picking_ids.pop()
         wlog_item = self.browse(cr, uid, wlog_id, context)
-        
-        for item in self.browse(cr, uid, picking_ids, context):    
+
+        # iterate through others        
+        for item in self.browse(cr, uid, picking_ids, context):
+            
+            # check for type    
             if (wlog_item.type != item.type):
                 raise osv.except_osv(_('Grouping failed.'), _('%s (%s) and %s (%s) have different types.' 
                                                             % (wlog_item.name, wlog_item.type, item.name, item.type)))
                 
-            if (wlog_item.address_id):
-                if (item.address_id):
-                    if (wlog_item.address_id.id != item.address_id.id):
-                        raise osv.except_osv(_('Grouping failed.'), _('%s and %s have different target addresses.' 
-                                                                      % (wlog_item.name, item.name)))
-                else:
-                    raise osv.except_osv(_('Grouping failed.'), _('%s has a target address, %s has not.' % ( wlog_item.name, item.name)))
-            else:
-                if (item.address_id):
-                    raise osv.except_osv(_('Grouping failed.'), _('%s has a target address, %s has not.' % ( item.name, wlog_item.name)))
+            # check for address
+            wlog_address = wlog_item.address_id and wlog_item.address_id.id or None
+            item_address = item.address_id and item.address_id.id or None
 
-        new_group = self.pool.get("stock.picking.group").create(cr,uid,{})
+            if (wlog_address == None and item_address != None):
+                raise osv.except_osv(_('Grouping failed.'), _('%s has a target address, %s has not.' % ( item.name, wlog_item.name)))
+            elif (wlog_address != None and item_address == None):
+                raise osv.except_osv(_('Grouping failed.'), _('%s has a target address, %s has not.' % ( wlog_item.name, item.name)))
+            elif (wlog_address != item_address):
+                raise osv.except_osv(_('Grouping failed.'), _('%s and %s have different target addresses.' % (wlog_item.name, item.name)))
+
+            # check for company    
+            if (wlog_item.company_id.id != item.company_id.id):
+                raise osv.except_osv(_('Grouping failed.'), _('%s (%s) and %s (%s) belong to different companies.' 
+                                                            % (wlog_item.name, wlog_item.company_id.name, item.name, item.company_id.name)))
+
+        # create grouping
+        group_obj = self.pool.get("stock.picking.group")
+        
+        # create empty group
+        new_group = group_obj.create(cr,uid,{})
+        
+        # and use for the requested pickings
         self.write(cr, uid, context['active_ids'], {'picking_group_id': new_group}, context=context)
 
+        # and update fields
+        group_obj.update_stored(cr, uid, [new_group], context=context)
+
+        # opening picking group window
         data_pool = self.pool.get('ir.model.data')
         view_result = data_pool.get_object_reference(cr, uid, 'stock_picking_group', 'picking_group_form')
         view_id = view_result and view_result[1] or False
@@ -75,8 +96,10 @@ class stock_picking_group(osv.osv):
         # TODO replace with live sequence prefix (codes "Picking IN", "Picking INT", "Picking OUT")
         naming = {'internal': 'INT/', 'out': 'OUT/', 'in': 'IN/'}
         return naming[pickingtype]
-                                                       
-    def _get_list(self, cr, uid, ids, field_name, arg, context):
+                                    
+    # get list of picking names (for display, easier reference.)                   
+    # will be stored, to be searchable
+    def _get_list(self, cr, uid, ids, field_name=None, arg=None, context=None):
         res = {}
         for session in self.browse(cr, uid, ids):
             r = []
@@ -85,8 +108,9 @@ class stock_picking_group(osv.osv):
             res[session.id] = ", ".join(r)
         return res
     
-    
+    # get name by type and group id
     def _get_name(self, cr, uid, ids, field_name, arg, context):
+        print "running _get_name for",ids
         res = {}
         for session in self.browse(cr, uid, ids):
             if (not session.type): # happens when creating from action
@@ -95,6 +119,7 @@ class stock_picking_group(osv.osv):
                 res[session.id] = self._get_naming(session.type) + 'GRP' + str(session.id)
         return res
     
+    # get combined list of moves from all pickings
     def _get_move_ids(self, cr, uid, ids, field_name, arg, context):
         res = {}
         for session in self.browse(cr, uid, ids):
@@ -105,25 +130,77 @@ class stock_picking_group(osv.osv):
             res[session.id] = move_ids.keys()
         return res
     
-    def _get_info(self, cr, uid, ids, field_name, arg, context):
+    # get type and address_id from any picking (here: first, as they are equal by design)  
+    def _get_info(self, cr, uid, ids, field_name=None, arg=None, context=None):
         res = {}
         for session in self.browse(cr, uid, ids):
-            res[session.id] = {'type': 'internal', 'address_id': None}
+            company = lambda self, cr, uid, c: self.pool.get('res.company')._company_default_get(cr, uid, 'stock.picking', context=c)
+            res[session.id] = {'type': 'internal', 'address_id': None, 'company_id': company}
             if (session.picking_ids):
                 first_picking = session.picking_ids[0]
-                res[session.id] = {'type': first_picking.type, 'address_id': first_picking.address_id.id}
+                res[session.id] = {'type': first_picking.type, 'address_id': first_picking.address_id.id, 'company_id': first_picking.company_id.id}
         return res
     
+    # get group ids from picking, for store trigger
+    def _getstore_picking(self, cr, uid, ids, context=None):
+        picking_obj = self.pool.get("stock.picking")
+        r = []
+        for p in picking_obj.browse(cr, uid, ids, context=context):
+            if (p.picking_group_id):
+                r.append(p.picking_group_id.id)
+        print "_getstore_picking",ids,"to",r
+        return r
+
+    # get group ids from group..., for store trigger
+    def _getstore_self(self, cr, uid, ids, context=None):
+        print "_getstore_self",ids
+        # working on this end already...
+        return ids
+
+    # update stored values (trying to figure out the "-unset-" reference problem, likely semi-concurrent accessing
+    def update_stored(self, cr, uid, ids, context=None):
+        info = self._get_info(cr, uid, ids, context=context)
+        lst = self._get_list(cr, uid, ids, context=context)
+        for session in self.browse(cr, uid, ids):
+            data = {'name': self._get_naming(info[session.id]['type']) + 'GRP' + str(session.id),
+                    'list': lst[session.id],
+                    'type': info[session.id]['type'],
+                    'address_id': info[session.id]['address_id'],
+                    'company_id': info[session.id]['company_id']}
+            print "updating",session.id,"with",data
+            self.write(cr, uid, session.id, data)
+            
+
+    
     _columns = {
-        "name": fields.function(_get_name, string="Reference", type='char', size=75, method=True, store=False), # todo store
-        "list": fields.function(_get_list, string="Pickings", type='char', size=255, method=True, store=False), # todo store
-        "type": fields.function(_get_info, multi="type", string="Type", type='char', size=75, method=True, store=False), # todo store
-        "address_id": fields.function(_get_info, multi="address_id", string="Address", type='many2one', relation="res.partner.address", size=75, method=True, store=False), # todo store
+        "name": fields.function(_get_name, string="Reference", type='char', size=75, method=True, store=False),
+        # this does a lot of -unset- on entries created by action from picking.
+        # I suspect it happens when picking_ids is not connected, hence no store as of now
+        # update_stored did not work 
+#                                    store={'stock.picking': (_getstore_picking, ['type','picking_group_id'], 10),
+#                                           'stock.picking.group': (_getstore_self, ['picking_ids'], 20)}),
+        "list": fields.function(_get_list, string="Pickings", type='char', size=255, method=True,
+                                    store={'stock.picking': (_getstore_picking, ['picking_group_id'], 10),
+                                           'stock.picking.group': (_getstore_self, ['picking_ids'], 20)}),
+        "type": fields.function(_get_info, multi="type", string="Type", type='char', size=75, method=True,
+                                    store={'stock.picking': (_getstore_picking, ['picking_group_id','type'], 10),
+                                           'stock.picking.group': (_getstore_self, ['picking_ids'], 20)}),
+        "address_id": fields.function(_get_info, multi="address_id", string="Address", type='many2one', relation="res.partner.address", method=True,
+                                    store={'stock.picking': (_getstore_picking, ['picking_group_id','address_id'], 10),
+                                           'stock.picking.group': (_getstore_self, ['picking_ids'], 20)}),
+        "company_id": fields.function(_get_info, multi="address_id", string="Address", type='many2one', relation="res.company", method=True,
+                                    store={'stock.picking': (_getstore_picking, ['picking_group_id','company_id'], 10),
+                                           'stock.picking.group': (_getstore_self, ['picking_ids'], 20)}),
         "picking_ids": fields.one2many("stock.picking", "picking_group_id", name="Picking group"),
         "move_ids": fields.function(_get_move_ids, string="Moves", type='many2many', relation="stock.move", size=75, method=True, store=False),
+        "date": fields.datetime("Date",help="Date when the grouping was created", required=True),
+    }
+
+    _defaults = {
+        "date": lambda *a: time.strftime('%Y-%m-%d %H:%M:%S'),
     }
     
-
+    # wrapper for multiple group ids checked
     def _check_grouped_compatible_picking(self, cr, uid, ids, context=None):
         for g in self.browse(cr, uid, ids, context=context):
             pickings = [p.id for p in g.picking_ids]
@@ -133,6 +210,8 @@ class stock_picking_group(osv.osv):
         # all ok? then true
         return True
 
+    # check compatibility
+    # yes, operating on picking. Maybe this would be better in picking class, but for now it's here.
     def _check_compatible_picking(self, cr, uid, picking_ids, context=None):
         if (len(picking_ids) < 2):
             # one or no item? is compatible with itself
@@ -140,17 +219,20 @@ class stock_picking_group(osv.osv):
 
         picking_obj = self.pool.get("stock.picking")
 
-        # Without Loss Of Generality, we take the first item to compare all later ones to
+        # Without Loss Of Generality, we take the last (pop()) item to compare all later ones to
         wlog_id = picking_ids.pop()
         wlog = picking_obj.browse(cr, uid, wlog_id, context=context)
          
         for p in picking_obj.browse(cr, uid, picking_ids, context=context):
+            # compare types
             if (wlog.type <> p.type):
                 return False
             
+            # compare company
             if (wlog.company_id.id <> p.company_id.id):
                 return False
             
+            # compare address
             wlog_address = wlog.address_id and wlog.address_id.id or None
             p_address = p.address_id and p.address_id.id or None
             if (wlog_address <> p_address):
@@ -159,7 +241,7 @@ class stock_picking_group(osv.osv):
         return True
      
     _constraints = [
-        (_check_grouped_compatible_picking, 'The pickings you chose are not compatible (type or address varies)', ['picking_ids']),
+        (_check_grouped_compatible_picking, 'The pickings you chose are not compatible (type or address varies, or from different companies)', ['picking_ids']),
     ]
             
         
