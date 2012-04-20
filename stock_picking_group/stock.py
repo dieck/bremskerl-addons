@@ -38,24 +38,24 @@ class stock_picking(osv.osv):
             
             # check for type    
             if (wlog_item.type != item.type):
-                raise osv.except_osv(_('Grouping failed.'), _('%s (%s) and %s (%s) have different types.' 
-                                                            % (wlog_item.name, wlog_item.type, item.name, item.type)))
+                raise osv.except_osv(_('Grouping failed.'), _('%s (%s) and %s (%s) have different types.') 
+                                                            % (wlog_item.name, wlog_item.type, item.name, item.type))
                 
             # check for address
             wlog_address = wlog_item.address_id and wlog_item.address_id.id or None
             item_address = item.address_id and item.address_id.id or None
 
             if (wlog_address == None and item_address != None):
-                raise osv.except_osv(_('Grouping failed.'), _('%s has a target address, %s has not.' % ( item.name, wlog_item.name)))
+                raise osv.except_osv(_('Grouping failed.'), _('%s has a target address, %s has not.') % ( item.name, wlog_item.name))
             elif (wlog_address != None and item_address == None):
-                raise osv.except_osv(_('Grouping failed.'), _('%s has a target address, %s has not.' % ( wlog_item.name, item.name)))
+                raise osv.except_osv(_('Grouping failed.'), _('%s has a target address, %s has not.') % ( wlog_item.name, item.name))
             elif (wlog_address != item_address):
-                raise osv.except_osv(_('Grouping failed.'), _('%s and %s have different target addresses.' % (wlog_item.name, item.name)))
+                raise osv.except_osv(_('Grouping failed.'), _('%s and %s have different target addresses.') % (wlog_item.name, item.name))
 
             # check for company    
             if (wlog_item.company_id.id != item.company_id.id):
-                raise osv.except_osv(_('Grouping failed.'), _('%s (%s) and %s (%s) belong to different companies.' 
-                                                            % (wlog_item.name, wlog_item.company_id.name, item.name, item.company_id.name)))
+                raise osv.except_osv(_('Grouping failed.'), _('%s (%s) and %s (%s) belong to different companies.') 
+                                                            % (wlog_item.name, wlog_item.company_id.name, item.name, item.company_id.name))
 
         # create grouping
         group_obj = self.pool.get("stock.picking.group")

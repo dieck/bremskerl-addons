@@ -8,8 +8,11 @@
 			<field name="type">form</field>
 			<field name="arch" type="xml">
 				<form string="Picking Group">
+					<group colspan="4" col="6">
 					<field name="name" />
 					<field name="type" />
+					<field name="date" />
+					</group>
 					<field name="list" />
 					<field name="address_id" />
 					<field name="company_id" invisible="1" />
