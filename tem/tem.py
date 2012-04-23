@@ -169,9 +169,8 @@ class tem_equipment(osv.osv):
             res[session.id] = ((session.state == 'new') or (session.state == 'available') or (session.state == 'disabled'))
         return res
 
-    def _is_active_changed(self, cr, uid, ids, context={}):
+    def _is_active_changed(self, cr, uid, ids, context=None):
         return ids
-        
 
     # _get_currency        
     # @author: from account.invoice,     
