@@ -130,6 +130,23 @@ class stock_picking_group(osv.osv):
             res[session.id] = move_ids.keys()
         return res
     
+    # get combined notes from all pickings
+    def _get_notes(self, cr, uid, ids, field_name, arg, context):
+        res = {}
+        for session in self.browse(cr, uid, ids):
+            n = ""
+            for p in session.picking_ids:
+                if (p.note):
+                    n = n + p.name + ":\n" + p.note + "\n\n"
+            
+            n = n.rstrip("\n")
+            n = n.strip()
+            
+            if (n):
+                res[session.id] = n
+        return res
+    
+    
     # get type and address_id from any picking (here: first, as they are equal by design)  
     def _get_info(self, cr, uid, ids, field_name=None, arg=None, context=None):
         res = {}
@@ -193,9 +210,9 @@ class stock_picking_group(osv.osv):
                                            'stock.picking.group': (_getstore_self, ['picking_ids'], 20)}),
         "picking_ids": fields.one2many("stock.picking", "picking_group_id", name="Picking group"),
         "partner_id": fields.related("address_id", "partner_id", type="many2one", relation="res.partner", string="Partner"),
-        "move_lines": fields.function(_get_move_ids, string="Moves", type='many2many', relation="stock.move", size=75, method=True, store=False),
+        "move_lines": fields.function(_get_move_ids, string="Moves", type='many2many', relation="stock.move", method=True, store=False),
         "date": fields.datetime("Date",help="Date when the grouping was created", required=True),
-        "note": fields.text("Note", translate=True),
+        "note": fields.function(_get_notes, string="Notes", type='text', method=True, store=False),
     }
 
     _defaults = {

@@ -25,7 +25,7 @@
 							<field name="move_lines" nolabel="1" colspan="4" widget="many2many" readonly="1" />
 						</page>
 						<page string="Notes">
-							<field name="note" nolabel="1" colspan="4" />
+							<field name="note" nolabel="1" colspan="4" readonly="1"/>
 						</page>
 					</notebook>
 				</form>
