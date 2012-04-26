@@ -192,7 +192,8 @@ class stock_picking_group(osv.osv):
                                     store={'stock.picking': (_getstore_picking, ['picking_group_id','company_id'], 10),
                                            'stock.picking.group': (_getstore_self, ['picking_ids'], 20)}),
         "picking_ids": fields.one2many("stock.picking", "picking_group_id", name="Picking group"),
-        "move_ids": fields.function(_get_move_ids, string="Moves", type='many2many', relation="stock.move", size=75, method=True, store=False),
+        "partner_id": fields.related("address_id", "partner_id", type="many2one", relation="res.partner", string="Partner"),
+        "move_lines": fields.function(_get_move_ids, string="Moves", type='many2many', relation="stock.move", size=75, method=True, store=False),
         "date": fields.datetime("Date",help="Date when the grouping was created", required=True),
     }
 
