@@ -195,6 +195,7 @@ class stock_picking_group(osv.osv):
         "partner_id": fields.related("address_id", "partner_id", type="many2one", relation="res.partner", string="Partner"),
         "move_lines": fields.function(_get_move_ids, string="Moves", type='many2many', relation="stock.move", size=75, method=True, store=False),
         "date": fields.datetime("Date",help="Date when the grouping was created", required=True),
+        "note": fields.text("Note", translate=True),
     }
 
     _defaults = {

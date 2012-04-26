@@ -24,6 +24,9 @@
 						<page string="Combined Moves">
 							<field name="move_lines" nolabel="1" colspan="4" widget="many2many" readonly="1" />
 						</page>
+						<page string="Notes">
+							<field name="note" nolabel="1" colspan="4" />
+						</page>
 					</notebook>
 				</form>
 			</field>
