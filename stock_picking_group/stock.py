@@ -110,7 +110,6 @@ class stock_picking_group(osv.osv):
     
     # get name by type and group id
     def _get_name(self, cr, uid, ids, field_name, arg, context):
-        print "running _get_name for",ids
         res = {}
         for session in self.browse(cr, uid, ids):
             if (not session.type): # happens when creating from action
@@ -142,8 +141,7 @@ class stock_picking_group(osv.osv):
             n = n.rstrip("\n")
             n = n.strip()
             
-            if (n):
-                res[session.id] = n
+            res[session.id] = n
         return res
     
     
@@ -151,7 +149,7 @@ class stock_picking_group(osv.osv):
     def _get_info(self, cr, uid, ids, field_name=None, arg=None, context=None):
         res = {}
         for session in self.browse(cr, uid, ids):
-            company = lambda self, cr, uid, c: self.pool.get('res.company')._company_default_get(cr, uid, 'stock.picking', context=c)
+            company = self.pool.get('res.company')._company_default_get(cr, uid, 'stock.picking.group', context=context)
             res[session.id] = {'type': 'internal', 'address_id': None, 'company_id': company}
             if (session.picking_ids):
                 first_picking = session.picking_ids[0]
@@ -165,12 +163,10 @@ class stock_picking_group(osv.osv):
         for p in picking_obj.browse(cr, uid, ids, context=context):
             if (p.picking_group_id):
                 r.append(p.picking_group_id.id)
-        print "_getstore_picking",ids,"to",r
         return r
 
     # get group ids from group..., for store trigger
     def _getstore_self(self, cr, uid, ids, context=None):
-        print "_getstore_self",ids
         # working on this end already...
         return ids
 
@@ -184,7 +180,6 @@ class stock_picking_group(osv.osv):
                     'type': info[session.id]['type'],
                     'address_id': info[session.id]['address_id'],
                     'company_id': info[session.id]['company_id']}
-            print "updating",session.id,"with",data
             self.write(cr, uid, session.id, data)
             
 
