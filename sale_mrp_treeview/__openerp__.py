@@ -11,7 +11,7 @@
     "name": "Add Sale Reference to MRP Production tree view",
     "version": "1.0",
     "depends": ["sale_mrp"],
-    'author' : 'Marco Dieckhoff (Bremskerl)',
+    'author' : 'Marco Dieckhoff, BREMSKERL',
     'website' : 'www.bremskerl.com',
     "category": "Manufacturing",
     "description": """Add Sale Reference to MRP Production tree view""",

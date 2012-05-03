@@ -10,7 +10,7 @@
 {
     'name' : 'Boilerplates for Sales',
     'version' : '6.0',
-    'author' : 'Marco Dieckhoff (Bremskerl)',
+    'author' : 'Marco Dieckhoff, BREMSKERL',
     'website' : 'www.bremskerl.com',
     'depends' : ['boilerplates','sale'],
     'category' : 'Boilerplates',

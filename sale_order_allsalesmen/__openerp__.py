@@ -11,7 +11,7 @@
     "name": "Add a menu item to Sales Orders without setting salesman in search",
     "version": "1.0",
     "depends": ["sale"],
-    'author' : 'Marco Dieckhoff (Bremskerl)',
+    'author' : 'Marco Dieckhoff, BREMSKERL',
     'website' : 'www.bremskerl.com',
     "category": "Sales",
     "description": """Add a menu item to Sales Orders without setting salesman in search""",

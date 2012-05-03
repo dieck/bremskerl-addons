@@ -24,7 +24,7 @@
     "name": "Add notes to stock move",
     "version": "1.06",
     "depends": ["stock","delivery"],
-    'author' : 'Marco Dieckhoff (Bremskerl)',
+    'author' : 'Marco Dieckhoff, BREMSKERL',
     'website' : 'www.bremskerl.com',
     "category": "Warehouse",
     "description": "Add notes to stock move, as internal and printed notes",

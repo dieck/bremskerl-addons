@@ -24,7 +24,7 @@
     "name": "Allows back-dating of stock moves",
     "version": "1.00",
     "depends": ["stock"],
-    'author' : 'Marco Dieckhoff (Bremskerl)',
+    'author' : 'Marco Dieckhoff, BREMSKERL',
     'website' : 'www.bremskerl.com',
     "category": "Warehouse",
     "description": "Allows back-dating of stock moves",

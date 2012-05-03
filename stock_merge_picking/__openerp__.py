@@ -15,7 +15,7 @@
 {
     'name' : 'Merge Picking',
     'version' : '6.0',
-    'author' : 'Marco Dieckhoff (Bremskerl)',
+    'author' : 'Marco Dieckhoff, BREMSKERL',
     'website' : 'www.bremskerl.com',
     'depends' : ['stock'],
     'category' : 'Warehouse',

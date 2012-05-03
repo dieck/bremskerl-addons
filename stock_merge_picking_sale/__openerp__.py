@@ -15,7 +15,7 @@
 {
     'name' : 'Merge Picking: Sales Handling',
     'version' : '6.0',
-    'author' : 'Marco Dieckhoff (Bremskerl)',
+    'author' : 'Marco Dieckhoff, BREMSKERL',
     'website' : 'www.bremskerl.com',
     'depends' : ['stock_merge_picking','sale','stock_sale_order_references'],
     'category' : 'Generic Modules',

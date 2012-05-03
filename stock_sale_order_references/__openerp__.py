@@ -10,7 +10,7 @@
 {
     'name' : 'Sales Order References overview for merged of picked pickings',
     'version' : '6.0',
-    'author' : 'Marco Dieckhoff (Bremskerl)',
+    'author' : 'Marco Dieckhoff, BREMSKERL',
     'website' : 'www.bremskerl.com',
     'depends' : ['stock','sale'],
     'category' : 'Generic Modules',

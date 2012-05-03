@@ -10,7 +10,7 @@
 {
     'name' : 'Move RePick',
     'version' : '6.0',
-    'author' : 'Marco Dieckhoff (Bremskerl)',
+    'author' : 'Marco Dieckhoff, BREMSKERL',
     'website' : 'www.bremskerl.com',
     'depends' : ['stock','sale','stock_sale_order_references'],
     'category' : 'Warehouse',

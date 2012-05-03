@@ -10,7 +10,7 @@
 {
     'name' : 'Survey: Change Response User',
     'version' : '6.0',
-    'author' : 'Marco Dieckhoff (Bremskerl)',
+    'author' : 'Marco Dieckhoff, BREMSKERL',
     'website' : 'www.bremskerl.com',
     'depends' : ['survey'],
     'category' : 'Tools',

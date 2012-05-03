@@ -24,7 +24,7 @@
     "name": "Add product cost price to stock move",
     "version": "1.05",
     "depends": ["stock"],
-    'author' : 'Marco Dieckhoff (Bremskerl)',
+    'author' : 'Marco Dieckhoff, BREMSKERL',
     'website' : 'www.bremskerl.com',
     "category": "Stock",
     "description": """Adds product cost price and currency to stock move at the time of setting it to done.

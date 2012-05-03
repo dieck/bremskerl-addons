@@ -25,7 +25,7 @@
     "version": "1.06",
     "depends": ["stock_move_notes"],
     # "conflicts": ["delivery_remove_report"],
-    'author' : 'Marco Dieckhoff (Bremskerl)',
+    'author' : 'Marco Dieckhoff, BREMSKERL',
     'website' : 'www.bremskerl.com',
     "category": "Warehouse",
     "description": "Add reports for notes to stock move",

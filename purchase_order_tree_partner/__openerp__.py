@@ -24,7 +24,7 @@
     "name": "Show Partner Reference in Purchase Order list views",
     "version": "1.0",
     "depends": [ "purchase" ],
-    'author' : 'Marco Dieckhoff (Bremskerl)',
+    'author' : 'Marco Dieckhoff, BREMSKERL',
     'website' : 'www.bremskerl.com',
     "category": "Purchases",
     "description": "Show Partner Reference in Purchase Order list views",

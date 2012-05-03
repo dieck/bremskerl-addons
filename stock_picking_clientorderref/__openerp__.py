@@ -24,7 +24,7 @@
     "name": "Add Customer Reference from Sales Order to Stock Picking overview",
     "version": "1.05",
     "depends": ["stock","sale"],
-    'author' : 'Marco Dieckhoff (Bremskerl)',
+    'author' : 'Marco Dieckhoff, BREMSKERL',
     'website' : 'www.bremskerl.com',
     "category": "Warehouse",
     "description": "Add Customer Reference from Sales Order to Stock Picking overview",

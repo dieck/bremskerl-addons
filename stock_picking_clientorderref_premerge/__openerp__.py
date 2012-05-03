@@ -23,7 +23,7 @@
 {
     'name' : 'Add Customer Reference from pre-merge Sales Order to Stock Picking overview',
     'version' : '1.05',
-    'author' : 'Marco Dieckhoff (Bremskerl)',
+    'author' : 'Marco Dieckhoff, BREMSKERL',
     'website' : 'www.bremskerl.com',
     'depends' : ['stock_merge_picking_sale'],
     'category' : 'Warehouse',

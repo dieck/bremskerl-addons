@@ -11,7 +11,7 @@
     "name": "Purchase Order View Currency",
     "version": "1.0",
     "depends": ["purchase"],
-    'author' : 'Marco Dieckhoff (Bremskerl)',
+    'author' : 'Marco Dieckhoff, BREMSKERL',
     'website' : 'www.bremskerl.com',
     "category": "Purchases",
     "description": """

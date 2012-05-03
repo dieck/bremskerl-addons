@@ -10,7 +10,7 @@
 {
     'name' : 'Merge Picking: Backorder Handling',
     'version' : '6.0',
-    'author' : 'Marco Dieckhoff (Bremskerl)',
+    'author' : 'Marco Dieckhoff, BREMSKERL',
     'website' : 'www.bremskerl.com',
     'depends' : ['stock_merge_picking','stock'],
     'category' : 'Generic Modules',

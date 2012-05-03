@@ -15,7 +15,7 @@
 {
     'name' : 'Sales Report with Shipped Quantities',
     'version' : '6.0',
-    'author' : 'Marco Dieckhoff (Bremskerl)',
+    'author' : 'Marco Dieckhoff, BREMSKERL',
     'website' : 'www.bremskerl.com',
     'depends' : ['sale'],
     'category' : 'Sales',

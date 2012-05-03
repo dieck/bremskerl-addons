@@ -11,7 +11,7 @@
     "name": "Makes Sale Reference in MRP Production searchable (and sortable)",
     "version": "1.0",
     "depends": ["sale_mrp"],
-    'author' : 'Marco Dieckhoff (Bremskerl)',
+    'author' : 'Marco Dieckhoff, BREMSKERL',
     'website' : 'www.bremskerl.com',
     "category": "Manufacturing",
     "description": """Makes Sale Reference in MRP Production searchable (and sortable)""",
