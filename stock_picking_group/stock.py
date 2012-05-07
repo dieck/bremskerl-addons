@@ -85,6 +85,41 @@ class stock_picking(osv.osv):
                 'context': context,
         }
     
+        
+    # handle back orders - the old order is the rest, not the just processed items
+    def do_partial(self, cr, uid, ids, partial_datas, context=None):
+        print "do_partial in stock_picking_group: start"
+        # before
+        before = {}
+        for picking in self.browse(cr, uid, ids, context=context):
+            group = picking.picking_group_id and picking.picking_group_id.id or None
+            backorder = picking.backorder_id and picking.backorder_id.id or None
+            before[picking.id] = { 'backorder': backorder, 'group': group }
+        
+        # process partial 
+        result = super(stock_picking, self).do_partial(cr, uid, ids, partial_datas, context)
+
+        # after
+        for picking in self.browse(cr, uid, ids, context=context):
+            group = picking.picking_group_id and picking.picking_group_id.id or None
+            backorder = picking.backorder_id and picking.backorder_id.id or None
+            
+            if (before[picking.id]['backorder'] != backorder):
+                # was changed, so switch backorders[picking.id] and backorder_id on before[group]
+
+                # add new, processed picking (set as "backorder of" on the current picking) to the group
+                print "writing ",{'picking_group_id': before[picking.id]['group']},"to",backorder
+                self.write(cr, uid, [backorder], {'picking_group_id': before[picking.id]['group']}, context)
+
+                print "writing ",{'picking_group_id': False},"to",picking.id
+                # remove the current, unprocessed picking from the group
+                self.write(cr, uid, [picking.id], {'picking_group_id': False}, context)
+        
+        # switch if neccessary
+        print "do_partial in stock_picking_group: end"
+        return result
+
+    
 stock_picking()
 
 
@@ -136,7 +171,8 @@ class stock_picking_group(osv.osv):
             n = ""
             for p in session.picking_ids:
                 if (p.note):
-                    n = n + p.name + ":\n" + p.note + "\n\n"
+                    # add picking name and note, where the note puts in no additional newlines
+                    n = n + p.name + ":\n" + p.note.rstrip("\r\n").rstrip("\n") + "\n\n"
             
             n = n.rstrip("\n")
             n = n.strip()
