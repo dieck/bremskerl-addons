@@ -31,11 +31,12 @@ class product_code_unique_product(osv.osv):
         if context is None:
             context={}
 
-        product = self.read(cr, uid, id, ['default_code'], context=context)
         if not default:
             default = {}
-        default = default.copy()
-        default['default_code'] = product['default_code'] + _(' (copy)')
+        if 'default_code' not in default:
+            default = default.copy()
+            product = self.read(cr, uid, id, ['default_code'], context=context)
+            default['default_code'] = product['default_code'] + _(' (copy)')
 
         return super(product_code_unique_product, self).copy(cr=cr, uid=uid, id=id, default=default, context=context)
         
