@@ -8,12 +8,13 @@ class product_code_unique_product(osv.osv):
     _inherit = "product.product"
       
     def _check_defaultcode_and_variants(self, cr, uid, ids):
-        for session in self.browse(cr, uid, ids):
-            res = self.search(cr, uid, [ ('default_code','=',session.default_code),
-                                         ('variants','=',session.variants)
+        for product in self.browse(cr, uid, ids):
+            res = self.search(cr, uid, [ ('default_code','=',product.default_code),
+                                         ('variants','=',product.variants)
                                        ])
-            # Result will contain the current session, we remove it here.
-            res.remove( session.id )
+            # Result may contain the current product if it's active: we remove it here.
+            if product.id in res:
+                res.remove(product.id)
             if len(res):
                 # If we have any results left
                 # we have duplicate entries
