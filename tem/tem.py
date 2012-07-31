@@ -386,8 +386,22 @@ tem_inspection()
 
 class tem_inspection_measurements(osv.osv):
     _name = "tem.inspection.measurements"
+
+    def _get_name(self, cr, uid, ids, field_name, arg, context):
+        res = {}
+        for insp in self.browse(cr, uid, ids):
+            r = [] 
+            if (insp.measurement):
+                r.append(str(insp.measurement) + " " + str(insp.measurement_unit_id.name))
+            if (insp.note):
+                r.append(str(insp.note))
+            if not r:
+                r = ['Name update follows']
+            res[insp.id] = " // ".join(r)
+        return res
     
     _columns = {
+        "name": fields.function(_get_name, string="Inspection", type='char', size=100, method=True,),    
         "inspection_id": fields.many2one("tem.inspection", "Inspection", required=True),
         "user_id": fields.many2one("res.users", "Inspected by", required=True),
         "date": fields.datetime("Inspection date", required=True),
