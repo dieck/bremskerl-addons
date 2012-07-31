@@ -303,12 +303,6 @@ class tem_inspection(osv.osv):
         "tool": fields.char("Tool", size=50, help="Tool (appliance/calibre) used to calibrate the test equipment.", required=True)
     }
 
-
-    def default_get(self, cr, uid, fields_list, context=None):
-        res = super(tem_inspection, self).default_get(cr, uid, fields_list, context)
-        #self.compute_date(cr, uid, context=context)
-        return res
-
     def _get_next_date(self, cr, uid, context):
         # datetime object for deriving the default next test date
         dt = datetime.today()
