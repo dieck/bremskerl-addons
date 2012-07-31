@@ -311,8 +311,15 @@ class tem_inspection(osv.osv):
         # datetime object for deriving the default next test date
         dt = datetime.today()
 
+        # test if coming from equipment
+        if (context.get('active_model','') != 'tem.equipment'):
+            # otherwise return current date/time
+            return dt.strftime('%Y-%m-%d %H:%M:%S')
+        
         eqid = context.get('equipment_id', context.get('active_id', None))
+
         if (not eqid):
+            # return current date/time
             return dt.strftime('%Y-%m-%d %H:%M:%S')
         
         equipment = self.pool.get('tem.equipment').browse(cr, uid, [eqid], context=context)[0]
