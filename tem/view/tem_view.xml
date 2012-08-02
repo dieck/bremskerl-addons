@@ -100,8 +100,10 @@
 									<group colspan="2" col="2">
 										<separator string="Inspection" colspan="2" />
 										<field name="by_id" />
+										<field name="tool" />
 										<field name="date" />
 										<field name="next" />
+										<field name="interval_text" />
 									</group>
 									<group colspan="2" col="2">
 										<separator string="Proof of Calibration" colspan="2" />
@@ -114,6 +116,29 @@
 										<separator string="Remarks" colspan="2" />
 										<field name="notes" nolabel="1" />
 									</group>
+
+									<group colspan="4" col="1">
+										<separator string="Measurements" />
+										<field nolabel="1" name="measurement_ids"
+											context="{'inspection_id':active_id or False}">
+											<tree string="TEM - Inspection Measurements">
+												<field name="user_id" />
+												<field name="date" />
+												<field name="measurement" />
+												<field name="measurement_unit_id" colspan="2" nolabel="1" />
+												<field name="note" colspan="4" />
+											</tree>
+											<form string="TEM - Inspection Measurements">
+												<field name="user_id" />
+												<field name="date" />
+												<newline />
+												<field name="measurement" />
+												<field name="measurement_unit_id" colspan="2" nolabel="1" />
+												<field name="note" />
+											</form>
+										</field>
+									</group>
+
 								</form>
 							</field>
 						</page>
@@ -378,7 +403,7 @@
 								<field name="date" />
 								<field name="measurement" />
 								<field name="measurement_unit_id" colspan="2" nolabel="1" />
-								<field name="note" colspan="4"/>
+								<field name="note" colspan="4" />
 							</tree>
 							<form string="TEM - Inspection Measurements">
 								<field name="user_id" />
