@@ -152,20 +152,14 @@ class tem_equipment(osv.osv):
   
     def _get_name(self, cr, uid, ids, field_name, arg, context):
         res = {}
-        for insp in self.browse(cr, uid, ids):
-            r = [] 
-            if (insp.date):
-                r.append(str(insp.date))
-            if (insp.result):
-                r.append(str(insp.result))
-            if (insp.equipment_id):
-                r.append(str(insp.equipment_id.name))
-            if not r:
-                r = ['Name update follows']
-            res[insp.id] = " // ".join(r)
+        for eqp in self.browse(cr, uid, ids):
+            r = "" 
+            if (eqp.id_number):
+                r += str(eqp.id_number)
+            if (eqp.description):
+                r += " ("+str(eqp.description.encode('utf-8'))+")"
+            res[eqp.id] = r
         return res
-    
-    
     
     def _is_active(self, cr, uid, ids, field_name, arg, context={}):
         res = {}
@@ -489,7 +483,7 @@ tem_equipment_group_o2m()
 class tem_location_o2m(osv.osv):
     _name = "tem.location";
     _inherit = _name
-    
+     
     def _get_related_equipments(self, cr, uid, ids, field_name, arg, context):
         res = {}
         equipment_obj = self.pool.get("tem.equipment")
