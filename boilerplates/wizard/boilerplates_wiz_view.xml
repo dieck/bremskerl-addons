@@ -8,6 +8,10 @@
 			<field name="type">form</field>
 			<field name="arch" type="xml">
 				<form string="Add Boilerplate">
+					<separator colspan="4" string="WARNING!"/>
+					<label colspan="4" string="Unsaved changes to the form will be overwritten."/>
+					<label colspan="4" string="If unsure, please cancel and use the Save button first." />
+					<separator colspan="4" />
 					<field name="boilerplate_id" colspan="4" required="1" context="context" />
 					<field name="remote_id" invisible="1" />
 					<group col="2" colspan="4">
@@ -25,6 +29,10 @@
 			<field name="type">form</field>
 			<field name="arch" type="xml">
 				<form string="Add Boilerplate">
+					<separator colspan="4" string="WARNING!"/>
+					<label colspan="4" string="Unsaved changes to the form will be overwritten."/>
+					<label colspan="4" string="If unsure, please cancel and use the Save button first." />
+					<separator colspan="4" />
 					<field name="boilerplate_id" colspan="4" required="1" context="context" />
 					<field name="lang" colspan="4" context="context" />
 					<field name="remote_id" invisible="1" />
