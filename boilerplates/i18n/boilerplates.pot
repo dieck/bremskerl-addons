@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 6.0.2\n"
+"Project-Id-Version: OpenERP Server 6.0.4\n"
 "Report-Msgid-Bugs-To: https://bugs.launchpad.net/bremskerl-addons/\n"
-"POT-Creation-Date: 2011-05-24 14:49+0000\n"
-"PO-Revision-Date: 2011-05-24 14:49+0000\n"
+"POT-Creation-Date: 2012-08-06 06:57+0000\n"
+"PO-Revision-Date: 2012-08-06 06:57+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -15,232 +15,213 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
+#. module: boilerplates
 #: view:boilerplates.text:0
 #: field:boilerplates.text,category_id:0
-#. module: boilerplates
 msgid "Category"
 msgstr ""
 
-#: model:boilerplates.text,name:boilerplates.bp_txt_acct1
 #. module: boilerplates
-msgid "Rates 12 @ 2%"
-msgstr ""
-
 #: help:boilerplates.text,product_id:0
-#. module: boilerplates
 msgid "This boilerplate relates to this single specific product."
 msgstr ""
 
-#: code:addons\boilerplates\wizard\boilerplates_wizard.py:67
-#: code:addons\boilerplates\wizard\boilerplates_wizard.py:69
 #. module: boilerplates
+#: code:addons/boilerplates/wizard/boilerplates_wizard.py:64
+#: code:addons/boilerplates/wizard/boilerplates_wizard.py:66
 #, python-format
 msgid "Product set on the Boilerplate does not match this "
 msgstr ""
 
-#: code:addons\boilerplates\wizard\boilerplates_wizard.py:76
-#: code:addons\boilerplates\wizard\boilerplates_wizard.py:79
 #. module: boilerplates
+#: code:addons/boilerplates/wizard/boilerplates_wizard.py:73
+#: code:addons/boilerplates/wizard/boilerplates_wizard.py:76
 #, python-format
 msgid "Partner mismatch"
 msgstr ""
 
-#: code:addons\boilerplates\wizard\boilerplates_wizard.py:76
-#: code:addons\boilerplates\wizard\boilerplates_wizard.py:79
 #. module: boilerplates
+#: code:addons/boilerplates/wizard/boilerplates_wizard.py:73
+#: code:addons/boilerplates/wizard/boilerplates_wizard.py:76
 #, python-format
 msgid "Partner set on the Boilerplate does not match this "
 msgstr ""
 
-#: field:boilerplates.text,active:0
 #. module: boilerplates
+#: view:boilerplate.wizard:0
+msgid "If unsure, please cancel and use the Save button first."
+msgstr ""
+
+#. module: boilerplates
+#: field:boilerplates.text,active:0
 msgid "Valid"
 msgstr ""
 
-#: code:addons\boilerplates\boilerplates.py:16
-#: sql_constraint:boilerplates.category:0
 #. module: boilerplates
+#: code:addons/boilerplates/boilerplates.py:16
+#: sql_constraint:boilerplates.category:0
 #, python-format
 msgid "The boilerplate category names must be unique!"
 msgstr ""
 
-#: model:ir.model,name:boilerplates.model_boilerplates_text
-#. module: boilerplates
-msgid "boilerplates.text"
-msgstr ""
 
-#: view:boilerplates.text:0
 #. module: boilerplates
+#: view:boilerplates.text:0
 msgid "Boilerplate Text"
 msgstr ""
 
-#: model:boilerplates.text,name:boilerplates.bp_txt_acct2
 #. module: boilerplates
-msgid "No cheques"
-msgstr ""
-
-#: model:ir.model,name:boilerplates.model_boilerplates_category
-#. module: boilerplates
-msgid "boilerplates.category"
-msgstr ""
-
 #: view:boilerplates.category:0
-#. module: boilerplates
 msgid "Boilerplate Category"
 msgstr ""
 
-#: field:boilerplates.text,note:0
 #. module: boilerplates
+#: field:boilerplates.text,note:0
 msgid "Internal notes about this boilerplate"
 msgstr ""
 
+#. module: boilerplates
 #: view:boilerplates.text:0
 #: field:boilerplates.text,product_id:0
-#. module: boilerplates
 msgid "Product"
 msgstr ""
 
-#: field:boilerplates.category,description:0
 #. module: boilerplates
+#: field:boilerplates.category,description:0
 msgid "Description"
 msgstr ""
 
-#: field:boilerplate.wizard,boilerplate_id:0
 #. module: boilerplates
+#: field:boilerplate.wizard,boilerplate_id:0
 msgid "Boilerplate"
 msgstr ""
 
-#: field:boilerplates.text,valid_to:0
 #. module: boilerplates
-msgid "Valid To"
+#: view:boilerplate.wizard:0
+msgid "Unsaved changes to the form will be overwritten."
 msgstr ""
 
-#: view:boilerplates.text:0
 #. module: boilerplates
+#: view:boilerplates.text:0
 msgid "Constraints..."
 msgstr ""
 
-#: view:boilerplates.text:0
 #. module: boilerplates
+#: view:boilerplates.text:0
 msgid "Content..."
 msgstr ""
 
+#. module: boilerplates
 #: view:boilerplates.text:0
-#. module: boilerplates
 msgid "Internal Notes"
-msgstr ""
+msgstr "Internal Notes"
 
-#: help:boilerplates.text,partner_id:0
 #. module: boilerplates
+#: help:boilerplates.text,partner_id:0
 msgid "This boilerplate relates to this single specific partner."
 msgstr ""
 
-#: model:boilerplates.text,text:boilerplates.bp_txt_acct2
 #. module: boilerplates
-msgid "Please note: Due to recent events, we can not accept cheques from outside the EU."
+#: field:boilerplates.text,valid_to:0
+msgid "Valid To"
 msgstr ""
 
-#: model:boilerplates.category,name:boilerplates.bp_cat_customs
 #. module: boilerplates
+#: model:boilerplates.category,name:boilerplates.bp_cat_customs
 msgid "Customs Authority Notes"
 msgstr ""
 
-#: model:boilerplates.text,text:boilerplates.bp_txt_tracking1
 #. module: boilerplates
-msgid "Urgent Freight. Please keep sender informed about unplanned delays."
+#: view:boilerplate.wizard:0
+msgid "WARNING!"
 msgstr ""
 
+#. module: boilerplates
 #: model:ir.actions.act_window,name:boilerplates.open_boilerplate_text_tree
 #: model:ir.module.module,shortdesc:boilerplates.module_meta_information
 #: model:ir.ui.menu,name:boilerplates.menu_boilerplates
 #: model:ir.ui.menu,name:boilerplates.menu_boilerplates_text
-#. module: boilerplates
 msgid "Boilerplates"
 msgstr ""
 
-#: view:boilerplates.category:0
 #. module: boilerplates
+#: view:boilerplates.category:0
 msgid "Boilerplate Categories"
 msgstr ""
 
-#: model:boilerplates.category,name:boilerplates.bp_cat_general
 #. module: boilerplates
+#: model:boilerplates.category,name:boilerplates.bp_cat_general
 msgid "General Notes"
 msgstr ""
 
-#: view:boilerplates.text:0
 #. module: boilerplates
+#: view:boilerplates.text:0
 msgid "Usability"
 msgstr ""
 
+#. module: boilerplates
 #: model:ir.actions.act_window,name:boilerplates.open_boilerplate_category_tree
 #: model:ir.ui.menu,name:boilerplates.menu_boilerplates_category
-#. module: boilerplates
 msgid "Categories"
 msgstr ""
 
-#: code:addons\boilerplates\wizard\boilerplates_wizard.py:18
 #. module: boilerplates
+#: code:addons/boilerplates/wizard/boilerplates_wizard.py:18
 #, python-format
 msgid "Dummy"
 msgstr ""
 
-#: model:boilerplates.text,text:boilerplates.bp_txt_acct1
 #. module: boilerplates
-msgid "You may pay in 12 rates at only 2% interest. Contact our Accounting department."
-msgstr ""
-
 #: field:boilerplates.category,name:0
 #: field:boilerplates.text,name:0
-#. module: boilerplates
 msgid "Name"
 msgstr ""
 
-#: model:boilerplates.category,name:boilerplates.bp_cat_accounting
 #. module: boilerplates
+#: field:boilerplate.wizard,lang:0
+msgid "Language"
+msgstr ""
+
+#. module: boilerplates
+#: model:boilerplates.category,name:boilerplates.bp_cat_accounting
 msgid "Accounting Notes"
 msgstr ""
 
-#: model:boilerplates.text,name:boilerplates.bp_txt_tracking1
 #. module: boilerplates
-msgid "Urgent - Delay Information"
-msgstr ""
-
 #: view:boilerplates.text:0
-#. module: boilerplates
 msgid "Active"
 msgstr ""
 
+#. module: boilerplates
 #: view:boilerplates.text:0
 #: field:boilerplates.text,partner_id:0
-#. module: boilerplates
 msgid "Partner"
 msgstr ""
 
-#: view:boilerplates.text:0
 #. module: boilerplates
+#: view:boilerplates.text:0
 msgid "Usability..."
 msgstr ""
 
-#: view:boilerplates.text:0
 #. module: boilerplates
+#: view:boilerplates.text:0
 msgid "Constraints"
 msgstr ""
 
-#: code:addons\boilerplates\wizard\boilerplates_wizard.py:67
-#: code:addons\boilerplates\wizard\boilerplates_wizard.py:69
 #. module: boilerplates
+#: code:addons/boilerplates/wizard/boilerplates_wizard.py:64
+#: code:addons/boilerplates/wizard/boilerplates_wizard.py:66
 #, python-format
 msgid "Product mismatch"
 msgstr ""
 
-#: model:boilerplates.category,name:boilerplates.bp_cat_usage
 #. module: boilerplates
+#: model:boilerplates.category,name:boilerplates.bp_cat_usage
 msgid "Usage Notes"
 msgstr ""
 
-#: model:ir.module.module,description:boilerplates.module_meta_information
 #. module: boilerplates
+#: model:ir.module.module,description:boilerplates.module_meta_information
 msgid "\n"
 "This addon, together with it's modular extensions, provides boilerplates for multiple fields.\n"
 "\n"
@@ -250,58 +231,52 @@ msgid "\n"
 "Modular extensions provide actions on different forms to add these boilerplates directly to existing text fields, thus being used natively, e.g. in reports. \n"
 "    "
 msgstr ""
-"Dieses Addon und seine modularen Erweiterungen stellen Textbausteine für verschiedene Felder bereit.\n"
-"\n"
-"Die Textbausteine können in Kategorien angeordnet und Produkten oder Partnern zugeordnet werden.\n"
-"Die Einrichtung erfolgt über das Menü Werkzeuge / Textbausteine.\n"
-"\n"
-"Modulare Erweiterungen (boilerplate_*) stellen Aktionen in verschiedenen Formularen bereit, um die Textbausteine direkt existierenden Textfeldern hinzuzufügen. Dadurch stehen sie nativ, zum Beispiel für Ausdrucke, zur Verfügung.\n"
-"    "
 
-#: field:boilerplates.text,text:0
+
 #. module: boilerplates
+#: field:boilerplates.text,text:0
 msgid "Text"
 msgstr ""
 
-#: field:boilerplates.text,valid_from:0
 #. module: boilerplates
+#: field:boilerplates.text,valid_from:0
 msgid "Valid From"
 msgstr ""
 
+#. module: boilerplates
 #: view:boilerplate.wizard:0
 #: model:ir.model,name:boilerplates.model_boilerplate_wizard
-#. module: boilerplates
 msgid "Add Boilerplate"
 msgstr ""
 
-#: view:boilerplates.text:0
 #. module: boilerplates
+#: view:boilerplates.text:0
 msgid "Group by..."
 msgstr ""
 
-#: view:boilerplate.wizard:0
 #. module: boilerplates
+#: view:boilerplate.wizard:0
 msgid "Cancel"
 msgstr ""
 
-#: model:boilerplates.category,name:boilerplates.bp_cat_tracking
 #. module: boilerplates
+#: model:boilerplates.category,name:boilerplates.bp_cat_tracking
 msgid "Dispatch & Tracking Notes"
 msgstr ""
 
-#: field:boilerplate.wizard,remote_id:0
 #. module: boilerplates
+#: field:boilerplate.wizard,remote_id:0
 msgid "Remote model"
 msgstr ""
 
-#: view:boilerplates.text:0
 #. module: boilerplates
+#: view:boilerplates.text:0
 msgid "Boilerplate Texts"
 msgstr ""
 
-#: code:addons\boilerplates\boilerplates.py:50
-#: sql_constraint:boilerplates.text:0
 #. module: boilerplates
+#: code:addons/boilerplates/boilerplates.py:50
+#: sql_constraint:boilerplates.text:0
 #, python-format
 msgid "The boilerplate names must be unique!"
 msgstr ""
