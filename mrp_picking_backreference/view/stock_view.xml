@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+
+		<record id="view_move_form" model="ir.ui.view">
+			<field name="name">stock.sale.order.references.stock.move.form.info</field>
+			<field name="model">stock.move</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="stock.view_move_form" />
+			<field name="arch" type="xml">
+				<xpath expr="//group/separator[@string='Traceability']/.."
+					position="inside">
+				<field name="production_ids_raw_single" />
+				</xpath>
+			</field>
+		</record>
+
+		<record id="view_move_tree_reception_picking" model="ir.ui.view">
+			<field name="name">mrp.picking.backreference.stock.move.tree2</field>
+			<field name="model">stock.move</field>
+			<field name="type">tree</field>
+			<field name="inherit_id" ref="stock.view_move_tree_reception_picking" />
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='partner_id']" position="before">
+					<field name="production_ids_raw_single" />
+					</xpath>
+			</field>
+		</record>
+
+	</data>
+</openerp>
