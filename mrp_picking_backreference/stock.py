@@ -22,11 +22,11 @@ class stock_picking(osv.osv):
     
     _columns = {
         'production_ids_raw': fields.one2many('mrp.production', 'picking_id',
-                                          string="Production orders",
+                                          string="Raw materials for",
                                           help="Production orders this picking provides raw material for"),
         "production_ids_raw_single": fields.function(_wlog_single_production_ids_raw, 
                                          type='char', size=64, method=True,
-                                         string="Production order",
+                                         string="Raw material for",
                                          help="Production order this move provides raw material for"),
     }
 
@@ -40,12 +40,12 @@ class stock_move(osv.osv):
     _columns = {
         'production_ids_raw': fields.related('picking_id','production_ids_raw',
                                          type="one2many", relation="mrp.production", 
-                                          string="Production orders",
+                                          string="Raw materials for",
                                           help="Production orders this picking provides raw material for"),
 
         'production_ids_raw_single': fields.related('picking_id','production_ids_raw_single',
                                          type="char", size="64", 
-                                         string="Production order",
+                                         string="Raw material for",
                                          help="Production order this move provides raw material for"),
     }
 
