@@ -34,14 +34,14 @@ class tem_res_responsibles(osv.osv):
     ]
 
     def _check_userid(self, cr, uid, ids, context=None):
-        for session in self.browse(cr, uid, ids, context=context):
-            if ( (session.type == 'employee') and not (session.user_id and session.user_id.id) ) :
+        for rsp in self.browse(cr, uid, ids, context=context):
+            if ( (rsp.type == 'employee') and not (rsp.user_id and rsp.user_id.id) ) :
                 return False
         return True
 
     def _check_partnerid(self, cr, uid, ids, context=None):
-        for session in self.browse(cr, uid, ids, context=context):
-            if ( ((session.type == 'manufacturer') or (session.type == 'contractor')) and not (session.partner_id and session.partner_id.id) ) :
+        for rsp in self.browse(cr, uid, ids, context=context):
+            if ( ((rsp.type == 'manufacturer') or (rsp.type == 'contractor')) and not (rsp.partner_id and rsp.partner_id.id) ) :
                 return False
         return True
      
@@ -97,13 +97,13 @@ class tem_equipment_group(osv.osv):
 
     def _get_interval_text(self, cr, uid, ids, field_name, arg, context):
         res = {}
-        for session in self.browse(cr, uid, ids):
+        for grp in self.browse(cr, uid, ids):
             r = "" 
-            if (session.interval):
-                r += str(session.interval)
-            if (session.interval_repeat):
-                r += " "+str(session.interval_repeat)
-            res[session.id] = r or False
+            if (grp.interval):
+                r += str(grp.interval)
+            if (grp.interval_repeat):
+                r += " "+str(grp.interval_repeat)
+            res[grp.id] = r or False
         return res
     
     _columns = {
@@ -152,21 +152,22 @@ class tem_equipment(osv.osv):
   
     def _get_name(self, cr, uid, ids, field_name, arg, context):
         res = {}
-        for session in self.browse(cr, uid, ids):
+        for eqp in self.browse(cr, uid, ids):
             r = "" 
-            if (session.id_number):
-                r += str(session.id_number)
-            if (session.description):
-                r += " ("+str(session.description.encode('utf-8'))+")"
-            res[session.id] = r
+            if (eqp.id_number):
+                r += str(eqp.id_number)
+            if (eqp.description):
+                r += " ("+str(eqp.description.encode('utf-8'))+")"
+            res[eqp.id] = r
         return res
+    
     
     
     
     def _is_active(self, cr, uid, ids, field_name, arg, context={}):
         res = {}
-        for session in self.browse(cr, uid, ids):
-            res[session.id] = ((session.state == 'new') or (session.state == 'available') or (session.state == 'disabled'))
+        for eqp in self.browse(cr, uid, ids):
+            res[eqp.id] = ((eqp.state == 'new') or (eqp.state == 'available') or (eqp.state == 'disabled'))
         return res
 
     def _is_active_changed(self, cr, uid, ids, context=None):
@@ -196,7 +197,8 @@ class tem_equipment(osv.osv):
         
         "name": fields.function(_get_name, string="Equipment name", type='char', size=75, method=True),
         "active": fields.function(_is_active, string="Active", type='boolean', method=True,
-                                  store={'tem.equipment': (_is_active_changed, 'state', 10)}),
+                                  store={'tem.equipment': (_is_active_changed, ['state'], 10)},
+                                  help="Active status is derived from the state: scrapped and lost are considered inactive."),
 
         #char("test1", size=32), 
         #function(_get_name, string="Equipment name", type='char', size=75, method=True),
@@ -243,14 +245,14 @@ class tem_equipment(osv.osv):
     }
     
     def _check_measuring_rangeresolution_unit_id(self, cr, uid, ids, context=None):
-        for session in self.browse(cr, uid, ids, context=context):
-            if ( ((session.measuring_range) or (session.measuring_resolution)) and not (session.measuring_rangeresolution_unit_id and session.measuring_rangeresolution_unit_id.id) ) :
+        for eqp in self.browse(cr, uid, ids, context=context):
+            if ( ((eqp.measuring_range) or (eqp.measuring_resolution)) and not (eqp.measuring_rangeresolution_unit_id and eqp.measuring_rangeresolution_unit_id.id) ) :
                 return False
         return True
 
     def _check_measuring_precision_unit_id(self, cr, uid, ids, context=None):
-        for session in self.browse(cr, uid, ids, context=context):
-            if ( (session.measuring_precision) and not (session.measuring_precision_unit_id and session.measuring_precision_unit_id.id) ) :
+        for eqp in self.browse(cr, uid, ids, context=context):
+            if ( (eqp.measuring_precision) and not (eqp.measuring_precision_unit_id and eqp.measuring_precision_unit_id.id) ) :
                 return False
         return True
      
@@ -269,52 +271,44 @@ class tem_inspection(osv.osv):
     
     def _get_name(self, cr, uid, ids, field_name, arg, context):
         res = {}
-        for session in self.browse(cr, uid, ids):
+        for insp in self.browse(cr, uid, ids):
             r = [] 
-            if (session.date):
-                r.append(str(session.date))
-            if (session.result):
-                r.append(str(session.result))
-            if (session.equipment_id):
-                r.append(str(session.equipment_id.name))
-            res[session.id] = " // ".join(r)
+            if (insp.date):
+                r.append(str(insp.date))
+            if (insp.result):
+                r.append(str(insp.result))
+            if (insp.equipment_id):
+                r.append(str(insp.equipment_id.name))
+            res[insp.id] = " // ".join(r)
         return res
     
-    def on_change_equipment_id(self, cr, uid, ids, equipment):
-        if not equipment:
-            return {'value': {'interval_text': False}}
-        eq_ids = self.pool.get('tem.equipment')
-        for eq in eq_ids.browse(cr, uid, [equipment]):
-            data = {'interval_text': eq.interval_text}
-        return {'value': data}
     
-    _columns = {
-        "name": fields.function(_get_name, string="Inspection", type='char', size=100, method=True),
-        "equipment_id": fields.many2one("tem.equipment", "Equipment", required=True),
-        "by_id": fields.many2one("res.users", "Inspected by", required=True),
-        "date": fields.datetime("Inspection date", required=True),
-        "next": fields.datetime("Next Inspection Due", required=True),
-        "interval_text": fields.related("equipment_id", "interval_text",  type='char', string="Scheduled Interval", readonly=True),
-        "description": fields.char("Short Description", size=64, translate=True,),
-        "result": fields.selection([("defer","Deferred"),("pass","Passed"),("fail","Failed")], "Inspection Result", required=True),
-        "maint": fields.boolean("Needs Maintenance/Repair"),
-        "scrap": fields.boolean("To be scrapped"),
-        "notes": fields.text("Notes"),
-        "tool": fields.char("Tool", size=50, help="Tool (appliance/calibre) used to calibrate the test equipment.", required=True)
-    }
+    def _get_interval_text(self, cr, uid, equipment_id):
+        if not equipment_id:
+            return False
+        eq_obj = self.pool.get('tem.equipment')
+        eqp = eq_obj.browse(cr, uid, equipment_id)
+        return eqp.interval_text
+              
 
-
-    def default_get(self, cr, uid, fields_list, context=None):
-        res = super(tem_inspection, self).default_get(cr, uid, fields_list, context)
-        #self.compute_date(cr, uid, context=context)
-        return res
-
-    def _get_next_date(self, cr, uid, context):
+    def _get_next_date(self, cr, uid, context={}, equipment_id={}):
         # datetime object for deriving the default next test date
         dt = datetime.today()
 
-        eqid = context.get('equipment_id', context.get('active_id', None))
+        
+        # we need to have an equipment_id.
+        # Either from context, or by variable from on_change
+        eqid = None
+        
+        if (equipment_id):
+            eqid = equipment_id
+                            
+        if (context.get('active_model','') == 'tem.equipment'):
+            eqid = context.get('equipment_id', context.get('active_id', None))
+ 
+        
         if (not eqid):
+            # return current date/time
             return dt.strftime('%Y-%m-%d %H:%M:%S')
         
         equipment = self.pool.get('tem.equipment').browse(cr, uid, [eqid], context=context)[0]
@@ -326,8 +320,6 @@ class tem_inspection(osv.osv):
         # nothing to do? return "today"
         if (intvl == 0 or intvl_type is None):
             return time.strftime('%Y-%m-%d %H:%M:%S') 
-        
-       
          
         # year and month are directly converted
         if (intvl_type == 'yr'):
@@ -370,7 +362,28 @@ class tem_inspection(osv.osv):
             dt -= timedelta(days=dt.weekday()-4)
 
         return dt.strftime('%Y-%m-%d %H:%M:%S')
+                  
+               
+    def on_change_equipment_id(self, cr, uid, ids, equipment_id):
+        return {'value': {'interval_text': self._get_interval_text(cr, uid, equipment_id),
+                          'next': self._get_next_date(cr, uid, equipment_id=equipment_id),
+                          'date': time.strftime('%Y-%m-%d %H:%M:%S')}}
     
+    _columns = {
+        "name": fields.function(_get_name, string="Inspection", type='char', size=100, method=True),
+        "equipment_id": fields.many2one("tem.equipment", "Equipment", required=True),
+        "by_id": fields.many2one("res.users", "Inspected by", required=True),
+        "date": fields.datetime("Inspection date", required=True),
+        "next": fields.datetime("Next Inspection Due", required=True),
+        "interval_text": fields.related("equipment_id", "interval_text",  type='char', string="Scheduled Interval", readonly=True),
+        "description": fields.char("Short Description", size=64, translate=True,),
+        "result": fields.selection([("defer","Deferred"),("pass","Passed"),("fail","Failed")], "Inspection Result", required=True),
+        "maint": fields.boolean("Needs Maintenance/Repair"),
+        "scrap": fields.boolean("To be scrapped"),
+        "notes": fields.text("Notes"),
+        "tool": fields.char("Tool", size=50, help="Tool (appliance/calibre) used to calibrate the test equipment.", required=True)
+    }
+
     _defaults = {
         "date": lambda *a: time.strftime('%Y-%m-%d %H:%M:%S'),
         "next": _get_next_date,
@@ -381,8 +394,22 @@ tem_inspection()
 
 class tem_inspection_measurements(osv.osv):
     _name = "tem.inspection.measurements"
+
+    def _get_name(self, cr, uid, ids, field_name, arg, context):
+        res = {}
+        for insp in self.browse(cr, uid, ids):
+            r = [] 
+            if (insp.measurement):
+                r.append(str(insp.measurement) + " " + str(insp.measurement_unit_id.name))
+            if (insp.note):
+                r.append(str(insp.note))
+            if not r:
+                r = ['Name update follows']
+            res[insp.id] = " // ".join(r)
+        return res
     
     _columns = {
+        "name": fields.function(_get_name, string="Inspection", type='char', size=100, method=True,),    
         "inspection_id": fields.many2one("tem.inspection", "Inspection", required=True),
         "user_id": fields.many2one("res.users", "Inspected by", required=True),
         "date": fields.datetime("Inspection date", required=True),
@@ -399,13 +426,13 @@ class tem_inspection_measurements(osv.osv):
     
     def _check_content(self, cr, uid, ids, context=None):
         r = True
-        for session in self.browse(cr, uid, ids, context=context):
-            r = r and (session.note or session.measurement)
+        for msr in self.browse(cr, uid, ids, context=context):
+            r = r and (msr.note or msr.measurement)
         return r
      
     def _check_measuring_unit_id(self, cr, uid, ids, context=None):
-        for session in self.browse(cr, uid, ids, context=context):
-            if ( (session.measurement) and not (session.measurement_unit_id and session.measurement_unit_id.id) ) :
+        for msr in self.browse(cr, uid, ids, context=context):
+            if ( (msr.measurement) and not (msr.measurement_unit_id and msr.measurement_unit_id.id) ) :
                 return False
         return True
      
@@ -430,17 +457,17 @@ class tem_equipment_update1(osv.osv):
 
     def _get_last_inspection(self, cr, uid, ids, field_name, arg, context):
         res = {}
-        for session in self.browse(cr, uid, ids):
-            cr.execute("SELECT MAX(date) FROM tem_inspection WHERE equipment_id=%s", (session.id,))
-            res[session.id] = cr.fetchone()[0] or False
+        for eqp in self.browse(cr, uid, ids):
+            cr.execute("SELECT MAX(date) FROM tem_inspection WHERE equipment_id=%s", (eqp.id,))
+            res[eqp.id] = cr.fetchone()[0] or False
         return res
     
     def _get_next_inspection(self, cr, uid, ids, field_name, arg, context):
         res = {}
-        for session in self.browse(cr, uid, ids):
-            cr.execute("SELECT DATE_PART('epoch',MAX(next)) FROM tem_inspection WHERE equipment_id=%s", (session.id,))
+        for eqp in self.browse(cr, uid, ids):
+            cr.execute("SELECT DATE_PART('epoch',MAX(next)) FROM tem_inspection WHERE equipment_id=%s", (eqp.id,))
             next_inspection = cr.fetchone()[0] or False
-            res[session.id] = {'next_inspection': (datetime.fromtimestamp(next_inspection)).strftime('%Y-%m-%d'), 'inspection_due': (next_inspection <= time.time()) }
+            res[eqp.id] = {'next_inspection': (datetime.fromtimestamp(next_inspection)).strftime('%Y-%m-%d'), 'inspection_due': (next_inspection <= time.time()) }
         return res
     
     _columns = {
@@ -470,20 +497,20 @@ tem_equipment_group_o2m()
 class tem_location_o2m(osv.osv):
     _name = "tem.location";
     _inherit = _name
-    
+     
     def _get_related_equipments(self, cr, uid, ids, field_name, arg, context):
         res = {}
         equipment_obj = self.pool.get("tem.equipment")
-        for session in self.browse(cr, uid, ids):
+        for loc in self.browse(cr, uid, ids):
             li = []
             
-            storage_ids = equipment_obj.search(cr, uid, [('storage_location.id','=',session.id)], context=context)
+            storage_ids = equipment_obj.search(cr, uid, [('storage_location.id','=',loc.id)], context=context)
             li.extend(storage_ids)
             
-            usage_ids = equipment_obj.search(cr, uid, [('usage_site.id','=',session.id)], context=context)
+            usage_ids = equipment_obj.search(cr, uid, [('usage_site.id','=',loc.id)], context=context)
             li.extend(usage_ids)
             
-            res[session.id] = li
+            res[loc.id] = li
         return res
     
     _columns = {
@@ -501,9 +528,9 @@ class tem_inspection_o2m(osv.osv):
     }       
     
     def _check_measurements(self, cr, uid, ids):
-        for session in self.browse(cr, uid, ids):
-            if ((session.result == "pass") or (session.result == "fail")):
-                if (len(session.measurement_ids)<1):
+        for insp in self.browse(cr, uid, ids):
+            if ((insp.result == "pass") or (insp.result == "fail")):
+                if (len(insp.measurement_ids)<1):
                     return False
         return True
     
