@@ -10,7 +10,7 @@
 			<field name="arch" type="xml">
 				<field name="active" select="1" position="after">
 					<field name="default_partner_id" colspan="4">
-						<tree string="Test">
+						<tree string="Used as default for:">
 							<field name="name" />
 							<field name="city" />
 							<field name="country" />
