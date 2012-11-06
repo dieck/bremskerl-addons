@@ -13,7 +13,7 @@
 #
 ##############################################################################
 {
-    'name' : 'Merge Picking: Sales Handling',
+    'name' : 'Merge Picking: Sales Handling (DEPRECATED)',
     'version' : '6.0',
     'author' : 'Marco Dieckhoff, BREMSKERL',
     'website' : 'www.bremskerl.com',
@@ -21,6 +21,9 @@
     'category' : 'Generic Modules',
     'description': """
 This module allow the merging of picking lists from different Sales Orders and introduces a new relation for tracking them. 
+
+Deprecated due to side effects. We now use stock_picking_group.
+
     """,
     'init_xml' : [],
     'demo_xml' : [],

@@ -21,13 +21,18 @@
 #
 ##############################################################################
 {
-    'name' : 'Add Customer Reference from pre-merge Sales Order to Stock Picking overview',
+    'name' : 'Add Customer Reference from pre-merge Sales Order to Stock Picking overview (DEPRECATED)',
     'version' : '1.05',
     'author' : 'Marco Dieckhoff, BREMSKERL',
     'website' : 'www.bremskerl.com',
     'depends' : ['stock_merge_picking_sale'],
     'category' : 'Warehouse',
-    'description': "Add Customer Reference from pre-merge Sales Order to Stock Picking overview",
+    'description': """Add Customer Reference from pre-merge Sales Order to Stock Picking overview
+    
+        Deprecated due to side effects. We now use stock_picking_group.
+
+    
+    """,
     'init_xml' : [],
     'demo_xml' : [],
     'update_xml' : ["view/stock_view.xml"],

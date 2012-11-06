@@ -8,7 +8,7 @@
 #
 ##############################################################################
 {
-    'name' : 'Merge Picking: Backorder Handling',
+    'name' : 'Merge Picking: Backorder Handling (DEPRECATED)',
     'version' : '6.0',
     'author' : 'Marco Dieckhoff, BREMSKERL',
     'website' : 'www.bremskerl.com',
@@ -16,6 +16,9 @@
     'category' : 'Generic Modules',
     'description': """
 This module allow the merging of picking lists with different backorder pickings and introduces a new relation for tracking them. 
+
+Deprecated due to side effects. We now use stock_picking_group.
+
     """,
     'init_xml' : [],
     'demo_xml' : [],

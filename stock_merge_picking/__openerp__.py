@@ -13,7 +13,7 @@
 #
 ##############################################################################
 {
-    'name' : 'Merge Picking',
+    'name' : 'Merge Picking (DEPRECATED)',
     'version' : '6.0',
     'author' : 'Marco Dieckhoff, BREMSKERL',
     'website' : 'www.bremskerl.com',
@@ -21,6 +21,9 @@
     'category' : 'Warehouse',
     'description': """
 This module allows you to manually merge stock pickings (Incoming Shipments, Delivery Orders, Internal Moves).
+
+Deprecated due to side effects. We now use stock_picking_group.
+
     """,
     'init_xml' : [],
     'demo_xml' : [],
