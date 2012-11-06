@@ -18,8 +18,8 @@ class tem_res_responsibles(osv.osv):
                                  ('manufacturer','Manufacturer'),
                                  ('contractor','Contractor')],
                                 "Type", required=True),
-        "user_id": fields.many2one('res.users', "User"),
-        "partner_id": fields.many2one('res.partner', 'Partner'),
+        "user_id": fields.many2one('res.users', "User", ondelete='set null'),
+        "partner_id": fields.many2one('res.partner', 'Partner', ondelete='set null'),
         "description": fields.char("Description", size=256, translate=True,),
         "active": fields.boolean('Active', required=True),
     }
@@ -76,7 +76,7 @@ class tem_location(osv.osv):
         "description": fields.char("Description", size=128),
         
         "cost_unit": fields.integer("Cost Unit"),
-        "partner_id": fields.many2one("res.partner", "Partner"),
+        "partner_id": fields.many2one("res.partner", "Partner", ondelete='set null'),
         
         "type_storage": fields.boolean("Storage"),
         "type_usage": fields.boolean("Usage Site"),
@@ -130,7 +130,7 @@ class tem_equipment_group(osv.osv):
         "interval_text": fields.function(_get_interval_text, string="Interval", type='char', size=50, method=True),
         "measuring_range": fields.char("Range", size=64),
         "measuring_resolution": fields.char("Resolution", size=64),
-        "measuring_resolution_unit_id": fields.many2one("tem.res.units", "Resolution unit"),
+        "measuring_resolution_unit_id": fields.many2one("tem.res.units", "Resolution unit", ondelete='restrict'),
        
         "inspection_plan": fields.text("General Inspection Plan", translate=True),
         "notes": fields.text("Notes"),
@@ -149,6 +149,11 @@ tem_equipment_group()
 
 class tem_equipment(osv.osv):
     _name = "tem.equipment"
+
+    # do not delete, just mark deleted  
+    def unlink(self, cr, uid, ids, context=None):
+        self.write(cr, uid, ids, {'state': 'deleted'}, context=context)
+        return True
   
     def _get_name(self, cr, uid, ids, field_name, arg, context):
         res = {}
@@ -160,9 +165,6 @@ class tem_equipment(osv.osv):
                 r += " ("+str(eqp.description.encode('utf-8'))+")"
             res[eqp.id] = r
         return res
-    
-    
-    
     
     def _is_active(self, cr, uid, ids, field_name, arg, context={}):
         res = {}
@@ -202,7 +204,7 @@ class tem_equipment(osv.osv):
 
         #char("test1", size=32), 
         #function(_get_name, string="Equipment name", type='char', size=75, method=True),
-        "group_id": fields.many2one("tem.equipment.group", "Type", required=True),
+        "group_id": fields.many2one("tem.equipment.group", "Type", required=True, ondelete='restrict'),
         "interval_text": fields.related("group_id", "interval_text",  type='char', string="Interval", readonly=True),
         "state": fields.selection([
                                    ('new','New'),
@@ -210,30 +212,31 @@ class tem_equipment(osv.osv):
                                    ('disabled','Disabled'),
                                    ('scrapped','Scrapped'),
                                    ('lost','Cannot be found'),
+                                   ('deleted','Marked deleted'),
                                    ],
                                    "State"),# required=True),
-        "manufacturer_id": fields.many2one("res.partner","Manufacturer"),
+        "manufacturer_id": fields.many2one("res.partner","Manufacturer", ondelete='set null'),
         "measuring_range": fields.char("Range", size=64),
         "measuring_resolution": fields.char("Resolution", size=64, help="Maximal fraction of measurements readings. E.g. a scale might be read in a resolution of 0.1."),
-        "measuring_rangeresolution_unit_id": fields.many2one("tem.res.units", "Range & Resolution unit"),
+        "measuring_rangeresolution_unit_id": fields.many2one("tem.res.units", "Range & Resolution unit", ondelete='restrict'),
         "measuring_precision": fields.char("Precision", size=64),
-        "measuring_precision_unit_id": fields.many2one("tem.res.units", "Precision unit", help="Inherent maximal deviation of measurements. E.g. if a scale reads in a resolution of 0.1, but with 0.2 deviation, the reading 0.5 might be in between 0.3 and 0.7."),
+        "measuring_precision_unit_id": fields.many2one("tem.res.units", "Precision unit", help="Inherent maximal deviation of measurements. E.g. if a scale reads in a resolution of 0.1, but with 0.2 deviation, the reading 0.5 might be in between 0.3 and 0.7.", ondelete='restrict'),
         
         
-        "storage_location": fields.many2one("tem.location", "Storage location", domain=[('type_storage','=',True)]),
-        "usage_site": fields.many2one("tem.location", "Usage site", domain=[('type_usage','=',True)]),
+        "storage_location": fields.many2one("tem.location", "Storage location", domain=[('type_storage','=',True)], ondelete='restrict'),
+        "usage_site": fields.many2one("tem.location", "Usage site", domain=[('type_usage','=',True)], ondelete='restrict'),
         
-        "supplier_id": fields.many2one("res.partner","Supplier", domain=[('supplier','=',True)]),
+        "supplier_id": fields.many2one("res.partner","Supplier", domain=[('supplier','=',True)], ondelete='set null'),
         "order_no": fields.char("Order no.", size=64),
         "serial_no": fields.char("Serial no.", size=64),
         "service_contract": fields.char("Service Contract", size=64),
         
         "purchase_date": fields.date("Purchased"),
         "purchase_price": fields.float('Purchase Price', digits_compute=dp.get_precision('TEM Prices')),
-        "purchase_currency_id": fields.many2one('res.currency', 'Currency'),
-        "purchase_invoice_id": fields.many2one("account.invoice","Purchase Invoice", domain=[('type','=','in_invoice')]),
+        "purchase_currency_id": fields.many2one('res.currency', 'Currency', ondelete='restrict'),
+        "purchase_invoice_id": fields.many2one("account.invoice","Purchase Invoice", domain=[('type','=','in_invoice')], ondelete='set null'),
         
-        "cal_company_id": fields.many2one("res.partner","Involved Company", domain=[('supplier','=',True)]),
+        "cal_company_id": fields.many2one("res.partner","Involved Company", domain=[('supplier','=',True)], ondelete='set null'),
 
         "notes": fields.text("Notes"),
         
@@ -371,8 +374,8 @@ class tem_inspection(osv.osv):
     
     _columns = {
         "name": fields.function(_get_name, string="Inspection", type='char', size=100, method=True),
-        "equipment_id": fields.many2one("tem.equipment", "Equipment", required=True),
-        "by_id": fields.many2one("res.users", "Inspected by", required=True),
+        "equipment_id": fields.many2one("tem.equipment", "Equipment", required=True, ondelete='restrict'),
+        "by_id": fields.many2one("res.users", "Inspected by", required=True, ondelete='restrict'),
         "date": fields.datetime("Inspection date", required=True),
         "next": fields.datetime("Next Inspection Due", required=True),
         "interval_text": fields.related("equipment_id", "interval_text",  type='char', string="Scheduled Interval", readonly=True),
@@ -410,11 +413,11 @@ class tem_inspection_measurements(osv.osv):
     
     _columns = {
         "name": fields.function(_get_name, string="Inspection", type='char', size=100, method=True,),    
-        "inspection_id": fields.many2one("tem.inspection", "Inspection", required=True),
-        "user_id": fields.many2one("res.users", "Inspected by", required=True),
+        "inspection_id": fields.many2one("tem.inspection", "Inspection", required=True, ondelete='cascade'),
+        "user_id": fields.many2one("res.users", "Inspected by", required=True, ondelete='restrict'),
         "date": fields.datetime("Inspection date", required=True),
         "measurement": fields.float("Measurement"),
-        "measurement_unit_id": fields.many2one("tem.res.units","Unit"),
+        "measurement_unit_id": fields.many2one("tem.res.units","Unit", ondelete='restrict'),
         "note": fields.char("Note",size=250),
     }
     
@@ -535,7 +538,7 @@ class tem_inspection_o2m(osv.osv):
         return True
     
     _constraints = [
-        (_check_measurements, 'You need to set at least one measurement.', ['measurement_ids']),
+        (_check_measurements, "\n\n" + 'You need to set at least one measurement on an inspection.' + "\n", ['measurement_ids']),
     ]
      
 tem_inspection_o2m()    
