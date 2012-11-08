@@ -126,8 +126,8 @@
 												<field name="user_id" />
 												<field name="date" />
 												<field name="measurement" />
-												<field name="measurement_unit_id" colspan="2" nolabel="1" />
-												<field name="note" colspan="4" />
+												<field name="measurement_unit_id" />
+												<field name="note" />
 											</tree>
 											<form string="TEM - Inspection Measurements">
 												<field name="user_id" />
@@ -135,7 +135,8 @@
 												<newline />
 												<field name="measurement" />
 												<field name="measurement_unit_id" colspan="2" nolabel="1" />
-												<field name="note" />
+												<field name="note" colspan="3" />
+												<label colspan="1" string="Set note if value is 0.00" />
 											</form>
 										</field>
 									</group>
@@ -412,7 +413,8 @@
 								<newline />
 								<field name="measurement" />
 								<field name="measurement_unit_id" colspan="2" nolabel="1" />
-								<field name="note" />
+								<field name="note" colspan="3" />
+								<label colspan="1" string="Set note if value is 0.00" />
 							</form>
 						</field>
 					</group>
@@ -587,7 +589,8 @@
 					<newline />
 					<field name="measurement" />
 					<field name="measurement_unit_id" colspan="2" nolabel="1" />
-					<field name="note" colspan="4" />
+					<field name="note" colspan="3" />
+					<label colspan="1" string="Set note if value is 0.00" />
 				</form>
 			</field>
 		</record>
