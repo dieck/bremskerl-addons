@@ -9,7 +9,7 @@ class stock_picking_clientorderref(osv.osv):
         res = {}
         for session in self.browse(cr,uid,ids,context=context):
             if (session.sale_id):
-                res[session.id] = session.sale_id.client_order_ref or False
+                res[session.id] = session.sale_id and session.sale_id.client_order_ref or False
         return res
 
     def _trigger_sale_client_order_ref(self, cr, uid, ids, context={}):
