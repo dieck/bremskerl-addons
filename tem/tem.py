@@ -11,6 +11,8 @@ from datetime import datetime, timedelta
 
 class tem_res_responsibles(osv.osv):
     _name = "tem.res.responsibles"
+    _order = "name"
+    
     _columns = {
         "name": fields.char("Name", size=64, required=True),
         "type": fields.selection([('employee','Employee'),
@@ -55,6 +57,8 @@ tem_res_responsibles()
 
 class tem_res_units(osv.osv):
     _name = "tem.res.units"
+    _order = "name"
+
     _columns = {
         "name": fields.char("Unit", size=64, required=True),
         "description": fields.char("Description", size=64, translate=True,),
@@ -66,7 +70,9 @@ class tem_res_units(osv.osv):
 tem_res_units()
 
 class tem_location(osv.osv):
-    _name = "tem.location";
+    _name = "tem.location"
+    _order = "name"
+
     _columns = {
         "name": fields.char("Location Name", size=64, required=True),
         "category": fields.selection([('account','Internal Acocunt'),
@@ -94,6 +100,7 @@ tem_location()
 
 class tem_equipment_group(osv.osv):
     _name = "tem.equipment.group";
+    _order = "name"
 
     def _get_interval_text(self, cr, uid, ids, field_name, arg, context):
         res = {}
@@ -271,7 +278,8 @@ tem_equipment()
 
 class tem_inspection(osv.osv):
     _name = "tem.inspection"
-    
+    _order = "date"
+
     def _get_name(self, cr, uid, ids, field_name, arg, context):
         res = {}
         for insp in self.browse(cr, uid, ids):
@@ -397,6 +405,7 @@ tem_inspection()
 
 class tem_inspection_measurements(osv.osv):
     _name = "tem.inspection.measurements"
+    _order = "date"
 
     def _get_name(self, cr, uid, ids, field_name, arg, context):
         res = {}
