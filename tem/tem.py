@@ -470,7 +470,10 @@ class tem_equipment_update1(osv.osv):
         for eqp in self.browse(cr, uid, ids):
             cr.execute("SELECT DATE_PART('epoch',MAX(next)) FROM tem_inspection WHERE equipment_id=%s", (eqp.id,))
             next_inspection = cr.fetchone()[0] or False
-            res[eqp.id] = {'next_inspection': (datetime.fromtimestamp(next_inspection)).strftime('%Y-%m-%d'), 'inspection_due': (next_inspection <= time.time()) }
+            res[eqp.id] = {'next_inspection': (datetime.fromtimestamp(next_inspection)).strftime('%Y-%m-%d'), 
+                           'inspection_due': (next_inspection <= time.time()),
+                           'inspection_soon': ((next_inspection > time.time()) and (next_inspection <= (time.time()+14*24*60*60) ) ),
+                           }
         return res
     
     _columns = {
@@ -481,6 +484,8 @@ class tem_equipment_update1(osv.osv):
         "next_inspection": fields.function(_get_next_inspection, string="Next Inspection", type='date', method=True, multi='_get_next_inspection',
                                            store={'tem.inspection':(_get_equipment_from_inspection,['next'],10)}),
         "inspection_due": fields.function(_get_next_inspection, string="Next Inspection due", type='boolean', method=True, multi='_get_next_inspection',
+                                           store={'tem.inspection':(_get_equipment_from_inspection,['next'],10)}),
+        "inspection_soon": fields.function(_get_next_inspection, string="Next Inspection soon", type='boolean', method=True, multi='_get_next_inspection',
                                            store={'tem.inspection':(_get_equipment_from_inspection,['next'],10)}),
     }
 tem_equipment_update1()
@@ -538,7 +543,7 @@ class tem_inspection_o2m(osv.osv):
         return True
     
     _constraints = [
-        (_check_measurements, "\n\n" + 'You need to set at least one measurement on an inspection.' + "\n", ['measurement_ids']),
+        (_check_measurements, "\n\n" + 'You need to set at least one measurement on a passed or failed inspection.' + "\n", ['measurement_ids']),
     ]
      
 tem_inspection_o2m()    

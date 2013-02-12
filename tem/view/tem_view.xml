@@ -9,13 +9,14 @@
 			<field name="model">tem.equipment</field>
 			<field name="type">tree</field>
 			<field name="arch" type="xml">
-				<tree colors="red:inspection_due" string="TEM - Equipment">
+				<tree colors="red:inspection_due;orange:inspection_soon" string="TEM - Equipment">
 					<field name="id_number" />
 					<field name="description" />
 					<field name="state" />
 					<field name="next_inspection" />
 					<field name="active" invisible="1" />
 					<field name="inspection_due" invisible="1" />
+					<field name="inspection_soon" invisible="1" />
 					<field name="usage_site" />
 					<field name="storage_location" />
 				</tree>
