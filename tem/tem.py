@@ -450,6 +450,7 @@ class tem_inspection_measurements(osv.osv):
         "measurement": fields.float("Measurement"),
         "measurement_unit_id": fields.many2one("tem.res.units","Unit", ondelete='restrict'),
         "note": fields.char("Note",size=250),
+        "reference_ids": fields.related("inspection_id", "equipment_id", "group_id", "references_ids", string="Reference values"),
     }
     
     _defaults = {
@@ -529,6 +530,7 @@ class tem_equipment_group_o2m(osv.osv):
     
     _columns = {
         "equipment_ids": fields.one2many("tem.equipment","group_id","Equipment"),
+        "reference_ids": fields.one2many("tem.inspection.references","group_id","Reference values"),
     }                                
     
 tem_equipment_group_o2m()

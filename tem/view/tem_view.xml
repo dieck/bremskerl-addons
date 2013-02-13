@@ -131,6 +131,8 @@
 												<field name="note" />
 											</tree>
 											<form string="TEM - Inspection Measurements">
+												<field name="references_ids" colspan="4" nolabel="1" readonly="1" />
+												<separator colspan="4" />
 												<field name="user_id" />
 												<field name="date" />
 												<newline />
@@ -584,6 +586,8 @@
 			<field name="type">form</field>
 			<field name="arch" type="xml">
 				<form string="TEM - Inspection Measurements">
+					<field name="references_ids" colspan="4" nolabel="1" readonly="1" />
+					<separator colspan="4" />
 					<field name="inspection_id" />
 					<newline />
 					<field name="user_id" />
