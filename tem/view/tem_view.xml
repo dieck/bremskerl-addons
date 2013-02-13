@@ -572,7 +572,7 @@
 					<field name="user_id" />
 					<field name="date" />
 					<field name="measurement" />
-					<field name="measurement_unit_id" colspan="2" nolabel="1" />
+					<field name="measurement_unit_id" />
 					<field name="note" />
 				</tree>
 			</field>
