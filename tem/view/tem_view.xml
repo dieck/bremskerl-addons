@@ -168,8 +168,9 @@
 					<filter icon="terp-check" string="Inactive" name="Inactive"
 						domain="[('active','=',False)]" />
 					<separator orientation="vertical" />
-					<field name="description" />
 					<field name="id_number" />
+					<field name="description" />
+					<field name="usage_site" />
 					<newline />
 					<field name="last_inspection" />
 					<field name="next_inspection" />
