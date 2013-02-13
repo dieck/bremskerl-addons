@@ -53,7 +53,7 @@
 								<field name="measuring_precision" />
 
 								<field name="measuring_precision_unit_id" nolabel="1"
-									colspan="2" attrs="{'required':[('measuring_precision','!=',False)]}" />
+									colspan="2" />
 
 							</group>
 							<group col="2" colspan="2">
