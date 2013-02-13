@@ -403,6 +403,28 @@ class tem_inspection(osv.osv):
 tem_inspection()
 
 
+class tem_inspection_references(osv.osv):
+    _name = "tem.inspection.references"
+
+    def _get_name(self, cr, uid, ids, field_name, arg, context):
+        res = {}
+        for ref in self.browse(cr, uid, ids):
+            res[ref.id] = ref.group_id.name + ": " + ref.reference_value
+        return res
+
+    _columns = {
+        "name": fields.function(_get_name, string="Reference Value", type='char', size=100, method=True,),    
+        "group_id": fields.many2one("tem.equipment.group", "Type", required=True, ondelete='cascade'),
+        "reference_value": fields.char("Reference Value", size=50, required=True),
+        "unit_id": fields.many2one("tem.units", "Unit"),
+        "boundary_lower": fields.char("Lower Boundary", size=50),
+        "boundary_upper": fields.char("Upper Boundary", size=50),
+        "apply_to": fields.char("Apply To", size=50,
+                                help="Notes on when to apply this reference value, if some reference values do not apply to all items in the equipment group."),
+    }
+tem_inspection_references()
+
+
 class tem_inspection_measurements(osv.osv):
     _name = "tem.inspection.measurements"
     _order = "date"
