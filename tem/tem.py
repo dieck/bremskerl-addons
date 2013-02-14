@@ -181,9 +181,6 @@ class tem_equipment(osv.osv):
             res[eqp.id] = ((eqp.state == 'new') or (eqp.state == 'available') or (eqp.state == 'disabled'))
         return res
 
-    def _is_active_changed(self, cr, uid, ids, context=None):
-        return ids
-
     # _get_currency        
     # @author: from account.invoice,     
     # @copyright: Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
@@ -208,7 +205,7 @@ class tem_equipment(osv.osv):
         
         "name": fields.function(_get_name, string="Equipment name", type='char', size=75, method=True),
         "active": fields.function(_is_active, string="Active", type='boolean', method=True,
-                                  store={'tem.equipment': (_is_active_changed, ['state'], 10)},
+                                  store={'tem.equipment': (lambda self, cr, uid, ids, c={}: ids, ['state'], 10)},
                                   help="Active status is derived from the state: scrapped and lost are considered inactive."),
 
         #char("test1", size=32), 
