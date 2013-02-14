@@ -416,7 +416,7 @@ class tem_inspection_references(osv.osv):
         "name": fields.function(_get_name, string="Reference Value", type='char', size=100, method=True,),    
         "group_id": fields.many2one("tem.equipment.group", "Type", required=True, ondelete='cascade'),
         "reference_value": fields.char("Reference Value", size=50, required=True),
-        "unit_id": fields.many2one("tem.units", "Unit"),
+        "unit_id": fields.many2one("tem.res.units", "Unit"),
         "boundary_lower": fields.char("Lower Boundary", size=50),
         "boundary_upper": fields.char("Upper Boundary", size=50),
         "apply_to": fields.char("Apply To", size=50,
@@ -450,7 +450,7 @@ class tem_inspection_measurements(osv.osv):
         "measurement": fields.float("Measurement"),
         "measurement_unit_id": fields.many2one("tem.res.units","Unit", ondelete='restrict'),
         "note": fields.char("Note",size=250),
-        "reference_ids": fields.related("inspection_id", "equipment_id", "group_id", "references_ids", string="Reference values"),
+        "references_ids": fields.related("inspection_id", "equipment_id", "group_id", "references_ids", string="Reference values"),
     }
     
     _defaults = {
@@ -530,7 +530,7 @@ class tem_equipment_group_o2m(osv.osv):
     
     _columns = {
         "equipment_ids": fields.one2many("tem.equipment","group_id","Equipment"),
-        "reference_ids": fields.one2many("tem.inspection.references","group_id","Reference values"),
+        "references_ids": fields.one2many("tem.inspection.references","group_id","Reference values"),
     }                                
     
 tem_equipment_group_o2m()

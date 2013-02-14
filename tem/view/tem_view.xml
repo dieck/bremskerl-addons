@@ -780,13 +780,15 @@
 		<menuitem id="menu_definitions" name="Configuration" parent="main_menu"
 			sequence="60" />
 		<menuitem id="menu_definitions_groups" name="Groups"
-			parent="menu_definitions" sequence="1" action="open_tem_equipment_group_tree" />
+			parent="menu_definitions" sequence="10" action="open_tem_equipment_group_tree" />
+		<menuitem id="menu_definitions_references" name="Reference Values"
+			parent="menu_definitions" sequence="15" action="open_tem_inspection_references_tree" />
 		<menuitem id="menu_definitions_locations" name="Locations"
-			parent="menu_definitions" sequence="2" action="open_tem_location_tree" />
+			parent="menu_definitions" sequence="20" action="open_tem_location_tree" />
 		<menuitem id="menu_definitions_res_units" name="Units"
-			parent="menu_definitions" sequence="3" action="open_tem_res_units_tree" />
+			parent="menu_definitions" sequence="30" action="open_tem_res_units_tree" />
 		<menuitem id="menu_definitions_res_responsibles" name="Responsibles"
-			parent="menu_definitions" sequence="4" action="open_tem_res_responsibles_tree" />
+			parent="menu_definitions" sequence="40" action="open_tem_res_responsibles_tree" />
 
 
 
