@@ -11,6 +11,26 @@ from datetime import datetime, timedelta
 from tools.translate import _
 
 
+
+
+class res_user(osv.osv):
+    _inherit = "res.users"
+
+    def _is_tem_inspector(self, cr, uid, ids, field_name, arg, context):
+        res = {}
+        for u in self.browse(cr, uid, ids):
+            res[u.id] = False
+            for g in u.groups_id:
+                if g.name == "Test Equipment / Inspector":
+                    res[u.id] = True
+        return res
+    
+    _columns = {
+        "is_tem_inspector": fields.function(_is_tem_inspector, string="Is TEM inspector", type='boolean', method=True),
+    }
+res_user()
+
+
 class tem_res_responsibles(osv.osv):
     _name = "tem.res.responsibles"
     _order = "name"
@@ -405,7 +425,7 @@ class tem_inspection(osv.osv):
     _columns = {
         "name": fields.function(_get_name, string="Inspection", type='char', size=100, method=True),
         "equipment_id": fields.many2one("tem.equipment", "Equipment", required=True, ondelete='restrict'),
-        "by_id": fields.many2one("res.users", "Inspected by", required=True, ondelete='restrict'),
+        "by_id": fields.many2one("res.users", "Inspected by", required=True, ondelete='restrict', domain=[("is_tem_inspector","=",True)] ),
         "date": fields.datetime("Inspection date", required=True),
         "next": fields.datetime("Next Inspection Due", required=True),
         "interval_text": fields.related("equipment_id", "interval_text",  type='char', string="Scheduled Interval", readonly=True),
@@ -584,3 +604,5 @@ class tem_inspection_o2m(osv.osv):
     ]
      
 tem_inspection_o2m()    
+
+
