@@ -9,7 +9,8 @@
 			<field name="model">tem.equipment</field>
 			<field name="type">tree</field>
 			<field name="arch" type="xml">
-				<tree colors="red:inspection_due;orange:inspection_soon" string="TEM - Equipment">
+				<tree colors="red:inspection_due;orange:inspection_soon"
+					string="TEM - Equipment">
 					<field name="id_number" />
 					<field name="description" />
 					<field name="state" />
@@ -131,7 +132,17 @@
 												<field name="note" />
 											</tree>
 											<form string="TEM - Inspection Measurements">
-												<field name="references_ids" colspan="4" nolabel="1" readonly="1" />
+												<field name="references_ids" colspan="4" nolabel="1"
+													readonly="1">
+													<tree string="TEM Reference Values">
+														<field name="subject" />
+														<field name="reference_value" />
+														<field name="unit_id" />
+														<field name="boundary_lower" />
+														<field name="boundary_upper" />
+														<field name="apply_to" />
+													</tree>
+												</field>
 												<separator colspan="4" />
 												<field name="user_id" />
 												<field name="date" />
@@ -586,7 +597,17 @@
 			<field name="type">form</field>
 			<field name="arch" type="xml">
 				<form string="TEM - Inspection Measurements">
-					<field name="references_ids" colspan="4" nolabel="1" readonly="1" />
+					<field name="references_ids" colspan="4" nolabel="1"
+						readonly="1">
+						<tree string="TEM Reference Values">
+							<field name="subject" />
+							<field name="reference_value" />
+							<field name="unit_id" />
+							<field name="boundary_lower" />
+							<field name="boundary_upper" />
+							<field name="apply_to" />
+						</tree>
+					</field>
 					<separator colspan="4" />
 					<field name="inspection_id" />
 					<newline />
@@ -629,6 +650,7 @@
 			<field name="arch" type="xml">
 				<tree string="TEM Reference Values">
 					<field name="group_id" />
+					<field name="subject" />
 					<field name="reference_value" />
 					<field name="unit_id" />
 					<field name="boundary_lower" />
@@ -645,13 +667,14 @@
 			<field name="arch" type="xml">
 				<form string="TEM Reference Values">
 					<field name="group_id" />
-					<newline/>
+					<field name="subject" />
+					<newline />
 					<field name="reference_value" />
 					<field name="unit_id" />
-					<newline/>
+					<newline />
 					<field name="boundary_lower" />
 					<field name="boundary_upper" />
-					<newline/>
+					<newline />
 					<field name="apply_to" />
 				</form>
 			</field>
@@ -782,7 +805,8 @@
 		<menuitem id="menu_definitions_groups" name="Groups"
 			parent="menu_definitions" sequence="10" action="open_tem_equipment_group_tree" />
 		<menuitem id="menu_definitions_references" name="Reference Values"
-			parent="menu_definitions" sequence="15" action="open_tem_inspection_references_tree" />
+			parent="menu_definitions" sequence="15"
+			action="open_tem_inspection_references_tree" />
 		<menuitem id="menu_definitions_locations" name="Locations"
 			parent="menu_definitions" sequence="20" action="open_tem_location_tree" />
 		<menuitem id="menu_definitions_res_units" name="Units"

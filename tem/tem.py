@@ -415,6 +415,7 @@ class tem_inspection_references(osv.osv):
     _columns = {
         "name": fields.function(_get_name, string="Reference Value", type='char', size=100, method=True,),    
         "group_id": fields.many2one("tem.equipment.group", "Type", required=True, ondelete='cascade'),
+        "subject": fields.char("Subject", help="Short note on what to measure", size=50),
         "reference_value": fields.char("Reference Value", size=50, required=True),
         "unit_id": fields.many2one("tem.res.units", "Unit"),
         "boundary_lower": fields.char("Lower Boundary", size=50),
@@ -450,7 +451,7 @@ class tem_inspection_measurements(osv.osv):
         "measurement": fields.float("Measurement"),
         "measurement_unit_id": fields.many2one("tem.res.units","Unit", ondelete='restrict'),
         "note": fields.char("Note",size=250),
-        "references_ids": fields.related("inspection_id", "equipment_id", "group_id", "references_ids", string="Reference values"),
+        "references_ids": fields.related("inspection_id", "equipment_id", "group_id", "references_ids", type="one2many", relation="tem.inspection.references", string="Reference values"),
     }
     
     _defaults = {
