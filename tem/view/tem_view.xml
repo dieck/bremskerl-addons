@@ -108,16 +108,14 @@
 										<field name="next" />
 										<field name="interval_text" />
 									</group>
-									<group colspan="2" col="2">
-										<separator string="Proof of Calibration" colspan="2" />
-										<field name="description" />
-										<field name="result" />
+									<group colspan="2" col="4">
+										<separator string="Proof of Calibration" colspan="4" />
+										<field name="description" colspan="4" />
+										<field name="result" colspan="4" />
 										<field name="maint" />
 										<field name="scrap" />
-									</group>
-									<group colspan="2" col="2">
-										<separator string="Remarks" colspan="2" />
-										<field name="notes" nolabel="1" />
+										<separator string="Remarks" colspan="4" />
+										<field name="notes" nolabel="1" colspan="4" widget="char" />
 									</group>
 
 									<group colspan="4" col="1">
@@ -127,32 +125,39 @@
 											<tree string="TEM - Inspection Measurements">
 												<field name="user_id" />
 												<field name="date" />
+												<field name="property" />
 												<field name="measurement" />
 												<field name="measurement_unit_id" />
 												<field name="note" />
 											</tree>
 											<form string="TEM - Inspection Measurements">
-												<field name="references_ids" colspan="4" nolabel="1"
-													readonly="1">
-													<tree string="TEM Reference Values">
-														<field name="subject" />
-														<field name="reference_value" />
-														<field name="unit_id" />
-														<field name="boundary_lower" />
-														<field name="boundary_upper" />
-														<field name="apply_to" />
-													</tree>
-												</field>
-												<separator colspan="4" />
 												<field name="user_id" />
 												<field name="date" />
 												<newline />
-												<field name="measurement" />
-												<field name="measurement_unit_id" colspan="2" nolabel="1" />
+
+												<group colspan="4" col="5">
+													<field name="property" />
+													<field name="measurement" />
+													<field name="measurement_unit_id" nolabel="1" />
+												</group>
+
 												<field name="note" colspan="3" />
 												<label colspan="1" string="Set note if value is 0.00" />
 											</form>
 										</field>
+
+										<field name="references_ids" colspan="4" nolabel="1"
+											readonly="1">
+											<tree string="TEM Reference Values">
+												<field name="property" />
+												<field name="reference_value" />
+												<field name="unit_id" />
+												<field name="boundary_lower" />
+												<field name="boundary_upper" />
+												<field name="apply_to" />
+											</tree>
+										</field>
+
 									</group>
 
 								</form>
@@ -399,16 +404,14 @@
 						<field name="next" />
 						<field name="interval_text" />
 					</group>
-					<group colspan="2" col="2">
-						<separator string="Proof of Calibration" colspan="2" />
-						<field name="description" />
-						<field name="result" />
+					<group colspan="2" col="4">
+						<separator string="Proof of Calibration" colspan="4" />
+						<field name="description" colspan="4" />
+						<field name="result" colspan="4" />
 						<field name="maint" />
 						<field name="scrap" />
-					</group>
-					<group colspan="2" col="2">
-						<separator string="Remarks" colspan="2" />
-						<field name="notes" nolabel="1" />
+						<separator string="Remarks" colspan="4" />
+						<field name="notes" nolabel="1" colspan="4" widget="char" />
 					</group>
 
 					<group colspan="4" col="1">
@@ -418,16 +421,20 @@
 							<tree string="TEM - Inspection Measurements">
 								<field name="user_id" />
 								<field name="date" />
+								<field name="property" />
 								<field name="measurement" />
-								<field name="measurement_unit_id" colspan="2" nolabel="1" />
-								<field name="note" colspan="4" />
+								<field name="measurement_unit_id" />
+								<field name="note" />
 							</tree>
 							<form string="TEM - Inspection Measurements">
 								<field name="user_id" />
 								<field name="date" />
 								<newline />
-								<field name="measurement" />
-								<field name="measurement_unit_id" colspan="2" nolabel="1" />
+								<group colspan="4" col="5">
+									<field name="property" />
+									<field name="measurement" />
+									<field name="measurement_unit_id" nolabel="1" />
+								</group>
 								<field name="note" colspan="3" />
 								<label colspan="1" string="Set note if value is 0.00" />
 							</form>
@@ -600,7 +607,7 @@
 					<field name="references_ids" colspan="4" nolabel="1"
 						readonly="1">
 						<tree string="TEM Reference Values">
-							<field name="subject" />
+							<field name="property" />
 							<field name="reference_value" />
 							<field name="unit_id" />
 							<field name="boundary_lower" />
@@ -650,7 +657,7 @@
 			<field name="arch" type="xml">
 				<tree string="TEM Reference Values">
 					<field name="group_id" />
-					<field name="subject" />
+					<field name="property" />
 					<field name="reference_value" />
 					<field name="unit_id" />
 					<field name="boundary_lower" />
@@ -667,7 +674,7 @@
 			<field name="arch" type="xml">
 				<form string="TEM Reference Values">
 					<field name="group_id" />
-					<field name="subject" />
+					<field name="property" />
 					<newline />
 					<field name="reference_value" />
 					<field name="unit_id" />

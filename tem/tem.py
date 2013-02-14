@@ -276,6 +276,29 @@ class tem_equipment(osv.osv):
 tem_equipment()
 
 
+class tem_inspection_references(osv.osv):
+    _name = "tem.inspection.references"
+
+    def _get_name(self, cr, uid, ids, field_name, arg, context):
+        res = {}
+        for ref in self.browse(cr, uid, ids):
+            res[ref.id] = ref.group_id.name + " " + ref.property + ": " + ref.reference_value
+        return res
+
+    _columns = {
+        "name": fields.function(_get_name, string="Reference Value", type='char', size=100, method=True,),    
+        "group_id": fields.many2one("tem.equipment.group", "Type", required=True, ondelete='cascade'),
+        "property": fields.char("Property", help="Short note on what to measure", size=50, required=True, translate=True),
+        "reference_value": fields.char("Reference Value", size=50, required=True),
+        "unit_id": fields.many2one("tem.res.units", "Unit"),
+        "boundary_lower": fields.char("Lower Boundary", size=50),
+        "boundary_upper": fields.char("Upper Boundary", size=50),
+        "apply_to": fields.char("Apply To", size=50,
+                                help="Notes on when to apply this reference value, if some reference values do not apply to all items in the equipment group."),
+    }
+tem_inspection_references()
+
+
 class tem_inspection(osv.osv):
     _name = "tem.inspection"
     _order = "date"
@@ -392,7 +415,8 @@ class tem_inspection(osv.osv):
         "maint": fields.boolean("Needs Maintenance/Repair"),
         "scrap": fields.boolean("To be scrapped"),
         "notes": fields.text("Notes"),
-        "tool": fields.char("Tool", size=50, help="Tool (appliance/calibre) used to calibrate the test equipment.", required=True)
+        "tool": fields.char("Tool", size=50, help="Tool (appliance/calibre) used to calibrate the test equipment.", required=True),
+        "references_ids": fields.related("equipment_id", "group_id", "references_ids", type="one2many", relation="tem.inspection.references", string="Reference values"),
     }
 
     _defaults = {
@@ -403,27 +427,6 @@ class tem_inspection(osv.osv):
 tem_inspection()
 
 
-class tem_inspection_references(osv.osv):
-    _name = "tem.inspection.references"
-
-    def _get_name(self, cr, uid, ids, field_name, arg, context):
-        res = {}
-        for ref in self.browse(cr, uid, ids):
-            res[ref.id] = ref.group_id.name + ": " + ref.reference_value
-        return res
-
-    _columns = {
-        "name": fields.function(_get_name, string="Reference Value", type='char', size=100, method=True,),    
-        "group_id": fields.many2one("tem.equipment.group", "Type", required=True, ondelete='cascade'),
-        "subject": fields.char("Subject", help="Short note on what to measure", size=50),
-        "reference_value": fields.char("Reference Value", size=50, required=True),
-        "unit_id": fields.many2one("tem.res.units", "Unit"),
-        "boundary_lower": fields.char("Lower Boundary", size=50),
-        "boundary_upper": fields.char("Upper Boundary", size=50),
-        "apply_to": fields.char("Apply To", size=50,
-                                help="Notes on when to apply this reference value, if some reference values do not apply to all items in the equipment group."),
-    }
-tem_inspection_references()
 
 
 class tem_inspection_measurements(osv.osv):
@@ -448,15 +451,16 @@ class tem_inspection_measurements(osv.osv):
         "inspection_id": fields.many2one("tem.inspection", "Inspection", required=True, ondelete='cascade'),
         "user_id": fields.many2one("res.users", "Inspected by", required=True, ondelete='restrict'),
         "date": fields.datetime("Inspection date", required=True),
+        "property": fields.char("Property", size=50, required=True, translate=True),
         "measurement": fields.float("Measurement"),
         "measurement_unit_id": fields.many2one("tem.res.units","Unit", ondelete='restrict'),
         "note": fields.char("Note",size=250),
-        "references_ids": fields.related("inspection_id", "equipment_id", "group_id", "references_ids", type="one2many", relation="tem.inspection.references", string="Reference values"),
     }
     
     _defaults = {
         "date": lambda *a: time.strftime('%Y-%m-%d %H:%M:%S'),
         "user_id": lambda self,cr,uid,context: uid,
+        "property": _('Property'),
     }
     
     
