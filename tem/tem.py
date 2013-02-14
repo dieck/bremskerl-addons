@@ -8,6 +8,8 @@ import decimal_precision as dp
 import time
 import pooler
 from datetime import datetime, timedelta
+from tools.translate import _
+
 
 class tem_res_responsibles(osv.osv):
     _name = "tem.res.responsibles"
