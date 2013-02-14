@@ -115,7 +115,7 @@
 										<field name="maint" />
 										<field name="scrap" />
 										<separator string="Remarks" colspan="4" />
-										<field name="notes" nolabel="1" colspan="4" widget="char" />
+										<field name="notes" nolabel="1" colspan="4" />
 									</group>
 
 									<group colspan="4" col="1">
@@ -411,7 +411,7 @@
 						<field name="maint" />
 						<field name="scrap" />
 						<separator string="Remarks" colspan="4" />
-						<field name="notes" nolabel="1" colspan="4" widget="char" />
+						<field name="notes" nolabel="1" colspan="4" />
 					</group>
 
 					<group colspan="4" col="1">
