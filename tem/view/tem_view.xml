@@ -162,6 +162,7 @@
 														<label colspan="1" string="Set note if value is 0.00" />
 													</form>
 												</field>
+											</group>
 										</page>
 									</notebook>
 
