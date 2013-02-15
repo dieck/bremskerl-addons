@@ -22,6 +22,12 @@ msgid "tem.equipment"
 msgstr "tem.equipment"
 
 #. module: tem
+#: view:tem.equipment:0
+#: view:tem.inspection:0
+msgid "Please remember to add measurements on the second tab if the result is passed or failed."
+msgstr "Bitte denken Sie daran, Messungen auf dem zweiten Tab einzugeben, falls das Ergebnis Bestanden oder Nicht Bestanden ist."
+
+#. module: tem
 #: model:tem.res.units,description:tem.temunit15
 msgid "Millimeters"
 msgstr "Millimeter"

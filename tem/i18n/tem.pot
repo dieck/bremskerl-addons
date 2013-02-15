@@ -532,6 +532,12 @@ msgid "Set note if value is 0.00"
 msgstr ""
 
 #. module: tem
+#: view:tem.equipment:0
+#: view:tem.inspection:0
+msgid "Please remember to add measurements on the second tab if the result is passed or failed."
+msgstr ""
+
+#. module: tem
 #: model:ir.actions.act_window,name:tem.open_tem_location_tree
 msgid "TEM Locations"
 msgstr ""
