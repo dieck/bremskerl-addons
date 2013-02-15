@@ -14,7 +14,8 @@ from tools.translate import _
 
 
 class res_user(osv.osv):
-    _inherit = "res.users"
+    _name = "res.users"
+    _inherit = _name
 
     def _is_tem_inspector(self, cr, uid, ids, field_name, arg, context):
         res = {}
@@ -26,7 +27,9 @@ class res_user(osv.osv):
         return res
     
     _columns = {
-        "is_tem_inspector": fields.function(_is_tem_inspector, string="Is TEM inspector", type='boolean', method=True),
+        "is_tem_inspector": fields.function(_is_tem_inspector, string="Is TEM inspector", type='boolean', method=True,
+                                            store={'res.users': (lambda self, cr, uid, ids, c={}: ids, ['groups_id'], 10)}),
+                # needs store, otherwise it won't work as domain condition on tem.inspections
     }
 res_user()
 
