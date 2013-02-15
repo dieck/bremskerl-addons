@@ -126,41 +126,42 @@
 												string="Please remember to add measurements on the second tab if the result is passed or failed." />
 										</page>
 
-										<page string="Measurements" col="1">
-											<field name="references_ids" nolabel="1" readonly="1">
-												<tree string="TEM Reference Values">
-													<field name="property" />
-													<field name="reference_value" />
-													<field name="unit_id" />
-													<field name="boundary_lower" />
-													<field name="boundary_upper" />
-													<field name="apply_to" />
-												</tree>
-											</field>
-											<separator string="Measurements" />
-											<field nolabel="1" name="measurement_ids"
-												context="{'inspection_id':active_id or False}">
-												<tree string="TEM - Inspection Measurements">
-													<field name="user_id" />
-													<field name="date" />
-													<field name="property" />
-													<field name="measurement" />
-													<field name="measurement_unit_id" />
-													<field name="note" />
-												</tree>
-												<form string="TEM - Inspection Measurements">
-													<field name="user_id" />
-													<field name="date" />
-													<newline />
-													<group colspan="4" col="5">
+										<page string="Measurements">
+											<group colspan="4" col="1">
+												<field name="references_ids" nolabel="1" readonly="1">
+													<tree string="TEM Reference Values">
+														<field name="property" />
+														<field name="reference_value" />
+														<field name="unit_id" />
+														<field name="boundary_lower" />
+														<field name="boundary_upper" />
+														<field name="apply_to" />
+													</tree>
+												</field>
+												<separator string="Measurements" />
+												<field nolabel="1" name="measurement_ids"
+													context="{'inspection_id':active_id or False}">
+													<tree string="TEM - Inspection Measurements">
+														<field name="user_id" />
+														<field name="date" />
 														<field name="property" />
 														<field name="measurement" />
-														<field name="measurement_unit_id" nolabel="1" />
-													</group>
-													<field name="note" colspan="3" />
-													<label colspan="1" string="Set note if value is 0.00" />
-												</form>
-											</field>
+														<field name="measurement_unit_id" />
+														<field name="note" />
+													</tree>
+													<form string="TEM - Inspection Measurements">
+														<field name="user_id" />
+														<field name="date" />
+														<newline />
+														<group colspan="4" col="5">
+															<field name="property" />
+															<field name="measurement" />
+															<field name="measurement_unit_id" nolabel="1" />
+														</group>
+														<field name="note" colspan="3" />
+														<label colspan="1" string="Set note if value is 0.00" />
+													</form>
+												</field>
 										</page>
 									</notebook>
 
@@ -426,41 +427,43 @@
 								string="Please remember to add measurements on the second tab if the result is passed or failed." />
 						</page>
 
-						<page string="Measurements" col="1">
-							<field name="references_ids" nolabel="1" readonly="1">
-								<tree string="TEM Reference Values">
-									<field name="property" />
-									<field name="reference_value" />
-									<field name="unit_id" />
-									<field name="boundary_lower" />
-									<field name="boundary_upper" />
-									<field name="apply_to" />
-								</tree>
-							</field>
-							<separator string="Measurements" />
-							<field nolabel="1" name="measurement_ids"
-								context="{'inspection_id':active_id or False}">
-								<tree string="TEM - Inspection Measurements">
-									<field name="user_id" />
-									<field name="date" />
-									<field name="property" />
-									<field name="measurement" />
-									<field name="measurement_unit_id" />
-									<field name="note" />
-								</tree>
-								<form string="TEM - Inspection Measurements">
-									<field name="user_id" />
-									<field name="date" />
-									<newline />
-									<group colspan="4" col="5">
+						<page string="Measurements">
+							<group colspan="4" col="1">
+								<field name="references_ids" nolabel="1" readonly="1">
+									<tree string="TEM Reference Values">
+										<field name="property" />
+										<field name="reference_value" />
+										<field name="unit_id" />
+										<field name="boundary_lower" />
+										<field name="boundary_upper" />
+										<field name="apply_to" />
+									</tree>
+								</field>
+								<separator string="Measurements" />
+								<field nolabel="1" name="measurement_ids"
+									context="{'inspection_id':active_id or False}">
+									<tree string="TEM - Inspection Measurements">
+										<field name="user_id" />
+										<field name="date" />
 										<field name="property" />
 										<field name="measurement" />
-										<field name="measurement_unit_id" nolabel="1" />
-									</group>
-									<field name="note" colspan="3" />
-									<label colspan="1" string="Set note if value is 0.00" />
-								</form>
-							</field>
+										<field name="measurement_unit_id" />
+										<field name="note" />
+									</tree>
+									<form string="TEM - Inspection Measurements">
+										<field name="user_id" />
+										<field name="date" />
+										<newline />
+										<group colspan="4" col="5">
+											<field name="property" />
+											<field name="measurement" />
+											<field name="measurement_unit_id" nolabel="1" />
+										</group>
+										<field name="note" colspan="3" />
+										<label colspan="1" string="Set note if value is 0.00" />
+									</form>
+								</field>
+							</group>
 						</page>
 					</notebook>
 
