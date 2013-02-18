@@ -8,9 +8,7 @@
 			<field name="type">tree</field>
 			<field name="arch" type="xml">
 				<tree string="TEM - Locations">
-					<field name="name" />
-					<field name="category" />
-					<field name="description" />
+					<field name="location_id" />
 					<field name="date_start" />
 					<field name="date_end" />
 				</tree>
@@ -23,34 +21,10 @@
 			<field name="type">form</field>
 			<field name="arch" type="xml">
 				<form string="TEM - Locations">
-					<field name="date_start" />
-					<field name="date_end" />
-					<notebook>
-						<page string="Basics">
-							<group col="2" colspan="2">
-								<separator string="Basics" colspan="2" />
-								<field name="name" />
-								<field name="description" />
-								<field name="active" />
-							</group>
-							<group col="2" colspan="2">
-								<separator string="References" colspan="2" />
-								<field name="category" />
-								<field name="cost_unit" />
-								<field name="partner_id" />
-							</group>
-							<group col="2" colspan="2">
-								<separator string="Location" colspan="2" />
-								<field name="type_storage" />
-								<field name="type_usage" />
-								<field name="type_calibration" />
-								<field name="type_rigging" />
-							</group>
-						</page>
-						<page string="Due Equipment">
-							<field name="due_equipment_ids" colspan="4" nolabel="1" />
-						</page>
-					</notebook>
+						<field name="date_start" />
+						<field name="date_end" />
+						<field name="location_id" />
+						<field name="due_equipment_ids" colspan="4" nolabel="1" />
 
 				</form>
 			</field>

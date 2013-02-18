@@ -12,29 +12,31 @@ from tools.translate import _
 
 class tem_listing_bylocation_location(osv.osv_memory):
     _name = "tem.listing.bylocation.location"
-    _inherits = { "tem_location": "tem.location" }
-     
+
+    _rec_name = "date_end"
+         
     def _get_due_equipments(self, cr, uid, ids, field_name, arg, context):
         res = {}
         equipment_obj = self.pool.get("tem.equipment")
         
-        for loc in self.browse(cr, uid, ids):
+        for bll in self.browse(cr, uid, ids):
 
             dom = []
-            dom.append(('location_id','=',loc.id))
-            if (loc.date_start):
-                dom.append(('next_inspection','>=',loc.date_start))
-            if (loc.date_end):
-                dom.append(('next_inspection','<=',loc.date_end))
+            dom.append(('usage_site','=',bll.location_id.id))
+            if (bll.date_start):
+                dom.append(('next_inspection','>=',bll.date_start))
+            if (bll.date_end):
+                dom.append(('next_inspection','<=',bll.date_end))
             
             due_equipment = equipment_obj.search(cr, uid, dom)
 
-            res[loc.id] = due_equipment
+            res[bll.id] = due_equipment
         return res
     
     _columns = {
+        "location_id": fields.many2one("tem.location", "Location", required=True),
         "date_start": fields.date("Date start"),
-        "date_end": fields.date("Date end"),                
+        "date_end": fields.date("Date end", required=True),
         "due_equipment_ids": fields.function(_get_due_equipments, type='one2many', obj='tem.equipment', method=True, string="Due Equipment",),
     }                                
         
@@ -48,26 +50,29 @@ class tem_listing_bylocation(osv.osv_memory):
     _rec_name = "date_end"
     
     def _search_locations(self, cr, uid, ids, name, args, context=None):
-        result = {}
+        res = {}
+
+        bylocation_location_obj = self.pool.get("tem.listing.bylocation.location")
         
-        location_obj = self.pool.get("tem.listing.bylocation.location")
+        location_obj = self.pool.get("tem.location")
         all_locations = location_obj.search(cr, uid, [])
-        
-        ds = None
-        de = None
-        for i in self.browse(cr, uid, ids, context=context):
-            ds = i.date_start
-            de = i.date_end
-            result[i.id] = all_locations
 
-        location_obj.update(cr, uid, all_locations, {"date_start": ds, "date_end": de})
+        for i in self.browse(cr, uid, ids):
+            lines = []
+          
+            for l in location_obj.browse(cr, uid, all_locations):
+                data = { "location_id": l.id, "date_start": i.date_start, "date_end": i.date_end }
+                bll = bylocation_location_obj.create(cr, uid, data)
+                lines.append(bll)
+            
+            res[i.id] = lines
 
-        return result
+        return res
     
     _columns = {
-        "date_start": fields.date("Date start", required=True),
+        "date_start": fields.date("Date start"),
         "date_end": fields.date("Date end", required=True),
-        "location_ids": fields.function(_search_locations, relation='tem.listing.bylocation.location', type="many2many", string='Personen'),
+        "location_ids": fields.function(_search_locations, relation='tem.listing.bylocation.location', type="many2many", string='Locations', method=True),
     }
     
     _defaults = {
