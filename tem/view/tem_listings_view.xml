@@ -61,12 +61,14 @@
 			<field name="model">tem.listing.bylocation</field>
 			<field name="type">form</field>
 			<field name="arch" type="xml">
-				<field name="date_start" />
-				<field name="date_end" />
-				<field name="location_ids" nolabel="1" colspan="4" />
+				<form string="Due Equipment, listing by Location">
+					<field name="date_start" />
+					<field name="date_end" />
+					<field name="location_ids" nolabel="1" colspan="4" />
+				</form>
 			</field>
 		</record>
-			
+
 
 		<!-- actions -->
 		<record id="open_tem_listing_bylocation_location_tree" model="ir.actions.act_window">
@@ -76,9 +78,9 @@
 			<field name="view_mode">tree,form</field>
 			<field name="view_id" ref="tem_listing_bylocation_location_tree" />
 		</record>
-		
+
 		<record id="open_tem_listing_bylocation_form" model="ir.actions.act_window">
-			<field name="name">TEM Locations</field>
+			<field name="name">Due Equipment, listing by Location</field>
 			<field name="res_model">tem.listing.bylocation</field>
 			<field name="view_type">form</field>
 			<field name="view_mode">form</field>
