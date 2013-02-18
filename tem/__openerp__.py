@@ -10,7 +10,7 @@
 {
     "name": "Test Equiment Management",
     "version": "1.0",
-    "depends": ["base", "decimal_precision", "account", "audittrail", "base_tools"],
+    "depends": ["base", "decimal_precision", "account", "audittrail", "base_tools", "report_aeroo"],
     "author": "Marco Dieckhoff, BREMSKERL",
     "category": "Custom",
     "description": """Test Equipment Management Suite""",
@@ -19,6 +19,7 @@
                    "security/tem_security.xml",
                    "security/ir.model.access.csv", 
                    "view/tem_view.xml",
+                   "view/tem_listings_view.xml",
                    ],
     'demo_xml': [],
     'installable': True,

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<!-- tem.location -->
+		<record id="tem_listing_bylocation_location_tree" model="ir.ui.view">
+			<field name="name">tem.listing.bylocation.location.tree</field>
+			<field name="model">tem.listing.bylocation.location</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="TEM - Locations">
+					<field name="name" />
+					<field name="category" />
+					<field name="description" />
+					<field name="date_start" />
+					<field name="date_end" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="tem_location_form" model="ir.ui.view">
+			<field name="name">tem.listing.bylocation.location.form</field>
+			<field name="model">tem.listing.bylocation.location</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="TEM - Locations">
+					<field name="date_start" />
+					<field name="date_end" />
+					<notebook>
+						<page string="Basics">
+							<group col="2" colspan="2">
+								<separator string="Basics" colspan="2" />
+								<field name="name" />
+								<field name="description" />
+								<field name="active" />
+							</group>
+							<group col="2" colspan="2">
+								<separator string="References" colspan="2" />
+								<field name="category" />
+								<field name="cost_unit" />
+								<field name="partner_id" />
+							</group>
+							<group col="2" colspan="2">
+								<separator string="Location" colspan="2" />
+								<field name="type_storage" />
+								<field name="type_usage" />
+								<field name="type_calibration" />
+								<field name="type_rigging" />
+							</group>
+						</page>
+						<page string="Due Equipment">
+							<field name="due_equipment_ids" colspan="4" nolabel="1" />
+						</page>
+					</notebook>
+
+				</form>
+			</field>
+		</record>
+
+		<record id="tem_listing_bylocation_form" model="ir.ui.view">
+			<field name="name">tem.listing.bylocation.form</field>
+			<field name="model">tem.listing.bylocation</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<field name="date_start" />
+				<field name="date_end" />
+				<field name="location_ids" nolabel="1" colspan="4" />
+			</field>
+		</record>
+			
+
+		<!-- actions -->
+		<record id="open_tem_listing_bylocation_location_tree" model="ir.actions.act_window">
+			<field name="name">TEM Locations</field>
+			<field name="res_model">tem.listing.bylocation.location</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_id" ref="tem_listing_bylocation_location_tree" />
+		</record>
+		
+		<record id="open_tem_listing_bylocation_form" model="ir.actions.act_window">
+			<field name="name">TEM Locations</field>
+			<field name="res_model">tem.listing.bylocation</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="tem_listing_bylocation_form" />
+		</record>
+
+		<!-- menu -->
+		<menuitem id="menu_listing_bylocation_location" name="Due Equipment, listing by Location"
+			parent="main_menu" sequence="50" action="open_tem_listing_bylocation_form"
+			groups="group_tem_manager,group_tem_inspector" />
+
+
+	</data>
+</openerp>
