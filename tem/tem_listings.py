@@ -63,7 +63,12 @@ class tem_listing_bylocation(osv.osv_memory):
             for l in location_obj.browse(cr, uid, all_locations):
                 data = { "location_id": l.id, "date_start": i.date_start, "date_end": i.date_end }
                 bll = bylocation_location_obj.create(cr, uid, data)
-                lines.append(bll)
+
+                                
+                # print only the ones which will have due_equipment_ids 
+                bll_this = bylocation_location_obj.browse(cr, uid, bll)
+                if (len(bll_this.due_equipment_ids) > 0):
+                    lines.append(bll)
             
             res[i.id] = lines
 
