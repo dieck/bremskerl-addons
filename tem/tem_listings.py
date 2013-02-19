@@ -35,7 +35,7 @@ class tem_listing_bylocation_location(osv.osv_memory):
                 if (d.usage_site.printreports):
                     due.append(d.id)
 
-            res[bll.id] = due_equipment
+            res[bll.id] = due
         return res
     
     _columns = {
