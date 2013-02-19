@@ -86,7 +86,6 @@ class tem_listing_bylocation(osv.osv_memory):
     }
     
     _defaults = {
-        "date_start": lambda *a: time.strftime('%Y-%m-%d'),
         "date_end": lambda *a: (datetime.today() + timedelta(days=14)).strftime('%Y-%m-%d'),
     }
     
