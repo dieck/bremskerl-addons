@@ -29,6 +29,11 @@ class tem_listing_bylocation_location(osv.osv_memory):
                 dom.append(('next_inspection','<=',bll.date_end))
             
             due_equipment = equipment_obj.search(cr, uid, dom)
+            
+            due = []
+            for d in equipment_obj.browse(cr, uid, due_equipment):
+                if (d.usage_site.printreports):
+                    due.append(d.id)
 
             res[bll.id] = due_equipment
         return res

@@ -251,7 +251,7 @@
 							<field name="interval" attrs="{'required':[('interval_repeat','!=',False)]}" />
 							<field name="interval_repeat" nolabel="1"
 								attrs="{'required':[('interval','!=',False)]}" />
-
+							<field name="printreports" />
 							<newline />
 							<separator string="Notes" colspan="4" />
 							<field name="notes" colspan="4" nolabel="1" />

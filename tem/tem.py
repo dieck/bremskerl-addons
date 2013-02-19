@@ -114,10 +114,12 @@ class tem_location(osv.osv):
         "type_calibration": fields.boolean("Calibration Site"),
         "type_rigging": fields.boolean("Rigging Site"),
 
-        "active": fields.boolean("Active"),    
+        "active": fields.boolean("Active"),
+        "printreports": fields.boolean("Show on printed reports"),        
     }
     _defaults = {
         "active": lambda *a: True,
+        "printreports": lambda *a: True,
     }                      
 tem_location()
 
