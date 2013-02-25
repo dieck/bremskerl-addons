@@ -8,6 +8,29 @@ import decimal_precision as dp
 import time
 import pooler
 from datetime import datetime, timedelta
+from tools.translate import _
+
+
+class res_user(osv.osv):
+    _name = "res.users"
+    _inherit = _name
+
+    def _is_tem_inspector(self, cr, uid, ids, field_name, arg, context):
+        res = {}
+        for u in self.browse(cr, uid, ids):
+            res[u.id] = False
+            for g in u.groups_id:
+                if g.name == "Test Equipment / Inspector":
+                    res[u.id] = True
+        return res
+    
+    _columns = {
+        "is_tem_inspector": fields.function(_is_tem_inspector, string="Is TEM inspector", type='boolean', method=True,
+                                            store={'res.users': (lambda self, cr, uid, ids, c={}: ids, ['groups_id'], 10)}),
+                # needs store, otherwise it won't work as domain condition on tem.inspections
+    }
+res_user()
+
 
 class tem_res_responsibles(osv.osv):
     _name = "tem.res.responsibles"
@@ -89,10 +112,12 @@ class tem_location(osv.osv):
         "type_calibration": fields.boolean("Calibration Site"),
         "type_rigging": fields.boolean("Rigging Site"),
 
-        "active": fields.boolean("Active"),    
+        "active": fields.boolean("Active"),
+        "printreports": fields.boolean("Show on printed reports"),        
     }
     _defaults = {
         "active": lambda *a: True,
+        "printreports": lambda *a: True,
     }                      
 tem_location()
 
@@ -179,9 +204,6 @@ class tem_equipment(osv.osv):
             res[eqp.id] = ((eqp.state == 'new') or (eqp.state == 'available') or (eqp.state == 'disabled'))
         return res
 
-    def _is_active_changed(self, cr, uid, ids, context=None):
-        return ids
-
     # _get_currency        
     # @author: from account.invoice,     
     # @copyright: Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>).
@@ -206,7 +228,7 @@ class tem_equipment(osv.osv):
         
         "name": fields.function(_get_name, string="Equipment name", type='char', size=75, method=True),
         "active": fields.function(_is_active, string="Active", type='boolean', method=True,
-                                  store={'tem.equipment': (_is_active_changed, ['state'], 10)},
+                                  store={'tem.equipment': (lambda self, cr, uid, ids, c={}: ids, ['state'], 10)},
                                   help="Active status is derived from the state: scrapped and lost are considered inactive."),
 
         #char("test1", size=32), 
@@ -274,6 +296,29 @@ class tem_equipment(osv.osv):
     _sql_constraints = [ ('default_idnumber_uniq', 'unique (id_number)', """Ident no. has to be unique."""), ]
 
 tem_equipment()
+
+
+class tem_inspection_references(osv.osv):
+    _name = "tem.inspection.references"
+
+    def _get_name(self, cr, uid, ids, field_name, arg, context):
+        res = {}
+        for ref in self.browse(cr, uid, ids):
+            res[ref.id] = ref.group_id.name + " " + ref.property + ": " + ref.reference_value
+        return res
+
+    _columns = {
+        "name": fields.function(_get_name, string="Reference Value", type='char', size=100, method=True,),    
+        "group_id": fields.many2one("tem.equipment.group", "Type", required=True, ondelete='cascade'),
+        "property": fields.char("Property", help="Short note on what to measure", size=50, required=True, translate=True),
+        "reference_value": fields.char("Reference Value", size=50, required=True),
+        "unit_id": fields.many2one("tem.res.units", "Unit"),
+        "boundary_lower": fields.char("Lower Boundary", size=50),
+        "boundary_upper": fields.char("Upper Boundary", size=50),
+        "apply_to": fields.char("Apply To", size=50,
+                                help="Notes on when to apply this reference value, if some reference values do not apply to all items in the equipment group."),
+    }
+tem_inspection_references()
 
 
 class tem_inspection(osv.osv):
@@ -366,24 +411,24 @@ class tem_inspection(osv.osv):
             # calculate new date
             dt = dt + td
 
-
         # if it's a Saturday or Sunday, set to Friday before (test equipment needs to be prepared for start of work on Monday)
         # TODO make configurable (with install wizard?)
         if (dt.weekday() > 4): # Saturday = 5, Sunday = 6
             dt -= timedelta(days=dt.weekday()-4)
 
         return dt.strftime('%Y-%m-%d %H:%M:%S')
-                  
+
                
     def on_change_equipment_id(self, cr, uid, ids, equipment_id):
         return {'value': {'interval_text': self._get_interval_text(cr, uid, equipment_id),
                           'next': self._get_next_date(cr, uid, equipment_id=equipment_id),
-                          'date': time.strftime('%Y-%m-%d %H:%M:%S')}}
+                          'date': time.strftime('%Y-%m-%d %H:%M:%S')
+                          }}
     
     _columns = {
         "name": fields.function(_get_name, string="Inspection", type='char', size=100, method=True),
         "equipment_id": fields.many2one("tem.equipment", "Equipment", required=True, ondelete='restrict'),
-        "by_id": fields.many2one("res.users", "Inspected by", required=True, ondelete='restrict'),
+        "by_id": fields.many2one("res.users", "Inspected by", required=True, ondelete='restrict', domain=[("is_tem_inspector","=",True)] ),
         "date": fields.datetime("Inspection date", required=True),
         "next": fields.datetime("Next Inspection Due", required=True),
         "interval_text": fields.related("equipment_id", "interval_text",  type='char', string="Scheduled Interval", readonly=True),
@@ -392,7 +437,8 @@ class tem_inspection(osv.osv):
         "maint": fields.boolean("Needs Maintenance/Repair"),
         "scrap": fields.boolean("To be scrapped"),
         "notes": fields.text("Notes"),
-        "tool": fields.char("Tool", size=50, help="Tool (appliance/calibre) used to calibrate the test equipment.", required=True)
+        "tool": fields.char("Tool", size=50, help="Tool (appliance/calibre) used to calibrate the test equipment.", required=True),
+        "references_ids": fields.related("equipment_id", "group_id", "references_ids", type="one2many", relation="tem.inspection.references", string="Reference values"),
     }
 
     _defaults = {
@@ -401,6 +447,8 @@ class tem_inspection(osv.osv):
         "by_id": lambda self,cr,uid,context: uid,
     }
 tem_inspection()
+
+
 
 
 class tem_inspection_measurements(osv.osv):
@@ -425,6 +473,7 @@ class tem_inspection_measurements(osv.osv):
         "inspection_id": fields.many2one("tem.inspection", "Inspection", required=True, ondelete='cascade'),
         "user_id": fields.many2one("res.users", "Inspected by", required=True, ondelete='restrict'),
         "date": fields.datetime("Inspection date", required=True),
+        "property": fields.char("Property", size=50, required=True, translate=True),
         "measurement": fields.float("Measurement"),
         "measurement_unit_id": fields.many2one("tem.res.units","Unit", ondelete='restrict'),
         "note": fields.char("Note",size=250),
@@ -433,6 +482,7 @@ class tem_inspection_measurements(osv.osv):
     _defaults = {
         "date": lambda *a: time.strftime('%Y-%m-%d %H:%M:%S'),
         "user_id": lambda self,cr,uid,context: uid,
+        "property": _('Property'),
     }
     
     
@@ -507,6 +557,7 @@ class tem_equipment_group_o2m(osv.osv):
     
     _columns = {
         "equipment_ids": fields.one2many("tem.equipment","group_id","Equipment"),
+        "references_ids": fields.one2many("tem.inspection.references","group_id","Reference values"),
     }                                
     
 tem_equipment_group_o2m()
@@ -556,3 +607,72 @@ class tem_inspection_o2m(osv.osv):
     ]
      
 tem_inspection_o2m()    
+
+
+
+class tem_listing_bylocation_location(osv.osv_memory):
+    _name = "tem.listing.bylocation.location"
+    _inherits = { "tem_location": "tem.location" }
+     
+    def _get_due_equipments(self, cr, uid, ids, field_name, arg, context):
+        res = {}
+        equipment_obj = self.pool.get("tem.equipment")
+        
+        for loc in self.browse(cr, uid, ids):
+
+            dom = []
+            dom.append(('location_id','=',loc.id))
+            if (loc.date_start):
+                dom.append(('next_inspection','>=',loc.date_start))
+            if (loc.date_end):
+                dom.append(('next_inspection','<=',loc.date_end))
+            
+            due_equipment = equipment_obj.search(cr, uid, dom)
+
+            res[loc.id] = due_equipment
+        return res
+    
+    _columns = {
+        "date_start": fields.date("Date start"),
+        "date_end": fields.date("Date end"),                
+        "due_equipment_ids": fields.function(_get_due_equipments, type='one2many', obj='tem.equipment', method=True, string="Due Equipment",),
+    }                                
+        
+tem_listing_bylocation_location()
+
+
+class tem_listing_bylocation(osv.osv_memory):
+    _name = 'tem.listing.bylocation'
+    _description = 'Listing by Location'
+    
+    _rec_name = "date_end"
+    
+    def _search_locations(self, cr, uid, ids, name, args, context=None):
+        result = {}
+        
+        location_obj = self.pool.get("tem.listing.bylocation.location")
+        all_locations = location_obj.search(cr, uid, [])
+        
+        ds = None
+        de = None
+        for i in self.browse(cr, uid, ids, context=context):
+            ds = i.date_start
+            de = i.date_end
+            result[i.id] = all_locations
+
+        location_obj.update(cr, uid, all_locations, {"date_start": ds, "date_end": de})
+
+        return result
+    
+    _columns = {
+        "date_start": fields.date("Date start", required=True),
+        "date_end": fields.date("Date end", required=True),
+        "location_ids": fields.function(_search_locations, relation='tem.listing.bylocation.location', type="many2many", string='Personen'),
+    }
+    
+    _defaults = {
+        "date_end": lambda *a: (datetime.today() + timedelta(days=14)).strftime('%Y-%m-%d'),
+    }
+    
+tem_listing_bylocation()
+
