@@ -11,8 +11,6 @@ from datetime import datetime, timedelta
 from tools.translate import _
 
 
-
-
 class res_user(osv.osv):
     _name = "res.users"
     _inherit = _name
@@ -424,7 +422,8 @@ class tem_inspection(osv.osv):
     def on_change_equipment_id(self, cr, uid, ids, equipment_id):
         return {'value': {'interval_text': self._get_interval_text(cr, uid, equipment_id),
                           'next': self._get_next_date(cr, uid, equipment_id=equipment_id),
-                          'date': time.strftime('%Y-%m-%d %H:%M:%S')}}
+                          'date': time.strftime('%Y-%m-%d %H:%M:%S')
+                          }}
     
     _columns = {
         "name": fields.function(_get_name, string="Inspection", type='char', size=100, method=True),
@@ -672,7 +671,6 @@ class tem_listing_bylocation(osv.osv_memory):
     }
     
     _defaults = {
-        "date_start": lambda *a: time.strftime('%Y-%m-%d'),
         "date_end": lambda *a: (datetime.today() + timedelta(days=14)).strftime('%Y-%m-%d'),
     }
     
