@@ -7,6 +7,10 @@ class stock_move_price_history(osv.osv):
     _name = "stock.move"
     _inherit = "stock.move"
     
+    # TODO Oh my god, what did I do here... Sorry to all who have to see this :) Please rewrite me...  md 2013-03-14
+    # Would work much more simplier, and easier to read and understand:
+    # superseed .write and .create to look for a change to state=done, then set the history_price_unit and currency.
+    
     # do updates. works as an update determination function
     def _smph_do_updates(self, cr, uid, ids, context={}):
         res = []
