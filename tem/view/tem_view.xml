@@ -86,10 +86,19 @@
 							</group>
 						</page>
 						<page string="Inspections">
+							<separator string="Interval" colspan="4"/>
+							<field name="interval_group_text" string="Group interval" colspan="4" />
+							<newline/>
+							<field name="interval_local" string="Override interval" />
+							<field name="interval_local_repeat" nolabel="1" />
+							
+							<newline/>						
+							<separator string="Inspections" colspan="4" />	
 							<field name="inspection_ids" nolabel="1" colspan="4"
 								context="{'equipment_id':active_id or False}">
 								<tree string="TEM - Inspections">
 									<field name="date" />
+									<field name="next" widget="date" />
 									<field name="result" />
 									<field name="by_id" />
 									<field name="maint" string="Maintenance" />
@@ -105,7 +114,19 @@
 											<group colspan="2" col="2">
 												<separator string="Inspection" colspan="2" />
 												<field name="by_id" />
-												<field name="tool" />
+												<field name="tool_id">
+													<tree>
+														<field name="name" />
+														<field name="equipment_id" />
+													</tree>
+													<form>
+														<field name="name" />
+														<field name="equipment_id" />
+														<label
+															string="Warning! If you commit changes here, ALL old inspections will be changed! In most cases, you would want to add a NEW entry instead!"
+															colspan="4" />
+													</form>
+												</field>
 												<field name="date" />
 												<field name="next" />
 												<field name="interval_text" />
@@ -159,7 +180,6 @@
 															<field name="measurement_unit_id" nolabel="1" />
 														</group>
 														<field name="note" colspan="3" />
-														<label colspan="1" string="Set note if value is 0.00" />
 													</form>
 												</field>
 											</group>
@@ -251,7 +271,6 @@
 							<field name="interval" attrs="{'required':[('interval_repeat','!=',False)]}" />
 							<field name="interval_repeat" nolabel="1"
 								attrs="{'required':[('interval','!=',False)]}" />
-							<field name="printreports" />
 							<newline />
 							<separator string="Notes" colspan="4" />
 							<field name="notes" colspan="4" nolabel="1" />
@@ -261,6 +280,10 @@
 						</page>
 						<page string="Equipment">
 							<field name="equipment_ids" colspan="4" nolabel="1" />
+						</page>
+						<page string="Reference values">
+							<field name="references_ids" colspan="4" nolabel="1"
+								widget="many2many" />
 						</page>
 					</notebook>
 				</form>
@@ -320,6 +343,7 @@
 								<field name="name" />
 								<field name="description" />
 								<field name="active" />
+								<field name="printreports" />
 							</group>
 							<group col="2" colspan="2">
 								<separator string="References" colspan="2" />
@@ -382,6 +406,7 @@
 			<field name="arch" type="xml">
 				<tree string="TEM - Inspections">
 					<field name="date" />
+					<field name="next" widget="date" />
 					<field name="result" />
 					<field name="by_id" />
 					<field name="equipment_id" />
@@ -407,7 +432,19 @@
 								<separator string="Inspection" colspan="2" />
 								<field name="equipment_id" on_change="on_change_equipment_id(equipment_id)" />
 								<field name="by_id" />
-								<field name="tool" />
+								<field name="tool_id">
+									<tree>
+										<field name="name" />
+										<field name="equipment_id" />
+									</tree>
+									<form>
+										<field name="name" />
+										<field name="equipment_id" />
+										<label
+											string="Warning! If you commit changes here, ALL old inspections will be changed! In most cases, you would want to add a NEW entry instead!"
+											colspan="4" />
+									</form>
+								</field>
 								<field name="date" />
 								<field name="next" />
 								<field name="interval_text" />
@@ -461,7 +498,6 @@
 											<field name="measurement_unit_id" nolabel="1" />
 										</group>
 										<field name="note" colspan="3" />
-										<label colspan="1" string="Set note if value is 0.00" />
 									</form>
 								</field>
 							</group>
@@ -639,7 +675,6 @@
 					<field name="measurement" />
 					<field name="measurement_unit_id" colspan="2" nolabel="1" />
 					<field name="note" colspan="3" />
-					<label colspan="1" string="Set note if value is 0.00" />
 				</form>
 			</field>
 		</record>
@@ -719,6 +754,46 @@
 				</search>
 			</field>
 		</record>
+
+		<record id="tem_inspection_tools_tree" model="ir.ui.view">
+			<field name="name">tem.inspection.tools.tree</field>
+			<field name="model">tem.inspection.tools</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="TEM Inspection Tools">
+					<field name="name" />
+					<field name="equipment_id" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="tem_inspection_tools_form" model="ir.ui.view">
+			<field name="name">tem.inspection.tools.form</field>
+			<field name="model">tem.inspection.tools</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="TEM Inspection Tools">
+					<field name="name" />
+					<field name="equipment_id" />
+					<label
+						string="Warning! If you commit changes here, ALL old inspections will be changed! In most cases, you would want to add a NEW entry instead!"
+						colspan="4" />
+				</form>
+			</field>
+		</record>
+
+		<record id="tem_inspection_tools_search" model="ir.ui.view">
+			<field name="name">tem.inspection.tools.search</field>
+			<field name="model">tem.inspection.tools</field>
+			<field name="type">search</field>
+			<field name="arch" type="xml">
+				<search string="TEM Inspection Tools">
+					<field name="name" />
+					<field name="equipment_id" />
+				</search>
+			</field>
+		</record>
+
 
 		<!-- actions -->
 		<record id="open_tem_equipment_tree" model="ir.actions.act_window">

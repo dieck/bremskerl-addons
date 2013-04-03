@@ -132,9 +132,9 @@ class tem_equipment_group(osv.osv):
         for grp in self.browse(cr, uid, ids):
             r = "" 
             if (grp.interval):
-                r += str(grp.interval)
+                r += unicode(grp.interval)
             if (grp.interval_repeat):
-                r += " "+str(grp.interval_repeat)
+                r += u" "+unicode(grp.interval_repeat)
             res[grp.id] = r or False
         return res
     
@@ -190,11 +190,11 @@ class tem_equipment(osv.osv):
     def _get_name(self, cr, uid, ids, field_name, arg, context):
         res = {}
         for eqp in self.browse(cr, uid, ids):
-            r = "" 
+            r = u"" 
             if (eqp.id_number):
-                r += str(eqp.id_number)
+                r += unicode(eqp.id_number)
             if (eqp.description):
-                r += " ("+str(eqp.description.encode('utf-8'))+")"
+                r += u" ("+unicode(eqp.description)+")"
             res[eqp.id] = r
         return res
     
@@ -221,7 +221,39 @@ class tem_equipment(osv.osv):
             return u.id
         return False
 
-        
+
+    def _get_interval_local_text(self, cr, uid, ids, field_name, arg, context):
+        res = {}
+        for eq in self.browse(cr, uid, ids):
+            r = "" 
+            if (eq.interval_local):
+                r += unicode(eq.interval_local)
+            if (eq.interval_local_repeat):
+                r += u" "+unicode(eq.interval_local_repeat)
+            res[eq.id] = r or False
+        return res
+
+    def _get_interval(self, cr, uid, ids, field_name, arg, context):
+        res = {}
+        for eq in self.browse(cr, uid, ids):
+            if (eq.interval_local):
+                res[eq.id] = { 'interval': eq.interval_local,
+                               'interval_repeat': eq.interval_local_repeat,
+                               'interval_text': eq.interval_local_text,
+                              }
+            elif (eq.group_id.interval):
+                res[eq.id] = { 'interval': eq.group_id.interval,
+                               'interval_repeat': eq.group_id.interval_repeat,
+                               'interval_text': eq.group_id.interval_text,
+                              }
+            else:
+                res[eq.id] = { 'interval': None,
+                               'interval_repeat': None,
+                               'interval_text': None,
+                              }
+        return res
+    
+
     _columns = {
         "id_number": fields.char("TEM Ident no.", size=32, required=True),
         "description": fields.char("Equipment", size=64, required=True),
@@ -234,7 +266,32 @@ class tem_equipment(osv.osv):
         #char("test1", size=32), 
         #function(_get_name, string="Equipment name", type='char', size=75, method=True),
         "group_id": fields.many2one("tem.equipment.group", "Type", required=True, ondelete='restrict'),
-        "interval_text": fields.related("group_id", "interval_text",  type='char', string="Interval", readonly=True),
+        "interval_local": fields.float("Interval", digits=(8,1) ),
+        "interval_local_repeat": fields.selection([
+                                   ('prdord','Production Orders'),
+                                   ('need','as needed'),
+                                   ('wh','Working Hours'),
+                                   ('prdcycl','Production Cycle'),
+                                   ('yr','Years'),
+                                   ('delbt','Delivery Batches'),
+                                   ('min','Minutes'),
+                                   ('mon','Months'),
+                                   ('inspord','Inspection Orders'),
+                                   ('qrt','Quarter'),
+                                   ('sec','Moved'),
+                                   ('hr','Hours'),
+                                   ('dy','Days'),
+                                   ('wk','Weeks')],
+                                   "Interval type", ), # required=True has to be set on view, is no sql "NOT NULL"
+        "interval_local_text": fields.function(_get_interval_local_text, string="Interval", type='char', size=50, method=True),
+        
+        "interval_group_text": fields.related("group_id", "interval_text", type="char", size=50, string="Interval"),
+        
+        "interval": fields.function(_get_interval, string="Interval", type='float', size=50, method=True, multi='_get_interval'),
+        "interval_repeat": fields.function(_get_interval, string="Interval type", type='char', size=50, method=True, multi='_get_interval'),
+        "interval_text": fields.function(_get_interval, string="Interval", type='char', size=50, method=True, multi='_get_interval'),
+        "interval_origin": fields.function(_get_interval, string="Interval origin", type='char', size=50, method=True, multi='_get_interval'),
+        
         "state": fields.selection([
                                    ('new','New'),
                                    ('available','Available'),
@@ -293,7 +350,7 @@ class tem_equipment(osv.osv):
         (_check_measuring_precision_unit_id, 'If you set a Precision, you have to set the unit.', ['measuring_precision','measuring_precision_unit_id']),
     ]
     
-    _sql_constraints = [ ('default_idnumber_uniq', 'unique (id_number)', """Ident no. has to be unique."""), ]
+    _sql_constraints = [ ('default_idnumber_uniq', 'unique (id_number)', _("Ident no. has to be unique.")), ]
 
 tem_equipment()
 
@@ -304,7 +361,7 @@ class tem_inspection_references(osv.osv):
     def _get_name(self, cr, uid, ids, field_name, arg, context):
         res = {}
         for ref in self.browse(cr, uid, ids):
-            res[ref.id] = ref.group_id.name + " " + ref.property + ": " + ref.reference_value
+            res[ref.id] = unicode(ref.group_id.name) + u" " + unicode(ref.property) + u": " + unicode(ref.reference_value)
         return res
 
     _columns = {
@@ -320,22 +377,31 @@ class tem_inspection_references(osv.osv):
     }
 tem_inspection_references()
 
+class tem_inspection_tools(osv.osv):
+    _name = "tem.inspection.tools"
+
+    _columns = {
+        "name": fields.char("Description", size=150, required=True),    
+        "equipment_id": fields.many2one("tem.equipment", "Equipment", ondelete='set null'),
+    }
+tem_inspection_tools()
+
 
 class tem_inspection(osv.osv):
     _name = "tem.inspection"
-    _order = "date"
+    _order = "date DESC"
 
     def _get_name(self, cr, uid, ids, field_name, arg, context):
         res = {}
         for insp in self.browse(cr, uid, ids):
             r = [] 
             if (insp.date):
-                r.append(str(insp.date))
+                r.append(unicode(insp.date))
             if (insp.result):
-                r.append(str(insp.result))
+                r.append(unicode(insp.result))
             if (insp.equipment_id):
-                r.append(str(insp.equipment_id.name))
-            res[insp.id] = " // ".join(r)
+                r.append(unicode(insp.equipment_id.name))
+            res[insp.id] = u" // ".join(r)
         return res
     
     
@@ -350,7 +416,6 @@ class tem_inspection(osv.osv):
     def _get_next_date(self, cr, uid, context={}, equipment_id={}):
         # datetime object for deriving the default next test date
         dt = datetime.today()
-
         
         # we need to have an equipment_id.
         # Either from context, or by variable from on_change
@@ -361,8 +426,8 @@ class tem_inspection(osv.osv):
                             
         if (context.get('active_model','') == 'tem.equipment'):
             eqid = context.get('equipment_id', context.get('active_id', None))
- 
-        
+
+        # no equipment set? direct access, not coming from eq        
         if (not eqid):
             # return current date/time
             return dt.strftime('%Y-%m-%d %H:%M:%S')
@@ -370,8 +435,8 @@ class tem_inspection(osv.osv):
         equipment = self.pool.get('tem.equipment').browse(cr, uid, [eqid], context=context)[0]
         
         # get interval count and type
-        intvl =  equipment and equipment.group_id and equipment.group_id.interval or 0
-        intvl_type = equipment and equipment.group_id and equipment.group_id.interval_repeat or None
+        intvl =  equipment and equipment.interval or 0
+        intvl_type = equipment and equipment.interval_repeat or None
 
         # nothing to do? return "today"
         if (intvl == 0 or intvl_type is None):
@@ -381,7 +446,7 @@ class tem_inspection(osv.osv):
         if (intvl_type == 'yr'):
             dt = dt.replace(year=(dt.year + intvl))
 
-        elif (equipment and equipment.group_id and equipment.group_id.interval_repeat == 'mon'):
+        elif (intvl_type == 'mon'):
             
             dmon = dt.month + intvl
             dyr = dt.year
@@ -393,19 +458,17 @@ class tem_inspection(osv.osv):
         else:
             # week, days, hours and minutes are handled via timedelta (got problems with days in months otherwise :))
             td = timedelta(days=0)
-            
-            rp = equipment and equipment.group_id and equipment.group_id.interval_repeat or None
-                
-            if (rp == 'wk'):
+                            
+            if (intvl_type == 'wk'):
                 td = timedelta(weeks=intvl)
                 
-            elif (rp == 'dy'):
+            elif (intvl_type == 'dy'):
                 td = timedelta(days=intvl)
                 
-            elif (rp == 'hr'):
+            elif (intvl_type == 'hr'):
                 td = timedelta(hours=intvl)
             
-            elif (rp == 'min'):
+            elif (intvl_type == 'min'):
                 td = timedelta(minutes=intvl)
 
             # calculate new date
@@ -422,8 +485,54 @@ class tem_inspection(osv.osv):
     def on_change_equipment_id(self, cr, uid, ids, equipment_id):
         return {'value': {'interval_text': self._get_interval_text(cr, uid, equipment_id),
                           'next': self._get_next_date(cr, uid, equipment_id=equipment_id),
-                          'date': time.strftime('%Y-%m-%d %H:%M:%S')
+                          'date': time.strftime('%Y-%m-%d %H:%M:%S'),
+                          'references_ids': self._get_references_ids_defaults(cr, uid, {'active_model':'tem.equipment','active_id':equipment_id}),
                           }}
+    
+    def _get_references_ids(self, cr, uid, ids, field_name, arg, context={}):
+        result = {}
+        for insp in self.browse(cr, uid, ids, context=context):
+            r = []
+            if (insp.equipment_id):
+                if (insp.equipment_id.group_id):
+                    for rf in insp.equipment_id.group_id.references_ids:
+                        r.append(rf.id)
+            result[insp.id] = r
+        return result
+    
+    def _get_references_ids_defaults(self, cr, uid, context=None):
+        # button click: _get_references_ids_defaults context {'lang': 'de_DE', 'tz': False, 'active_model': 'tem.equipment', 'search_default_Active': 1, 'active_ids': [468], 'active_id': 468}
+        # new on one2many widget:_get_references_ids_defaults, context {'lang': 'de_DE', 'equipment_id': 1129, 'tz': False}
+
+        if (not context):
+            # no context? no active_ids, no data to show
+            return []
+
+        eqid = context.get('equipment_id', None)
+
+        if (not eqid):
+            if (context.get('active_model','') == 'tem.equipment'):
+                eqid = context.get('active_id',None)
+
+        if (not eqid):
+            # neither new nor button clicked
+            return []
+
+        equipment_obj = self.pool.get("tem.equipment")
+        eq = equipment_obj.browse(cr, uid, eqid, context=context)
+
+        if (not eq):
+            # could not browse active id
+            return []
+
+        res = []
+        # group_id is required, so no check neccessary
+        for rf in eq.group_id.references_ids:
+            res.append(rf.id)
+        return res
+
+
+    
     
     _columns = {
         "name": fields.function(_get_name, string="Inspection", type='char', size=100, method=True),
@@ -437,18 +546,97 @@ class tem_inspection(osv.osv):
         "maint": fields.boolean("Needs Maintenance/Repair"),
         "scrap": fields.boolean("To be scrapped"),
         "notes": fields.text("Notes"),
-        "tool": fields.char("Tool", size=50, help="Tool (appliance/calibre) used to calibrate the test equipment.", required=True),
-        "references_ids": fields.related("equipment_id", "group_id", "references_ids", type="one2many", relation="tem.inspection.references", string="Reference values"),
+        "tool_id": fields.many2one("tem.inspection.tools", string="Tool", help="Tool (appliance/calibre) used to calibrate the test equipment.", required=True),
+        "references_ids": fields.function(_get_references_ids, string="Reference values", type='many2many', relation="tem.inspection.references", method=True),
     }
 
     _defaults = {
+        "references_ids": _get_references_ids_defaults,
         "date": lambda *a: time.strftime('%Y-%m-%d %H:%M:%S'),
         "next": _get_next_date,
         "by_id": lambda self,cr,uid,context: uid,
     }
+    
+
+    # set equipment state to available on pass, disabled on fail    
+    def create(self, cr, uid, data, context=None):
+        # create inspection first
+        created = super(tem_inspection, self).create(cr, uid, data, context)
+        
+        # look for result settings
+        state = None
+        if (data.get('result','') == 'pass'):
+            state = "available"
+        if (data.get('result','') == 'fail'):
+            state = "disabled"
+            # will be scrapped? only on failed
+            if (data.get('scrap',False)):
+                state = "scrapped"
+        # at defer, stay the same
+
+               
+        # nothing to do?
+        if (state == None):
+            return created
+               
+        # read equipment id from inspection
+        insp = self.browse(cr, uid, created, context=context)
+        eqid = insp and insp.equipment_id and insp.equipment_id.id
+        
+        if (not eqid):
+            # should never happen, but better to be sure than sorry
+            return created
+        
+        eqstate = insp and insp.equipment_id and insp.equipment_id.state
+        
+        if (eqstate == state):
+            # nothing changed
+            return created
+        
+        # change state
+        eq_obj = self.pool.get('tem.equipment')
+        eq_obj.write(cr, uid, [eqid], {'state': state}, context=context)
+        return created
+
+
+    # set equipment state to available on pass, disabled on fail    
+    def write(self, cr, uid, ids, vals, context=None):
+        # write data
+        written = super(tem_inspection, self).write(cr, uid, ids, vals, context=context)
+        
+        # if result was not changed, do nothing
+        if (vals.get('result','') == ''):
+            return written
+
+        eq_obj = self.pool.get('tem.equipment')
+        
+        # read equipment id from inspection
+        for insp in self.browse(cr, uid, ids, context=context):
+            eqid = insp and insp.equipment_id and insp.equipment_id.id
+            eqstate = insp and insp.equipment_id and insp.equipment_id.state
+
+            # look for result settings
+            state = None
+            if (insp.result == 'pass'):
+                state = "available"
+            if (insp.result == 'fail'):
+                state = "disabled"
+                # will be scrapped? only on failed
+                if (insp.scrap):
+                    state = "scrapped"
+            # at defer, stay the same
+        
+            # nothing to do
+            if (eqstate == state):
+                continue
+            
+            # change state
+            eq_obj.write(cr, uid, [eqid], {'state': state}, context=context)
+            
+        return written
+        
+    
 tem_inspection()
-
-
 
 
 class tem_inspection_measurements(osv.osv):
@@ -460,12 +648,12 @@ class tem_inspection_measurements(osv.osv):
         for insp in self.browse(cr, uid, ids):
             r = [] 
             if (insp.measurement):
-                r.append(str(insp.measurement) + " " + str(insp.measurement_unit_id.name))
+                r.append(unicode(insp.measurement) + u" " + unicode(insp.measurement_unit_id.name))
             if (insp.note):
-                r.append(str(insp.note))
+                r.append(unicode(insp.note))
             if not r:
-                r = ['Name update follows']
-            res[insp.id] = " // ".join(r)
+                r = [u'Name update follows']
+            res[insp.id] = unicode(" // ").join(r)
         return res
     
     _columns = {
@@ -485,13 +673,6 @@ class tem_inspection_measurements(osv.osv):
         "property": _('Property'),
     }
     
-    
-    def _check_content(self, cr, uid, ids, context=None):
-        r = True
-        for msr in self.browse(cr, uid, ids, context=context):
-            r = r and (msr.note or msr.measurement)
-        return r
-     
     def _check_measuring_unit_id(self, cr, uid, ids, context=None):
         for msr in self.browse(cr, uid, ids, context=context):
             if ( (msr.measurement) and not (msr.measurement_unit_id and msr.measurement_unit_id.id) ) :
@@ -499,7 +680,6 @@ class tem_inspection_measurements(osv.osv):
         return True
      
     _constraints = [
-        (_check_content, 'You have to set either measurement or note.', ['measurement','note']),
         (_check_measuring_unit_id, 'If you set a measurement value, you have to set the unit.', ['measurement','measurement_unit_id']),
     ]
     
