@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		
+	   <record id="view_mrp_production_filter" model="ir.ui.view">
+            <field name="name">mrp.production.select.plusdraft</field>
+            <field name="model">mrp.production</field>
+            <field name="type">search</field>
+            <field name="inherit_id" ref="mrp.view_mrp_production_filter" />
+            <field name="arch" type="xml">
+            	<xpath expr="//filter[@name='pending']" position="before">
+            		<filter icon="terp-document-new" string="Draft" name="draft" domain="[('state','=','draft')]" help="Manufacturing Orders which are draft."/>
+            	</xpath>
+            </field>
+        </record>
+        
+	</data>
+</openerp>
