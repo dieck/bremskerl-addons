@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from osv import osv, fields
-import types
+from types import * 
 
 class product(osv.osv):
     _name = "product.product"
@@ -53,6 +53,9 @@ class product(osv.osv):
             # no warehouse found, so I won't be able to insert orderpoints anyway
             return r
         wh = wh_obj.browse(cr, uid, whs[0], context=context)        
+
+        if ( (not (type(ids) is ListType)) and (not (type(ids) is TupleType)) ):
+            ids = [ids] 
 
         for prd in self.browse(cr, uid, ids, context=context):
             if (prd.type == 'product'):
