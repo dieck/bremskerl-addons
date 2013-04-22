@@ -86,6 +86,7 @@
 						type="action" groups="base.group_extended" icon="terp-stock_effects-object-colorize"
 						states="draft,assigned,confirmed,done" />
 					<field name="date" />
+					<field name="date_expected" />
 					<field name="state" />
 					<button name="action_assign" states="confirmed" string="Set Available"
 						type="object" icon="gtk-yes" />
