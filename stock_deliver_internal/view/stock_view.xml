@@ -97,7 +97,7 @@
 		</record>
 
 		<record id="action_int_picking_move" model="ir.actions.act_window">
-			<field name="name">Internal Moves</field>
+			<field name="name">Internal Move Lines</field>
 			<field name="res_model">stock.move</field>
 			<field name="type">ir.actions.act_window</field>
 			<field name="view_type">form</field>
