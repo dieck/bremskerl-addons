@@ -13,7 +13,7 @@ class product_product(osv.osv):
         return result
     
     _columns = {
-        'supplier_product_code': fields.function(_get_supplier_productcode, method=True, store=True, type='char', string='Supplier Product Code', 
+        'supplier_product_code': fields.function(_get_supplier_productcode, method=True, store=True, type='char', size=64, string='Supplier Product Code', 
                                 help="For more than one supplier, this is a NON-DETERMINISTIC suppliers product code (though most likely from the first supplier configured)."),
     }
             
