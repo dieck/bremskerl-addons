@@ -15,6 +15,7 @@
 
 from osv import osv, fields
 from tools.translate import _
+from tools import ustr
 
 class stock_picking_merge_wizard(osv.osv_memory):
     _name = "stock.picking.merge.wizard"
@@ -211,20 +212,20 @@ class stock_picking_merge_wizard(osv.osv_memory):
             for merge in session.picking_ids:
                 # fetch notes
 
-                linenote = " Merged " + str(merge.name)
+                linenote = u" Merged " + ustr(merge.name)
                 if (merge.origin != target.origin):
-                    linenote += ", had Origin " + str(merge.origin)
+                    linenote += u", had Origin " + ustr(merge.origin)
                 
                 if (merge.date != target.date):
-                    linenote += ", from " + str(merge.date)
+                    linenote += u", from " + ustr(merge.date)
 
                 if (merge.note):
-                    linenote += ", Notes: " + str(merge.note)
+                    linenote += u", Notes: " + ustr(merge.note)
 
-                target_changes['merge_notes'] += linenote + ";\n"
+                target_changes['merge_notes'] += linenote + u";\n"
 
                 if (merge.note):
-                    target_changes['note'] += str(merge.note) + "\n"
+                    target_changes['note'] += ustr(merge.note) + u"\n"
 
                 # handle changeable values
 
