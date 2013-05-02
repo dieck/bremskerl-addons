@@ -51,7 +51,7 @@ class sale_report(osv.osv):
     }
     _order = 'date desc'
     def init(self, cr):
-        tools.drop_view_if_exists(cr, 'sale_report')
+        tools.drop_view_if_exists(cr, 'sale_report_shipped')
         cr.execute("""
             create or replace view sale_report_shipped as (
                 select el.*,
