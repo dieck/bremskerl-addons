@@ -46,7 +46,7 @@ class stock_move_price_history(osv.osv):
     
     _columns = {
          # store price
-         'history_price_unit' : fields.float('Historic Unit Price', digits_compute=dp.get_precision('Account')),
+         'history_price_unit' : fields.float('Historic Unit Price', digits_compute=dp.get_precision('Purchase Price')),
 
          # store only id, not relation
          'history_price_unit_currency_id_store': fields.integer('Internal storage for Historic Unit Price Currency'),

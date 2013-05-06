@@ -3,7 +3,7 @@
 #
 #    OpenERP Module
 #    
-#    Copyright (C) 2011 BREMSKERL-REIBBELAGWERKE EMMERLING GmbH & Co. KG
+#    Copyright (C) 2011+ BREMSKERL-REIBBELAGWERKE EMMERLING GmbH & Co. KG
 #    Author Marco Dieckhoff
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -23,7 +23,7 @@
 {
     "name": "Add product cost price to stock move",
     "version": "1.05",
-    "depends": ["stock"],
+    "depends": ["stock", "product"],
     'author' : 'Marco Dieckhoff, BREMSKERL',
     'website' : 'www.bremskerl.com',
     "category": "Stock",
