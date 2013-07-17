@@ -25,7 +25,7 @@
     "version": "1.00",
     "depends": ["delivery"],
     # "conflicts": ["stock_move_notes_report"],
-    'author' : 'Marco Dieckhoff (Bremskerl)',
+    'author' : 'Marco Dieckhoff, BREMSKERL',
     'website' : 'www.bremskerl.com',
     "category": "Warehouse",
     "description": "Removes the Delivery Order report button",

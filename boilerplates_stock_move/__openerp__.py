@@ -10,7 +10,7 @@
 {
     'name' : 'Boilerplates for Stock Moves',
     'version' : '6.0',
-    'author' : 'Marco Dieckhoff (Bremskerl)',
+    'author' : 'Marco Dieckhoff, BREMSKERL',
     'website' : 'www.bremskerl.com',
     'depends' : ['boilerplates','boilerplates_stock','stock_move_notes'],
     # Hint: stock_move_notes is a custom addon from me, too :)

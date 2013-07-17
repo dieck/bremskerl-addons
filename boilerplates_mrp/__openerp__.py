@@ -15,7 +15,7 @@
 {
     'name' : 'Boilerplates for MRP',
     'version' : '6.0',
-    'author' : 'Marco Dieckhoff (Bremskerl)',
+    'author' : 'Marco Dieckhoff, BREMSKERL',
     'website' : 'www.bremskerl.com',
     'depends' : ['boilerplates','mrp_notes'],
     # Hint: mrp_notes is a custom addon from me, too :)

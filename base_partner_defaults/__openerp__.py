@@ -11,7 +11,7 @@
     "name": "View defaults set for this specific partner",
     "version": "1.0",
     "depends": ["base", "stock"],
-    'author' : 'Marco Dieckhoff (Bremskerl)',
+    'author' : 'Marco Dieckhoff, BREMSKERL',
     'website' : 'www.bremskerl.com',
     "category": "Base",
     "description": """View defaults set for this specific partner

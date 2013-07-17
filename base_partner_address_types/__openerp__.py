@@ -11,7 +11,7 @@
     "name": "View address type in tree view on general partner tab",
     "version": "1.0",
     "depends": [],
-    'author' : 'Marco Dieckhoff (Bremskerl)',
+    'author' : 'Marco Dieckhoff, BREMSKERL',
     'website' : 'www.bremskerl.com',
     "category": "Base",
     "description": """View address type in tree view on general partner tab
