@@ -413,6 +413,22 @@ class tem_inspection(osv.osv):
         return eqp.interval_text
               
 
+    def _get_next_real_date(self, dt, day, month, year):
+        count = 0
+        # go back at max a full week
+        while (count < 7):
+            count += 1                
+            try:
+                dnew = dt.replace(day=day, month=month, year=year)
+                return dnew
+            except ValueError:
+                # just change the days, so "Last of Month" will be "Last of Month in $month mon"
+                if (day > 0):
+                    day -= 1
+                else:
+                    day = 1
+        return dt
+
     def _get_next_date(self, cr, uid, context={}, equipment_id={}):
         # datetime object for deriving the default next test date
         dt = datetime.today()
@@ -453,7 +469,8 @@ class tem_inspection(osv.osv):
             while (dmon > 12): # convert month to years
                 dyr += 1
                 dmon -= 12
-            dt = dt.replace(year=dyr,month=int(dmon))
+	    # Problem (#15740): will not recalculate days, so "day is out of range for month" error may occur, e.g. with 31st February
+            dt = self._get_next_real_date(dt, day=dt.day, month=int(dmon), year=dyr)
         
         else:
             # week, days, hours and minutes are handled via timedelta (got problems with days in months otherwise :))
