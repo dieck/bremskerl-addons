@@ -657,13 +657,13 @@ class tem_equipment_update1(osv.osv):
         "inspection_ids": fields.one2many("tem.inspection","equipment_id","Inspections"),
                                          
         "last_inspection": fields.function(_get_last_inspection, string="Last Inspection", type='date', method=True,
-                                           store={'tem.inspection':(_get_equipment_from_inspection,['date'],10)}),
+                                           store=True),
         "next_inspection": fields.function(_get_next_inspection, string="Next Inspection", type='date', method=True, multi='_get_next_inspection',
-                                           store={'tem.inspection':(_get_equipment_from_inspection,['next'],10)}),
+                                           store=True),
         "inspection_due": fields.function(_get_next_inspection, string="Next Inspection due", type='boolean', method=True, multi='_get_next_inspection',
-                                           store={'tem.inspection':(_get_equipment_from_inspection,['next'],10)}),
+                                           store=False),
         "inspection_soon": fields.function(_get_next_inspection, string="Next Inspection soon", type='boolean', method=True, multi='_get_next_inspection',
-                                           store={'tem.inspection':(_get_equipment_from_inspection,['next'],10)}),
+                                           store=False),
     }
 tem_equipment_update1()
 
