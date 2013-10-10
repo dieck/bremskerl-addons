@@ -1,0 +1,2 @@
+"id","name","group_id:id","model_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"stock_move_dateexpectedlog_all","All User access","base.group_user","model_stock_move_dateexpectedlog",1,0,1,0
