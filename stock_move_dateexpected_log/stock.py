@@ -45,11 +45,12 @@ class stock_move(osv.osv):
     def create(self, cr, uid, vals, context=None):
         new_id = super(stock_move, self).create(cr, uid, vals, context=context) 
 
-        # create "initial" log entry        
-        smdel_obj = self.pool.get('stock.move.dateexpectedlog')
-        log = {'move_id': new_id, 'prev_date_expected': None, 'new_date_expected': vals['date_expected']}
-        smdel_obj.create(cr, uid, log, context=context)
-        
+        # create "initial" log entry, if new date_expected exists
+        if vals.get('date_expected', False):
+            smdel_obj = self.pool.get('stock.move.dateexpectedlog')
+            log = {'move_id': new_id, 'prev_date_expected': None, 'new_date_expected': vals['date_expected']}
+            smdel_obj.create(cr, uid, log, context=context)
+
         return new_id 
     
 
