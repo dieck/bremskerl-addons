@@ -8,7 +8,7 @@ class stock_move_date_expected_log(osv.osv):
     _columns = {
         'changed_date': fields.datetime('Changed on', readonly=False),
         'changed_uid': fields.many2one('res.users', 'Changed by', readonly=False),
-        'move_id': fields.many2one("stock.move", "Stock Move", required=True),
+        'move_id': fields.many2one("stock.move", "Stock Move", ondelete="cascade", required=True),
         'prev_date_expected': fields.datetime('Previously Scheduled Date', required=False), # false for initial
         'new_date_expected': fields.datetime('New Scheduled Date', required=True),
         'picking_id': fields.related('move_id', 'picking_id', type='many2one', relation="stock.picking", string="Picking"),
