@@ -74,7 +74,7 @@
 						<separator orientation="vertical" />
 						<filter string='List Currency' icon="terp-stock_symbol-selection"
 							domain="[]" context="{'group_by' : 'pricelist_cur'}" />
-						
+
 						<newline />
 						<filter string='Version' icon="terp-mrp" domain="[]"
 							context="{'group_by' : 'price_version_idid'}" />
@@ -109,6 +109,14 @@
 		</record>
 		<menuitem action="product_pricelist_megaview_action" id="menu_product_pricelist_megaview_action"
 			parent="product.menu_product_pricelist_main" sequence="2" />
+
+
+		<act_window
+			context="{'search_default_product_id': [active_id], 'default_product_id': active_id}"
+			id="act_product_open_allinone_view" name="Pricelist MegaView"
+			res_model="product.pricelist.item" src_model="product.product"
+			groups="base.group_extended" view_id="product_pricelist_item_tree_view" />
+
 
 	</data>
 </openerp>
