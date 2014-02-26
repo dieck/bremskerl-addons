@@ -10,7 +10,7 @@
 {
     "name": "Add product field to journal items list view",
     "version": "1.0",
-    "depends": ["account"],
+    "depends": ["account", "account_payment"],
     "author": "Marco Dieckhoff, BREMSKERL",
     "category": "Generic Modules/Accounting",
     "description": """Add product field to journal items list view
