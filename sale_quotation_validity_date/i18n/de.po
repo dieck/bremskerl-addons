@@ -13,8 +13,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-22 05:56+0000\n"
-"X-Generator: Launchpad (build 16831)\n"
+"X-Launchpad-Export-Date: 2014-03-06 06:06+0000\n"
+"X-Generator: Launchpad (build 16948)\n"
 
 #. module: sale_quotation_validity_date
 #: help:sale.order,quotation_validity:0
