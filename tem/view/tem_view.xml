@@ -881,7 +881,7 @@
 		<!-- menu -->
 		<menuitem icon="terp-project" id="main_menu" name="Test Equipment Management"
 			parent="base.menu_tools" sequence="10"
-			groups="group_tem_manager,group_tem_inspector,group_tem_user"
+			groups="group_tem_manager,group_tem_inspector,group_tem_user,group_tem_administrator"
 			web_icon="images/project.png" web_icon_hover="images/project-hover.png" />
 
 
@@ -894,11 +894,11 @@
 
 		<menuitem id="menu_inspection_measurements" name="Inspection Measurements"
 			parent="main_menu" sequence="3" action="open_tem_inspection_measurements_tree"
-			groups="group_tem_manager,group_tem_inspector" />
+			groups="group_tem_manager,group_tem_inspector,group_tem_administrator" />
 
 
 		<menuitem id="menu_definitions" name="Configuration" parent="main_menu"
-			sequence="60" />
+			sequence="60" groups="group_tem_manager,group_tem_administrator" />
 		<menuitem id="menu_definitions_groups" name="Groups"
 			parent="menu_definitions" sequence="10" action="open_tem_equipment_group_tree" />
 		<menuitem id="menu_definitions_references" name="Reference Values"
