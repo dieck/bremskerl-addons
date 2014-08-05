@@ -23,7 +23,7 @@
 {
     "name": "Test Equiment Management",
     "version": "1.0",
-    "depends": ["base", "decimal_precision", "account", "audittrail", "base_tools", "report_aeroo"],
+    "depends": ["base", "decimal_precision", "account", "audittrail", "base_tools", "report_aeroo", "report_aeroo_ooo"],
     "author": "Marco Dieckhoff, BREMSKERL",
     "category": "Custom",
     "description": """Test Equipment Management Suite""",
