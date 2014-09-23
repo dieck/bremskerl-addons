@@ -600,7 +600,7 @@ class tem_inspection_measurements(osv.osv):
         "user_id": fields.many2one("res.users", "Inspected by", required=True, ondelete='restrict'),
         "date": fields.datetime("Inspection date", required=True),
         "property": fields.char("Property", size=50, required=True, translate=True),
-        "measurement": fields.float("Measurement"),
+        "measurement": fields.float("Measurement", digits_compute=dp.get_precision('TEM Measurements')),
         "measurement_unit_id": fields.many2one("tem.res.units","Unit", ondelete='restrict'),
         "note": fields.char("Note",size=250),
     }

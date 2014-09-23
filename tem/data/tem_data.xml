@@ -107,6 +107,11 @@
 			<field name="name">TEM Prices</field>
 			<field name="digits">2</field>
 		</record>
+		
+		<record id="dp_measure" model="decimal.precision">
+			<field name="name">TEM Measurements</field>
+			<field name="digits">3</field>
+		</record>
 
 		<record id="at_tem_location" model="audittrail.rule">
 			<field name="name">TEM Location</field>

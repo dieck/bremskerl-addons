@@ -30,3 +30,5 @@
 "tem_location_administrator","Access for TEM administrator","tem.group_tem_administrator","model_tem_location",1,1,1,1
 "tem_equipment_group_administrator","Access for TEM administrator","tem.group_tem_administrator","model_tem_equipment_group",1,1,1,1
 "tem_insptls_administrator","Access for TEM administrator","tem.group_tem_administrator","model_tem_inspection_tools",1,1,1,1
+"tem_inspref_administrator","Access for TEM admministrator","tem.group_tem_administrator","model_tem_inspection_references",1,0,0,0
+"tem_equipment_administrator","Access for TEM admministrator","tem.group_tem_administrator","model_tem_equipment",1,0,0,0
