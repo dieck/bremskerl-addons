@@ -133,8 +133,8 @@ class tem_equipment_group(osv.osv):
             r = "" 
             if (grp.interval):
                 r += unicode(grp.interval)
-            if (grp.interval_repeat):
-                r += u" "+unicode(grp.interval_repeat)
+                if (grp.interval_repeat):
+                    r += u" "+unicode(grp.interval_repeat)
             res[grp.id] = r or False
         return res
     
