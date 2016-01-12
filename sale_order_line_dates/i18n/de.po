@@ -1,0 +1,42 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* sale_order_line_dates
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2012-03-27 11:31+0000\n"
+"PO-Revision-Date: 2012-03-27 14:39+0000\n"
+"Last-Translator: Bremskerl <Unknown>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2014-12-02 05:59+0000\n"
+"X-Generator: Launchpad (build 17274)\n"
+
+#. module: sale_order_line_dates
+#: field:sale.order.line,requested_date:0
+msgid "Requested Date"
+msgstr "Datum der Anfrage"
+
+#. module: sale_order_line_dates
+#: model:ir.model,name:sale_order_line_dates.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Verkaufsauftragsposition"
+
+#. module: sale_order_line_dates
+#: help:sale.order.line,effective_date:0
+msgid "Date on which picking is created."
+msgstr "Datum der Erstellung des Lieferauftrags"
+
+#. module: sale_order_line_dates
+#: help:sale.order.line,requested_date:0
+msgid "Date on which customer has requested for sales."
+msgstr "Datum der Anfrage an Vertrieb"
+
+#. module: sale_order_line_dates
+#: field:sale.order.line,effective_date:0
+msgid "Effective Date"
+msgstr "Effektives Datum"

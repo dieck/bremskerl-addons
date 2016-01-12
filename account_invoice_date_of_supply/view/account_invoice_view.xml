@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<!-- views -->
+		<record id="view_invoice_line_form" model="ir.ui.view">
+			<field name="name">account.invoice.line.dateofsupply.form</field>
+			<field name="model">account.invoice.line</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="account.view_invoice_line_form" />
+			<field name="arch" type="xml">
+				<field name="company_id" groups="base.group_multi_company"
+					readonly="1" position="after">
+					<field name="dateofsupply" />
+				</field>
+			</field>
+		</record>
+
+	</data>
+</openerp>

@@ -1,0 +1,27 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* l10n_de_base_res_bank
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.1\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2011-02-18 16:07+0000\n"
+"PO-Revision-Date: 2011-08-16 15:29+0000\n"
+"Last-Translator: Marco Dieckhoff <Unknown>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2014-12-02 05:58+0000\n"
+"X-Generator: Launchpad (build 17274)\n"
+
+#. module: l10n_de_base_res_bank
+#: help:res.bank,bic_de:0
+msgid "German Bank Identifier Code (Bankleitzahl)"
+msgstr "Deutsche Bankleitzahl"
+
+#. module: l10n_de_base_res_bank
+#: field:res.bank,bic_de:0
+msgid "German BIC"
+msgstr "Bankleitzahl (BLZ)"

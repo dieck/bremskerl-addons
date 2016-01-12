@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<record id="boilerplates_wiz" model="ir.ui.view">
+			<field name="name">Boilerplates</field>
+			<field name="model">boilerplate.wizard.stock.picking</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="boilerplates.boilerplates_wiz_singlelang" />
+			<field name="arch" type="xml">
+				<field name="remote_id" invisible="1" position="replace">
+					<field name="remote_id" invisible="1" />
+				</field>
+			</field>
+		</record>
+
+		<act_window id="action_boilerplate_stock_picking" name="Add Boilerplate"
+			res_model="boilerplate.wizard.stock.picking" src_model="stock.picking"
+			view_type="form" view_mode="form" target="new" view_id="boilerplates_wiz"
+			domain="[('remote_id', '=', active_id)]" context="{'search_default_filter_usability_stock':1}" />
+
+	</data>
+</openerp>

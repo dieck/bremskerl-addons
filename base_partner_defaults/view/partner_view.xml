@@ -1,0 +1,74 @@
+<openerp>
+    <data>
+
+        <record id="view_partner_defaults_form" model="ir.ui.view">
+            <field name="name">base.partner.defaults.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="priority">36</field>
+            <field name="arch" type="xml">
+                <page string="Sales &amp; Purchases" position="inside">
+                    <group colspan="2" col="2" groups="base.group_extended">
+                        <separator string="Defaults" colspan="2"/>
+                        <field name="default_incoterm_id" />
+                    </group>
+                </page>
+            </field>
+        </record>
+
+ <!-- Values -->
+
+        <record id="values_view_form" model="ir.ui.view">
+            <field name="name">ir.values.form</field>
+            <field name="model">ir.values</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Values">
+                    <field name="name" select="1"/>
+                    <field name="model" select="1"/>
+                    <field name="key" select="1"/>
+                    <field name="key2" select="2"/>
+                    <field name="object" select="2"/>
+                    <field name="res_id"/>
+                    <field name="user_id" select="2"/>
+                    <field name="company_id" select="2"/>
+                    <field name="value_unpickle"/>
+                    <field name="meta_unpickle"/>
+                    <field name="value"/>
+                    <field name="meta"/>
+                </form>
+            </field>
+        </record>
+
+        <record id="values_view_tree" model="ir.ui.view">
+            <field name="name">ir.values.tree</field>
+            <field name="model">ir.values</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Values">
+                    <field name="name"/>
+                    <field name="model"/>
+                    <field name="key"/>
+                    <field name="key2"/>
+                    <field name="user_id"/>
+                    <field name="company_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="act_values_form" model="ir.actions.act_window">
+            <field name="name">Client Actions Connections</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ir.values</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="values_view_tree"/>
+            <field name="context">{'read':'default'}</field>
+        </record>
+        
+        <menuitem id="valuesid1" name="Values"/>
+        <menuitem action="act_values_form" id="menu_ir_values_form_md" parent="valuesid1"/>
+        
+
+    </data>
+</openerp>

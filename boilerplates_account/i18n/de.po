@@ -1,0 +1,74 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* boilerplates_account
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.2\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2011-05-20 11:23+0000\n"
+"PO-Revision-Date: 2011-08-16 15:11+0000\n"
+"Last-Translator: Bremskerl <Unknown>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2014-12-02 05:58+0000\n"
+"X-Generator: Launchpad (build 17274)\n"
+
+#. module: boilerplates_account
+#: model:ir.module.module,description:boilerplates_account.module_meta_information
+msgid "Adds Boilerplate actions to Accounting forms: Invoices"
+msgstr "Fügt Textbaustein-Option zu Finanzen hinzu, für Rechnungen"
+
+#. module: boilerplates_account
+#: model:ir.model,name:boilerplates_account.model_boilerplates_text
+msgid "boilerplates.text"
+msgstr "boilerplates.text"
+
+#. module: boilerplates_account
+#: field:boilerplate.wizard.account.invoice,boilerplate_id:0
+msgid "Boilerplate"
+msgstr "Textbaustein"
+
+#. module: boilerplates_account
+#: model:ir.actions.act_window,name:boilerplates_account.action_boilerplate_account_invoice
+#: model:ir.model,name:boilerplates_account.model_boilerplate_wizard_account_invoice
+msgid "Add Boilerplate"
+msgstr "Textbaustein hinzufügen"
+
+#. module: boilerplates_account
+#: model:ir.module.module,shortdesc:boilerplates_account.module_meta_information
+msgid "Boilerplates for Accounting"
+msgstr "Textbausteine für Finanzen"
+
+#. module: boilerplates_account
+#: field:boilerplates.text,usability_account:0
+msgid "Usable for Accounting"
+msgstr "Vorgesehen für Finanzen"
+
+#. module: boilerplates_account
+#: code:addons\boilerplates_account\wizard\boilerplates.py:23
+#, python-format
+msgid "Invoice"
+msgstr "Rechnung"
+
+#. module: boilerplates_account
+#: field:boilerplate.wizard.account.invoice,remote_id:0
+msgid "Remote model"
+msgstr "Bezug zum Datenbankmodel"
+
+#. module: boilerplates_account
+#: view:boilerplates.text:0
+msgid "Accounting"
+msgstr "Finanzen"
+
+#. module: boilerplates_account
+#: sql_constraint:boilerplates.text:0
+msgid "The boilerplate names must be unique!"
+msgstr "Der Name des Textbausteins muss eindeutig sein!"
+
+#. module: boilerplates_account
+#: view:boilerplates.text:0
+msgid "Usability"
+msgstr "Bereitstellung"

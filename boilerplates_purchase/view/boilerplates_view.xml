@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+
+	
+		<record id="text_search" model="ir.ui.view">
+			<field name="name">boilerplates.purchase.text.search</field>
+			<field name="model">boilerplates.text</field>
+			<field name="type">search</field>
+			<field name="inherit_id" ref="boilerplates.text_search" />
+			<field name="arch" type="xml">
+				<xpath expr="//group[@string='Usability...']" position="inside">
+					<filter name="filter_usability_purchase" string='Purchase' icon="terp-go-week"
+						domain="[('usability_purchase','=',True)]" />
+				</xpath>
+			</field>
+		</record>
+
+		<record id="text_form" model="ir.ui.view">
+			<field name="name">boilerplates.purchase.text.form</field>
+			<field name="model">boilerplates.text</field>
+			<field name="inherit_id" ref="boilerplates.text_form" />
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<page string="Usability" position="inside">
+					<field name="usability_purchase" />
+				</page>
+			</field>
+		</record>
+
+	</data>
+</openerp>

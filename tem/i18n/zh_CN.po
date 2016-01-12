@@ -1,0 +1,1080 @@
+# Chinese (Simplified) translation for bremskerl-addons
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the bremskerl-addons package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: bremskerl-addons\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2013-02-25 07:43+0000\n"
+"PO-Revision-Date: 2012-03-02 08:41+0000\n"
+"Last-Translator: Marco Dieckhoff <Unknown>\n"
+"Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2014-12-02 05:59+0000\n"
+"X-Generator: Launchpad (build 17274)\n"
+
+#. module: tem
+#: field:tem.inspection,maint:0
+msgid "Needs Maintenance/Repair"
+msgstr ""
+
+#. module: tem
+#: model:tem.res.units,description:tem.temunit20
+msgid "Parts per Million"
+msgstr ""
+
+#. module: tem
+#: view:tem.equipment:0
+#: view:tem.inspection:0
+#: field:tem.inspection,measurement_ids:0
+msgid "Measurements"
+msgstr ""
+
+#. module: tem
+#: field:tem.inspection,scrap:0
+msgid "To be scrapped"
+msgstr ""
+
+#. module: tem
+#: view:tem.equipment:0
+#: view:tem.inspection:0
+#: view:tem.inspection.measurements:0
+msgid "Set note if value is 0.00"
+msgstr ""
+
+#. module: tem
+#: model:ir.actions.act_window,name:tem.open_tem_listing_bylocation_location_tree
+#: model:ir.actions.act_window,name:tem.open_tem_location_tree
+msgid "TEM Locations"
+msgstr ""
+
+#. module: tem
+#: selection:tem.res.responsibles,type:0
+msgid "Department"
+msgstr "部门"
+
+#. module: tem
+#: selection:tem.equipment.group,interval_repeat:0
+msgid "Weeks"
+msgstr "周"
+
+#. module: tem
+#: view:tem.equipment:0
+#: view:tem.inspection:0
+msgid "Proof of Calibration"
+msgstr ""
+
+#. module: tem
+#: model:ir.actions.act_window,name:tem.open_tem_inspection_references_tree
+#: model:ir.ui.menu,name:tem.menu_definitions_references
+msgid "Reference Values"
+msgstr ""
+
+#. module: tem
+#: field:tem.equipment,inspection_soon:0
+msgid "Next Inspection soon"
+msgstr ""
+
+#. module: tem
+#: field:tem.location,printreports:0
+msgid "Show on printed reports"
+msgstr ""
+
+#. module: tem
+#: model:tem.res.units,description:tem.temunit13
+msgid "Liter"
+msgstr "升"
+
+#. module: tem
+#: model:ir.actions.act_window,name:tem.open_tem_equipment_tree
+msgid "TEM Equipment"
+msgstr ""
+
+#. module: tem
+#: model:tem.res.units,description:tem.temunit10
+msgid "Kilograms"
+msgstr "千克"
+
+#. module: tem
+#: model:ir.ui.menu,name:tem.main_menu
+msgid "Test Equipment Management"
+msgstr ""
+
+#. module: tem
+#: view:tem.equipment.group:0
+msgid "TEM - Equipment Groups"
+msgstr ""
+
+#. module: tem
+#: view:tem.equipment.group:0
+msgid "Standard"
+msgstr "标准"
+
+#. module: tem
+#: field:tem.equipment,cal_company_id:0
+msgid "Involved Company"
+msgstr ""
+
+#. module: tem
+#: selection:tem.location,category:0
+msgid "Internal Acocunt"
+msgstr ""
+
+#. module: tem
+#: selection:tem.equipment,state:0
+msgid "Cannot be found"
+msgstr ""
+
+#. module: tem
+#: field:tem.equipment,service_contract:0
+msgid "Service Contract"
+msgstr ""
+
+#. module: tem
+#: model:ir.actions.act_window,name:tem.action_tem_inspection_from_equipment
+msgid "New Inspection"
+msgstr ""
+
+#. module: tem
+#: model:ir.actions.act_window,name:tem.open_tem_inspection_measurements_tree
+msgid "TEM Inspection Measurements"
+msgstr ""
+
+#. module: tem
+#: view:tem.equipment:0
+#: field:tem.equipment,notes:0
+#: view:tem.equipment.group:0
+#: field:tem.equipment.group,notes:0
+#: field:tem.inspection,notes:0
+msgid "Notes"
+msgstr "备注"
+
+#. module: tem
+#: field:tem.equipment.group,interval_repeat:0
+msgid "Interval type"
+msgstr ""
+
+#. module: tem
+#: selection:tem.equipment.group,interval_repeat:0
+msgid "Days"
+msgstr "日"
+
+#. module: tem
+#: view:tem.equipment:0
+#: field:tem.location,type_usage:0
+msgid "Usage Site"
+msgstr ""
+
+#. module: tem
+#: model:ir.model,name:tem.model_tem_listing_bylocation
+msgid "Listing by Location"
+msgstr ""
+
+#. module: tem
+#: model:tem.res.units,description:tem.temunit14
+msgid "Square Meters"
+msgstr "平方米"
+
+#. module: tem
+#: model:tem.res.units,description:tem.temunit04
+msgid "Ampere"
+msgstr ""
+
+#. module: tem
+#: selection:tem.equipment.group,interval_repeat:0
+msgid "Quarter"
+msgstr "季度"
+
+#. module: tem
+#: selection:tem.equipment.group,interval_repeat:0
+msgid "Minutes"
+msgstr "每分钟"
+
+#. module: tem
+#: model:tem.res.units,description:tem.temunit19
+msgid "Ohm"
+msgstr ""
+
+#. module: tem
+#: constraint:tem.equipment:0
+msgid "If you set a Range or Resolution, you have to set the unit."
+msgstr ""
+
+#. module: tem
+#: field:tem.equipment,measuring_rangeresolution_unit_id:0
+msgid "Range & Resolution unit"
+msgstr ""
+
+#. module: tem
+#: sql_constraint:tem.res.responsibles:0
+msgid "Responsibles Name has to be unique."
+msgstr ""
+
+#. module: tem
+#: model:tem.res.units,description:tem.temunit18
+msgid "Newton"
+msgstr "牛顿"
+
+#. module: tem
+#: selection:tem.equipment,state:0
+msgid "Disabled"
+msgstr "已禁用"
+
+#. module: tem
+#: constraint:tem.res.responsibles:0
+msgid "For Employee type, you have to set a related user"
+msgstr ""
+
+#. module: tem
+#: view:tem.inspection.references:0
+msgid "Equipment Group"
+msgstr ""
+
+#. module: tem
+#: model:tem.res.units,description:tem.temunit11
+msgid "Kiloohm"
+msgstr ""
+
+#. module: tem
+#: help:tem.equipment,measuring_precision_unit_id:0
+msgid ""
+"Inherent maximal deviation of measurements. E.g. if a scale reads in a "
+"resolution of 0.1, but with 0.2 deviation, the reading 0.5 might be in "
+"between 0.3 and 0.7."
+msgstr ""
+
+#. module: tem
+#: field:tem.inspection.measurements,measurement:0
+msgid "Measurement"
+msgstr ""
+
+#. module: tem
+#: field:tem.location,partner_id:0
+#: field:tem.res.responsibles,partner_id:0
+msgid "Partner"
+msgstr "业务伙伴"
+
+#. module: tem
+#: view:tem.inspection:0
+msgid "Inspector"
+msgstr "检查器"
+
+#. module: tem
+#: field:tem.equipment.group,measuring_resolution_unit_id:0
+msgid "Resolution unit"
+msgstr ""
+
+#. module: tem
+#: model:tem.res.units,description:tem.temunit24
+msgid "Hardness Shore D"
+msgstr ""
+
+#. module: tem
+#: field:tem.equipment.group,standard_link:0
+msgid "Test standard specifications"
+msgstr ""
+
+#. module: tem
+#: field:tem.inspection,interval_text:0
+msgid "Scheduled Interval"
+msgstr ""
+
+#. module: tem
+#: view:tem.location:0
+msgid "Rigging"
+msgstr ""
+
+#. module: tem
+#: model:tem.res.units,description:tem.temunit07
+msgid "Square Centimeters"
+msgstr "平方厘米"
+
+#. module: tem
+#: selection:tem.equipment.group,interval_repeat:0
+msgid "Inspection Orders"
+msgstr ""
+
+#. module: tem
+#: view:tem.location:0
+#: field:tem.location,type_storage:0
+msgid "Storage"
+msgstr ""
+
+#. module: tem
+#: selection:tem.res.responsibles,type:0
+msgid "Contractor"
+msgstr "承建商"
+
+#. module: tem
+#: view:tem.inspection:0
+#: selection:tem.inspection,result:0
+msgid "Failed"
+msgstr "失败的"
+
+#. module: tem
+#: view:tem.equipment:0
+#: field:tem.equipment,state:0
+msgid "State"
+msgstr "状态"
+
+#. module: tem
+#: field:tem.listing.bylocation.location,location_id:0
+msgid "Location"
+msgstr "地点"
+
+#. module: tem
+#: view:tem.inspection:0
+#: selection:tem.inspection,result:0
+msgid "Passed"
+msgstr ""
+
+#. module: tem
+#: selection:tem.equipment.group,interval_repeat:0
+msgid "Production Cycle"
+msgstr ""
+
+#. module: tem
+#: selection:tem.res.responsibles,type:0
+msgid "Employee"
+msgstr "雇员"
+
+#. module: tem
+#: selection:tem.equipment,state:0
+msgid "New"
+msgstr "新建"
+
+#. module: tem
+#: model:tem.res.units,description:tem.temunit06
+msgid "Centimeters"
+msgstr "厘米"
+
+#. module: tem
+#: view:tem.equipment:0
+#: field:tem.equipment,group_id:0
+#: field:tem.inspection.references,group_id:0
+#: view:tem.res.responsibles:0
+#: field:tem.res.responsibles,type:0
+msgid "Type"
+msgstr "类型"
+
+#. module: tem
+#: selection:tem.equipment,state:0
+msgid "Available"
+msgstr ""
+
+#. module: tem
+#: model:tem.res.units,description:tem.temunit12
+msgid "Kilovolt"
+msgstr ""
+
+#. module: tem
+#: field:tem.equipment,id_number:0
+msgid "TEM Ident no."
+msgstr ""
+
+#. module: tem
+#: view:tem.location:0
+msgid "Usage"
+msgstr "用法"
+
+#. module: tem
+#: field:tem.location,type_rigging:0
+msgid "Rigging Site"
+msgstr ""
+
+#. module: tem
+#: model:tem.res.units,description:tem.temunit02
+msgid "Degree Celcius"
+msgstr ""
+
+#. module: tem
+#: selection:tem.equipment.group,interval_repeat:0
+msgid "Hours"
+msgstr "时"
+
+#. module: tem
+#: model:ir.module.module,description:tem.module_meta_information
+msgid "Test Equipment Management Suite"
+msgstr ""
+
+#. module: tem
+#: field:tem.inspection.references,boundary_lower:0
+msgid "Lower Boundary"
+msgstr ""
+
+#. module: tem
+#: field:tem.inspection,description:0
+msgid "Short Description"
+msgstr "简短说明"
+
+#. module: tem
+#: model:ir.ui.menu,name:tem.menu_definitions
+msgid "Configuration"
+msgstr "配置"
+
+#. module: tem
+#: model:tem.res.units,description:tem.temunit22
+msgid "Specific Coefficient of Friction μ"
+msgstr ""
+
+#. module: tem
+#: field:tem.inspection,by_id:0
+#: field:tem.inspection.measurements,user_id:0
+msgid "Inspected by"
+msgstr ""
+
+#. module: tem
+#: model:tem.res.units,description:tem.temunit23
+msgid "Milligrams"
+msgstr ""
+
+#. module: tem
+#: model:tem.res.units,description:tem.temunit08
+msgid "Grams"
+msgstr "克"
+
+#. module: tem
+#: field:tem.equipment,next_inspection:0
+msgid "Next Inspection"
+msgstr ""
+
+#. module: tem
+#: selection:tem.equipment,state:0
+msgid "Marked deleted"
+msgstr ""
+
+#. module: tem
+#: sql_constraint:tem.equipment:0
+msgid "Ident no. has to be unique."
+msgstr ""
+
+#. module: tem
+#: field:tem.location,type_calibration:0
+msgid "Calibration Site"
+msgstr ""
+
+#. module: tem
+#: view:tem.inspection:0
+#: selection:tem.inspection,result:0
+msgid "Deferred"
+msgstr ""
+
+#. module: tem
+#: field:tem.equipment,measuring_range:0
+#: field:tem.equipment.group,measuring_range:0
+msgid "Range"
+msgstr "比率"
+
+#. module: tem
+#: model:ir.model,name:tem.model_res_users
+msgid "res.users"
+msgstr ""
+
+#. module: tem
+#: field:tem.inspection,next:0
+msgid "Next Inspection Due"
+msgstr ""
+
+#. module: tem
+#: code:addons/tem/tem.py:486
+#: field:tem.inspection.measurements,property:0
+#: model:tem.inspection.measurements,property:0
+#: field:tem.inspection.references,property:0
+#, python-format
+msgid "Property"
+msgstr ""
+
+#. module: tem
+#: view:tem.equipment:0
+#: view:tem.inspection:0
+#: field:tem.inspection,name:0
+#: view:tem.inspection.measurements:0
+#: field:tem.inspection.measurements,inspection_id:0
+#: field:tem.inspection.measurements,name:0
+msgid "Inspection"
+msgstr ""
+
+#. module: tem
+#: model:ir.ui.menu,name:tem.menu_inspection
+#: view:tem.equipment:0
+#: field:tem.equipment,inspection_ids:0
+msgid "Inspections"
+msgstr ""
+
+#. module: tem
+#: model:ir.ui.menu,name:tem.menu_inspection_measurements
+msgid "Inspection Measurements"
+msgstr ""
+
+#. module: tem
+#: field:tem.equipment,order_no:0
+msgid "Order no."
+msgstr ""
+
+#. module: tem
+#: constraint:tem.inspection:0
+msgid ""
+"\n"
+"\n"
+"You need to set at least one measurement on a passed or failed inspection.\n"
+msgstr ""
+
+#. module: tem
+#: field:tem.equipment,name:0
+msgid "Equipment name"
+msgstr ""
+
+#. module: tem
+#: view:tem.listing.bylocation.location:0
+#: view:tem.location:0
+msgid "TEM - Locations"
+msgstr ""
+
+#. module: tem
+#: field:tem.equipment,serial_no:0
+msgid "Serial no."
+msgstr ""
+
+#. module: tem
+#: view:tem.equipment.group:0
+#: field:tem.equipment.group,inspection_plan:0
+msgid "General Inspection Plan"
+msgstr ""
+
+#. module: tem
+#: view:tem.equipment:0
+#: view:tem.equipment.group:0
+#: view:tem.inspection:0
+#: view:tem.inspection.measurements:0
+#: view:tem.inspection.references:0
+#: view:tem.location:0
+#: view:tem.res.responsibles:0
+#: view:tem.res.units:0
+msgid "Group by..."
+msgstr "分组于"
+
+#. module: tem
+#: view:tem.equipment:0
+#: view:tem.inspection:0
+msgid ""
+"Please remember to add measurements on the second tab if the result is "
+"passed or failed."
+msgstr ""
+
+#. module: tem
+#: view:tem.inspection:0
+msgid "Result"
+msgstr ""
+
+#. module: tem
+#: model:ir.ui.menu,name:tem.menu_definitions_res_responsibles
+msgid "Responsibles"
+msgstr ""
+
+#. module: tem
+#: view:tem.location:0
+#: field:tem.location,category:0
+#: view:tem.res.units:0
+msgid "Category"
+msgstr "范畴"
+
+#. module: tem
+#: view:tem.equipment:0
+#: view:tem.inspection:0
+#: view:tem.inspection.references:0
+msgid "TEM Reference Values"
+msgstr ""
+
+#. module: tem
+#: view:tem.equipment.group:0
+#: field:tem.equipment.group,name:0
+msgid "Group"
+msgstr "组"
+
+#. module: tem
+#: model:tem.res.units,description:tem.temunit03
+msgid "Micrometers"
+msgstr ""
+
+#. module: tem
+#: field:tem.location,name:0
+msgid "Location Name"
+msgstr "货位名称"
+
+#. module: tem
+#: field:tem.inspection.measurements,note:0
+msgid "Note"
+msgstr ""
+
+#. module: tem
+#: constraint:res.users:0
+msgid "The chosen company is not in the allowed companies for this user"
+msgstr ""
+
+#. module: tem
+#: view:tem.equipment:0
+#: view:tem.inspection:0
+msgid "Maintenance"
+msgstr "维护"
+
+#. module: tem
+#: view:tem.equipment:0
+msgid "Basic"
+msgstr ""
+
+#. module: tem
+#: view:tem.equipment:0
+#: field:tem.equipment,supplier_id:0
+#: selection:tem.location,category:0
+msgid "Supplier"
+msgstr "供货商"
+
+#. module: tem
+#: model:ir.actions.act_window,name:tem.open_tem_res_responsibles_tree
+#: model:ir.actions.act_window,name:tem.open_tem_res_units_tree
+msgid "TEM Units"
+msgstr ""
+
+#. module: tem
+#: field:tem.inspection.references,apply_to:0
+msgid "Apply To"
+msgstr ""
+
+#. module: tem
+#: view:tem.equipment:0
+msgid "TEM - Equipment"
+msgstr ""
+
+#. module: tem
+#: field:tem.location,related_equipment_ids:0
+msgid "Related Equipment"
+msgstr ""
+
+#. module: tem
+#: field:tem.location,cost_unit:0
+msgid "Cost Unit"
+msgstr ""
+
+#. module: tem
+#: view:tem.equipment:0
+msgid "Storage Location"
+msgstr ""
+
+#. module: tem
+#: field:tem.equipment,measuring_precision:0
+msgid "Precision"
+msgstr "精度"
+
+#. module: tem
+#: view:tem.inspection.measurements:0
+#: field:tem.res.responsibles,user_id:0
+msgid "User"
+msgstr "用户"
+
+#. module: tem
+#: model:ir.ui.menu,name:tem.menu_definitions_groups
+msgid "Groups"
+msgstr ""
+
+#. module: tem
+#: field:tem.equipment,active:0
+#: view:tem.equipment.group:0
+#: field:tem.equipment.group,active:0
+#: view:tem.location:0
+#: field:tem.location,active:0
+#: view:tem.res.responsibles:0
+#: field:tem.res.responsibles,active:0
+#: view:tem.res.units:0
+#: field:tem.res.units,active:0
+msgid "Active"
+msgstr "现用"
+
+#. module: tem
+#: field:tem.equipment,manufacturer_id:0
+#: selection:tem.res.responsibles,type:0
+msgid "Manufacturer"
+msgstr "制造商"
+
+#. module: tem
+#: model:tem.res.units,description:tem.temunit05
+msgid "Count"
+msgstr "次数"
+
+#. module: tem
+#: field:tem.listing.bylocation,date_end:0
+#: field:tem.listing.bylocation.location,date_end:0
+msgid "Date end"
+msgstr ""
+
+#. module: tem
+#: model:tem.res.units,description:tem.temunit00
+msgid "Percent"
+msgstr "百分比"
+
+#. module: tem
+#: field:tem.equipment,interval_text:0
+#: field:tem.equipment.group,interval:0
+#: field:tem.equipment.group,interval_text:0
+msgid "Interval"
+msgstr "間隔時間"
+
+#. module: tem
+#: field:tem.listing.bylocation.location,due_equipment_ids:0
+msgid "Due Equipment"
+msgstr ""
+
+#. module: tem
+#: selection:tem.equipment.group,interval_repeat:0
+msgid "Production Orders"
+msgstr "生产单"
+
+#. module: tem
+#: model:tem.res.units,description:tem.temunit15
+msgid "Millimeters"
+msgstr "毫米"
+
+#. module: tem
+#: field:tem.equipment,measuring_resolution:0
+#: field:tem.equipment.group,measuring_resolution:0
+msgid "Resolution"
+msgstr "解决方案"
+
+#. module: tem
+#: view:tem.equipment:0
+#: selection:tem.equipment,state:0
+#: view:tem.inspection:0
+msgid "Scrapped"
+msgstr ""
+
+#. module: tem
+#: field:tem.inspection.references,boundary_upper:0
+msgid "Upper Boundary"
+msgstr ""
+
+#. module: tem
+#: help:tem.inspection.references,property:0
+msgid "Short note on what to measure"
+msgstr ""
+
+#. module: tem
+#: constraint:tem.inspection.measurements:0
+msgid "If you set a measurement value, you have to set the unit."
+msgstr ""
+
+#. module: tem
+#: field:tem.equipment.group,standard:0
+msgid "Test standard"
+msgstr ""
+
+#. module: tem
+#: model:ir.ui.menu,name:tem.menu_equipment_list
+#: field:tem.equipment,description:0
+#: view:tem.equipment.group:0
+#: field:tem.equipment.group,equipment_ids:0
+#: view:tem.inspection:0
+#: field:tem.inspection,equipment_id:0
+msgid "Equipment"
+msgstr "设备"
+
+#. module: tem
+#: model:tem.res.units,description:tem.temunit17
+msgid "Newton / Square Millimeter"
+msgstr ""
+
+#. module: tem
+#: sql_constraint:res.users:0
+msgid "You can not have two users with the same login !"
+msgstr ""
+
+#. module: tem
+#: selection:tem.equipment.group,interval_repeat:0
+msgid "Moved"
+msgstr ""
+
+#. module: tem
+#: model:ir.ui.menu,name:tem.menu_definitions_locations
+#: view:tem.equipment:0
+#: field:tem.listing.bylocation,location_ids:0
+msgid "Locations"
+msgstr "货位列表"
+
+#. module: tem
+#: model:tem.res.units,description:tem.temunit21
+msgid "Volt"
+msgstr ""
+
+#. module: tem
+#: view:tem.equipment:0
+msgid "Inactive"
+msgstr "不活跃的"
+
+#. module: tem
+#: field:tem.equipment,purchase_date:0
+msgid "Purchased"
+msgstr "采购物料"
+
+#. module: tem
+#: model:ir.actions.act_window,name:tem.open_tem_inspection_tree
+msgid "TEM Inspections"
+msgstr ""
+
+#. module: tem
+#: field:tem.equipment,last_inspection:0
+msgid "Last Inspection"
+msgstr ""
+
+#. module: tem
+#: field:tem.equipment,storage_location:0
+msgid "Storage location"
+msgstr ""
+
+#. module: tem
+#: view:tem.res.units:0
+msgid "TEM - Units"
+msgstr ""
+
+#. module: tem
+#: field:tem.equipment,measuring_precision_unit_id:0
+msgid "Precision unit"
+msgstr ""
+
+#. module: tem
+#: field:res.users,is_tem_inspector:0
+msgid "Is TEM inspector"
+msgstr ""
+
+#. module: tem
+#: view:tem.equipment:0
+#: view:tem.location:0
+msgid "Calibration"
+msgstr "校准"
+
+#. module: tem
+#: model:tem.res.units,description:tem.temunit01
+msgid "Grams/Liter"
+msgstr ""
+
+#. module: tem
+#: constraint:tem.res.responsibles:0
+msgid ""
+"For Manufacturer and Contractor type, you have to set a related partner"
+msgstr ""
+
+#. module: tem
+#: view:tem.equipment:0
+msgid "Details"
+msgstr ""
+
+#. module: tem
+#: selection:tem.equipment.group,interval_repeat:0
+msgid "Years"
+msgstr "年"
+
+#. module: tem
+#: field:tem.location,description:0
+#: field:tem.res.responsibles,description:0
+#: field:tem.res.units,description:0
+msgid "Description"
+msgstr "描述"
+
+#. module: tem
+#: field:tem.equipment,purchase_currency_id:0
+msgid "Currency"
+msgstr "币种"
+
+#. module: tem
+#: field:tem.inspection,date:0
+#: field:tem.inspection.measurements,date:0
+msgid "Inspection date"
+msgstr ""
+
+#. module: tem
+#: model:ir.actions.act_window,name:tem.open_tem_equipment_group_tree
+msgid "TEM Equipment Groups"
+msgstr ""
+
+#. module: tem
+#: model:tem.res.units,description:tem.temunit16
+msgid "Square Millimeters"
+msgstr "平方毫米"
+
+#. module: tem
+#: field:tem.equipment,usage_site:0
+msgid "Usage site"
+msgstr ""
+
+#. module: tem
+#: constraint:tem.inspection.measurements:0
+msgid "You have to set either measurement or note."
+msgstr ""
+
+#. module: tem
+#: field:tem.inspection,result:0
+msgid "Inspection Result"
+msgstr ""
+
+#. module: tem
+#: help:tem.equipment,measuring_resolution:0
+msgid ""
+"Maximal fraction of measurements readings. E.g. a scale might be read in a "
+"resolution of 0.1."
+msgstr ""
+
+#. module: tem
+#: view:tem.equipment:0
+#: view:tem.inspection:0
+msgid "Remarks"
+msgstr ""
+
+#. module: tem
+#: model:ir.ui.menu,name:tem.menu_definitions_res_units
+msgid "Units"
+msgstr ""
+
+#. module: tem
+#: constraint:tem.equipment:0
+msgid "If you set a Precision, you have to set the unit."
+msgstr ""
+
+#. module: tem
+#: field:tem.equipment,purchase_invoice_id:0
+msgid "Purchase Invoice"
+msgstr "采购发票"
+
+#. module: tem
+#: selection:tem.equipment.group,interval_repeat:0
+msgid "Working Hours"
+msgstr "工时"
+
+#. module: tem
+#: field:tem.equipment.group,references_ids:0
+#: field:tem.inspection,references_ids:0
+msgid "Reference values"
+msgstr ""
+
+#. module: tem
+#: selection:tem.location,category:0
+msgid "Customer"
+msgstr "客户"
+
+#. module: tem
+#: selection:tem.equipment.group,interval_repeat:0
+msgid "Months"
+msgstr "月"
+
+#. module: tem
+#: field:tem.res.responsibles,name:0
+msgid "Name"
+msgstr ""
+
+#. module: tem
+#: help:tem.inspection.references,apply_to:0
+msgid ""
+"Notes on when to apply this reference value, if some reference values do not "
+"apply to all items in the equipment group."
+msgstr ""
+
+#. module: tem
+#: view:tem.equipment:0
+#: view:tem.inspection:0
+#: view:tem.inspection.measurements:0
+msgid "TEM - Inspection Measurements"
+msgstr ""
+
+#. module: tem
+#: selection:tem.equipment.group,interval_repeat:0
+msgid "as needed"
+msgstr ""
+
+#. module: tem
+#: help:tem.inspection,tool:0
+msgid "Tool (appliance/calibre) used to calibrate the test equipment."
+msgstr ""
+
+#. module: tem
+#: view:tem.equipment:0
+msgid "Item"
+msgstr ""
+
+#. module: tem
+#: model:ir.module.module,shortdesc:tem.module_meta_information
+msgid "Test Equiment Management"
+msgstr ""
+
+#. module: tem
+#: view:tem.res.responsibles:0
+msgid "TEM - Responsibles"
+msgstr ""
+
+#. module: tem
+#: model:tem.res.units,description:tem.temunit09
+msgid "Hardness Brinell"
+msgstr ""
+
+#. module: tem
+#: field:tem.listing.bylocation,date_start:0
+#: field:tem.listing.bylocation.location,date_start:0
+msgid "Date start"
+msgstr ""
+
+#. module: tem
+#: field:tem.inspection.references,name:0
+#: field:tem.inspection.references,reference_value:0
+msgid "Reference Value"
+msgstr ""
+
+#. module: tem
+#: model:ir.actions.act_window,name:tem.open_tem_listing_bylocation_form
+#: model:ir.ui.menu,name:tem.menu_listing_bylocation_location
+#: view:tem.listing.bylocation:0
+msgid "Due Equipment, listing by Location"
+msgstr ""
+
+#. module: tem
+#: field:tem.inspection.measurements,measurement_unit_id:0
+#: field:tem.inspection.references,unit_id:0
+#: field:tem.res.units,name:0
+msgid "Unit"
+msgstr "个"
+
+#. module: tem
+#: view:tem.equipment:0
+#: view:tem.inspection:0
+msgid "TEM - Inspections"
+msgstr ""
+
+#. module: tem
+#: help:tem.equipment,active:0
+msgid ""
+"Active status is derived from the state: scrapped and lost are considered "
+"inactive."
+msgstr ""
+
+#. module: tem
+#: field:tem.equipment,purchase_price:0
+msgid "Purchase Price"
+msgstr "采购价格表"
+
+#. module: tem
+#: view:tem.equipment.group:0
+msgid "Extended search..."
+msgstr ""
+
+#. module: tem
+#: field:tem.equipment,inspection_due:0
+msgid "Next Inspection due"
+msgstr ""
+
+#. module: tem
+#: selection:tem.equipment.group,interval_repeat:0
+msgid "Delivery Batches"
+msgstr ""
+
+#. module: tem
+#: field:tem.inspection,tool:0
+msgid "Tool"
+msgstr ""

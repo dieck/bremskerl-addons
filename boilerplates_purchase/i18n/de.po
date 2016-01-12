@@ -1,0 +1,96 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* boilerplates_purchase
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.2\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2011-05-24 14:44+0000\n"
+"PO-Revision-Date: 2011-08-16 15:13+0000\n"
+"Last-Translator: Bremskerl <Unknown>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2014-12-02 05:58+0000\n"
+"X-Generator: Launchpad (build 17274)\n"
+
+#. module: boilerplates_purchase
+#: view:boilerplates.text:0
+msgid "Purchase"
+msgstr "Einkauf"
+
+#. module: boilerplates_purchase
+#: model:ir.model,name:boilerplates_purchase.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Einkaufspositionen"
+
+#. module: boilerplates_purchase
+#: model:ir.module.module,description:boilerplates_purchase.module_meta_information
+msgid "Adds Boilerplate actions"
+msgstr "Fügt Textbaustein-Optionen hinzu"
+
+#. module: boilerplates_purchase
+#: field:boilerplate.wizard.purchase.order,boilerplate_id:0
+#: field:boilerplate.wizard.purchase.order.line,boilerplate_id:0
+msgid "Boilerplate"
+msgstr "Textbaustein"
+
+#. module: boilerplates_purchase
+#: model:ir.module.module,shortdesc:boilerplates_purchase.module_meta_information
+msgid "Boilerplates for Purchases"
+msgstr "Textbausteine für Einkauf"
+
+#. module: boilerplates_purchase
+#: view:purchase.order.line:0
+msgid "Notes"
+msgstr "Bemerkungen"
+
+#. module: boilerplates_purchase
+#: model:ir.actions.act_window,name:boilerplates_purchase.action_boilerplate_purchase_order
+#: model:ir.actions.act_window,name:boilerplates_purchase.action_boilerplate_purchase_order_line
+#: model:ir.model,name:boilerplates_purchase.model_boilerplate_wizard_purchase_order
+#: model:ir.model,name:boilerplates_purchase.model_boilerplate_wizard_purchase_order_line
+#: model:ir.model,name:boilerplates_purchase.model_boilerplate_wizard_purchase_order_lines
+#: view:purchase.order.line:0
+msgid "Add Boilerplate"
+msgstr "Textbaustein hinzufügen"
+
+#. module: boilerplates_purchase
+#: model:ir.model,name:boilerplates_purchase.model_boilerplates_text
+msgid "boilerplates.text"
+msgstr "boilerplates.text"
+
+#. module: boilerplates_purchase
+#: field:boilerplates.text,usability_purchase:0
+msgid "Usable for Purchase"
+msgstr "Vorgesehen für Einkauf"
+
+#. module: boilerplates_purchase
+#: field:boilerplate.wizard.purchase.order,remote_id:0
+#: field:boilerplate.wizard.purchase.order.line,remote_id:0
+msgid "Remote model"
+msgstr "Bezug zum Datenbankmodel"
+
+#. module: boilerplates_purchase
+#: code:addons\boilerplates_purchase\wizard\boilerplates.py:26
+#, python-format
+msgid "Purchases Order Line"
+msgstr "Beschaffungsauftragsposition"
+
+#. module: boilerplates_purchase
+#: view:boilerplates.text:0
+msgid "Usability"
+msgstr "Bereitstellung"
+
+#. module: boilerplates_purchase
+#: sql_constraint:boilerplates.text:0
+msgid "The boilerplate names must be unique!"
+msgstr "Der Name des Textbausteins muss eindeutig sein!"
+
+#. module: boilerplates_purchase
+#: code:addons\boilerplates_purchase\wizard\boilerplates.py:10
+#, python-format
+msgid "Purchases Order"
+msgstr "Beschaffungsauftrag"

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<menuitem name="Survey Responses" id="survey.menu_survey_responses"
+			groups="survey.group_survey_manager,base.group_tool_manager" parent="survey.menu_surveys" />
+
+		<record id="survey_response_search" model="ir.ui.view">
+			<field name="name">survey_response_search</field>
+			<field name="model">survey.response</field>
+			<field name="type">search</field>
+			<field name="arch" type="xml">
+				<search string="Search Reponses">
+					<group col='10' colspan='4'>
+						<filter icon="terp-camera_test" string="Finished"
+							domain="[('state','=','done')]" />
+						<filter icon="terp-gtk-media-pause" string="Not Finished"
+							domain="[('state','=','skip')]" />
+						<separator orientation="vertical" />
+						<field name="survey_id" widget="selection" select="1" />
+						<field name="user_id" />
+						<field name="date_create" />
+					</group>
+					<newline />
+					<group expand="0" string="Group By..." colspan="4" col="20">
+						<filter string="User" icon="terp-personal" domain="[]"
+							context="{'group_by':'user_id'}" />
+						<separator orientation="vertical" />
+						<filter string="Survey" icon="terp-stock_align_left_24"
+							domain="[]" context="{'group_by':'survey_id'}" />
+						<separator orientation="vertical" />
+						<filter string="State" icon="terp-mail_delete"
+							domain="[]" context="{'group_by':'state'}" />
+					</group>
+				</search>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="action_survey_response_form1">
+			<field name="name">Survey Responses</field>
+			<field name="res_model">survey.response</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_id" ref="survey.survey_response_tree"></field>
+			<field name="search_view_id" ref="survey_response_search" />
+		</record>
+		<menuitem name="Survey Responses" id="menu_survey_response_form"
+			action="action_survey_response_form1" parent="survey.menu_survey_responses"
+			groups="survey.group_survey_manager,base.group_tool_manager" />
+
+
+
+
+	</data>
+</openerp>

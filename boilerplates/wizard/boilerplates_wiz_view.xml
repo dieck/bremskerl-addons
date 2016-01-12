@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<record id="boilerplates_wiz" model="ir.ui.view">
+			<field name="name">Boilerplates</field>
+			<field name="model">boilerplate.wizard</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Add Boilerplate">
+					<separator colspan="4" string="WARNING!"/>
+					<label colspan="4" string="Unsaved changes to the form will be overwritten."/>
+					<label colspan="4" string="If unsure, please cancel and use the Save button first." />
+					<separator colspan="4" />
+					<field name="boilerplate_id" colspan="4" required="1" context="context" />
+					<field name="remote_id" invisible="1" />
+					<group col="2" colspan="4">
+						<button icon="gtk-cancel" special="cancel" string="Cancel" />
+						<button name="do_boilerplate" string="Add Boilerplate" type="object"
+							icon="gtk-go-forward" />
+					</group>
+				</form>
+			</field>
+		</record>
+		
+		<record id="boilerplates_wiz_singlelang" model="ir.ui.view">
+			<field name="name">Boilerplates</field>
+			<field name="model">boilerplate.wizard</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Add Boilerplate">
+					<separator colspan="4" string="WARNING!"/>
+					<label colspan="4" string="Unsaved changes to the form will be overwritten."/>
+					<label colspan="4" string="If unsure, please cancel and use the Save button first." />
+					<separator colspan="4" />
+					<field name="boilerplate_id" colspan="4" required="1" context="context" />
+					<field name="lang" colspan="4" context="context" />
+					<field name="remote_id" invisible="1" />
+					<group col="2" colspan="4">
+						<button icon="gtk-cancel" special="cancel" string="Cancel" />
+						<button name="do_boilerplate" string="Add Boilerplate" type="object"
+							icon="gtk-go-forward" />
+					</group>
+				</form>
+			</field>
+		</record>
+
+	</data>
+</openerp>

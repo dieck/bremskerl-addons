@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+		<record id="mrp_search" model="ir.ui.view">
+			<field name="name">mrp.order.saleref.search</field>
+			<field name="model">mrp.production</field>
+			<field name="type">search</field>
+			<field name="inherit_id" ref="mrp.view_mrp_production_filter" />
+			<field name="arch" type="xml">
+				<field name="name" position="after">
+					<field name="sale_ref"/>
+				</field>
+			</field>
+		</record>
+	</data>
+</openerp>

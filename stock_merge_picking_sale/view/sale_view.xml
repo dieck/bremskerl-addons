@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+
+		<!-- views -->
+		  <record id="view_order_form" model="ir.ui.view">
+            <field name="name">sale.order.stmrpcsl.form</field>
+            <field name="model">sale.order</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+ 	            <xpath expr="//field[@name='picking_ids']" position="after">
+ 	            	<separator colspan="4" string="Related Pickings" />  
+                    <field colspan="4" nolabel="1" name="related_picking_ids"/>
+                </xpath>
+            </field>
+        </record>
+		
+	</data>
+</openerp>

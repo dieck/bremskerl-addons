@@ -1,0 +1,184 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* stock_move_notes
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.2\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2011-05-12 09:38+0000\n"
+"PO-Revision-Date: 2011-08-16 14:26+0000\n"
+"Last-Translator: Bremskerl <Unknown>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2014-12-02 05:58+0000\n"
+"X-Generator: Launchpad (build 17274)\n"
+
+#. module: stock_move_notes
+#: report:sale.shipping.notes:0
+msgid "Order Ref."
+msgstr "Referenz Auslieferung"
+
+#. module: stock_move_notes
+#: report:stock.picking.list.notes:0
+msgid "Shipping Address :"
+msgstr "Lieferadresse :"
+
+#. module: stock_move_notes
+#: constraint:stock.move:0
+msgid "You must assign a production lot for this product"
+msgstr "Sie müssen zwingend eine Losnummer für dieses Produkt angeben"
+
+#. module: stock_move_notes
+#: view:stock.picking:0
+msgid "Delivery Order"
+msgstr "Lieferauftrag"
+
+#. module: stock_move_notes
+#: report:stock.picking.list.notes:0
+msgid "State"
+msgstr "Status"
+
+#. module: stock_move_notes
+#: report:stock.picking.list.notes:0
+msgid "Location"
+msgstr "Ort"
+
+#. module: stock_move_notes
+#: report:sale.shipping.notes:0
+#: report:stock.picking.list.notes:0
+msgid "Lot"
+msgstr "Fertigungslos"
+
+#. module: stock_move_notes
+#: report:sale.shipping.notes:0
+#: report:stock.picking.list.notes:0
+msgid "Description"
+msgstr "Beschreibung"
+
+#. module: stock_move_notes
+#: report:stock.picking.list.notes:0
+msgid "Picking List:"
+msgstr "Packauftrag:"
+
+#. module: stock_move_notes
+#: report:stock.picking.list.notes:0
+msgid "Contact Address :"
+msgstr "Kontakt Adresse"
+
+#. module: stock_move_notes
+#: constraint:stock.move:0
+msgid "You try to assign a lot which is not from the same product"
+msgstr ""
+"Sie versuchen eine Losnummer ohne Bezug zu diesem Produkt zuzuweisen."
+
+#. module: stock_move_notes
+#: report:stock.picking.list.notes:0
+msgid "Journal"
+msgstr "Journal"
+
+#. module: stock_move_notes
+#: model:ir.actions.report.xml,name:stock_move_notes.report_shipping
+msgid "Delivery order"
+msgstr "Lieferauftrag"
+
+#. module: stock_move_notes
+#: report:stock.picking.list.notes:0
+msgid "Expected Shipping Date"
+msgstr "Erwartete Auslieferung"
+
+#. module: stock_move_notes
+#: report:stock.picking.list.notes:0
+msgid "Delivery Order:"
+msgstr "Lieferauftrag:"
+
+#. module: stock_move_notes
+#: report:sale.shipping.notes:0
+msgid "Shipping Date"
+msgstr "Lieferdatum"
+
+#. module: stock_move_notes
+#: report:stock.picking.list.notes:0
+msgid "Recipient"
+msgstr "Empfänger"
+
+#. module: stock_move_notes
+#: view:stock.move:0
+#: field:stock.move,notes:0
+#: view:stock.picking:0
+msgid "Notes"
+msgstr "Anmerkungen"
+
+#. module: stock_move_notes
+#: report:sale.shipping.notes:0
+msgid "Delivery Order :"
+msgstr "Lieferauftrag :"
+
+#. module: stock_move_notes
+#: report:sale.shipping.notes:0
+msgid "Order Date"
+msgstr "Auftragsdatum"
+
+#. module: stock_move_notes
+#: model:ir.actions.report.xml,name:stock_move_notes.report_picking_list
+msgid "Packing list"
+msgstr "Packliste"
+
+#. module: stock_move_notes
+#: field:stock.move,prtnotes:0
+msgid "Printed Notes"
+msgstr "Anmerkungen (Druck)"
+
+#. module: stock_move_notes
+#: report:sale.shipping.notes:0
+msgid "Carrier"
+msgstr "Frachtführer"
+
+#. module: stock_move_notes
+#: report:stock.picking.list.notes:0
+msgid "["
+msgstr "["
+
+#. module: stock_move_notes
+#: report:stock.picking.list.notes:0
+msgid "]"
+msgstr "]"
+
+#. module: stock_move_notes
+#: report:sale.shipping.notes:0
+#: report:stock.picking.list.notes:0
+msgid "Quantity"
+msgstr "Menge"
+
+#. module: stock_move_notes
+#: report:sale.shipping.notes:0
+#: report:stock.picking.list.notes:0
+msgid "Weight"
+msgstr "Gewicht"
+
+#. module: stock_move_notes
+#: model:ir.model,name:stock_move_notes.model_stock_move
+msgid "Stock Move"
+msgstr "Lieferung"
+
+#. module: stock_move_notes
+#: report:stock.picking.list.notes:0
+msgid "Reception:"
+msgstr "Zugang:"
+
+#. module: stock_move_notes
+#: report:stock.picking.list.notes:0
+msgid "Order(Origin)"
+msgstr "Auftragsgrundlage"
+
+#. module: stock_move_notes
+#: report:stock.picking.list.notes:0
+msgid "Total"
+msgstr "Summe"
+
+#. module: stock_move_notes
+#: report:sale.shipping.notes:0
+msgid "Invoiced to"
+msgstr "Berechnet an"

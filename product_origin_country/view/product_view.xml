@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+
+		<!-- views -->
+
+		<record id="product_form" model="ir.ui.view">
+			<field name="name">product.origin.country.form</field>
+			<field name="model">product.product</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="product.product_normal_form_view" />
+			<field name="arch" type="xml">
+				<xpath expr="//group/separator[@string='Status']/.." position="inside">
+					<field name="origin_country_id" />
+				</xpath>
+			</field>
+		</record>
+
+	</data>
+</openerp>
